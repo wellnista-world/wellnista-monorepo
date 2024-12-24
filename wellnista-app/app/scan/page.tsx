@@ -1,39 +1,56 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { BrowserMultiFormatReader, IScannerControls } from "@zxing/browser";
+import { useRouter } from "next/navigation";
 import { useLiff } from "../lib/api/use-liff";
 
 export default function ScanPage() {
   const { isLiffReady, error: liffError, isInLineApp, cameraPermission, requestCameraPermission } = useLiff();
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [scannerControls, setScannerControls] = useState<IScannerControls | null>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (!isLiffReady || !cameraPermission) return;
 
-    const initCamera = async () => {
+    const initScanner = async () => {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
-
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
-          await videoRef.current.play();
-        }
+        const codeReader = new BrowserMultiFormatReader();
+        const controls = await codeReader.decodeFromVideoDevice(
+          undefined,
+          videoRef.current!,
+          (result, err) => {
+            if (result) {
+              const barcode = result.getText();
+              controls.stop(); // Stop scanning once a barcode is found
+              router.push(`/scan/result?barcode=${barcode}`); // Navigate to result page
+            } else if (err && !(err instanceof Error)) {
+              console.error("Barcode scanning error:", err);
+            }
+          }
+        );
+        setScannerControls(controls);
       } catch (err) {
-        console.error("Camera access failed:", err);
-        setCameraError("Failed to access the camera. Please check permissions.");
+        console.error("Failed to initialize barcode scanner:", err);
+        setCameraError("Failed to access the camera or start scanning.");
       }
     };
 
-    initCamera();
+    initScanner();
 
     return () => {
+      // Stop scanner and release camera when unmounting
+      if (scannerControls) {
+        scannerControls.stop();
+      }
       if (videoRef.current && videoRef.current.srcObject) {
         const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
         tracks.forEach((track) => track.stop());
       }
     };
-  }, [isLiffReady, cameraPermission]);
+  }, [isLiffReady, cameraPermission, scannerControls, router]);
 
   if (!isLiffReady) {
     return <p>Loading LIFF...</p>;
