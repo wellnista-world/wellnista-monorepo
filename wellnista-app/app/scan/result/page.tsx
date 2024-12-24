@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { fetchProductByBarcode, NutritionalInfo } from "@/app/lib/api/image-analyze";
 
-
 export default function ResultPage() {
   const searchParams = useSearchParams();
   const barcode = searchParams.get("barcode");
@@ -55,8 +54,15 @@ export default function ResultPage() {
           <ul className="mt-4">
             <li>Energy: {product.nutriments.energy ?? "N/A"} kcal</li>
             <li>Fat: {product.nutriments.fat ?? "N/A"} g</li>
-            <li>Carbohydrates: {product.nutriments.carbohydrates ?? "N/A"} g</li>
+            <li>Cholesterol: {product.nutriments.cholesterol ?? "N/A"} mg</li>
             <li>Proteins: {product.nutriments.proteins ?? "N/A"} g</li>
+            <li>Carbohydrates: {product.nutriments.carbohydrates ?? "N/A"} g</li>
+            <li>Sodium: {product.nutriments.sodium ?? "N/A"} mg</li>
+            <li>Vitamin A: {product.nutriments["vitamin-a"] ?? "N/A"} µg</li>
+            <li>Vitamin B1: {product.nutriments["vitamin-b1"] ?? "N/A"} mg</li>
+            <li>Vitamin B2: {product.nutriments["vitamin-b2"] ?? "N/A"} mg</li>
+            <li>Calcium: {product.nutriments.calcium ?? "N/A"} mg</li>
+            <li>Iron: {product.nutriments.iron ?? "N/A"} mg</li>
           </ul>
         </div>
       ) : (

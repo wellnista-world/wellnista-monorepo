@@ -1,14 +1,21 @@
 export interface NutritionalInfo {
-    product_name: string;
-    brands: string;
-    nutriments: {
-      energy?: number;
-      fat?: number;
-      carbohydrates?: number;
-      proteins?: number;
-    };
-    [key: string]: unknown; // รองรับฟิลด์อื่น ๆ ที่ไม่ระบุ
-  }
+  product_name: string;
+  brands: string;
+  nutriments: {
+    energy?: number; // แคลอรี่
+    fat?: number; // ไขมัน
+    cholesterol?: number; // คอเลสเตอรอล
+    carbohydrates?: number; // คาร์โบไฮเดรท
+    proteins?: number; // โปรตีน
+    sodium?: number; // โซเดียม
+    "vitamin-a"?: number; // วิตามิน A
+    "vitamin-b1"?: number; // วิตามิน B1
+    "vitamin-b2"?: number; // วิตามิน B2
+    calcium?: number; // แคลเซียม
+    iron?: number; // ธาตุเหล็ก
+  };
+  [key: string]: unknown; // รองรับฟิลด์เพิ่มเติมที่ไม่ระบุ
+}
   
   export async function fetchProductByBarcode(barcode: string): Promise<NutritionalInfo | null> {
     try {
