@@ -6,10 +6,10 @@ interface NutritionalInfo {
   product_name: string;
   brands: string;
   nutriments: {
-    energy: number;
-    fat: number;
-    carbohydrates: number;
-    proteins: number;
+    energy?: number;
+    fat?: number;
+    carbohydrates?: number;
+    proteins?: number;
   };
 }
 
@@ -21,23 +21,41 @@ export default function ResultPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (barcode) {
-      fetch(`/api/get-product?barcode=${barcode}`)
-        .then((res) => res.json())
-        .then((data: NutritionalInfo) => {
-          setProduct(data);
-        })
-        .catch(() => setError("Failed to fetch product information"))
-        .finally(() => setLoading(false));
+    if (!barcode) {
+      setError("No barcode found in the URL.");
+      setLoading(false);
+      return;
     }
+
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`/api/get-product?barcode=${barcode}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch product data");
+        }
+
+        const data = await response.json();
+        if (!data.product_name || !data.nutriments) {
+          throw new Error("Incomplete product data");
+        }
+
+        setProduct(data);
+      } catch (err) {
+        setError((err as Error).message || "An unknown error occurred");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
   }, [barcode]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p className="text-center">Loading...</p>;
   }
 
   if (error) {
-    return <p className="text-red-500">{error}</p>;
+    return <p className="text-center text-red-500">{error}</p>;
   }
 
   return (
@@ -48,10 +66,10 @@ export default function ResultPage() {
           <h2 className="text-lg font-bold">{product.product_name}</h2>
           <p className="text-sm text-gray-600">{product.brands}</p>
           <ul className="mt-4">
-            <li>Energy: {product.nutriments.energy} kcal</li>
-            <li>Fat: {product.nutriments.fat} g</li>
-            <li>Carbohydrates: {product.nutriments.carbohydrates} g</li>
-            <li>Proteins: {product.nutriments.proteins} g</li>
+            <li>Energy: {product.nutriments.energy ?? "N/A"} kcal</li>
+            <li>Fat: {product.nutriments.fat ?? "N/A"} g</li>
+            <li>Carbohydrates: {product.nutriments.carbohydrates ?? "N/A"} g</li>
+            <li>Proteins: {product.nutriments.proteins ?? "N/A"} g</li>
           </ul>
         </div>
       ) : (
