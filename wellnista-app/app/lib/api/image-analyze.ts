@@ -1,4 +1,4 @@
-interface NutritionalInfo {
+export interface NutritionalInfo {
     product_name: string;
     brands: string;
     nutriments: {
@@ -7,7 +7,7 @@ interface NutritionalInfo {
       carbohydrates?: number;
       proteins?: number;
     };
-    [key: string]: unknown; // Use `unknown` for additional unspecified fields
+    [key: string]: unknown; // รองรับฟิลด์อื่น ๆ ที่ไม่ระบุ
   }
   
   export async function fetchProductByBarcode(barcode: string): Promise<NutritionalInfo | null> {
@@ -17,16 +17,16 @@ interface NutritionalInfo {
       );
   
       if (!response.ok) {
-        throw new Error("Failed to fetch product data");
+        throw new Error(`Failed to fetch product data: ${response.status}`);
       }
   
-      const data: { status: number; product: NutritionalInfo } = await response.json();
+      const data = await response.json();
   
-      if (data.status !== 1) {
-        throw new Error("Product not found");
+      if (!data || data.status !== 1 || !data.product) {
+        throw new Error("Product not found or incomplete data");
       }
   
-      return data.product;
+      return data.product as NutritionalInfo;
     } catch (error) {
       console.error("Error fetching product data:", error);
       return null;

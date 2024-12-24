@@ -1,17 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { fetchProductByBarcode, NutritionalInfo } from "@/app/lib/api/image-analyze";
 
-interface NutritionalInfo {
-  product_name: string;
-  brands: string;
-  nutriments: {
-    energy?: number;
-    fat?: number;
-    carbohydrates?: number;
-    proteins?: number;
-  };
-}
 
 export default function ResultPage() {
   const searchParams = useSearchParams();
@@ -29,14 +20,10 @@ export default function ResultPage() {
 
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`/api/get-product?barcode=${barcode}`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch product data");
-        }
+        const data = await fetchProductByBarcode(barcode);
 
-        const data = await response.json();
-        if (!data.product_name || !data.nutriments) {
-          throw new Error("Incomplete product data");
+        if (!data) {
+          throw new Error("Product not found or incomplete data");
         }
 
         setProduct(data);
@@ -64,7 +51,7 @@ export default function ResultPage() {
       {product ? (
         <div className="w-full max-w-md p-4 border rounded bg-white shadow">
           <h2 className="text-lg font-bold">{product.product_name}</h2>
-          <p className="text-sm text-gray-600">{product.brands}</p>
+          <p className="text-sm text-gray-600">Brand: {product.brands ?? "Unknown"}</p>
           <ul className="mt-4">
             <li>Energy: {product.nutriments.energy ?? "N/A"} kcal</li>
             <li>Fat: {product.nutriments.fat ?? "N/A"} g</li>
