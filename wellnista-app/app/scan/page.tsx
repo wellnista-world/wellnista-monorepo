@@ -1,33 +1,41 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BrowserMultiFormatReader, IScannerControls } from "@zxing/browser";
 import { useRouter } from "next/navigation";
+import { useLiff } from "../lib/api/use-liff";
+
 
 export default function ScanPage() {
+  const { isLiffReady, error: liffError, cameraPermission, requestCameraPermission } = useLiff();
   const [barcode, setBarcode] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [controls, setControls] = useState<IScannerControls | null>(null);
-  const [cameraPermission, setCameraPermission] = useState<boolean | null>(null);
+  const [scannerControls, setScannerControls] = useState<IScannerControls | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const router = useRouter();
 
   useEffect(() => {
-    const checkPermissionsAndStartScanner = async () => {
-      try {
-        // Check camera permission
-        const permissionStatus = await navigator.permissions.query({ name: "camera" as PermissionName });
-        setCameraPermission(permissionStatus.state === "granted");
+    if (!isLiffReady) return; // Wait until LIFF is ready
 
-        if (permissionStatus.state !== "granted") {
-          // Request permission using getUserMedia
-          await navigator.mediaDevices.getUserMedia({ video: true });
-          setCameraPermission(true);
+    const initCameraAndScanner = async () => {
+      try {
+        if (!cameraPermission) {
+          await requestCameraPermission(); // Request camera permission if not granted
         }
 
-        // Start scanning
-        const reader = new BrowserMultiFormatReader();
-        const scannerControls = await reader.decodeFromVideoDevice(
+        // Request camera access
+        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+
+        if (videoRef.current) {
+          // Attach the stream to the video element
+          videoRef.current.srcObject = stream;
+          await videoRef.current.play(); // Ensure the video starts playing
+        }
+
+        // Initialize the barcode scanner
+        const codeReader = new BrowserMultiFormatReader();
+        const controls = await codeReader.decodeFromVideoDevice(
           undefined,
-          "video",
+          videoRef.current!,
           (result, err) => {
             if (result) {
               setBarcode(result.getText());
@@ -37,30 +45,42 @@ export default function ScanPage() {
           }
         );
 
-        // Set controls to stop scanner later
-        setControls(scannerControls);
+        // Save the scanner controls to stop later
+        setScannerControls(controls);
       } catch (err) {
-        console.error("Camera permission error:", err);
+        console.error("Camera initialization failed:", err);
         setError("Failed to access the camera. Please check your permissions.");
-        setCameraPermission(false);
       }
     };
 
-    checkPermissionsAndStartScanner();
+    initCameraAndScanner();
 
     return () => {
-      // Stop the scanner on component unmount
-      if (controls) {
-        controls.stop();
+      // Stop scanner and release camera when component unmounts
+      if (scannerControls) {
+        scannerControls.stop();
+      }
+
+      if (videoRef.current && videoRef.current.srcObject) {
+        const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
+        tracks.forEach((track) => track.stop());
       }
     };
-  }, [controls]);
+  }, [isLiffReady, cameraPermission, scannerControls, requestCameraPermission]);
 
   useEffect(() => {
     if (barcode) {
       router.push(`/scan/result?barcode=${barcode}`);
     }
   }, [barcode, router]);
+
+  if (!isLiffReady) {
+    return <p>Loading LIFF...</p>;
+  }
+
+  if (liffError) {
+    return <p className="text-red-500">{liffError}</p>;
+  }
 
   return (
     <div className="flex flex-col items-center">
@@ -69,7 +89,15 @@ export default function ScanPage() {
       {cameraPermission === false && (
         <p className="text-red-500">Camera permission denied. Please enable it in your browser settings.</p>
       )}
-      {cameraPermission && <video id="video" className="w-full max-w-md border" />}
+      {cameraPermission && (
+        <video
+          ref={videoRef}
+          id="video"
+          className="w-full max-w-md border"
+          playsInline
+          muted
+        />
+      )}
       {error && <p className="mt-4 text-red-500">{error}</p>}
     </div>
   );

@@ -1,4 +1,4 @@
-"use client"; // Ensures this is a client component
+"use client";
 import { useEffect, useState } from "react";
 import liff from "@line/liff";
 
@@ -9,38 +9,42 @@ export function useLiff() {
   const [cameraPermission, setCameraPermission] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isLineApp = userAgent.includes("line");
+    const initLiff = async () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isLineApp = userAgent.includes("line");
 
-    setIsInLineApp(isLineApp);
+      setIsInLineApp(isLineApp);
 
-    if (isLineApp) {
-      // Initialize LIFF only if in LINE environment
-      liff
-        .init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID || "" })
-        .then(() => {
-          setIsLiffReady(true);
+      if (isLineApp) {
+        try {
+          // Initialize LIFF only if not already ready
+          if (!isLiffReady) {
+            await liff.init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID || "" });
+            setIsLiffReady(true);
+          }
 
           // Check for camera permission
-          navigator.permissions
-            .query({ name: "camera" as PermissionName })
-            .then((permissionStatus) => {
+          try {
+            const permissionStatus = await navigator.permissions.query({ name: "camera" as PermissionName });
+            setCameraPermission(permissionStatus.state === "granted");
+            permissionStatus.onchange = () => {
               setCameraPermission(permissionStatus.state === "granted");
-              permissionStatus.onchange = () => {
-                setCameraPermission(permissionStatus.state === "granted");
-              };
-            })
-            .catch(() => setCameraPermission(false)); // If permissions API not supported
-        })
-        .catch((err) => {
+            };
+          } catch {
+            setCameraPermission(false); // If permissions API not supported
+          }
+        } catch (err) {
           console.error("LIFF init failed", err);
           setError("Failed to initialize LIFF");
-        });
-    } else {
-      // For non-LIFF usage
-      setIsLiffReady(true); // Mark as ready for standard browsers
-    }
-  }, []);
+        }
+      } else {
+        // For non-LIFF usage
+        setIsLiffReady(true); // Mark as ready for standard browsers
+      }
+    };
+
+    initLiff();
+  }, [isLiffReady]);
 
   const requestCameraPermission = async () => {
     try {
