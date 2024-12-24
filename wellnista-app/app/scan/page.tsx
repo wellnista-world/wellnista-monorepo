@@ -1,104 +1,57 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { BrowserMultiFormatReader, IScannerControls } from "@zxing/browser";
-import { useRouter } from "next/navigation";
 import { useLiff } from "../lib/api/use-liff";
 
-
 export default function ScanPage() {
-  const { isLiffReady, error: liffError, cameraPermission, requestCameraPermission } = useLiff();
-  const [barcode, setBarcode] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [scannerControls, setScannerControls] = useState<IScannerControls | null>(null);
+  const { isLiffReady, error, isInLineApp, cameraPermission, requestCameraPermission } = useLiff();
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const router = useRouter();
+  const [cameraError, setCameraError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!isLiffReady) return; // Wait until LIFF is ready
+    if (!isLiffReady) return;
 
-    const initCameraAndScanner = async () => {
+    const initCamera = async () => {
       try {
-        if (!cameraPermission) {
-          await requestCameraPermission(); // Request camera permission if not granted
-        }
-
-        // Request camera access
         const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
 
         if (videoRef.current) {
-          // Attach the stream to the video element
           videoRef.current.srcObject = stream;
-          await videoRef.current.play(); // Ensure the video starts playing
+          await videoRef.current.play();
         }
-
-        // Initialize the barcode scanner
-        const codeReader = new BrowserMultiFormatReader();
-        const controls = await codeReader.decodeFromVideoDevice(
-          undefined,
-          videoRef.current!,
-          (result, err) => {
-            if (result) {
-              setBarcode(result.getText());
-            } else if (err && !(err instanceof Error)) {
-              setError("No barcode detected, please try again.");
-            }
-          }
-        );
-
-        // Save the scanner controls to stop later
-        setScannerControls(controls);
       } catch (err) {
-        console.error("Camera initialization failed:", err);
-        setError("Failed to access the camera. Please check your permissions.");
+        console.error("Camera access failed:", err);
+        setCameraError("Failed to access the camera. Please check permissions.");
       }
     };
 
-    initCameraAndScanner();
-
-    return () => {
-      // Stop scanner and release camera when component unmounts
-      if (scannerControls) {
-        scannerControls.stop();
-      }
-
-      if (videoRef.current && videoRef.current.srcObject) {
-        const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
-        tracks.forEach((track) => track.stop());
-      }
-    };
-  }, [isLiffReady, cameraPermission, scannerControls, requestCameraPermission]);
-
-  useEffect(() => {
-    if (barcode) {
-      router.push(`/scan/result?barcode=${barcode}`);
+    if (cameraPermission) {
+      initCamera();
     }
-  }, [barcode, router]);
+  }, [isLiffReady, cameraPermission]);
 
   if (!isLiffReady) {
     return <p>Loading LIFF...</p>;
   }
 
-  if (liffError) {
-    return <p className="text-red-500">{liffError}</p>;
+  if (error) {
+    return <p className="text-red-500">{error}</p>;
   }
 
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-2xl font-bold mb-4">Scan Barcode</h1>
-      {cameraPermission === null && <p>Checking camera permission...</p>}
+      {isInLineApp && <p className="text-sm text-gray-600">Running in LINE App</p>}
+      {!isInLineApp && <p className="text-sm text-gray-600">Running in Browser</p>}
       {cameraPermission === false && (
-        <p className="text-red-500">Camera permission denied. Please enable it in your browser settings.</p>
+        <button
+          onClick={requestCameraPermission}
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+        >
+          Request Camera Permission
+        </button>
       )}
-      {cameraPermission && (
-        <video
-          ref={videoRef}
-          id="video"
-          className="w-full max-w-md border"
-          playsInline
-          muted
-        />
-      )}
-      {error && <p className="mt-4 text-red-500">{error}</p>}
+      {cameraError && <p className="text-red-500">{cameraError}</p>}
+      <video ref={videoRef} className="w-full max-w-md border" playsInline muted />
     </div>
   );
 }

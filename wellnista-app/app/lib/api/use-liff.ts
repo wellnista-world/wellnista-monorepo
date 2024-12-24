@@ -22,24 +22,26 @@ export function useLiff() {
             await liff.init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID || "" });
             setIsLiffReady(true);
           }
-
-          // Check for camera permission
-          try {
-            const permissionStatus = await navigator.permissions.query({ name: "camera" as PermissionName });
-            setCameraPermission(permissionStatus.state === "granted");
-            permissionStatus.onchange = () => {
-              setCameraPermission(permissionStatus.state === "granted");
-            };
-          } catch {
-            setCameraPermission(false); // If permissions API not supported
-          }
         } catch (err) {
           console.error("LIFF init failed", err);
           setError("Failed to initialize LIFF");
+          return;
         }
       } else {
-        // For non-LIFF usage
-        setIsLiffReady(true); // Mark as ready for standard browsers
+        // For non-LIFF usage (browser)
+        setIsLiffReady(true);
+      }
+
+      // Check for camera permission
+      try {
+        const permissionStatus = await navigator.permissions.query({ name: "camera" as PermissionName });
+        setCameraPermission(permissionStatus.state === "granted");
+        permissionStatus.onchange = () => {
+          setCameraPermission(permissionStatus.state === "granted");
+        };
+      } catch (err) {
+        console.warn("Permissions API not supported, defaulting to false:", err);
+        setCameraPermission(false);
       }
     };
 
