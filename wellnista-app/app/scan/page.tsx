@@ -1,14 +1,15 @@
 "use client";
+
 import { useEffect, useRef, useState } from "react";
 import { useLiff } from "../lib/api/use-liff";
 
 export default function ScanPage() {
-  const { isLiffReady, error, isInLineApp, cameraPermission, requestCameraPermission } = useLiff();
+  const { isLiffReady, error: liffError, isInLineApp, cameraPermission, requestCameraPermission } = useLiff();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!isLiffReady) return;
+    if (!isLiffReady || !cameraPermission) return;
 
     const initCamera = async () => {
       try {
@@ -24,17 +25,22 @@ export default function ScanPage() {
       }
     };
 
-    if (cameraPermission) {
-      initCamera();
-    }
+    initCamera();
+
+    return () => {
+      if (videoRef.current && videoRef.current.srcObject) {
+        const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
+        tracks.forEach((track) => track.stop());
+      }
+    };
   }, [isLiffReady, cameraPermission]);
 
   if (!isLiffReady) {
     return <p>Loading LIFF...</p>;
   }
 
-  if (error) {
-    return <p className="text-red-500">{error}</p>;
+  if (liffError) {
+    return <p className="text-red-500">{liffError}</p>;
   }
 
   return (
@@ -44,14 +50,23 @@ export default function ScanPage() {
       {!isInLineApp && <p className="text-sm text-gray-600">Running in Browser</p>}
       {cameraPermission === false && (
         <button
-          onClick={requestCameraPermission}
+          onClick={async () => {
+            try {
+              await requestCameraPermission();
+            } catch (err) {
+              console.error("Failed to request camera permission:", err);
+              setCameraError("Unable to access the camera. Please check settings.");
+            }
+          }}
           className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
         >
           Request Camera Permission
         </button>
       )}
-      {cameraError && <p className="text-red-500">{cameraError}</p>}
-      <video ref={videoRef} className="w-full max-w-md border" playsInline muted />
+      {cameraError && <p className="text-red-500 mt-4">{cameraError}</p>}
+      {cameraPermission && (
+        <video ref={videoRef} className="w-full max-w-md border" playsInline muted />
+      )}
     </div>
   );
 }
