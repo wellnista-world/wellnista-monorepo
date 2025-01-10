@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { BrowserMultiFormatReader, IScannerControls } from "@zxing/browser";
+import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library";
 import { useRouter } from "next/navigation";
 import { useLiff } from "../lib/api/use-liff";
 
 export default function ScanPage() {
   const { isLiffReady, error: liffError, isInLineApp, cameraPermission, requestCameraPermission } = useLiff();
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [scannerControls, setScannerControls] = useState<IScannerControls | null>(null);
+  const [scannerControls, setScannerControls] = useState<BrowserMultiFormatReader | null>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
   const router = useRouter();
 
@@ -18,20 +18,30 @@ export default function ScanPage() {
     const initScanner = async () => {
       try {
         const codeReader = new BrowserMultiFormatReader();
-        const controls = await codeReader.decodeFromVideoDevice(
-          undefined,
+        setScannerControls(codeReader);
+
+        const videoInputDevices = await codeReader.listVideoInputDevices();
+        const selectedDeviceId = videoInputDevices[0]?.deviceId;
+
+        if (!selectedDeviceId) {
+          throw new Error("No video input devices found.");
+        }
+
+        await codeReader.decodeFromVideoDevice(
+          selectedDeviceId,
           videoRef.current!,
           (result, err) => {
             if (result) {
               const barcode = result.getText();
-              controls.stop(); // Stop scanning once a barcode is found
+              codeReader.reset(); // Stop scanning once a barcode is found
               router.push(`/scan/result?barcode=${barcode}`); // Navigate to result page
-            } else if (err && !(err instanceof Error)) {
+            } else if (err && !(err instanceof NotFoundException)) {
               console.error("Barcode scanning error:", err);
             }
           }
         );
-        setScannerControls(controls);
+
+        console.log(`Started continuous decode from camera with device id: ${selectedDeviceId}`);
       } catch (err) {
         console.error("Failed to initialize barcode scanner:", err);
         setCameraError("Failed to access the camera or start scanning.");
@@ -43,7 +53,7 @@ export default function ScanPage() {
     return () => {
       // Stop scanner and release camera when unmounting
       if (scannerControls) {
-        scannerControls.stop();
+        scannerControls.reset();
       }
       if (videoRef.current && videoRef.current.srcObject) {
         const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
