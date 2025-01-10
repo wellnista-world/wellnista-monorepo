@@ -6,10 +6,18 @@ import { useRouter } from "next/navigation";
 import { useLiff } from "../lib/api/use-liff";
 
 export default function ScanPage() {
-  const { isLiffReady, error: liffError, isInLineApp, cameraPermission, requestCameraPermission } = useLiff();
+  const {
+    isLiffReady,
+    error: liffError,
+    isInLineApp,
+    cameraPermission,
+    requestCameraPermission,
+  } = useLiff();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [codeReader, setCodeReader] = useState<BrowserMultiFormatReader>();
   const [cameraError, setCameraError] = useState<string | null>(null);
+  const [cameras, setCameras] = useState<MediaDeviceInfo[]>([]);
+  const [selectedCameraId, setSelectedCameraId] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -21,46 +29,54 @@ export default function ScanPage() {
         setCodeReader(reader);
 
         const videoInputDevices = await reader.listVideoInputDevices();
-        const backCamera = videoInputDevices.find(device =>
+        setCameras(videoInputDevices);
+
+        const backCamera = videoInputDevices.find((device) =>
           device.label.toLowerCase().includes("back") || device.label.toLowerCase().includes("rear")
         );
-        const selectedDeviceId = backCamera?.deviceId || videoInputDevices[0]?.deviceId;
+        setSelectedCameraId(backCamera?.deviceId || videoInputDevices[0]?.deviceId);
+      } catch (err) {
+        console.error("Failed to initialize cameras:", err);
+        setCameraError("Failed to access the camera.");
+      }
+    };
 
-        if (!selectedDeviceId) {
-          throw new Error("No video input devices found.");
-        }
+    initScanner();
+  }, [isLiffReady, cameraPermission, codeReader]);
 
-        await reader.decodeFromVideoDevice(
-          selectedDeviceId,
+  useEffect(() => {
+    if (!selectedCameraId || !videoRef.current || !codeReader) return;
+
+    const startScanner = async () => {
+      try {
+        await codeReader.decodeFromVideoDevice(
+          selectedCameraId,
           videoRef.current!,
           (result, err) => {
             if (result) {
               const barcode = result.getText();
-              reader.stopContinuousDecode(); // Stop scanning once a barcode is found
-              router.push(`/scan/result?barcode=${barcode}`); // Navigate to result page
+              codeReader.stopContinuousDecode();
+              router.push(`/scan/result?barcode=${barcode}`);
             } else if (err && !(err instanceof NotFoundException)) {
               console.error("Barcode scanning error:", err);
             }
           }
         );
-
-        console.log(`Started continuous decode from camera with device id: ${selectedDeviceId}`);
       } catch (err) {
-        console.error("Failed to initialize barcode scanner:", err);
-        setCameraError("Failed to access the camera or start scanning.");
+        console.error("Failed to start scanning:", err);
+        setCameraError("Failed to start scanning.");
       }
     };
 
-    initScanner();
+    startScanner();
 
     return () => {
-
       if (videoRef.current && videoRef.current.srcObject) {
         const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
         tracks.forEach((track) => track.stop());
       }
     };
-  }, [isLiffReady, cameraPermission, router, codeReader]);
+  }, [selectedCameraId, codeReader, router]);
 
   if (!isLiffReady) {
     return <p>Loading LIFF...</p>;
@@ -92,7 +108,20 @@ export default function ScanPage() {
       )}
       {cameraError && <p className="text-red-500 mt-4">{cameraError}</p>}
       {cameraPermission && (
-        <video ref={videoRef} className="w-full max-w-md border" playsInline muted />
+        <>
+          <select
+            className="mb-4 px-4 py-2 border rounded"
+            onChange={(e) => setSelectedCameraId(e.target.value)}
+            value={selectedCameraId || ""}
+          >
+            {cameras.map((camera) => (
+              <option key={camera.deviceId} value={camera.deviceId}>
+                {camera.label || `Camera ${camera.deviceId}`}
+              </option>
+            ))}
+          </select>
+          <video ref={videoRef} className="w-full max-w-md border" playsInline muted />
+        </>
       )}
     </div>
   );
