@@ -8,32 +8,32 @@ import { useLiff } from "../lib/api/use-liff";
 export default function ScanPage() {
   const { isLiffReady, error: liffError, isInLineApp, cameraPermission, requestCameraPermission } = useLiff();
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [scannerControls, setScannerControls] = useState<BrowserMultiFormatReader | null>(null);
+  const [codeReader, setCodeReader] = useState<BrowserMultiFormatReader>();
   const [cameraError, setCameraError] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLiffReady || !cameraPermission) return;
+    if (!isLiffReady || !cameraPermission || codeReader) return;
 
     const initScanner = async () => {
       try {
-        const codeReader = new BrowserMultiFormatReader();
-        setScannerControls(codeReader);
+        const reader = new BrowserMultiFormatReader();
+        setCodeReader(reader);
 
-        const videoInputDevices = await codeReader.listVideoInputDevices();
+        const videoInputDevices = await reader.listVideoInputDevices();
         const selectedDeviceId = videoInputDevices[0]?.deviceId;
 
         if (!selectedDeviceId) {
           throw new Error("No video input devices found.");
         }
 
-        await codeReader.decodeFromVideoDevice(
+        await reader.decodeFromVideoDevice(
           selectedDeviceId,
           videoRef.current!,
           (result, err) => {
             if (result) {
               const barcode = result.getText();
-              codeReader.reset(); // Stop scanning once a barcode is found
+              reader.stopContinuousDecode(); // Stop scanning once a barcode is found
               router.push(`/scan/result?barcode=${barcode}`); // Navigate to result page
             } else if (err && !(err instanceof NotFoundException)) {
               console.error("Barcode scanning error:", err);
@@ -52,15 +52,16 @@ export default function ScanPage() {
 
     return () => {
       // Stop scanner and release camera when unmounting
-      if (scannerControls) {
-        scannerControls.reset();
-      }
+      // if (codeReader) {
+      //   codeReader.reset();
+      // }
+      
       if (videoRef.current && videoRef.current.srcObject) {
         const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
         tracks.forEach((track) => track.stop());
       }
     };
-  }, [isLiffReady, cameraPermission, scannerControls, router]);
+  }, [isLiffReady, cameraPermission, router, codeReader]);
 
   if (!isLiffReady) {
     return <p>Loading LIFF...</p>;
