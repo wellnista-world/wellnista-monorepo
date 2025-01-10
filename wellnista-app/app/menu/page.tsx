@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function MenuScreen() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
