@@ -21,7 +21,10 @@ export default function ScanPage() {
         setCodeReader(reader);
 
         const videoInputDevices = await reader.listVideoInputDevices();
-        const selectedDeviceId = videoInputDevices[0]?.deviceId;
+        const backCamera = videoInputDevices.find(device =>
+          device.label.toLowerCase().includes("back") || device.label.toLowerCase().includes("rear")
+        );
+        const selectedDeviceId = backCamera?.deviceId || videoInputDevices[0]?.deviceId;
 
         if (!selectedDeviceId) {
           throw new Error("No video input devices found.");
@@ -51,11 +54,7 @@ export default function ScanPage() {
     initScanner();
 
     return () => {
-      // Stop scanner and release camera when unmounting
-      // if (codeReader) {
-      //   codeReader.reset();
-      // }
-      
+
       if (videoRef.current && videoRef.current.srcObject) {
         const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
         tracks.forEach((track) => track.stop());
