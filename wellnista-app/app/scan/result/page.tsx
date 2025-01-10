@@ -1,10 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { fetchProductByBarcode, NutritionalInfo } from "@/app/lib/api/image-analyze";
 
 export default function ResultPage() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const barcode = searchParams.get("barcode");
   const [product, setProduct] = useState<NutritionalInfo | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -68,6 +69,12 @@ export default function ResultPage() {
       ) : (
         <p>No product information available.</p>
       )}
+      <button
+        className="mt-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        onClick={() => router.push("/scan")}
+      >
+        Back
+      </button>
     </div>
   );
 }
