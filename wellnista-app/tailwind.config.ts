@@ -9,8 +9,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: "#9F9260",
+        secondary: "#FBF8EF",
+        accent: "#505631",
+        neutral: "#393939",
+        muted: "#E5E2D9",
+      },
+      fontFamily: {
+        magnolia: ["Magnolia Script", "sans-serif"],
+        garet: ["Garet", "sans-serif"],
       },
     },
   },

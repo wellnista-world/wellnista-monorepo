@@ -3,19 +3,62 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: #9F9260;
+  --secondary: #FBF8EF;
+  --accent: #505631;
+  --neutral: #393939;
+  --muted: #E5E2D9;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --primary: #9F9260;
+    --secondary: #171717;
+    --accent: #505631;
+    --neutral: #ededed;
+    --muted: #303030;
   }
 }
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-secondary text-neutral;
+  font-family: 'Magnolia Script', 'Garet', sans-serif;
 }
+
+button {
+  @apply px-4 py-2 rounded-full text-center;
+}
+
+button.primary {
+  @apply bg-primary text-secondary;
+}
+
+button.secondary {
+  @apply bg-accent text-secondary;
+}
+
+button.neutral {
+  @apply bg-neutral text-secondary;
+}
+
+.loading {
+  @apply flex items-center justify-center w-12 h-12 rounded-full;
+}
+
+.loading.primary {
+  @apply bg-primary text-secondary;
+}
+
+.loading.secondary {
+  @apply bg-accent text-secondary;
+}
+
+.loading.muted {
+  @apply bg-muted text-neutral;
+}
+

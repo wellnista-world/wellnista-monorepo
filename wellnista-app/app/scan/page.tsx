@@ -79,18 +79,30 @@ export default function ScanPage() {
   }, [selectedCameraId, codeReader, router]);
 
   if (!isLiffReady) {
-    return <p>Loading LIFF...</p>;
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-secondary text-neutral font-garet">
+        <p>Loading LIFF...</p>
+      </div>
+    );
   }
 
   if (liffError) {
-    return <p className="text-red-500">{liffError}</p>;
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-secondary text-red-500 font-garet">
+        <p>{liffError}</p>
+      </div>
+    );
   }
 
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-2xl font-bold mb-4">Scan Barcode</h1>
-      {isInLineApp && <p className="text-sm text-gray-600">Running in LINE App</p>}
-      {!isInLineApp && <p className="text-sm text-gray-600">Running in Browser</p>}
+    <div className="flex flex-col items-center justify-center min-h-screen bg-secondary text-neutral font-garet">
+      <h1 className="text-3xl font-magnolia text-primary mb-6">Scan Barcode</h1>
+      {isInLineApp && (
+        <p className="text-sm text-accent mb-4">Running in LINE App</p>
+      )}
+      {!isInLineApp && (
+        <p className="text-sm text-accent mb-4">Running in Browser</p>
+      )}
       {cameraPermission === false && (
         <button
           onClick={async () => {
@@ -101,16 +113,18 @@ export default function ScanPage() {
               setCameraError("Unable to access the camera. Please check settings.");
             }
           }}
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+          className="px-6 py-3 bg-primary text-secondary font-semibold rounded-full hover:bg-accent transition mb-4"
         >
           Request Camera Permission
         </button>
       )}
-      {cameraError && <p className="text-red-500 mt-4">{cameraError}</p>}
+      {cameraError && (
+        <p className="text-red-500 text-center mb-4">{cameraError}</p>
+      )}
       {cameraPermission && (
         <>
           <select
-            className="mb-4 px-4 py-2 border rounded"
+            className="mb-4 px-4 py-2 border-2 border-accent rounded-full bg-muted text-neutral"
             onChange={(e) => setSelectedCameraId(e.target.value)}
             value={selectedCameraId || ""}
           >
@@ -120,7 +134,12 @@ export default function ScanPage() {
               </option>
             ))}
           </select>
-          <video ref={videoRef} className="w-full max-w-md border" playsInline muted />
+          <video
+            ref={videoRef}
+            className="w-full max-w-md border-4 border-primary rounded-lg"
+            playsInline
+            muted
+          />
         </>
       )}
     </div>

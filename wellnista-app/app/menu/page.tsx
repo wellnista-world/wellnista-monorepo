@@ -4,7 +4,7 @@ export default function MenuScreen() {
       <h1 className="text-3xl font-bold mb-4">Welcome Wellnista</h1>
       <p className="mb-6 text-gray-600">Choose your action below to get started.</p>
       <div className="flex flex-col gap-4">
-        Menu Screen
+        This feature is on development
       </div>
     </div>
   );

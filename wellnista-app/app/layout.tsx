@@ -9,7 +9,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
       <html lang="en">
         <body>
-          <div className="flex items-center justify-center min-h-screen">Loading...</div>
+          <div className="flex items-center justify-center min-h-screen bg-secondary text-neutral font-garet">
+            <div className="text-center">
+              <div className="loading primary mb-4" />
+              <p>Loading...</p>
+            </div>
+          </div>
         </body>
       </html>
     );
@@ -19,7 +24,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
       <html lang="en">
         <body>
-          <div className="text-red-500 text-center">{error}</div>
+          <div className="flex items-center justify-center min-h-screen bg-secondary text-red-600 font-garet text-lg">
+            <p className="text-center">{error}</p>
+          </div>
         </body>
       </html>
     );
@@ -27,10 +34,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en">
-      <body className="bg-gray-50 text-gray-900">
-        <header className="p-4 bg-blue-500 text-white">
-          <h1 className="text-xl font-bold text-center">Wellnista</h1>
-          {isInLineApp && <p className="text-sm text-center">Running inside LINE</p>}
+      <body className="bg-secondary text-neutral font-garet">
+        <header className="p-4 bg-primary text-secondary">
+          <h1 className="text-2xl font-magnolia text-center">Wellnista</h1>
+          {isInLineApp && (
+            <p className="text-sm text-accent text-center">Running inside LINE</p>
+          )}
         </header>
         <main className="p-4">{children}</main>
       </body>
