@@ -94,44 +94,57 @@ export default function ResultPage() {
         )}
       </div>
 
-      {/* Color Indicators with Dimming Effect */}
+      {/* Color Indicators with Dimming and Size Adjustment */}
       <div className="flex justify-center mb-6 space-x-6">
+        {/* Green Indicator */}
         <div className="flex items-center space-x-2">
           <div
-            className={`flex items-center justify-center rounded-full bg-green-500 w-12 h-12 text-white font-bold ${prominentColor !== "green" ? "opacity-50" : ""
-              }`}
+            className={`flex items-center justify-center rounded-full bg-green-500 ${prominentColor === "green" ? "w-14 h-14 text-3xl" : "w-8 h-8 text-sm opacity-50"
+              } text-white font-bold`}
           >
             A
           </div>
-          <p className={`text-sm ${prominentColor !== "green" ? "text-green-300" : "text-green-500"}`}>
+          <p
+            className={`${prominentColor === "green" ? "text-green-500 text-sm" : "text-green-300 text-xs"
+              }`}
+          >
             ตามเกณฑ์
           </p>
         </div>
 
+        {/* Yellow Indicator */}
         <div className="flex items-center space-x-2">
           <div
-            className={`flex items-center justify-center rounded-full bg-yellow-400 w-12 h-12 text-white font-bold ${prominentColor !== "yellow" ? "opacity-50" : ""
-              }`}
+            className={`flex items-center justify-center rounded-full bg-yellow-400 ${prominentColor === "yellow" ? "w-12 h-12 text-base" : "w-8 h-8 text-sm opacity-50"
+              } text-white font-bold`}
           >
             B
           </div>
-          <p className={`text-sm ${prominentColor !== "yellow" ? "text-yellow-300" : "text-yellow-400"}`}>
+          <p
+            className={`${prominentColor === "yellow" ? "text-yellow-400 text-sm" : "text-yellow-300 text-xs"
+              }`}
+          >
             สูงกว่าเกณฑ์ปานกลาง
           </p>
         </div>
 
+        {/* Red Indicator */}
         <div className="flex items-center space-x-2">
           <div
-            className={`flex items-center justify-center rounded-full bg-red-500 w-12 h-12 text-white font-bold ${prominentColor !== "red" ? "opacity-50" : ""
-              }`}
+            className={`flex items-center justify-center rounded-full bg-red-500 ${prominentColor === "red" ? "w-12 h-12 text-base" : "w-8 h-8 text-sm opacity-50"
+              } text-white font-bold`}
           >
             C
           </div>
-          <p className={`text-sm ${prominentColor !== "red" ? "text-red-300" : "text-red-500"}`}>
+          <p
+            className={`${prominentColor === "red" ? "text-red-500 text-sm" : "text-red-300 text-xs"
+              }`}
+          >
             สูงกว่าเกณฑ์
           </p>
         </div>
       </div>
+
 
       <div className="flex items-center mb-4">
         <div className="flex space-x-1 text-primary">
