@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { fetchProductByBarcode, NutritionalInfo } from "@/app/lib/api/image-analyze";
@@ -10,7 +10,7 @@ export default function ResultPage() {
   const [product, setProduct] = useState<NutritionalInfo | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const maxCarbs = 8; // ค่าคาร์บที่สามารถรับได้สูงสุด
+  const maxCarbs = 8;
 
   useEffect(() => {
     if (!barcode) {
@@ -60,23 +60,22 @@ export default function ResultPage() {
 
   const carbPercentage = Math.min(((carbValue / 15) / maxCarbs) * 100, 100);
 
+  // Calculate green stars based on nutritional values
   let greenStarCount = 0;
   if (carbValue >= 0 && carbValue <= 2) greenStarCount++;
   if (fatValue >= 0 && fatValue <= 10) greenStarCount++;
   if (sodiumValue >= 0 && sodiumValue <= 700) greenStarCount++;
 
+  // Determine prominent circle based on stars
   let prominentColor = "red";
   let prominentLabel = "C";
-  let prominentSize = "w-12 h-12";
 
   if (greenStarCount >= 2) {
     prominentColor = "green";
     prominentLabel = "A";
-    prominentSize = "w-14 h-14";
   } else if (greenStarCount === 1) {
     prominentColor = "yellow";
     prominentLabel = "B";
-    prominentSize = "w-12 h-12";
   }
 
   return (
@@ -98,21 +97,45 @@ export default function ResultPage() {
         )}
       </div>
 
-      <div className="flex items-center justify-center mb-6 space-x-4">
-        <div
-          className={`flex items-center justify-center rounded-full bg-green-500 ${prominentColor === "green" ? prominentSize : "w-8 h-8"} text-white font-bold`}
-        >
-          {prominentColor === "green" && prominentLabel}
+      {/* Color Indicators with Dimming Effect */}
+      <div className="flex justify-center mb-6 space-x-6">
+        <div className="flex items-center space-x-2">
+          <div
+            className={`flex items-center justify-center rounded-full bg-green-500 w-12 h-12 text-white font-bold ${
+              prominentColor !== "green" ? "opacity-50" : ""
+            }`}
+          >
+            A
+          </div>
+          <p className={`text-sm ${prominentColor !== "green" ? "text-green-300" : "text-green-500"}`}>
+            ตามเกณฑ์
+          </p>
         </div>
-        <div
-          className={`flex items-center justify-center rounded-full bg-yellow-400 ${prominentColor === "yellow" ? prominentSize : "w-8 h-8"} text-white font-bold`}
-        >
-          {prominentColor === "yellow" && prominentLabel}
+
+        <div className="flex items-center space-x-2">
+          <div
+            className={`flex items-center justify-center rounded-full bg-yellow-400 w-12 h-12 text-white font-bold ${
+              prominentColor !== "yellow" ? "opacity-50" : ""
+            }`}
+          >
+            B
+          </div>
+          <p className={`text-sm ${prominentColor !== "yellow" ? "text-yellow-300" : "text-yellow-400"}`}>
+            สูงกว่าเกณฑ์ปานกลาง
+          </p>
         </div>
-        <div
-          className={`flex items-center justify-center rounded-full bg-red-500 ${prominentColor === "red" ? prominentSize : "w-8 h-8"} text-white font-bold`}
-        >
-          {prominentColor === "red" && prominentLabel}
+
+        <div className="flex items-center space-x-2">
+          <div
+            className={`flex items-center justify-center rounded-full bg-red-500 w-12 h-12 text-white font-bold ${
+              prominentColor !== "red" ? "opacity-50" : ""
+            }`}
+          >
+            C
+          </div>
+          <p className={`text-sm ${prominentColor !== "red" ? "text-red-300" : "text-red-500"}`}>
+            สูงกว่าเกณฑ์
+          </p>
         </div>
       </div>
 
