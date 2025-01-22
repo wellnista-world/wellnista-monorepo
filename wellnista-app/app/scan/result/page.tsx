@@ -129,7 +129,7 @@ export default function ResultPage() {
         <div className="flex flex-col items-start bg-white p-4 rounded-lg shadow w-full">
           <h2 className="text-lg font-bold mb-2">ข้อมูลทางโภชนาการ</h2>
           <ul className="text-sm space-y-1">
-            <li>แคลอรี่: {product?.nutriments.energy ?? "ไม่มีข้อมูล"} kcal</li>
+            <li>แคลอรี่: {product?.nutriments["energy-kcal_serving"] ?? "ไม่มีข้อมูล"} kcal</li>
             <li>ไขมัน: {fatValue} กรัม</li>
             <li>โซเดียม: {sodiumValue} มิลลิกรัม</li>
             <li>คาร์โบไฮเดรต: {carbValue} กรัม</li>

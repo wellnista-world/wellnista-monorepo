@@ -2,7 +2,7 @@ export interface NutritionalInfo {
   product_name_en: string;
   brands: string;
   nutriments: {
-    energy?: number; // แคลอรี่
+    "energy-kcal_serving"?: number; // แคลอรี่
     fat?: number; // ไขมัน
     cholesterol?: number; // คอเลสเตอรอล
     carbohydrates?: number; // คาร์โบไฮเดรท
