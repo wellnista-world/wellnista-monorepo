@@ -1,5 +1,7 @@
 export interface NutritionalInfo {
   product_name_en: string;
+  product_name_th: string;
+  product_name: string
   brands: string;
   nutriments: {
     "energy-kcal_serving"?: number; // แคลอรี่

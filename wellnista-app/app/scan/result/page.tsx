@@ -82,7 +82,7 @@ export default function ResultPage() {
   return (
     <div className="flex flex-col items-center min-h-screen bg-secondary text-neutral font-garet p-4">
       <p className="text-lg font-bold text-center mb-4">
-        {product?.product_name_en || "ไม่มีชื่อผลิตภัณฑ์"}
+        {product?.product_name_th || product?.product_name_en || product?.product_name || "ไม่มีชื่อผลิตภัณฑ์"}
       </p>
       <div className="w-full max-w-md h-32 bg-muted rounded-lg mb-4">
         {product?.image_url ? (
