@@ -68,14 +68,11 @@ export default function ResultPage() {
 
   // Determine prominent circle based on stars
   let prominentColor = "red";
-  let prominentLabel = "C";
 
   if (greenStarCount >= 2) {
     prominentColor = "green";
-    prominentLabel = "A";
   } else if (greenStarCount === 1) {
     prominentColor = "yellow";
-    prominentLabel = "B";
   }
 
   return (
@@ -101,9 +98,8 @@ export default function ResultPage() {
       <div className="flex justify-center mb-6 space-x-6">
         <div className="flex items-center space-x-2">
           <div
-            className={`flex items-center justify-center rounded-full bg-green-500 w-12 h-12 text-white font-bold ${
-              prominentColor !== "green" ? "opacity-50" : ""
-            }`}
+            className={`flex items-center justify-center rounded-full bg-green-500 w-12 h-12 text-white font-bold ${prominentColor !== "green" ? "opacity-50" : ""
+              }`}
           >
             A
           </div>
@@ -114,9 +110,8 @@ export default function ResultPage() {
 
         <div className="flex items-center space-x-2">
           <div
-            className={`flex items-center justify-center rounded-full bg-yellow-400 w-12 h-12 text-white font-bold ${
-              prominentColor !== "yellow" ? "opacity-50" : ""
-            }`}
+            className={`flex items-center justify-center rounded-full bg-yellow-400 w-12 h-12 text-white font-bold ${prominentColor !== "yellow" ? "opacity-50" : ""
+              }`}
           >
             B
           </div>
@@ -127,9 +122,8 @@ export default function ResultPage() {
 
         <div className="flex items-center space-x-2">
           <div
-            className={`flex items-center justify-center rounded-full bg-red-500 w-12 h-12 text-white font-bold ${
-              prominentColor !== "red" ? "opacity-50" : ""
-            }`}
+            className={`flex items-center justify-center rounded-full bg-red-500 w-12 h-12 text-white font-bold ${prominentColor !== "red" ? "opacity-50" : ""
+              }`}
           >
             C
           </div>
