@@ -16,8 +16,7 @@ export default {
         muted: "#E5E2D9",
       },
       fontFamily: {
-        magnolia: ["Magnolia Script", "sans-serif"],
-        garet: ["Garet", "sans-serif"],
+        kanit: ['Kanit', 'sans-serif'],
       },
     },
   },

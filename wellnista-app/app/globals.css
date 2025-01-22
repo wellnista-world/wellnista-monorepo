@@ -1,6 +1,13 @@
+@import "@fontsource/kanit"; /* Default Kanit font */
+@import "@fontsource/kanit/300.css"; /* Light weight */
+@import "@fontsource/kanit/400.css"; /* Regular weight */
+@import "@fontsource/kanit/700.css"; /* Bold weight */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 
 :root {
   --primary: #9F9260;
@@ -20,18 +27,16 @@
   }
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* Base styles */
 body {
   @apply bg-secondary text-neutral;
-  font-family: 'Magnolia Script', 'Garet', sans-serif;
+  font-family: 'Kanit', sans-serif; /* Apply Kanit globally */
+  font-weight: 400;
 }
 
 button {
   @apply px-4 py-2 rounded-full text-center;
+  font-family: 'Kanit', sans-serif; /* Ensure buttons use Kanit */
 }
 
 button.primary {
@@ -61,4 +66,3 @@ button.neutral {
 .loading.muted {
   @apply bg-muted text-neutral;
 }
-
