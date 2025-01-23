@@ -55,14 +55,15 @@ export default function ResultPage() {
   }
 
   const carbValue = product?.nutriments.carbohydrates ?? 0;
-  const sodiumValue = product?.nutriments.sodium ?? 0;
+  const sodiumValue = product?.nutriments["sodium_value"] ?? 0;
   const fatValue = product?.nutriments.fat ?? 0;
+  const sugarValue = product?.nutriments.sugars_value ?? 0;
 
   const carbPercentage = Math.min(((carbValue / 15) / maxCarbs) * 100, 100);
 
   // Calculate green stars based on nutritional values
   let greenStarCount = 0;
-  if (carbValue >= 0 && carbValue <= 2) greenStarCount++;
+  if (sugarValue >= 0 && sugarValue <= 2) greenStarCount++;
   if (fatValue >= 0 && fatValue <= 10) greenStarCount++;
   if (sodiumValue >= 0 && sodiumValue <= 700) greenStarCount++;
 
@@ -94,57 +95,110 @@ export default function ResultPage() {
         )}
       </div>
 
-      {/* Color Indicators with Dimming and Size Adjustment */}
-      <div className="flex justify-center mb-6 space-x-6">
-        {/* Green Indicator */}
-        <div className="flex items-center space-x-2">
-          <div
-            className={`flex items-center justify-center rounded-full bg-green-500 ${prominentColor === "green" ? "w-14 h-14 text-3xl" : "w-8 h-8 text-sm opacity-50"
-              } text-white font-bold`}
-          >
-            A
+      {/* Labels for Color Explanation */}
+      <div className="flex flex-col items-center mb-4 space-y-1">
+        <div className="flex space-x-4">
+          <div className="flex items-center space-x-2">
+            <div className="w-4 h-4 rounded-full bg-green-500"></div>
+            <p className="text-sm text-neutral">ตามเกณฑ์</p>
           </div>
-          <p
-            className={`${prominentColor === "green" ? "text-green-500 text-sm" : "text-green-300 text-xs"
-              }`}
-          >
-            ตามเกณฑ์
-          </p>
-        </div>
-
-        {/* Yellow Indicator */}
-        <div className="flex items-center space-x-2">
-          <div
-            className={`flex items-center justify-center rounded-full bg-yellow-400 ${prominentColor === "yellow" ? "w-12 h-12 text-base" : "w-8 h-8 text-sm opacity-50"
-              } text-white font-bold`}
-          >
-            B
+          <div className="flex items-center space-x-2">
+            <div className="w-4 h-4 rounded-full bg-yellow-400"></div>
+            <p className="text-sm text-neutral">สูงกว่าเกณฑ์ปานกลาง</p>
           </div>
-          <p
-            className={`${prominentColor === "yellow" ? "text-yellow-400 text-sm" : "text-yellow-300 text-xs"
-              }`}
-          >
-            สูงกว่าเกณฑ์ปานกลาง
-          </p>
-        </div>
-
-        {/* Red Indicator */}
-        <div className="flex items-center space-x-2">
-          <div
-            className={`flex items-center justify-center rounded-full bg-red-500 ${prominentColor === "red" ? "w-12 h-12 text-base" : "w-8 h-8 text-sm opacity-50"
-              } text-white font-bold`}
-          >
-            C
+          <div className="flex items-center space-x-2">
+            <div className="w-4 h-4 rounded-full bg-red-500"></div>
+            <p className="text-sm text-neutral">สูงกว่าเกณฑ์</p>
           </div>
-          <p
-            className={`${prominentColor === "red" ? "text-red-500 text-sm" : "text-red-300 text-xs"
-              }`}
-          >
-            สูงกว่าเกณฑ์
-          </p>
         </div>
       </div>
 
+      {/* Indicators for Sugar, Sodium, and Fat */}
+      <div className="flex flex-col space-y-6 mb-6 w-full max-w-md">
+        {/* Sugar Row */}
+        <div className="flex flex-col space-y-2">
+          <p className="text-neutral font-bold">น้ำตาล</p>
+          <div className="flex items-center justify-between">
+            {/* Green Circle */}
+            <div
+              className={`flex items-center justify-center rounded-full bg-green-500 w-12 h-12 text-lg text-white font-bold ${sugarValue >= 0 && sugarValue <= 2 ? "ring-4 ring-green-300" : "opacity-50"
+                }`}
+            >
+              1
+            </div>
+            {/* Yellow Circle */}
+            <div
+              className={`flex items-center justify-center rounded-full bg-yellow-400 w-12 h-12 text-lg text-white font-bold ${sugarValue >= 3 && sugarValue <= 7 ? "ring-4 ring-yellow-300" : "opacity-50"
+                }`}
+            >
+              2
+            </div>
+            {/* Red Circle */}
+            <div
+              className={`flex items-center justify-center rounded-full bg-red-500 w-12 h-12 text-lg text-white font-bold ${sugarValue > 7 ? "ring-4 ring-red-300" : "opacity-50"
+                }`}
+            >
+              3
+            </div>
+          </div>
+        </div>
+
+        {/* Sodium Row */}
+        <div className="flex flex-col space-y-2">
+          <p className="text-neutral font-bold">โซเดียม</p>
+          <div className="flex items-center justify-between">
+            {/* Green Circle */}
+            <div
+              className={`flex items-center justify-center rounded-full bg-green-500 w-12 h-12 text-lg text-white font-bold ${sodiumValue >= 0 && sodiumValue <= 700 ? "ring-4 ring-green-300" : "opacity-50"
+                }`}
+            >
+              1
+            </div>
+            {/* Yellow Circle */}
+            <div
+              className={`flex items-center justify-center rounded-full bg-yellow-400 w-12 h-12 text-lg text-white font-bold ${sodiumValue >= 701 && sodiumValue <= 1050 ? "ring-4 ring-yellow-300" : "opacity-50"
+                }`}
+            >
+              2
+            </div>
+            {/* Red Circle */}
+            <div
+              className={`flex items-center justify-center rounded-full bg-red-500 w-12 h-12 text-lg text-white font-bold ${sodiumValue > 1050 ? "ring-4 ring-red-300" : "opacity-50"
+                }`}
+            >
+              3
+            </div>
+          </div>
+        </div>
+
+        {/* Fat Row */}
+        <div className="flex flex-col space-y-2">
+          <p className="text-neutral font-bold">ไขมัน</p>
+          <div className="flex items-center justify-between">
+            {/* Green Circle */}
+            <div
+              className={`flex items-center justify-center rounded-full bg-green-500 w-12 h-12 text-lg text-white font-bold ${fatValue >= 0 && fatValue <= 10 ? "ring-4 ring-green-300" : "opacity-50"
+                }`}
+            >
+              1
+            </div>
+            {/* Yellow Circle */}
+            <div
+              className={`flex items-center justify-center rounded-full bg-yellow-400 w-12 h-12 text-lg text-white font-bold ${fatValue >= 11 && fatValue <= 13 ? "ring-4 ring-yellow-300" : "opacity-50"
+                }`}
+            >
+              2
+            </div>
+            {/* Red Circle */}
+            <div
+              className={`flex items-center justify-center rounded-full bg-red-500 w-12 h-12 text-lg text-white font-bold ${fatValue > 13 ? "ring-4 ring-red-300" : "opacity-50"
+                }`}
+            >
+              3
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div className="flex items-center mb-4">
         <div className="flex space-x-1 text-primary">
@@ -162,8 +216,9 @@ export default function ResultPage() {
             <li>แคลอรี่: {product?.nutriments["energy-kcal_serving"] ?? "ไม่มีข้อมูล"} kcal</li>
             <li>ไขมัน: {fatValue} กรัม</li>
             <li>โซเดียม: {sodiumValue} มิลลิกรัม</li>
+            <li>น้ำตาล: {sugarValue} กรัม</li>
             <li>คาร์โบไฮเดรต: {carbValue} กรัม</li>
-            <li>วิตามินเอ: {product?.nutriments["vitamin-a"] ?? "ไม่มีข้อมูล"} µg</li>
+            <li>วิตามินเอ: {product?.nutriments["vitamin-a"] ?? "ไม่มีข้อมูล"} มก.</li>
             <li>วิตามินบี1: {product?.nutriments["vitamin-b1"] ?? "ไม่มีข้อมูล"} มก.</li>
             <li>วิตามินบี2: {product?.nutriments["vitamin-b2"] ?? "ไม่มีข้อมูล"} มก.</li>
             <li>แคลเซียม: {product?.nutriments.calcium ?? "ไม่มีข้อมูล"} มก.</li>
