@@ -67,15 +67,6 @@ export default function ResultPage() {
   if (fatValue >= 0 && fatValue <= 10) greenStarCount++;
   if (sodiumValue >= 0 && sodiumValue <= 700) greenStarCount++;
 
-  // Determine prominent circle based on stars
-  let prominentColor = "red";
-
-  if (greenStarCount >= 2) {
-    prominentColor = "green";
-  } else if (greenStarCount === 1) {
-    prominentColor = "yellow";
-  }
-
   return (
     <div className="flex flex-col items-center min-h-screen bg-secondary text-neutral font-garet p-4">
       <p className="text-lg font-bold text-center mb-4">
