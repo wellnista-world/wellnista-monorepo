@@ -26,16 +26,34 @@ export default function InforDtx() {
   }, []);
  
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-secondary text-neutral font-garet text-center">
-      <h1 className="text-4xl font-magnolia text-primary ">สมุดบันทึกน้ำตาล</h1>
-      <div className="mb-8 text-xl font-semibold text-neutral">
-       วัน - เวลา
-       <div className="mx-2 px-6 py-3 bg-primary text-secondary font-bold rounded-full transition">
-            {currentDate}
-        </div>  
-          <div className="mx-10 px-6 py-3 bg-primary text-secondary font-bold rounded-full transition">
-            {currentTime}
-          </div>
+    
+    <div className="grid grid-cols-6 gap-4 md:place-content-center bg-secondary text-neutral font-garet ">
+
+      <div className="col-span-6 text-center text-3xl font-magnolia text-primary ">สมุดบันทึกน้ำตาล</div>
+
+      <div className="col-span-4 text-2xl font-bold text-neutral">
+        วัน - เวลา
+      </div>
+
+      <div className=" col-start-1 col-end-4 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
+        {currentDate}
+      </div>  
+      <div className=" col-start-7 col-end-4 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
+        {currentTime}
+      </div>
+
+      <div className=" col-span-4 text-2xl font-bold text-neutral">
+        มื้ออาหาร
+      </div>
+
+      <div className=" col-start-1 col-end-3 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
+        เช้า
+      </div>
+      <div className=" col-start-3 col-end-5 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
+        กลางวัน
+      </div>
+      <div className=" col-start-5 col-end-7 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
+        เย็น
       </div>
     
     </div>
