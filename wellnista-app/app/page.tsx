@@ -12,6 +12,11 @@ export default function Home() {
           เริ่มใช้งาน
         </button>
       </Link>
+      <Link href="book">
+        <button className="myเระ-3 px-6 py-3 bg-primary text-secondary font-bold font-garet rounded-full hover:bg-accent">
+          book testing
+        </button>
+      </Link>
     </div>
   );
 }
