@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function HomeScreen() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-secondary text-neutral font-garet text-center">
+    <div className="flex flex-col items-center justify-center bg-secondary text-neutral font-garet text-center">
       <h1 className="text-4xl font-magnolia text-primary mb-6">ยินดีต้อนรับเข้าสู่ Wellnista</h1>
       <p className="mb-8 text-lg font-semibold text-neutral">
         Choose your action below to get started.
