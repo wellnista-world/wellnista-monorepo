@@ -12,7 +12,7 @@ export default function SelectScreen() {
     </div>
       
     <h3 className="text-center text-lg text-[#000000] mt-6">ตรวจสอบโภชนาการอาหาร</h3>
-      <div className="mt-6 flex flex-col gap-6 w-full max-w-md items-center">
+      <div className="mt-6 flex flex-col gap-6 w-full items-center justify-center">
         {/* ปุ่มใช้ได้ */}
         <Link href="/scan">
           <button className="w-80 py-4 bg-primary text-2xl text-secondary font-bold rounded-lg hover:bg-accent transition">
