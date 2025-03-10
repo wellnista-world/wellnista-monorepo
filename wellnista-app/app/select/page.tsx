@@ -6,7 +6,7 @@ export default function SelectScreen() {
     
     {/*Body*/}
     <div className="text-center mt-8">
-      <h1 className="text-xl font-magnolia mb-2">ยินดีต้อนรับเข้าสู่</h1>
+      <h1 className="text-2xl font-magnolia mb-2">ยินดีต้อนรับเข้าสู่</h1>
       <h1 className="text-3xl font-magnolia font-bold text-[#000000]">Wellnista</h1>
       <p className="text-sm font-magnolia text-[#000000] mt-4">Choose your action below to get start</p>
     </div>
@@ -29,4 +29,3 @@ export default function SelectScreen() {
     </div>
     );
   }
-  
