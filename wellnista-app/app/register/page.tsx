@@ -25,7 +25,7 @@ export default function register() {
       <div className="py-3 col-span-6 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
         input name
       </div>
-      
+
       <div className=" col-span-6 text-2xl font-bold text-neutral">
         โรคประจำตัว (เลือกได้มากกว่า 1)
       </div>
@@ -47,6 +47,9 @@ export default function register() {
       <div className="py-3 col-start-4 col-end-7 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
         เก๊าต์
       </div> 
+      <div className="py-3 col-start-1 col-end-4 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
+        อื่นๆ
+      </div>
 
       <div className=" col-span-4 text-2xl font-bold text-neutral">
         ยาประจำตัว
@@ -55,6 +58,23 @@ export default function register() {
         input name
       </div>  
 
+      <div className=" col-span-6 text-2xl font-bold text-neutral">
+        เพศ
+      </div>
+      <div className="py-3 col-start-1 col-end-4 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
+        ชาย
+      </div>
+      <div className="py-3 col-start-4 col-end-7 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
+        หญิง
+      </div>
+
+      <div className=" col-span-4 text-2xl font-bold text-neutral">
+        อายุ
+      </div>
+      <div className="py-3 col-span-6 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
+        input name
+      </div>
+      
       <div className=" col-span-3 text-2xl font-bold text-neutral">
         น้ำหนัก
       </div>
