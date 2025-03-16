@@ -95,14 +95,14 @@ export default function ScanPage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-secondary text-neutral font-garet">
-      <h1 className="text-3xl font-magnolia text-primary mb-6">สแกน บาร์โค๊ด</h1>
+    <div className="flex flex-col items-center min-h-screen bg-secondary text-neutral font-garet">
+      <h1 className="mt-6 text-3xl font-magnolia text-primary mb-6">สแกน บาร์โค๊ด</h1>
       {isInLineApp && (
         <p className="text-sm text-accent mb-4">Running in LINE App</p>
       )}
-      {!isInLineApp && (
+      {/* {!isInLineApp && (
         <p className="text-sm text-accent mb-4">Running in Browser</p>
-      )}
+      )} */}
       {cameraPermission === false && (
         <button
           onClick={async () => {
@@ -124,7 +124,7 @@ export default function ScanPage() {
       {cameraPermission && (
         <>
           <select
-            className="mb-4 px-4 py-2 border-2 border-accent rounded-full bg-muted text-neutral"
+            className="mb-8 px-4 py-2 border-2 border-accent rounded-lg bg-muted text-neutral"
             onChange={(e) => setSelectedCameraId(e.target.value)}
             value={selectedCameraId || ""}
           >

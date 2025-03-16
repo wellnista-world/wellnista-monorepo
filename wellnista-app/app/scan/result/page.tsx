@@ -40,8 +40,10 @@ export default function ResultPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-secondary text-neutral font-garet">
-        <p>กำลังโหลด...</p>
+      <div className="mt-10 flex items-center justify-center">
+        <div className="mt-8 w-48 h-48 flex items-center text-2xl text-secondary bg-primary justify-center rounded-full border-[#8A7F5F] border-t-transparent animate-spin">
+          <p className="text-[#FFFFFF]">Loading...</p>
+        </div>
       </div>
     );
   }
@@ -68,11 +70,12 @@ export default function ResultPage() {
   if (sodiumValue >= 0 && sodiumValue <= 700) greenStarCount++;
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-secondary text-neutral font-garet p-4">
-      <p className="text-lg font-bold text-center mb-4">
+    <div className="flex flex-col min-h-screen bg-secondary text-neutral font-garet p-4">
+      <p className="text-3xl font-bold mb-4">
         {product?.product_name_th || product?.product_name_en || product?.product_name || "ไม่มีชื่อผลิตภัณฑ์"}
       </p>
-      <div className="w-full max-w-md h-32 bg-muted rounded-lg mb-4">
+      <div className="grid grid-cols-2 gap-4 mb-6">
+        <div className="rounded-full w-full h-full items-center">
         {product?.image_url ? (
           <img
             src={(product?.image_url as string) || "/placeholder-image.jpg"}
@@ -80,26 +83,38 @@ export default function ResultPage() {
             className="w-full h-full object-cover rounded-lg"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gray-200 rounded-lg">
+          <div className="flex items-center justify-center bg-gray-200 rounded-lg">
             <p>ไม่มีรูปภาพ</p>
           </div>
         )}
+        </div>
+        <div className="flex items-center mb-4 justify-center">
+        {/* <div className="flex space-x-1 text-primary">
+          {[...Array(greenStarCount)].map((_, index) => (
+            <span key={index} className="text-2xl">★</span>
+          ))}
+        </div> */}
+        <p className="text-3xl font-bold ml-4">{greenStarCount * 10} point</p>
+        </div>
       </div>
-
       {/* Labels for Color Explanation */}
-      <div className="flex flex-col items-center mb-4 space-y-1">
-        <div className="flex space-x-4">
+      <div className="grid grid-rows-3 grid-flow-col gap-4 mb-6">
+        <div>
           <div className="flex items-center space-x-2">
             <div className="w-4 h-4 rounded-full bg-green-500"></div>
-            <p className="text-sm text-neutral">ตามเกณฑ์</p>
+            <p className="text-sm text-neutral">ปลอดภัย อยู่ในช่วงค่าเเนะนำ</p>
           </div>
+        </div>
+        <div>
           <div className="flex items-center space-x-2">
             <div className="w-4 h-4 rounded-full bg-yellow-400"></div>
-            <p className="text-sm text-neutral">สูงกว่าเกณฑ์ปานกลาง</p>
+            <p className="text-sm text-neutral">เกินค่าแนะนำ“เล็กน้อย”</p>
           </div>
+        </div>
+        <div>
           <div className="flex items-center space-x-2">
             <div className="w-4 h-4 rounded-full bg-red-500"></div>
-            <p className="text-sm text-neutral">สูงกว่าเกณฑ์</p>
+            <p className="text-sm text-neutral">เกินค่าแนะนำ“มาก”</p>
           </div>
         </div>
       </div>
@@ -190,21 +205,20 @@ export default function ResultPage() {
           </div>
         </div>
       </div>
-
-      <div className="flex items-center mb-4">
-        <div className="flex space-x-1 text-primary">
-          {[...Array(greenStarCount)].map((_, index) => (
-            <span key={index} className="text-2xl">★</span>
-          ))}
+      
+      <div className="grid grid-cols-2 gap-4 mb-6">
+        <div className="bg-white p-4 rounded-lg shadow w-full text-lg font-bold">
+          <p>แคลอรี่: {product?.nutriments["energy-kcal_serving"] ?? "ไม่มีข้อมูล"} kcal</p>
         </div>
-        <p className="text-2xl font-bold ml-4">{greenStarCount * 10} คะแนน</p>
+        <div className="bg-white p-4 rounded-lg shadow w-full text-lg font-bold">
+          <p>โปรตีน: .... กรัม</p>
+        </div>
       </div>
 
-      <div className="flex flex-col md:flex-row w-full max-w-md gap-6">
+      <div className="flex flex-col md:flex-row w-full gap-6">
         <div className="flex flex-col items-start bg-white p-4 rounded-lg shadow w-full">
           <h2 className="text-lg font-bold mb-2">ข้อมูลทางโภชนาการ</h2>
           <ul className="text-sm space-y-1">
-            <li>แคลอรี่: {product?.nutriments["energy-kcal_serving"] ?? "ไม่มีข้อมูล"} kcal</li>
             <li>ไขมัน: {fatValue} กรัม</li>
             <li>โซเดียม: {sodiumValue} มิลลิกรัม</li>
             <li>น้ำตาล: {sugarValue} กรัม</li>
@@ -217,7 +231,7 @@ export default function ResultPage() {
           </ul>
         </div>
 
-        <div className="flex flex-col items-center justify-center bg-white p-4 rounded-lg shadow w-full">
+        <div className="flex flex-col items-center justify-center bg-white p-4 rounded-lg shadow w-full mb-8">
           <h2 className="text-lg font-bold mb-2">ปริมาณคาร์บ</h2>
           <div className="w-24 h-24 mb-4">
             <svg viewBox="0 0 36 36" className="circular-chart">
@@ -243,8 +257,26 @@ export default function ResultPage() {
           </p>
         </div>
       </div>
+      
+      <div className="grid grid-cols-2 grid-flow-col gap-4 mb-6">
+        <div>
+          <button
+          className="px-6 py-3 w-full bg-[#5EC269] text-neutral text-xl font-semibold rounded-lg hover:bg-accent transition">
+          กินแล้ว
+          </button>
+        </div>
+        <div>
+          <button
+          className="px-6 py-3 w-full bg-[#DD524C] text-neutral text-xl font-semibold rounded-lg hover:bg-accent transition">
+          ไม่ได้กิน
+          </button>
+        </div>
+        <div>
 
-      <div className="flex justify-center mt-6">
+        </div>       
+      </div>
+
+      <div className="flex justify-center">
         <button
           className="px-6 py-3 bg-primary text-secondary font-semibold rounded-full hover:bg-accent transition"
           onClick={() => router.push("/scan")}
