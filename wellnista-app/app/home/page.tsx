@@ -1,6 +1,11 @@
 import Link from "next/link";
+import { useEffect, useState } from 'react';
+import { supabase } from '@/app/lib/api/supabaseClient';
+
+
 
 export default function HomeScreen() {
+
   return (
     <div className="flex flex-col items-center justify-center bg-secondary text-neutral font-garet text-center">
       <h1 className="text-4xl font-magnolia text-primary mb-6">ยินดีต้อนรับเข้าสู่ Wellnista</h1>
