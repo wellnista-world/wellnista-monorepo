@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@ericblade/quagga2": "^1.8.4",
     "@fontsource/kanit": "^5.1.1",
     "@line/liff": "^2.25.1",
+    "@mui/material": "^6.4.7",
     "@undecaf/barcode-detector-polyfill": "^0.9.21",
     "@zxing/browser": "^0.1.5",
     "next": "15.1.2",
