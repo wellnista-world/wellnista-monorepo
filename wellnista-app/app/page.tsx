@@ -1,24 +1,24 @@
 "use client"
 
-import { useEffect, useState } from 'react';
-import { supabase } from '@/app/lib/api/supabaseClient';
+import { useEffect } from 'react';
+// import { supabase } from '@/app/lib/api/supabaseClient';
 
 export default function Home() {
-  const [user, setUser] = useState<any>(null);
+  // const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
     const getUser = async () => {
-      const { data } = await supabase.auth.getUser();
-      setUser(data?.user ?? null);
+      // const { data } = await supabase.auth.getUser();
+      // setUser(data?.user ?? null);
     };
 
     getUser();
   }, []);
 
-  const signOut = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
-  }
+  // const signOut = async () => {
+  //   await supabase.auth.signOut();
+  //   // setUser(null);
+  // }
   return (
     <div className="flex flex-col  justify-center item-center bg-secondary text-neutral font-garet text-center">
       <h1 className=" text-center text-5xl font-magnolia font-bold text-primary mt-10">ยินดีต้อนรับเข้าสู่ Wellnista</h1>
@@ -27,7 +27,7 @@ export default function Home() {
       </p>
       <div className="flex flex-col gap-4  justify-center">
         <div>
-          {user ? (
+          {/* {user ? (
             <div>
               <p>Welcome, {user.email}</p>
               <button onClick={signOut}>Sign Out</button>
@@ -36,7 +36,7 @@ export default function Home() {
             <button onClick={() => supabase.auth.signInWithOAuth({ provider: 'google' })}>
               Sign in with Google
             </button>
-          )}
+          )} */}
         </div>
 
 
