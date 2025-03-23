@@ -9,7 +9,7 @@ export interface NutritionalInfo {
     cholesterol?: number; // คอเลสเตอรอล
     carbohydrates?: number; // คาร์โบไฮเดรท
     "sugars_value"?: number;
-    proteins?: number; // โปรตีน
+    "proteins_serving"?: number; // โปรตีน
     "sodium_value"?: number; // โซเดียม
     "vitamin-a"?: number; // วิตามิน A
     "vitamin-b1"?: number; // วิตามิน B1

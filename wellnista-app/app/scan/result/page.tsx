@@ -60,6 +60,8 @@ export default function ResultPage() {
   const sodiumValue = product?.nutriments["sodium_value"] ?? 0;
   const fatValue = product?.nutriments.fat ?? 0;
   const sugarValue = product?.nutriments.sugars_value ?? 0;
+  const protein = product?.nutriments.proteins_serving ?? 0;
+  const kcal = product?.nutriments["energy-kcal_serving"] ?? 0;
 
   const carbPercentage = Math.min(((carbValue / 15) / maxCarbs) * 100, 100);
 
@@ -208,10 +210,10 @@ export default function ResultPage() {
       
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div className="bg-white p-4 rounded-lg shadow w-full text-lg font-bold">
-          <p>แคลอรี่: {product?.nutriments["energy-kcal_serving"] ?? "ไม่มีข้อมูล"} kcal</p>
+          <p>แคลอรี่: {kcal ?? "ไม่มีข้อมูล"} kcal</p>
         </div>
         <div className="bg-white p-4 rounded-lg shadow w-full text-lg font-bold">
-          <p>โปรตีน: .... กรัม</p>
+          <p>โปรตีน: {protein ?? "ไม่มีข้อมูล"} กรัม</p>
         </div>
       </div>
 
