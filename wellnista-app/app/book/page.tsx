@@ -1,32 +1,19 @@
 "use client";
 
-//import Link from "next/link";
 import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import 'react-datepicker/dist/react-datepicker.css';
-//import { text } from 'stream/consumers';
-import { OutlinedInput } from '@mui/material';
+import StdSelect from "@/app/components/std/StdSelect";
+import TextFields from '../components/util/InputBarFill';
 
 
 
+const mealNames: string[]=["เช้า" ,"กลางวัน" ,"เย็น"]
+const mealTime: string[]=["ก่อนอาหาร" ,"หลังอาหาร"]
 
 export default function InforDtx() {
-
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#FFF4D2',
-        contrastText: '#fff'
-      },
-      text: {
-        primary: '#fff',
-      },
-    },
-  });
-
+  
   const MainButton = styled(Button)({
     boxShadow: 'none',
     textTransform: 'none',
@@ -59,7 +46,7 @@ export default function InforDtx() {
       borderColor: '#005cbf',
     },
     '&:focus': {
-      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+      boxShadow: '0 0 0 0.2rem rgba(24, 111, 204, 0.5)',
     },
   });
   const [currentDate, setCurrentDate] = useState<string>("");
@@ -90,56 +77,30 @@ export default function InforDtx() {
         วัน - เวลา
       </div>
 
-      <div className=" col-start-1 col-end-4 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
+      <div className=" py-3 col-start-1 col-end-4 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
         {currentDate}
       </div>
-      <div className=" col-start-7 col-end-4 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
+      <div className=" py-3 col-start-7 col-end-4 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
         {currentTime}
       </div>
 
       <div className=" col-span-4 text-2xl font-bold text-neutral">
         มื้ออาหาร
       </div>
-
-      <div className="py-3 col-start-1 col-end-3 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
-        เช้า
+      
+      <div className="col-start-1 col-end-3 content-center text-center text-xl text-secondary font-bold rounded-md transition">
+        <StdSelect names={mealNames} />
       </div>
-      <div className="py-3 col-start-3 col-end-5 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
-        กลางวัน
+      
+      <div className="col-start-1 col-end-4 content-center text-center text-xl text-secondary font-bold rounded-md transition">
+        <StdSelect names={mealTime}/>
       </div>
-      <div className="py-3 col-start-5 col-end-7 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
-        เย็น
-      </div>
-
-      <div className="py-3 col-start-1 col-end-4 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
-        ก่อนอาหาร
-      </div>
-      <div className="py-3 col-start-4 col-end-7 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
-        หลังอาหาร
-      </div>
-
+      
       <div className="col-start-1 col-end-3 text-4xl content-center text-center font-bold text-neutral">
         DTX
       </div>
-      <div className="py-3 col-start-3 col-end-7 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
-        <ThemeProvider theme={theme}>
-          <Box
-            component="form"
-            sx={{ '& > :not(style)': { m: 1, width: '15ch' }, color: 'text.primary', fontSize: 50 }}
-            noValidate
-            autoComplete="off"
-          >
-            <OutlinedInput
-              //id="outlined-basic"
-              //label="DTX"
-              placeholder='ค่า DTX'
-              color='primary'
-              type='number'
-               sx={{ fontSize: 25,m: 1, }}
-            />
-
-          </Box>
-        </ThemeProvider>
+      <div className=" col-start-3 col-end-7 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">
+        <TextFields type='number' />
       </div>
 
       <div className="mt-20 py-3 col-start-2 col-end-6 text-center ">
@@ -151,3 +112,4 @@ export default function InforDtx() {
     </div>
   );
 }
+
