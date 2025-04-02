@@ -3,7 +3,6 @@ import { styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
-import { SelectChangeEvent } from '@mui/material/Select';
 
 interface InputBarProbs {
     type: string;

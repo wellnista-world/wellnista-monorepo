@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { supabase } from './lib/api/supabaseClient';
 import Link from 'next/link';
 
@@ -11,14 +10,25 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
+interface User {
+  phone?: string;
+  password?: string;
+}
+
 export default function Home() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const router = useRouter();
+  const formatPhoneNumber = (rawPhone: string) => {
+    const cleaned = rawPhone.replace(/\D/g, ''); // ลบ non-numeric ออก
+    if (cleaned.startsWith('0')) {
+      return '+66' + cleaned.slice(1);
+    }
+    return '+66' + cleaned; // fallback กรณี user ลืมใส่ 0
+  };
 
   useEffect(() => {
     const getUser = async () => {
@@ -32,8 +42,9 @@ export default function Home() {
   const handleLogin = async () => {
     setError(null);
     setLoading(true);
+    const formattedPhone = formatPhoneNumber(phone);
     const { data, error } = await supabase.auth.signInWithPassword({
-      phone,
+      phone: formattedPhone,
       password,
     });
 
@@ -83,7 +94,7 @@ export default function Home() {
         ) : (
           <>
             <TextField
-              label="เบอร์โทร (เช่น +66812345678)"
+              label="เบอร์โทร (เช่น 0812345678)"
               variant="outlined"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}

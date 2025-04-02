@@ -35,6 +35,8 @@ export default function SignupPage() {
       password,
     });
 
+    localStorage.setItem('phone', data.user?.phone ?? '');
+
     if (error) {
       setError(error.message);
     } else {
