@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { supabase } from '../../lib/api/supabaseClient';
 
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';

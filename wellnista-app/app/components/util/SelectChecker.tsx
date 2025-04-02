@@ -3,7 +3,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-//import Checkbox from '@mui/material/Checkbox';
+import Checkbox from '@mui/material/Checkbox';
 import { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -47,35 +47,31 @@ export default function MultipleSelectCheckmarks() {
     
     });
 
-  const [diseaseName, setDiseaseName] = useState<string>();
+  const [diseaseName, setDiseaseName] = useState<string[]>([]);
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = (event: SelectChangeEvent<string[]>) => {
     const {
       target: { value },
     } = event;
-    setDiseaseName(
-      // On autofill we get a stringified value.
-       value,
-    );
+    setDiseaseName(typeof value === 'string' ? value.split(',') : (value as string[]));
   };
 
   return (
     <div>
       <ThemeProvider theme={theme}>
       <FormControl >
-        <Select sx={{ width: 400, border:2,borderColor:'#9F9260' ,color: 'text.secondary',fontSize : 22,borderRadius: 4}}
+        <Select<string[]> sx={{ width: 400, border:2, borderColor:'#9F9260' ,color: 'text.secondary',fontSize : 22,borderRadius: 4}}
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
-          //multiple
+          multiple
           value={diseaseName}
           onChange={handleChange}
-          //input={<OutlinedInput label="Tag" />}
-          //renderValue={(selected) => selected.join(', ')}
+          renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}
         >
           {names.map((name) => (
             <MenuItem key={name} value={name}>
-              {/* <Checkbox  checked={diseaseName.includes(name)} /> */}
+              <Checkbox  checked={diseaseName.includes(name)} />
               <ListItemText sx={{color: 'text.secondary',fontWeight: 500}} primary={name} />
             </MenuItem>
           ))}
