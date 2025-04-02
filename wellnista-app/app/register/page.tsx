@@ -61,7 +61,7 @@ export default function Register() {
       <div className=" col-span-6 text-2xl font-bold text-neutral">
         เพศ
       </div>
-      <div className="col-span-6 content-center text-center text-xl text-secondary font-bold rounded-md transition">
+      <div className="col-span-6 col-start-0 text-left text-xl text-secondary font-bold rounded-md transition">
         <StdSelect names={genderName} />
       </div>
 
@@ -78,18 +78,19 @@ export default function Register() {
       <div className=" col-span-3 text-2xl font-bold text-neutral">
         ส่วนสูง
       </div>
-      <div className="col-start-1 col-end-4 content-center text-center text-xl text-secondary font-bold rounded-md transition">
+      <div className="col-start-1 col-end-4 content-left text-center text-xl text-secondary font-bold rounded-md transition">
         <TextFields type="number"/>
       </div>
-      <div className="col-start-4 col-end-7 content-center text-center text-xl text-secondary font-bold rounded-md transition">
+      <div className="col-start-4 col-end-7 content-left text-center text-xl text-secondary font-bold rounded-md transition">
         <TextFields type="number"/>
       </div>
 
       <div className=" col-span-4 text-2xl font-bold text-neutral">
         เลือกกิจกรรม
       </div>
-      <div className="col-span-6 content-center text-center text-xl text-secondary font-bold rounded-md transition">
-        <StdSelect names={activitiveLevel} />
+      <div className="col-span-6 text-left text-xl text-secondary font-bold rounded-md ">
+        <StdSelect names={activitiveLevel} >
+        </StdSelect>  
       </div>
 
       <div className="mt-20 py-3 col-start-2 col-end-6 bg-primary content-center text-center text-xl text-secondary font-bold rounded-md transition">

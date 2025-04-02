@@ -18,6 +18,7 @@ const MenuProps = {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
       width: 300,
+      bgColor: '#9F9260',
     },
   },
 };
@@ -49,18 +50,22 @@ const StdSelect: React.FC<StdSelectProds> = ({ names, onChangeValue }) => {
   return (
     <div>
       <ThemeProvider theme={theme}>
-        <FormControl sx={{ width: 400, color: 'text.secondary', border: 2, borderColor: '#9F9260', fontSize: 22 }}>
-          <Select
-            labelId="demo-multiple-checkbox-label"
-            id="demo-multiple-checkbox"
-            value={name}
-            onChange={handleChange}
-            MenuProps={MenuProps}
-          >
-            {names.map((name) => (
-              <MenuItem key={name} value={name}>
-                <ListItemText sx={{ color: 'text.secondary', fontWeight: 500 }} primary={name} />
-              </MenuItem>
+      <FormControl sx={{ width: 400 ,color: 'text.secondary',fontSize : 22,}}>
+        <Select 
+          labelId="demo-multiple-checkbox-label"
+          id="demo-multiple-checkbox"
+          //multiple
+          value={name}
+          onChange={handleChange}
+          //input={<OutlinedInput label="Tag" />}
+          
+          MenuProps={MenuProps}
+        >
+          {names.map((name) => (
+            <MenuItem key={name} value={name}>
+              
+              <ListItemText sx={{color: 'text.secondary',fontWeight: 500}} primary={name} />
+            </MenuItem>
             ))}
           </Select>
         </FormControl>

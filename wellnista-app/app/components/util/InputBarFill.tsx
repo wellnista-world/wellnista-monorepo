@@ -20,7 +20,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
         border: '2px solid',
         borderColor: '#9F9260',
         fontSize: 22,
-        width: 'full',
+        //width: 'full',
         padding: '10px 12px',
         transition: theme.transitions.create([
             'border-color',
@@ -45,9 +45,9 @@ const InputsBarFill: React.FC<InputBarProbs> = ({ type }) => {
         <Box
             component="form"
             noValidate
-            sx={{ display: 'grid', gridTemplateColumns: { sm: '1fr 1fr' }, gap: 2 }}
+            //sx={{ display: 'grid', gridTemplateColumns: { sm: '1fr 1fr' }, gap: 2 }}
         >
-            <FormControl variant="standard">
+            <FormControl variant="standard"className='w-full'>
                 <BootstrapInput type={getType(type)}  />
             </FormControl>
 

@@ -16,7 +16,7 @@ const MenuProps = {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
       width: 300,
-      //bgColor: '#9F9260',
+      bgColor: '#9F9260',
     },
   },
 };
@@ -35,7 +35,7 @@ export default function MultipleSelectCheckmarks() {
   const theme = createTheme({
       palette: {
         primary: {
-          main: '#d8ce73',
+          main: '#9F9260',
           contrastText: '#fff'
         },
         text: {
