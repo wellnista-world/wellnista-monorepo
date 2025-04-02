@@ -3,9 +3,11 @@ import { styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
+import { SelectChangeEvent } from '@mui/material/Select';
 
 interface InputBarProbs {
     type: string;
+    onChange?: (value: string) => void;
   }
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
@@ -29,7 +31,14 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
         ]),
     },
 }));
-const InputsBarFill: React.FC<InputBarProbs> = ({ type }) => {
+const StdTextField: React.FC<InputBarProbs> = ({ type, onChange }) => {
+
+      const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        if (onChange) {
+          onChange(value);
+        }
+      };
     
   
     const getType = (inputIype: string) => {
@@ -47,8 +56,8 @@ const InputsBarFill: React.FC<InputBarProbs> = ({ type }) => {
             noValidate
             //sx={{ display: 'grid', gridTemplateColumns: { sm: '1fr 1fr' }, gap: 2 }}
         >
-            <FormControl variant="standard"className='w-full'>
-                <BootstrapInput type={getType(type)}  />
+            <FormControl variant="standard">
+                <BootstrapInput type={getType(type)} onChange={handleChange}  />
             </FormControl>
 
         </Box>
@@ -56,5 +65,5 @@ const InputsBarFill: React.FC<InputBarProbs> = ({ type }) => {
     );
   };
 
-export default InputsBarFill ;
+export default StdTextField ;
     

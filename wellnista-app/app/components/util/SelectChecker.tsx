@@ -7,6 +7,11 @@ import Checkbox from '@mui/material/Checkbox';
 import { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+interface StdSelectProds {
+  names: string[];
+  onChangeValue?: (value: string[]) => void;
+}
+
 
 
 const ITEM_HEIGHT = 48;
@@ -21,31 +26,22 @@ const MenuProps = {
   },
 };
 
-const names  = [
-  'เบาหวาน',
-  'ไต',
-  'หัวใจ',
-  'ความดัน',
-  'เก๊าต์',
-  'ไขมัน',
-  
-];
-
-export default function MultipleSelectCheckmarks() {
-  const theme = createTheme({
-      palette: {
-        primary: {
-          main: '#9F9260',
-          contrastText: '#fff'
-        },
-        text: {
-          primary: '#fff',
-          secondary: '#000'
-        },
-        
-      },
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#d8ce73',
+      contrastText: '#fff'
+    },
+    text: {
+      primary: '#fff',
+      secondary: '#000'
+    },
     
-    });
+  },
+
+});
+
+const MultipleSelectCheckmarks: React.FC<StdSelectProds> = ({ names, onChangeValue }) => {
 
   const [diseaseName, setDiseaseName] = useState<string[]>([]);
 
@@ -54,6 +50,10 @@ export default function MultipleSelectCheckmarks() {
       target: { value },
     } = event;
     setDiseaseName(typeof value === 'string' ? value.split(',') : (value as string[]));
+
+    if (onChangeValue) {
+      onChangeValue(typeof value === 'string' ? value.split(',') : (value as string[]));
+    }
   };
 
   return (
@@ -81,3 +81,5 @@ export default function MultipleSelectCheckmarks() {
     </div>
   );
 }
+
+export default MultipleSelectCheckmarks;
