@@ -78,7 +78,7 @@ export default function Register() {
       return;
     }
 
-    const { data, error } = await supabase.from('users').update({
+    const { error } = await supabase.from('users').update({
       ...userData,
     }).eq('user_id', user.id);
 
@@ -156,7 +156,6 @@ export default function Register() {
             fullWidth
             type="number"
             value={userData.waist}
-            inputProps={{ min: 1 }}
             onChange={(e) => handleInputChange('waist', Number(e.target.value))}
           />
 
