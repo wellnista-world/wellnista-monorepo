@@ -95,19 +95,21 @@ export default function Register() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box className="min-h-screen bg-secondary text-neutral flex justify-center items-start px-4 pt-6 pb-12">
+      <Box className="min-h-screen bg-secondary flex justify-center items-start px-4 pt-6 pb-12">
         <Box className="w-full max-w-sm p-6 space-y-4">
-          <Typography variant="h5" className="text-primary font-magnolia text-center">
+          <Typography variant="h5" className="text-primary text-neutral font-garet text-center">
             ลงทะเบียน
           </Typography>
 
           <TextField
+            id="outlined-basic"
             label="ชื่อ - นามสกุล"
             fullWidth
             variant="outlined"
             value={userData.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
           />
+
           <TextField
             label="ชื่อเล่น"
             fullWidth
