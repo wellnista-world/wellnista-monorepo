@@ -50,7 +50,7 @@ const StdSelect: React.FC<StdSelectProds> = ({ names, onChangeValue }) => {
   return (
     <div>
       <ThemeProvider theme={theme}>
-      <FormControl sx={{ width: 400 ,color: 'text.secondary',fontSize : 22,}}>
+      <FormControl fullWidth className="font-garet">
         <Select 
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"

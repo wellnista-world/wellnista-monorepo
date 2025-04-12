@@ -2,10 +2,19 @@
 
 import { useState } from 'react';
 import { supabase } from '../lib/api/supabaseClient';
+import {
+  TextField,
+  Button,
+  Typography,
+  Box,
+  CircularProgress,
+  ThemeProvider,
+} from '@mui/material';
 
-import StdTextField from '../components/std/StdTextField';
 import MultipleSelectCheckmarks from '../components/util/SelectChecker';
 import StdSelect from '../components/std/StdSelect';
+import theme from '..//components/theme/theme';
+import { useRouter } from 'next/navigation';
 
 interface UserData {
   name: string;
@@ -17,6 +26,7 @@ interface UserData {
   weight: number;
   height: number;
   activityLevel: string;
+  waist?: number;
 }
 
 const genderName: string[] = ['ชาย', 'หญิง'];
@@ -27,17 +37,10 @@ const activitiveLevel: string[] = [
   'ออกกำลังกายหนัก 6-7วัน/สัปดาห์',
   'ออกกำลังกายหนักมาก 2 ครั้ง/วัน เป็นนักกีฬา',
 ];
-const diseaseNames  = [
-  'เบาหวาน',
-  'ไต',
-  'หัวใจ',
-  'ความดัน',
-  'เก๊าต์',
-  'ไขมัน',
-  
-];
+const diseaseNames = ['เบาหวาน', 'ไต', 'หัวใจ', 'ความดัน', 'เก๊าต์', 'ไขมัน'];
 
 export default function Register() {
+  const router = useRouter();
   const [userData, setUserData] = useState<UserData>({
     name: '',
     nickname: '',
@@ -48,115 +51,128 @@ export default function Register() {
     weight: 0,
     height: 0,
     activityLevel: '',
+    waist: 0,
   });
 
-const handleInputChange = (field: keyof UserData, value: string | number) => {
-    setUserData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+  const [loading, setLoading] = useState(false);
+
+  const handleInputChange = (field: keyof UserData, value: string | number) => {
+    setUserData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleDiseaseChangeValue = (values: string[]) => {
-    setUserData((prev) => ({
-      ...prev,
-      diseases: values,
-    }));
+    setUserData((prev) => ({ ...prev, diseases: values }));
   };
 
   const handleSubmit = async () => {
+    setLoading(true);
+
     const {
       data: { user },
       error: userError,
     } = await supabase.auth.getUser();
-  
+
     if (userError || !user) {
       alert('คุณยังไม่ได้เข้าสู่ระบบ');
+      setLoading(false);
       return;
     }
-  
-    const { data, error } = await supabase.from('users').insert([
-      {
-        ...userData,
-        user_id: user.id, // 👈 ผูกข้อมูลกับผู้ใช้ที่ login อยู่
-      },
-    ]);
-  
+
+    const { data, error } = await supabase.from('users').update({
+      ...userData,
+    }).eq('user_id', user.id);
+
     if (error) {
       console.error('Error inserting data:', error);
       alert('เกิดข้อผิดพลาดในการลงทะเบียน');
     } else {
       alert('ลงทะเบียนสำเร็จ!');
-      console.log('User inserted:', data);
+      router.push('/home');
     }
+
+    setLoading(false);
   };
 
   return (
-    <div className="grid grid-cols-6 gap-4 md:place-content-center bg-secondary text-neutral font-garet p-6">
-      <div className="col-span-6 text-center text-3xl font-magnolia text-primary">ลงทะเบียน</div>
+    <ThemeProvider theme={theme}>
+      <Box className="min-h-screen bg-secondary text-neutral flex justify-center items-start px-4 pt-6 pb-12">
+        <Box className="w-full max-w-sm p-6 space-y-4">
+          <Typography variant="h5" className="text-primary font-magnolia text-center">
+            ลงทะเบียน
+          </Typography>
 
-      <div className="col-span-4 text-2xl font-bold text-neutral">ชื่อ-นามสกุล</div>
-      <div className="col-span-6 text-center">
-        <StdTextField type="text" onChange={(e) => handleInputChange('name', e)} />
-      </div>
+          <TextField
+            label="ชื่อ - นามสกุล"
+            fullWidth
+            variant="outlined"
+            value={userData.name}
+            onChange={(e) => handleInputChange('name', e.target.value)}
+          />
+          <TextField
+            label="ชื่อเล่น"
+            fullWidth
+            variant="outlined"
+            value={userData.nickname}
+            onChange={(e) => handleInputChange('nickname', e.target.value)}
+          />
 
-      <div className="col-span-4 text-2xl font-bold text-neutral">ชื่อเล่น</div>
-      <div className="col-span-6 text-center">
-        <StdTextField type="text" onChange={(e) => handleInputChange('nickname', e)} />
-      </div>
+          <MultipleSelectCheckmarks names={diseaseNames} onChangeValue={handleDiseaseChangeValue} />
 
-      <div className="col-span-6 text-2xl font-bold text-neutral">โรคประจำตัว (เลือกได้มากกว่า 1)</div>
-      <div className="col-span-6 text-left">
-        <MultipleSelectCheckmarks names={diseaseNames} onChangeValue={handleDiseaseChangeValue} />
-      </div>
+          <TextField
+            label="ยาประจำตัว"
+            fullWidth
+            variant="outlined"
+            value={userData.madicines}
+            onChange={(e) => handleInputChange('madicines', e.target.value)}
+          />
 
-      <div className="col-span-4 text-2xl font-bold text-neutral">ยาประจำตัว</div>
-      <div className="col-span-6 text-center">
-        <StdTextField type="text" onChange={(e) => handleInputChange('madicines', e)} />
-      </div>
+          <StdSelect names={genderName} onChangeValue={(val) => handleInputChange('gender', val)} />
 
-      <div className="col-span-6 text-2xl font-bold text-neutral">เพศ</div>
-      <div className="col-span-6 text-center">
-        <StdSelect names={genderName} onChangeValue={(val) => handleInputChange('gender', val)} />
-      </div>
+          <TextField
+            label="อายุ"
+            fullWidth
+            type="number"
+            value={userData.age}
+            onChange={(e) => handleInputChange('age', Number(e.target.value))}
+          />
 
-      <div className="col-span-4 text-2xl font-bold text-neutral">อายุ</div>
-      <div className="col-span-6 text-center">
-        <StdTextField
-          type="number"
-          onChange={(e) => handleInputChange('age', Number(e))}
-        />
-      </div>
+          <div className="grid grid-cols-2 gap-4">
+            <TextField
+              label="น้ำหนัก"
+              type="number"
+              value={userData.weight}
+              onChange={(e) => handleInputChange('weight', Number(e.target.value))}
+            />
+            <TextField
+              label="ส่วนสูง"
+              type="number"
+              value={userData.height}
+              onChange={(e) => handleInputChange('height', Number(e.target.value))}
+            />
+          </div>
 
-      <div className="col-span-3 text-2xl font-bold text-neutral">น้ำหนัก</div>
-      <div className="col-span-3 text-2xl font-bold text-neutral">ส่วนสูง</div>
-      <div className="col-start-1 col-end-4 text-center">
-        <StdTextField
-          type="number"
-          onChange={(e) => handleInputChange('weight', Number(e))}
-        />
-      </div>
-      <div className="col-start-4 col-end-7 text-center">
-        <StdTextField
-          type="number"
-          onChange={(e) => handleInputChange('height', Number(e))}
-        />
-      </div>
+          <TextField
+            label="รอบเอว"
+            fullWidth
+            type="number"
+            value={userData.waist}
+            inputProps={{ min: 1 }}
+            onChange={(e) => handleInputChange('waist', Number(e.target.value))}
+          />
 
-      <div className="col-span-4 text-2xl font-bold text-neutral">เลือกกิจกรรม</div>
-      <div className="col-span-6 text-center">
-        <StdSelect
-          names={activitiveLevel}
-          onChangeValue={(val) => handleInputChange('activityLevel', val)}
-        />
-      </div>
+          <StdSelect names={activitiveLevel} onChangeValue={(val) => handleInputChange('activityLevel', val)} />
 
-      <button
-        onClick={handleSubmit}
-        className="mt-10 py-3 col-start-2 col-end-6 bg-primary text-center text-xl text-secondary font-bold rounded-md transition hover:bg-accent"
-      >
-        ลงทะเบียน
-      </button>
-    </div>
+          <Button
+            variant="contained"
+            fullWidth
+            onClick={handleSubmit}
+            disabled={loading}
+            className="!bg-primary hover:!bg-accent !text-white mt-4 rounded-full"
+          >
+            {loading ? <CircularProgress size={24} color="inherit" /> : 'ลงทะเบียน'}
+          </Button>
+        </Box>
+      </Box>
+    </ThemeProvider>
   );
 }

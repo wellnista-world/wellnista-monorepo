@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useRouter } from 'next/navigation';
 
 interface User {
   phone?: string;
@@ -21,6 +22,7 @@ export default function Home() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const formatPhoneNumber = (rawPhone: string) => {
     const cleaned = rawPhone.replace(/\D/g, ''); // ลบ non-numeric ออก
@@ -52,6 +54,7 @@ export default function Home() {
       setError(error.message);
     } else {
       setUser(data.user);
+      router.push('/home');
     }
     setLoading(false);
   };

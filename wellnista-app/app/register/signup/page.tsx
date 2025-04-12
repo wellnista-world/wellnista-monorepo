@@ -17,11 +17,11 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false);
 
   const formatPhoneNumber = (rawPhone: string) => {
-    const cleaned = rawPhone.replace(/\D/g, ''); // ลบ non-numeric ออก
+    const cleaned = rawPhone.replace(/\D/g, '');
     if (cleaned.startsWith('0')) {
       return '+66' + cleaned.slice(1);
     }
-    return '+66' + cleaned; // fallback กรณี user ลืมใส่ 0
+    return '+66' + cleaned;
   };
 
   const handleSignup = async () => {
@@ -35,14 +35,26 @@ export default function SignupPage() {
       password,
     });
 
-    localStorage.setItem('phone', data.user?.phone ?? '');
-
-    if (error) {
-      setError(error.message);
-    } else {
-      router.push('/register');
+    if (error || !data.user) {
+      setError(error?.message ?? 'เกิดข้อผิดพลาด');
+      setLoading(false);
+      return;
     }
 
+    // ✅ Insert into 'users' table
+    const { user } = data;
+    const { error: insertError } = await supabase.from('users').insert([
+      {
+        user_id: user.id,
+      },
+    ]);
+
+    if (insertError) {
+      setError('สมัครสำเร็จ แต่เกิดข้อผิดพลาดในการบันทึกข้อมูลเพิ่มเติม');
+      console.error(insertError);
+    }
+
+    router.push('/register');
     setLoading(false);
   };
 

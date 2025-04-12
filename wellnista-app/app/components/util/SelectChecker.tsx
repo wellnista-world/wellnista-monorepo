@@ -59,8 +59,8 @@ const MultipleSelectCheckmarks: React.FC<StdSelectProds> = ({ names, onChangeVal
   return (
     <div>
       <ThemeProvider theme={theme}>
-      <FormControl >
-        <Select<string[]> sx={{ width: 400, border:2, borderColor:'#9F9260' ,color: 'text.secondary',fontSize : 22,borderRadius: 4}}
+      <FormControl fullWidth className="font-garet">
+        <Select<string[]>
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
@@ -68,6 +68,9 @@ const MultipleSelectCheckmarks: React.FC<StdSelectProds> = ({ names, onChangeVal
           onChange={handleChange}
           renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}
+          sx={{
+            color: '#393939', // ✅ เปลี่ยนเป็นดำ
+          }}
         >
           {names.map((name) => (
             <MenuItem key={name} value={name}>
