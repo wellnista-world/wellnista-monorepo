@@ -24,7 +24,8 @@
     "openai": "^4.77.0",
     "react": "^19.0.0",
     "react-datepicker": "^8.1.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "recharts": "^2.15.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
