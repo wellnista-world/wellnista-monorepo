@@ -188,14 +188,6 @@ export default function InforDtx() {
         </Button>
 
         <DtxGraph
-          data={afterData}
-          title="หลังอาหาร"
-          normalMin={70}
-          normalMax={140}
-          maxY={600}
-          onUpdate={handleUpdate}
-        />
-        <DtxGraph
           data={beforeData}
           title="ก่อนอาหาร"
           normalMin={70}
@@ -203,6 +195,16 @@ export default function InforDtx() {
           maxY={600}
           onUpdate={handleUpdate}
         />
+
+        <DtxGraph
+          data={afterData}
+          title="หลังอาหาร"
+          normalMin={70}
+          normalMax={140}
+          maxY={600}
+          onUpdate={handleUpdate}
+        />
+
       </div>
     </div>
   );
