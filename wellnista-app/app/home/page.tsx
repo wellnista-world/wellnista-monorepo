@@ -71,7 +71,7 @@ export default function HomeScreen() {
 
       {/* Footer Note */}
       <div className="w-full max-w-xs mt-6 text-center text-sm text-neutral leading-relaxed">
-        การบันทคารบ้าง่ายกว่าที่คิด<br />
+        การบันทึกคาร์บง่ายกว่าที่คิด<br />
         ช่วยป้องกันโรคไม่ติดต่อเรื้อรัง
       </div>
     </div>
