@@ -71,3 +71,4 @@ button.neutral {
 .loading.muted {
   @apply bg-muted text-neutral;
 }
+
