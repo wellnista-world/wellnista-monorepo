@@ -20,7 +20,7 @@ export default function SelectScreen() {
           </button>
         </Link>
         {/* ปุ่มกำลังพัฒนา */}
-        <Link href="/menu">
+            <Link href="/menu">
           <button className="w-80 py-4 bg-primary text-2xl text-secondary font-bold rounded-lg hover:bg-accent transition">
             ถ่ายรูป / พิมพ์ชื่ออาหาร
           </button>

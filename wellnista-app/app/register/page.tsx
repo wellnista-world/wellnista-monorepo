@@ -22,11 +22,11 @@ interface UserData {
   diseases: string[];
   madicines: string;
   gender: string;
-  age: number;
-  weight: number;
-  height: number;
+  age: number | null;
+  weight: number | null;
+  height: number | null;
   activityLevel: string;
-  waist?: number;
+  waist?: number | null;
 }
 
 const genderName: string[] = ['ชาย', 'หญิง'];
@@ -47,16 +47,16 @@ export default function Register() {
     diseases: [],
     madicines: '',
     gender: '',
-    age: 0,
-    weight: 0,
-    height: 0,
+    age: null,
+    weight: null,
+    height: null,
     activityLevel: '',
-    waist: 0,
+    waist: null,
   });
 
   const [loading, setLoading] = useState(false);
 
-  const handleInputChange = (field: keyof UserData, value: string | number) => {
+  const handleInputChange = (field: keyof UserData, value: string | number | null) => {
     setUserData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -134,22 +134,22 @@ export default function Register() {
             label="อายุ"
             fullWidth
             type="number"
-            value={userData.age}
-            onChange={(e) => handleInputChange('age', Number(e.target.value))}
+            value={userData.age ?? ''}
+            onChange={(e) => handleInputChange('age', e.target.value === '' ? null : Number(e.target.value))}
           />
 
           <div className="grid grid-cols-2 gap-4">
             <TextField
               label="น้ำหนัก"
               type="number"
-              value={userData.weight}
-              onChange={(e) => handleInputChange('weight', Number(e.target.value))}
+              value={userData.weight ?? ''}
+              onChange={(e) => handleInputChange('weight', e.target.value === '' ? null : Number(e.target.value))}
             />
             <TextField
               label="ส่วนสูง"
               type="number"
-              value={userData.height}
-              onChange={(e) => handleInputChange('height', Number(e.target.value))}
+              value={userData.height ?? ''}
+              onChange={(e) => handleInputChange('height', e.target.value === '' ? null : Number(e.target.value))}
             />
           </div>
 
@@ -157,8 +157,8 @@ export default function Register() {
             label="รอบเอว"
             fullWidth
             type="number"
-            value={userData.waist}
-            onChange={(e) => handleInputChange('waist', Number(e.target.value))}
+            value={userData.waist ?? ''}
+            onChange={(e) => handleInputChange('waist', e.target.value === '' ? null : Number(e.target.value))}
           />
 
           <StdSelect names={activitiveLevel} onChangeValue={(val) => handleInputChange('activityLevel', val)} />

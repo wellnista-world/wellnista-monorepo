@@ -27,9 +27,9 @@ interface DtxRecord {
 export default function InforDtx() {
   const [currentDate, setCurrentDate] = useState<string>('');
   const [currentTime, setCurrentTime] = useState<string>('');
-  const [selectedMeal, setSelectedMeal] = useState('');
-  const [selectedTime, setSelectedTime] = useState('');
-  const [dtxValue, setDtxValue] = useState<number | ''>('');
+  const [selectedMeal, setSelectedMeal] = useState<string>('');
+  const [selectedTime, setSelectedTime] = useState<string>('');
+  const [dtxValue, setDtxValue] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [beforeData, setBeforeData] = useState<DtxRecord[]>([]);
   const [afterData, setAfterData] = useState<DtxRecord[]>([]);
@@ -107,7 +107,7 @@ export default function InforDtx() {
       alert('บันทึกข้อมูลสำเร็จ!');
       setSelectedMeal('');
       setSelectedTime('');
-      setDtxValue('');
+      setDtxValue(null);
     }
 
     setLoading(false);
@@ -152,8 +152,8 @@ export default function InforDtx() {
           fullWidth
           type="number"
           label="ค่า DTX"
-          value={dtxValue}
-          onChange={(e) => setDtxValue(Number(e.target.value))}
+          value={dtxValue ?? ''}
+          onChange={(e) => setDtxValue(e.target.value === '' ? null : Number(e.target.value))}
           className="bg-white"
         />
 
