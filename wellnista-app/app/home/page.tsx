@@ -60,8 +60,12 @@ export default function HomeScreen() {
         </Link>
       </div>
 
-      {/* Market Info */}
-      <div className="w-full max-w-xs mt-8 bg-muted px-6 py-4 rounded-xl text-center text-base font-semibold text-neutral shadow-sm">
+      {/* Market Info route to line official account */}
+      {/* hover to change color like our style */}
+      <div 
+        onClick={() => window.open('https://lin.ee/AwaT0wg', '_blank')}
+        className="w-full max-w-xs mt-6 bg-white border-2 border-primary px-6 py-4 rounded-xl text-center text-primary font-magnolia text-xl shadow-sm cursor-pointer hover:bg-primary hover:text-white transition-colors"
+      >
         อาหารเฉพาะโรคเพื่อคนที่คุณรัก<br />
         <span className="italic text-accent">Wellnista market</span>
       </div>
