@@ -1,10 +1,11 @@
 'use client';
 
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceArea, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceArea, ResponsiveContainer, TooltipProps } from 'recharts';
 
 interface DtxRecord {
   date: string; // e.g. '2025-04-10'
   dtx_value: number;
+  meal?: string; // Add meal information
 }
 
 interface DtxGraphProps {
@@ -15,6 +16,27 @@ interface DtxGraphProps {
   maxY: number;
 }
 
+const formatDateToThai = (dateStr: string) => {
+  const [year, month, day] = dateStr.split('-');
+  const thaiYear = parseInt(year) + 543;
+  return `${day}/${month}/${thaiYear}`;
+};
+
+const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-white p-2 border border-gray-300 rounded shadow">
+        <p className="font-bold">วันที่ {formatDateToThai(label)}</p>
+        <p className="text-primary">ระดับน้ำตาล: {payload[0].value}</p>
+        {payload[0].payload.meal && (
+          <p className="text-neutral">มื้อ: {payload[0].payload.meal}</p>
+        )}
+      </div>
+    );
+  }
+  return null;
+};
+
 export default function DtxGraph({ data, title, normalMin, normalMax, maxY }: DtxGraphProps) {
   return (
     <div className="bg-white p-4 rounded-md shadow-md mb-6">
@@ -24,7 +46,7 @@ export default function DtxGraph({ data, title, normalMin, normalMax, maxY }: Dt
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
           <YAxis domain={[0, maxY]} />
-          <Tooltip />
+          <Tooltip content={<CustomTooltip />} />
           <ReferenceArea y1={0} y2={normalMin} fill="red" fillOpacity={0.2} />
           <ReferenceArea y1={normalMin} y2={normalMax} fill="green" fillOpacity={0.2} />
           <ReferenceArea y1={normalMax} y2={maxY} fill="red" fillOpacity={0.2} />

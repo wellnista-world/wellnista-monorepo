@@ -22,6 +22,7 @@ interface DtxRecord {
   date: string;
   dtx_value: number;
   meal_phase: string;
+  meal: string;
 }
 
 export default function InforDtx() {
@@ -55,7 +56,7 @@ export default function InforDtx() {
 
       const { data } = await supabase
         .from('dtx_records')
-        .select('date, dtx_value, meal_phase')
+        .select('date, dtx_value, meal_phase, meal')
         .eq('user_id', user.id)
         .order('date', { ascending: true })
         .limit(30);
