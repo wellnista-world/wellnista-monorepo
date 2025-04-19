@@ -70,16 +70,28 @@ export default function Home() {
   return (
     <div className="flex flex-col justify-center items-center bg-secondary text-neutral font-garet min-h-screen px-4">
       <Typography
-        variant="h3"
+        variant="h4"
         className="font-magnolia font-bold text-primary mt-10 text-center"
       >
-        ยินดีต้อนรับเข้าสู่ Wellnista
+        ยินดีต้อนรับเข้าสู่
+      </Typography>
+      <Typography
+        variant="h4"
+        className="font-magnolia font-bold text-primary mt-10 text-center"
+      >
+        Wellnista
+      </Typography>
+      <Typography
+        variant="h4"
+        className="font-magnolia font-bold text-primary mt-10 text-center"
+      >
+        เวลล์นิสต้า
       </Typography>
       <Typography
         variant="subtitle1"
-        className="mt-5 font-garet text-neutral text-lg text-center font-semibold"
+        className="mt-5 font-garet text -neutral text-lg text-center font-semibold"
       >
-        Design your happier wellness life with AI-powered insights.
+        ตัวช่วยรู้ใจ เรื่องอาหารและสุขภาพ
       </Typography>
 
       <Box className="mt-10 w-full max-w-sm flex flex-col gap-4">
