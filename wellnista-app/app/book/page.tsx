@@ -23,6 +23,7 @@ interface DtxRecord {
   dtx_value: number | null;
   meal_phase: string;
   meal: string;
+  time: string;
 }
 
 export default function InforDtx() {
@@ -56,7 +57,7 @@ export default function InforDtx() {
 
       const { data } = await supabase
         .from('dtx_records')
-        .select('date, dtx_value, meal_phase, meal')
+        .select('date, dtx_value, meal_phase, meal, time')
         .eq('user_id', user.id)
         .order('date', { ascending: true })
         .limit(30);
@@ -146,9 +147,6 @@ export default function InforDtx() {
         <div className="flex gap-4">
           <Box className="bg-white border-2 border-primary rounded px-4 py-2 w-full text-center font-semibold text-lg">
             {currentDate}
-          </Box>
-          <Box className="bg-white border-2 border-primary rounded px-4 py-2 w-full text-center font-semibold text-lg">
-            {currentTime}
           </Box>
         </div>
 

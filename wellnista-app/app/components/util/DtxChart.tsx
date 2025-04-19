@@ -9,6 +9,7 @@ interface DtxRecord {
   dtx_value: number | null;
   meal: string;
   meal_phase: string;
+  time: string;
 }
 
 interface DtxGraphProps {
@@ -39,6 +40,7 @@ const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
     return (
       <div className="bg-white p-2 border border-gray-300 rounded shadow">
         <p className="font-bold">วันที่ {formatDateToThai(label)}</p>
+        <p className="text-primary">เวลา: {data.time}</p>
         <p className="text-primary">ระดับน้ำตาล: {payload[0].value}</p>
         {data.meal && (
           <p className="text-neutral">มื้อ: {data.meal}</p>
@@ -154,6 +156,18 @@ export default function DtxGraph({ data: initialData, title, normalMin, normalMa
         </DialogTitle>
         <DialogContent>
           <div className="space-y-4 mt-4">
+            <TextField
+              fullWidth
+              label="เวลา"
+              value={editData?.time}
+              disabled
+              className="bg-white"
+              InputProps={{
+                style: {
+                  borderRadius: '0.5rem',
+                }
+              }}
+            />
             <TextField
               fullWidth
               label="ค่า DTX"
