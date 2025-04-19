@@ -3,9 +3,11 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/api/supabaseClient';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function HomeScreen() {
   const [displayName, setDisplayName] = useState('...');
+  const router = useRouter();
 
   useEffect(() => {
     const fetchUserName = async () => {
@@ -65,7 +67,10 @@ export default function HomeScreen() {
       </div>
 
       {/* Library Section */}
-      <div className="w-full max-w-xs mt-6 bg-white border-2 border-primary px-6 py-4 rounded-xl text-center text-primary font-magnolia text-xl shadow-sm">
+      <div 
+        onClick={() => router.push('/home/library')}
+        className="w-full max-w-xs mt-6 bg-white border-2 border-primary px-6 py-4 rounded-xl text-center text-primary font-magnolia text-xl shadow-sm cursor-pointer hover:bg-primary hover:text-white transition-colors"
+      >
         Wellnista Library
       </div>
 
