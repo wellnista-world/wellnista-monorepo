@@ -20,7 +20,7 @@ const mealTime: string[] = ['ก่อนอาหาร', 'หลังอา�
 
 interface DtxRecord {
   date: string;
-  dtx_value: number;
+  dtx_value: number | null;
   meal_phase: string;
   meal: string;
 }
@@ -61,8 +61,8 @@ export default function InforDtx() {
         .order('date', { ascending: true })
         .limit(30);
 
-      const before = data?.filter((r) => r.meal_phase === 'ก่อน') || [];
-      const after = data?.filter((r) => r.meal_phase === 'หลัง 2 ชม.') || [];
+      const before = data?.filter((r) => r.meal_phase === 'ก่อนอาหาร' || r.meal_phase === 'ก่อน') || [];
+      const after = data?.filter((r) => r.meal_phase === 'หลังอาหาร 2 ชม.' || r.meal_phase === 'หลัง 2 ชม.') || [];
 
       setBeforeData(before);
       setAfterData(after);
@@ -112,6 +112,27 @@ export default function InforDtx() {
     }
 
     setLoading(false);
+  };
+
+  const handleUpdate = async (oldData: DtxRecord, newData: DtxRecord) => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
+    const { error } = await supabase
+      .from('dtx_records')
+      .update(newData)
+      .eq('user_id', user.id)
+      .eq('date', oldData.date)
+      .eq('meal_phase', oldData.meal_phase);
+
+
+    if (error) {
+      console.error('Error updating DTX:', error);
+      alert('เกิดข้อผิดพลาดในการแก้ไขข้อมูล');
+    } else {
+      setLoading(true); 
+      setLoading(false); 
+    }
   };
 
   return (
@@ -174,6 +195,7 @@ export default function InforDtx() {
           normalMin={70}
           normalMax={140}
           maxY={600}
+          onUpdate={handleUpdate}
         />
         <DtxGraph
           data={beforeData}
@@ -181,6 +203,7 @@ export default function InforDtx() {
           normalMin={70}
           normalMax={110}
           maxY={600}
+          onUpdate={handleUpdate}
         />
       </div>
     </div>
