@@ -36,10 +36,13 @@ export default function Home() {
     const getUser = async () => {
       const { data } = await supabase.auth.getUser();
       setUser(data?.user ?? null);
+      if (data?.user) {
+        router.push('/home');
+      }
     };
 
     getUser();
-  }, []);
+  }, [router]);
 
   const handleLogin = async () => {
     setError(null);
