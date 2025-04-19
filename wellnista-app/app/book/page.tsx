@@ -16,7 +16,7 @@ import { supabase } from '../lib/api/supabaseClient';
 import DtxGraph from '../components/util/DtxChart';
 
 const mealNames: string[] = ['เช้า', 'กลางวัน', 'เย็น', 'ก่อนนอน'];
-const mealTime: string[] = ['ก่อน', 'หลัง 2 ชม.'];
+const mealTime: string[] = ['ก่อนอาหาร', 'หลังอาหาร 2 ชม.'];
 
 interface DtxRecord {
   date: string;
@@ -173,14 +173,14 @@ export default function InforDtx() {
           title="หลังอาหาร"
           normalMin={70}
           normalMax={140}
-          maxY={200}
+          maxY={600}
         />
         <DtxGraph
           data={beforeData}
           title="ก่อนอาหาร"
           normalMin={70}
           normalMax={110}
-          maxY={150}
+          maxY={600}
         />
       </div>
     </div>
