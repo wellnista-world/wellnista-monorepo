@@ -190,18 +190,18 @@ export default function InforDtx() {
         <DtxGraph
           data={beforeData}
           title="ก่อนอาหาร"
-          normalMin={70}
-          normalMax={110}
-          maxY={600}
+          normalMin={80}
+          normalMax={200}
+          maxY={450}
           onUpdate={handleUpdate}
         />
 
         <DtxGraph
           data={afterData}
           title="หลังอาหาร"
-          normalMin={70}
-          normalMax={140}
-          maxY={600}
+          normalMin={80}
+          normalMax={200}
+          maxY={450}
           onUpdate={handleUpdate}
         />
 

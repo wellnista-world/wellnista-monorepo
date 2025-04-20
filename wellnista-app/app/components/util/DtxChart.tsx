@@ -121,13 +121,27 @@ export default function DtxGraph({ data: initialData, title, normalMin, normalMa
 
   return (
     <div className="bg-white p-4 rounded-md shadow-md mb-6">
-      <h3 className="text-center font-bold text-xl text-primary mb-2">{title}</h3>
+      <h3 className="text-center font-bold text-xl text-primary mb-4">{title}</h3>
       <ResponsiveContainer width="100%" height={250}>
         <LineChart data={graphData}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" />
-          <YAxis domain={[0, maxY]} />
-          <Tooltip content={<CustomTooltip onEdit={handleEdit} />} />
+          <XAxis 
+            dataKey="date" 
+            tick={{ fontSize: 10 }}
+            height={50}
+          />
+          <YAxis 
+            domain={[0, maxY]}
+            interval={0}
+            tickCount={Math.ceil(maxY/20) + 1}
+            ticks={Array.from({length: Math.ceil(maxY/20) + 1}, (_, i) => i * 20)}
+            tick={{ fontSize: 10 }}
+            width={45}
+          />
+          <Tooltip 
+            content={<CustomTooltip onEdit={handleEdit} />}
+            wrapperStyle={{ fontSize: '14px' }}
+          />
           <ReferenceArea y1={0} y2={normalMin} fill="red" fillOpacity={0.2} />
           <ReferenceArea y1={normalMin} y2={normalMax} fill="green" fillOpacity={0.2} />
           <ReferenceArea y1={normalMax} y2={maxY} fill="red" fillOpacity={0.2} />
