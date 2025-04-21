@@ -9,8 +9,6 @@ import {
   Box,
   CircularProgress,
   ThemeProvider,
-  Select,
-  InputLabel,
   FormControl,
 } from '@mui/material';
 

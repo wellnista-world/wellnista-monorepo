@@ -8,7 +8,6 @@ import { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import { Label } from 'recharts';
 
 interface StdSelectProds {
   labelInput: string;
@@ -48,7 +47,7 @@ const theme = createTheme({
 const MultipleSelectCheckmarks: React.FC<StdSelectProds> = ({ names,labelInput, onChangeValue }) => {
 
   const [diseaseName, setDiseaseName] = useState<string[]>([]);
-  const [label, setLabel] = useState<string>();
+
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
     const {
