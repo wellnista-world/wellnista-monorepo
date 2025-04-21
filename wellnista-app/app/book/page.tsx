@@ -152,7 +152,7 @@ export default function InforDtx() {
 
         <FormControl fullWidth>
           <InputLabel>เลือกมื้อ</InputLabel>
-          <Select value={selectedMeal} onChange={(e) => setSelectedMeal(e.target.value)} className="bg-white">
+          <Select label="เลือกมื้อ" variant='outlined' value={selectedMeal} onChange={(e) => setSelectedMeal(e.target.value)} className="bg-white">
             {mealNames.map((meal) => (
               <MenuItem key={meal} value={meal}>{meal}</MenuItem>
             ))}
@@ -161,7 +161,7 @@ export default function InforDtx() {
 
         <FormControl fullWidth>
           <InputLabel>ก่อน/หลัง</InputLabel>
-          <Select value={selectedTime} onChange={(e) => setSelectedTime(e.target.value)} className="bg-white">
+          <Select label="ก่อน/หลัง" variant='outlined' value={selectedTime} onChange={(e) => setSelectedTime(e.target.value)} className="bg-white">
             {mealTime.map((item) => (
               <MenuItem key={item} value={item}>{item}</MenuItem>
             ))}

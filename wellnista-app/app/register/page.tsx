@@ -9,6 +9,8 @@ import {
   Box,
   CircularProgress,
   ThemeProvider,
+  InputLabel,
+  FormControl,
 } from '@mui/material';
 
 import MultipleSelectCheckmarks from '../components/util/SelectChecker';
@@ -128,7 +130,10 @@ export default function Register() {
             onChange={(e) => handleInputChange('madicines', e.target.value)}
           />
 
-          <StdSelect names={genderName} onChangeValue={(val) => handleInputChange('gender', val)} />
+          <FormControl fullWidth>
+            <InputLabel >เพศ</InputLabel>
+              <StdSelect names={genderName} onChangeValue={(val) => handleInputChange('gender', val)} />
+          </FormControl> 
 
           <TextField
             label="อายุ"

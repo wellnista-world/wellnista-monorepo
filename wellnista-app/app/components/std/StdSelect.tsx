@@ -26,10 +26,7 @@ const MenuProps = {
 const StdSelect: React.FC<StdSelectProds> = ({ names, onChangeValue }) => {
   const theme = createTheme({
     palette: {
-      primary: {
-        main: '#9F9260',
-        contrastText: '#fff'
-      },
+     
       text: {
         primary: '#fff',
         secondary: '#000'
