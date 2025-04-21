@@ -9,12 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
     "@ericblade/quagga2": "^1.8.4",
     "@fontsource/kanit": "^5.1.1",
     "@line/liff": "^2.25.1",
-    "@mui/material": "^6.4.7",
     "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.49.1",
@@ -28,7 +25,10 @@
     "recharts": "^2.15.2"
   },
   "devDependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@eslint/eslintrc": "^3",
+    "@mui/material": "^7.0.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
