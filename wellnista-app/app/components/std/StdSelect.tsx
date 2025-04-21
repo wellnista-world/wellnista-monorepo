@@ -2,12 +2,15 @@ import * as React from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 interface StdSelectProds {
   names: string[];
+  label: string;
   onChangeValue?: (value: string) => void;
 }
 
@@ -23,7 +26,7 @@ const MenuProps = {
   },
 };
 
-const StdSelect: React.FC<StdSelectProds> = ({ names, onChangeValue }) => {
+const StdSelect: React.FC<StdSelectProds> = ({ names,label, onChangeValue }) => {
   const theme = createTheme({
     palette: {
      
@@ -48,13 +51,15 @@ const StdSelect: React.FC<StdSelectProds> = ({ names, onChangeValue }) => {
     <div>
       <ThemeProvider theme={theme}>
       <FormControl fullWidth className="font-garet">
+      <InputLabel id="demo-multiple-checkbox-label" className='text-neutral'>{label}</InputLabel>
         <Select 
+          variant='outlined'
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           //multiple
           value={name}
           onChange={handleChange}
-          //input={<OutlinedInput label="Tag" />}
+          input={<OutlinedInput label={label} />}
           
           MenuProps={MenuProps}
         >

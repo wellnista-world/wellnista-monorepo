@@ -6,8 +6,12 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 import { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import { Label } from 'recharts';
 
 interface StdSelectProds {
+  labelInput: string;
   names: string[];
   onChangeValue?: (value: string[]) => void;
 }
@@ -28,10 +32,10 @@ const MenuProps = {
 
 const theme = createTheme({
   palette: {
-    primary: {
+   /* primary: {
       main: '#d8ce73',
       contrastText: '#fff'
-    },
+    },*/
     text: {
       primary: '#fff',
       secondary: '#000'
@@ -41,9 +45,10 @@ const theme = createTheme({
 
 });
 
-const MultipleSelectCheckmarks: React.FC<StdSelectProds> = ({ names, onChangeValue }) => {
+const MultipleSelectCheckmarks: React.FC<StdSelectProds> = ({ names,labelInput, onChangeValue }) => {
 
   const [diseaseName, setDiseaseName] = useState<string[]>([]);
+  const [label, setLabel] = useState<string>();
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
     const {
@@ -60,14 +65,18 @@ const MultipleSelectCheckmarks: React.FC<StdSelectProds> = ({ names, onChangeVal
     <div>
       <ThemeProvider theme={theme}>
       <FormControl fullWidth className="font-garet">
+      <InputLabel id="demo-multiple-checkbox-label" className='text-neutral'>โรคประจำตัว</InputLabel>
         <Select<string[]>
+          variant='outlined'
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
           value={diseaseName}
           onChange={handleChange}
+          input={<OutlinedInput label={labelInput} />}
           renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}
+          
           sx={{
             color: '#393939', // ✅ เปลี่ยนเป็นดำ
           }}

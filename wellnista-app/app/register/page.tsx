@@ -9,6 +9,7 @@ import {
   Box,
   CircularProgress,
   ThemeProvider,
+  Select,
   InputLabel,
   FormControl,
 } from '@mui/material';
@@ -40,6 +41,7 @@ const activitiveLevel: string[] = [
   'ออกกำลังกายหนักมาก 2 ครั้ง/วัน เป็นนักกีฬา',
 ];
 const diseaseNames = ['เบาหวาน', 'ไต', 'หัวใจ', 'ความดัน', 'เก๊าต์', 'ไขมัน'];
+
 
 export default function Register() {
   const router = useRouter();
@@ -120,7 +122,10 @@ export default function Register() {
             onChange={(e) => handleInputChange('nickname', e.target.value)}
           />
 
-          <MultipleSelectCheckmarks names={diseaseNames} onChangeValue={handleDiseaseChangeValue} />
+          <FormControl fullWidth>
+            <MultipleSelectCheckmarks labelInput='โรคประจำตัว' names={diseaseNames} onChangeValue={handleDiseaseChangeValue} >
+            </MultipleSelectCheckmarks> 
+          </FormControl>
 
           <TextField
             label="ยาประจำตัว"
@@ -129,11 +134,8 @@ export default function Register() {
             value={userData.madicines}
             onChange={(e) => handleInputChange('madicines', e.target.value)}
           />
-
-          <FormControl fullWidth>
-            <InputLabel >เพศ</InputLabel>
-              <StdSelect names={genderName} onChangeValue={(val) => handleInputChange('gender', val)} />
-          </FormControl> 
+     
+          <StdSelect label='เพศ' names={genderName} onChangeValue={(val) => handleInputChange('gender', val)} />
 
           <TextField
             label="อายุ"
@@ -166,8 +168,8 @@ export default function Register() {
             onChange={(e) => handleInputChange('waist', e.target.value === '' ? null : Number(e.target.value))}
           />
 
-          <StdSelect names={activitiveLevel} onChangeValue={(val) => handleInputChange('activityLevel', val)} />
-
+          <StdSelect label='ระดับกิจกรรม' names={activitiveLevel} onChangeValue={(val) => handleInputChange('activityLevel', val)} />
+          
           <Button
             variant="contained"
             fullWidth
