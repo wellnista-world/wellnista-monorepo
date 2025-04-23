@@ -8,7 +8,7 @@ import Script from "next/script";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
-import WellnistaLogo from './components/WellnistaLogo';
+
 
 //const kanit = Kanit({
   //subsets: ["thai"],
