@@ -3,30 +3,31 @@ import "./globals.css";
 import { useLiff } from "./lib/api/use-liff";
 import Script from "next/script";
 
-import { Kanit } from "next/font/google";
-import { Leckerli_One } from "next/font/google";
+//import { Kanit } from "next/font/google";
+//import { Leckerli_One } from "next/font/google";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
+import WellnistaLogo from './components/WellnistaLogo';
 
-const kanit = Kanit({
-  subsets: ["thai"],
-  weight: ["300", "400", "500", "700"],
-  display: "swap",
-});
+//const kanit = Kanit({
+  //subsets: ["thai"],
+  //weight: ["300", "400", "500", "700"],
+  //display: "swap",
+//});
 
-export const leckerli = Leckerli_One({
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-});
+//export const leckerli = Leckerli_One({
+  //subsets: ["latin"],
+  //weight: "400",
+  //display: "swap",
+//});
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const { isLiffReady, error, isInLineApp } = useLiff();
 
   if (!isLiffReady) {
     return (
-      <html lang="en" className={`${kanit.className} ${leckerli.className}`}>
+      <html lang="en">
         <head>
           {/* Google Analytics */}
           <Script
@@ -60,7 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   if (error) {
     return (
-      <html lang="en" className={`${kanit.className} ${leckerli.className}`}>
+      <html lang="en">
         <head>
           {/* Google Analytics */}
           <Script
@@ -90,7 +91,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   }
 
   return (
-    <html lang="en" className={`${kanit.className} ${leckerli.className}`}>
+    <html lang="en">
       <head>
         {/* Google Analytics */}
         <Script
