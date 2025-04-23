@@ -4,10 +4,11 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
-import { useState } from 'react';
+import { useState, } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import { Label } from 'recharts';
 
 interface StdSelectProds {
   labelInput: string;
@@ -31,23 +32,20 @@ const MenuProps = {
 
 const theme = createTheme({
   palette: {
-   /* primary: {
-      main: '#d8ce73',
-      contrastText: '#fff'
-    },*/
     text: {
       primary: '#fff',
-      secondary: '#000'
+      secondary: '#000',
+      // '#C2C2C2',
     },
-    
+
   },
 
 });
 
-const MultipleSelectCheckmarks: React.FC<StdSelectProds> = ({ names,labelInput, onChangeValue }) => {
+const MultipleSelectCheckmarks: React.FC<StdSelectProds> = ({ names, labelInput, onChangeValue }) => {
 
   const [diseaseName, setDiseaseName] = useState<string[]>([]);
-
+  const [label, setLabel] = useState<string>();
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
     const {
@@ -63,34 +61,36 @@ const MultipleSelectCheckmarks: React.FC<StdSelectProds> = ({ names,labelInput, 
   return (
     <div>
       <ThemeProvider theme={theme}>
-      <FormControl fullWidth className="font-garet">
-      <InputLabel id="demo-multiple-checkbox-label" className='text-neutral'>โรคประจำตัว</InputLabel>
-        <Select<string[]>
-          variant='outlined'
-          labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
-          multiple
-          value={diseaseName}
-          onChange={handleChange}
-          input={<OutlinedInput label={labelInput} />}
-          renderValue={(selected) => selected.join(', ')}
-          MenuProps={MenuProps}
-          
-          sx={{
-            color: '#393939', // ✅ เปลี่ยนเป็นดำ
-          }}
-        >
-          {names.map((name) => (
-            <MenuItem key={name} value={name}>
-              <Checkbox  checked={diseaseName.includes(name)} />
-              <ListItemText sx={{color: 'text.secondary',fontWeight: 500}} primary={name} />
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+        <FormControl fullWidth className="font-garet">
+          <InputLabel id="demo-multiple-checkbox-label" >โรคประจำตัว</InputLabel>
+          <Select<string[]>
+
+            variant='outlined'
+            labelId="demo-multiple-checkbox-label"
+            id="demo-multiple-checkbox"
+            multiple
+            value={diseaseName}
+            onChange={handleChange}
+            input={<OutlinedInput label={labelInput} />}
+            renderValue={(selected) => selected.join(', ')}
+            MenuProps={MenuProps}
+
+            sx={{
+              color: 'text.secondary', // ✅ เปลี่ยนเป็นดำ
+            }}
+          >
+            {names.map((name) => (
+              <MenuItem key={name} value={name}>
+                <Checkbox checked={diseaseName.includes(name)} />
+                <ListItemText sx={{ color: 'text.secondary', fontWeight: 500 }} primary={name} />
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </ThemeProvider>
     </div>
   );
 }
+
 
 export default MultipleSelectCheckmarks;

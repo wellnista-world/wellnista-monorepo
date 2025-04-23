@@ -191,7 +191,7 @@ export default function InforDtx() {
           data={beforeData}
           title="ก่อนอาหาร"
           normalMin={80}
-          normalMax={200}
+          normalMax={182}
           maxY={450}
           onUpdate={handleUpdate}
         />
@@ -200,7 +200,7 @@ export default function InforDtx() {
           data={afterData}
           title="หลังอาหาร"
           normalMin={80}
-          normalMax={200}
+          normalMax={160}
           maxY={450}
           onUpdate={handleUpdate}
         />

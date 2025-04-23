@@ -103,7 +103,7 @@ export default function ScanPage() {
       {/* {!isInLineApp && (
         <p className="text-sm text-accent mb-4">Running in Browser</p>
       )} */}
-      {cameraPermission === false && (
+      {cameraPermission === false  &&(
         <button
           onClick={async () => {
             try {

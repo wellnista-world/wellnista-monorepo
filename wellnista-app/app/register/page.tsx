@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, } from 'react';
 import { supabase } from '../lib/api/supabaseClient';
 import {
   TextField,
@@ -38,7 +38,7 @@ const activitiveLevel: string[] = [
   'ออกกำลังกายหนัก 6-7วัน/สัปดาห์',
   'ออกกำลังกายหนักมาก 2 ครั้ง/วัน เป็นนักกีฬา',
 ];
-const diseaseNames = ['เบาหวาน', 'ไต', 'หัวใจ', 'ความดัน', 'เก๊าต์', 'ไขมัน'];
+const diseaseNames = ['เบาหวาน', 'ไต', 'หัวใจ', 'ความดัน', 'เก๊าต์', 'ไขมัน', 'อื่นๆ', 'ไม่มี'];
 
 
 export default function Register() {
@@ -57,6 +57,8 @@ export default function Register() {
   });
 
   const [loading, setLoading] = useState(false);
+  const [newDisease, setNewDisease] = useState("");
+  const [popUp, setPopUp] = useState(false);
 
   const handleInputChange = (field: keyof UserData, value: string | number | null) => {
     setUserData((prev) => ({ ...prev, [field]: value }));
@@ -64,11 +66,51 @@ export default function Register() {
 
   const handleDiseaseChangeValue = (values: string[]) => {
     setUserData((prev) => ({ ...prev, diseases: values }));
+
+    if(values.includes('อื่นๆ')){
+      setPopUp(true);
+    }else {
+      setPopUp(false);
+    }
+    
   };
+
+
+  const handleAddDisease = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewDisease(event.target.value);
+    /*const findIndex = userData.diseases.indexOf("อื่นๆ")
+    console.log (findIndex);
+    if (newDisease.trim() !== '') {
+      setUserData(prevUserData => ({
+        ...prevUserData,
+        diseases: [...prevUserData.diseases[findIndex], newDisease],
+      }));
+      //setNewDisease(''); // เคลียร์ input หลังจากเพิ่ม
+      console.log (userData.diseases);
+    }*/
+  };
+
+  const handleBlur = () => {
+    if (newDisease.trim() !== '') {
+      const findIndex = userData.diseases.indexOf("อื่นๆ");
+      setUserData(prevUserData => {
+        const updatedDiseases = [...prevUserData.diseases];
+        if (findIndex !== -1) {
+          updatedDiseases[findIndex] = prevUserData.diseases[findIndex] + ' ' + newDisease.trim();
+        } else {
+          updatedDiseases.push(newDisease.trim());
+        }
+        return { ...prevUserData, diseases: updatedDiseases };
+      });
+      // ไม่เคลียร์ newDisease ที่นี่
+    }
+    console.log(userData.diseases);
+  }
+
 
   const handleSubmit = async () => {
     setLoading(true);
-
+    
     const {
       data: { user },
       error: userError,
@@ -124,6 +166,18 @@ export default function Register() {
             <MultipleSelectCheckmarks labelInput='โรคประจำตัว' names={diseaseNames} onChangeValue={handleDiseaseChangeValue} >
             </MultipleSelectCheckmarks> 
           </FormControl>
+
+          { popUp &&(
+              <TextField
+              label="โรคประจำตัวอื่นๆ"
+              fullWidth
+              variant='outlined'
+              value={newDisease}
+              onChange={handleAddDisease}
+              onBlur={handleBlur}
+            />
+          ) }
+          
 
           <TextField
             label="ยาประจำตัว"
