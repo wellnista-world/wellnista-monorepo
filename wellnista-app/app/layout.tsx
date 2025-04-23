@@ -15,12 +15,6 @@ const kanit = Kanit({
   display: "swap",
 });
 
-const leckerli = Leckerli_One({
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-});
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const { isLiffReady, error, isInLineApp } = useLiff();
 

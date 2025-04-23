@@ -17,11 +17,7 @@ interface User {
   password?: string;
 }
 
-const leckerli = Leckerli_One({
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-});
+
 
 export default function Home() {
   const [user, setUser] = useState<User | null>(null);
