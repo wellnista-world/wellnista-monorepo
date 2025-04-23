@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from './lib/api/supabaseClient';
 import Link from 'next/link';
+import { Leckerli_One } from "next/font/google";
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -15,6 +16,12 @@ interface User {
   phone?: string;
   password?: string;
 }
+
+const leckerli = Leckerli_One({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
 
 export default function Home() {
   const [user, setUser] = useState<User | null>(null);
@@ -77,7 +84,7 @@ export default function Home() {
       </Typography>
       <Typography
         variant="h4"
-        className="font-bold mt-10 text-center"
+        className="font-leckerli font-bold mt-10 text-center"
       >
         Wellnista
       </Typography>
@@ -91,7 +98,7 @@ export default function Home() {
         variant="subtitle1"
         className="mt-5 text-lg text-center font-semibold"
       >
-        ตัวช่วยรู้ใจ เรื่องอาหารและสุขภาพ
+        ทำให้สุขภาพดี กลายเป็นเรื่องง่ายของทุกคน
       </Typography>
 
       <Box className="mt-10 w-full max-w-sm flex flex-col gap-4">
@@ -112,20 +119,20 @@ export default function Home() {
         ) : (
           <>
             <TextField
+              fullWidth
               label="เบอร์โทร (เช่น 0812345678)"
               variant="outlined"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              fullWidth
               className="bg-white rounded"
             />
             <TextField
+              fullWidth
               label="รหัสผ่าน"
               variant="outlined"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              fullWidth
               className="bg-white rounded"
             />
             <button

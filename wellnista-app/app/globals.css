@@ -4,6 +4,8 @@
 @import "@fontsource/kanit/700.css"; /* Bold weight */
 
 
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

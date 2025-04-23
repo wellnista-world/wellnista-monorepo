@@ -4,6 +4,7 @@ import { useLiff } from "./lib/api/use-liff";
 import Script from "next/script";
 
 import { Kanit } from "next/font/google";
+import { Leckerli_One } from "next/font/google";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
@@ -11,6 +12,12 @@ import theme from './theme';
 const kanit = Kanit({
   subsets: ["thai"],
   weight: ["300", "400", "500", "700"],
+  display: "swap",
+});
+
+const leckerli = Leckerli_One({
+  subsets: ["latin"],
+  weight: "400",
   display: "swap",
 });
 
