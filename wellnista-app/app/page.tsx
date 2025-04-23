@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { supabase } from './lib/api/supabaseClient';
 import Link from 'next/link';
-import { leckerli } from './layout';
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
