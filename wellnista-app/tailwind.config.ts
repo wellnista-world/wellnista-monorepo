@@ -17,7 +17,7 @@ export default {
       },
       fontFamily: {
         kanit: ['Kanit', 'sans-serif'],
-        leckerli: ['Leckerli One', 'cursive'],
+        leckerli: ['"Leckerli One"', 'cursive'],
       },
     },
   },

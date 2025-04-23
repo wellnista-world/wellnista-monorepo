@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from './lib/api/supabaseClient';
 import Link from 'next/link';
-import { Leckerli_One } from "next/font/google";
+import { leckerli } from './layout';
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -11,13 +11,12 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useRouter } from 'next/navigation';
+import WellnistaLogo from './components/WellnistaLogo';
 
 interface User {
   phone?: string;
   password?: string;
 }
-
-
 
 export default function Home() {
   const [user, setUser] = useState<User | null>(null);
@@ -71,33 +70,30 @@ export default function Home() {
   };
 
   return (
-    <Box className="justify-center items-center bg-secondary text-neutral min-h-screen px-4">
+    <Box className="justify-center items-center flex flex-col gap-1 bg-secondary px-4 mt-6">
       <Typography
         variant="h4"
         className="font-bold text-center"
       >
         ยินดีต้อนรับเข้าสู่
       </Typography>
+      <Box>
+        <WellnistaLogo />
+      </Box>
       <Typography
-        variant="h4"
-        className="font-leckerli font-bold mt-10 text-center"
-      >
-        Wellnista
-      </Typography>
-      <Typography
-        variant="h4"
+        variant="h5"
         className="font-bold mt-10 text-center"
       >
         เวลล์นิสต้า
       </Typography>
       <Typography
         variant="subtitle1"
-        className="mt-5 text-lg text-center font-semibold"
+        className="mt-10 text-lg text-center font-semibold"
       >
         ทำให้สุขภาพดี กลายเป็นเรื่องง่ายของทุกคน
       </Typography>
 
-      <Box className="mt-10 w-full max-w-sm flex flex-col gap-4">
+      <Box className="mt-6 w-full max-w-sm flex flex-col gap-4">
         {user ? (
           <>
             <Typography className="text-xl text-center">
@@ -144,7 +140,7 @@ export default function Home() {
               </Typography>
             )}
 
-            <Box className="flex justify-between mt-2 text-sm text-gray-500">
+            <Box className="flex justify-between text-sm text-gray-500">
               <Link href="/register/signup" passHref legacyBehavior>
                 <Typography className="cursor-pointer hover:underline">ลงทะเบียน</Typography>
               </Link>

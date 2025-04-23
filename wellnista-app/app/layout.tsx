@@ -15,12 +15,18 @@ const kanit = Kanit({
   display: "swap",
 });
 
+export const leckerli = Leckerli_One({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const { isLiffReady, error, isInLineApp } = useLiff();
 
   if (!isLiffReady) {
     return (
-      <html lang="en" className={kanit.className}>
+      <html lang="en" className={`${kanit.className} ${leckerli.className}`}>
         <head>
           {/* Google Analytics */}
           <Script
@@ -54,7 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   if (error) {
     return (
-      <html lang="en" className={kanit.className}>
+      <html lang="en" className={`${kanit.className} ${leckerli.className}`}>
         <head>
           {/* Google Analytics */}
           <Script
@@ -84,7 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   }
 
   return (
-    <html lang="en" className={kanit.className}>
+    <html lang="en" className={`${kanit.className} ${leckerli.className}`}>
       <head>
         {/* Google Analytics */}
         <Script
