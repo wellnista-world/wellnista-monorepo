@@ -114,7 +114,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <header className="p-4 bg-accent text-secondary">
-            <h1 className="text-2xl font-magnolia text-center">Wellnista</h1>
+            <h1 className="text-2xl font-leckerli text-center">Wellnista</h1>
             {isInLineApp && (
               <p className="text-sm text-accent text-center">Running inside LINE</p>
             )}
