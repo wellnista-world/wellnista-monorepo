@@ -33,9 +33,8 @@ const MenuProps = {
 const theme = createTheme({
   palette: {
     text: {
-      primary: '#fff',
-      secondary: '#000',
-      // '#C2C2C2',
+      primary: '#000',
+      
     },
 
   },
@@ -61,10 +60,10 @@ const MultipleSelectCheckmarks: React.FC<StdSelectProds> = ({ names, labelInput,
   return (
     <div>
       <ThemeProvider theme={theme}>
-        <FormControl fullWidth className="font-garet">
-          <InputLabel id="demo-multiple-checkbox-label" >โรคประจำตัว</InputLabel>
+        <FormControl fullWidth className="font-garet ">
+          <InputLabel id="demo-multiple-checkbox-label" sx={{color: "#707070"}}>โรคประจำตัว</InputLabel>
           <Select<string[]>
-
+            className="hover:outline-neutral-950"
             variant='outlined'
             labelId="demo-multiple-checkbox-label"
             id="demo-multiple-checkbox"
@@ -76,13 +75,13 @@ const MultipleSelectCheckmarks: React.FC<StdSelectProds> = ({ names, labelInput,
             MenuProps={MenuProps}
 
             sx={{
-              color: 'text.secondary', // ✅ เปลี่ยนเป็นดำ
+              color: 'text.primary', // ✅ เปลี่ยนเป็นดำ
             }}
           >
             {names.map((name) => (
               <MenuItem key={name} value={name}>
                 <Checkbox checked={diseaseName.includes(name)} />
-                <ListItemText sx={{ color: 'text.secondary', fontWeight: 500 }} primary={name} />
+                <ListItemText sx={{ color: 'text.primary', fontWeight: 500 }} primary={name} />
               </MenuItem>
             ))}
           </Select>

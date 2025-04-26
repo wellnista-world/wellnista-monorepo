@@ -31,8 +31,8 @@ const StdSelect: React.FC<StdSelectProds> = ({ names,label, onChangeValue }) => 
     palette: {
      
       text: {
-        primary: '#fff',
-        secondary: '#000'
+        primary: '#000',
+        
       },
     },
   });
@@ -51,7 +51,7 @@ const StdSelect: React.FC<StdSelectProds> = ({ names,label, onChangeValue }) => 
     <div>
       <ThemeProvider theme={theme}>
       <FormControl fullWidth className="font-garet">
-      <InputLabel id="demo-multiple-checkbox-label" className='text-neutral'>{label}</InputLabel>
+      <InputLabel id="demo-multiple-checkbox-label" sx={{color: "#707070" }}>{label}</InputLabel>
         <Select 
           variant='outlined'
           labelId="demo-multiple-checkbox-label"
@@ -66,7 +66,7 @@ const StdSelect: React.FC<StdSelectProds> = ({ names,label, onChangeValue }) => 
           {names.map((name) => (
             <MenuItem key={name} value={name}>
               
-              <ListItemText sx={{color: 'text.secondary',fontWeight: 500}} primary={name} />
+              <ListItemText sx={{color: 'text.primary',fontWeight: 500}} primary={name} />
             </MenuItem>
             ))}
           </Select>

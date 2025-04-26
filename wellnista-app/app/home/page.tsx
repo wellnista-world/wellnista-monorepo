@@ -37,9 +37,9 @@ export default function HomeScreen() {
   return (
     <div className="min-h-screen bg-secondary text-neutral font-garet px-4 py-6 flex flex-col items-center">
       {/* Welcome Button */}
-      <button className="w-full max-w-xs bg-primary text-secondary text-xl font-bold rounded-full px-6 py-3 mb-6 shadow-md">
+      <div className="w-full max-w-xs bg-primary text-center text-secondary text-3xl font-bold rounded-l px-6 py-3 mb-6 shadow-md">
         สวัสดี คุณ {displayName}
-      </button>
+      </div>
 
       {/* Main Action Buttons */}
       <div className="flex flex-col gap-4 w-full max-w-xs">
