@@ -2,12 +2,10 @@
 import { useState } from 'react';
 import { Menu, MenuItem, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useRouter } from 'next/navigation';
 import { supabase } from '../lib/api/supabaseClient';
 
 export default function HamburgerMenu() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const router = useRouter();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);

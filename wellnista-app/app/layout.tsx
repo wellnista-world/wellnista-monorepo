@@ -2,15 +2,15 @@
 import "./globals.css";
 import { useLiff } from "./lib/api/use-liff";
 import Script from "next/script";
-
-//import { Kanit } from "next/font/google";
-//import { Leckerli_One } from "next/font/google";
+import { usePathname } from "next/navigation";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
 import HamburgerMenu from './components/HamburgerMenu';
 import { AuthProvider } from './lib/context/AuthContext';
 
+//import { Kanit } from "next/font/google";
+//import { Leckerli_One } from "next/font/google";
 
 //const kanit = Kanit({
   //subsets: ["thai"],
@@ -26,6 +26,8 @@ import { AuthProvider } from './lib/context/AuthContext';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const { isLiffReady, error, isInLineApp } = useLiff();
+  const pathname = usePathname();
+  const showBackButton = pathname !== "/" && pathname !== "/home";
 
   if (!isLiffReady) {
     return (
@@ -118,11 +120,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <CssBaseline />
           <AuthProvider>
             <header className="p-4 bg-accent text-secondary relative">
-              <h1 className="text-2xl font-leckerli text-center">Wellnista</h1>
+              {showBackButton && (
+                <button
+                  onClick={() => window.history.back()}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 hover:bg-primary/80 text-accent hover:text-white shadow z-10"
+                  aria-label="Back"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+              )}
+              <div className="flex items-center justify-center">
+                <h1 className="text-2xl font-leckerli text-center flex-1">Wellnista</h1>
+                <div className="ml-auto w-8">
+                  <HamburgerMenu />
+                </div>
+              </div>
               {isInLineApp && (
                 <p className="text-sm text-accent text-center">Running inside LINE</p>
               )}
-              <HamburgerMenu />
             </header>
             <main className="p-4">{children}</main>
           </AuthProvider>

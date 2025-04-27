@@ -18,7 +18,7 @@ export default function HomeScreen() {
       const { data, error } = await supabase
         .from("users")
         .select("name")
-        .eq("id", user.id)
+        .eq("user_id", user.id)
         .single();
 
       if (error) {
