@@ -35,15 +35,19 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const getUser = async () => {
-      const { data } = await supabase.auth.getUser();
-      setUser(data?.user ?? null);
-      if (data?.user) {
+    const checkAuth = async () => {
+      const { data: { user }, error } = await supabase.auth.getUser();
+      
+      if (!error && user) {
+        // If already authenticated, redirect to home
         router.push('/home');
+        return;
       }
+      
+      setUser(null);
     };
 
-    getUser();
+    checkAuth();
   }, [router]);
 
   const handleLogin = async () => {
@@ -65,8 +69,14 @@ export default function Home() {
   };
 
   const signOut = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
+    const { error } = await supabase.auth.signOut();
+    if (!error) {
+      // Clear any local storage or session data
+      localStorage.clear();
+      sessionStorage.clear();
+      // Force a hard refresh of the page
+      window.location.href = '/';
+    }
   };
 
   return (

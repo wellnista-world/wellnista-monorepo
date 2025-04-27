@@ -8,6 +8,8 @@ import Script from "next/script";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
+import HamburgerMenu from './components/HamburgerMenu';
+import { AuthProvider } from './lib/context/AuthContext';
 
 
 //const kanit = Kanit({
@@ -114,13 +116,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-secondary text-neutral">
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <header className="p-4 bg-accent text-secondary">
-            <h1 className="text-2xl font-leckerli text-center">Wellnista</h1>
-            {isInLineApp && (
-              <p className="text-sm text-accent text-center">Running inside LINE</p>
-            )}
-          </header>
-          <main className="p-4">{children}</main>
+          <AuthProvider>
+            <header className="p-4 bg-accent text-secondary relative">
+              <h1 className="text-2xl font-leckerli text-center">Wellnista</h1>
+              {isInLineApp && (
+                <p className="text-sm text-accent text-center">Running inside LINE</p>
+              )}
+              <HamburgerMenu />
+            </header>
+            <main className="p-4">{children}</main>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

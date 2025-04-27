@@ -1,44 +1,50 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { supabase } from '../lib/api/supabaseClient';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { supabase } from "../lib/api/supabaseClient";
+import { useAuth } from "../lib/context/AuthContext";
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 export default function HomeScreen() {
-  const [displayName, setDisplayName] = useState('...');
   const router = useRouter();
+  const { user, signOut } = useAuth();
+  const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchUserName = async () => {
-      const { data: authData } = await supabase.auth.getUser();
-      const user = authData?.user;
-
       if (!user) return;
 
-      // ดึงข้อมูลจาก table users โดยใช้ user.id
-      const { data: profile } = await supabase
-        .from('users')
-        .select('name')
-        .eq('user_id', user.id)
+      const { data, error } = await supabase
+        .from("users")
+        .select("name")
+        .eq("id", user.id)
         .single();
 
-      if (profile?.name) {
-        setDisplayName(profile.name);
-      } else {
-        // fallback เป็นเบอร์โทร
-        setDisplayName(user.phone ?? '...');
+      if (error) {
+        console.error("Error fetching user name:", error);
+        return;
       }
+
+      setUserName(data.name);
     };
 
     fetchUserName();
-  }, []);
+  }, [user]);
+
+  const handleLogout = async () => {
+    await signOut();
+  };
+
+  if (!user) {
+    return null; // AuthProvider will handle the redirect
+  }
 
   return (
     <div className="min-h-screen bg-secondary text-neutral font-garet px-4 py-6 flex flex-col items-center">
       {/* Welcome Button */}
       <div className="w-full max-w-xs bg-primary text-center text-secondary text-3xl font-bold rounded-l px-6 py-3 mb-6 shadow-md">
-        สวัสดี คุณ {displayName}
+        สวัสดี คุณ {userName || "User"}
       </div>
 
       {/* Main Action Buttons */}
@@ -82,6 +88,15 @@ export default function HomeScreen() {
       <div className="w-full max-w-xs mt-6 text-center text-sm text-neutral leading-relaxed">
         การบันทึกคาร์บง่ายกว่าที่คิด<br />
         ช่วยป้องกันโรคไม่ติดต่อเรื้อรัง
+      </div>
+
+      <div className="max-w-md mx-auto p-4 mt-6">
+        <button
+          onClick={handleLogout}
+          className="w-full bg-accent text-secondary py-2 px-4 rounded-md hover:bg-accent/90 transition-colors"
+        >
+          Logout
+        </button>
       </div>
     </div>
   );
