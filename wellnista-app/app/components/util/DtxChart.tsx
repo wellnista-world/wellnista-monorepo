@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
 interface DtxRecord {
+  id: number;
   date: string;
   dtx_value: number | null;
   meal: string;
@@ -24,8 +25,11 @@ interface DtxGraphProps {
 const mealNames = ['เช้า', 'กลางวัน', 'เย็น', 'ก่อนนอน'];
 const mealTime = ['ก่อนอาหาร', 'หลังอาหาร 2 ชม.'];
 
-const formatDateToThai = (dateStr: string) => {
-  const [year, month, day] = dateStr.split('-');
+const formatDateToThai = (dateStr: string | undefined) => {
+  if (!dateStr) return '';
+  const parts = dateStr.split('-');
+  if (parts.length !== 3) return dateStr;
+  const [year, month, day] = parts;
   const thaiYear = parseInt(year) + 543;
   return `${day}/${month}/${thaiYear}`;
 };
@@ -105,11 +109,11 @@ export default function DtxGraph({ data: initialData, title, normalMin, normalMa
     if (editData && selectedData && onUpdate) {
       const dataToUpdate = {
         ...editData,
-        dtx_value: editData.dtx_value ?? 0
+        dtx_value: editData.dtx_value ?? null
       };
       onUpdate(selectedData, dataToUpdate).then(() => {
-        const updatedData = graphData.map(item => 
-          item.date === selectedData.date && item.meal_phase === selectedData.meal_phase
+        const updatedData = graphData.map(item =>
+          item.id === selectedData.id
             ? dataToUpdate
             : item
         );
@@ -173,7 +177,7 @@ export default function DtxGraph({ data: initialData, title, normalMin, normalMa
             <TextField
               fullWidth
               label="เวลา"
-              value={editData?.time}
+              value={editData?.time ?? ''}
               disabled
               className="bg-white"
               InputProps={{
@@ -186,8 +190,8 @@ export default function DtxGraph({ data: initialData, title, normalMin, normalMa
               fullWidth
               label="ค่า DTX"
               type="number"
-              value={editData?.dtx_value ?? ''}
-              onChange={(e) => setEditData({ ...editData!, dtx_value: Number(e.target.value) })}
+              value={editData?.dtx_value !== undefined && editData?.dtx_value !== null ? editData.dtx_value : ''}
+              onChange={(e) => setEditData({ ...editData!, dtx_value : Number(e.target.value) })}
               className="bg-white"
               InputProps={{
                 style: {
