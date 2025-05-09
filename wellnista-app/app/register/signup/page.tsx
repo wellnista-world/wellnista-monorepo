@@ -96,7 +96,7 @@ export default function SignupPage() {
 
         <Typography variant="body2" className="mt-4">
           มีบัญชีแล้ว?{' '}
-          <a href="/app" className="text-primary underline">
+          <a href="/" className="text-primary underline">
             เข้าสู่ระบบ
           </a>
         </Typography>

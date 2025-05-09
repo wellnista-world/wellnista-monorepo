@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import { supabase } from "../lib/api/supabaseClient";
 import { useAuth } from "../lib/context/AuthContext";
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import Typography from '@mui/material/Typography';
+
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -45,7 +46,8 @@ export default function HomeScreen() {
     <div className="min-h-screen bg-secondary text-neutral font-garet px-4 py-6 flex flex-col items-center">
       {/* Welcome Button */}
       <div className="w-full max-w-xs bg-primary text-center text-secondary text-3xl font-bold rounded-l px-6 py-3 mb-6 shadow-md">
-        สวัสดี คุณ {displayName}
+        <Typography className="text-xl font-bold">สวัสดี คุณ</Typography> 
+        {userName}
       </div>
 
       {/* Main Action Buttons */}
