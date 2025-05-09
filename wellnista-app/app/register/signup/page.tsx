@@ -24,6 +24,11 @@ export default function SignupPage() {
     return '+66' + cleaned;
   };
 
+  const handleLoginLinkClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault(); // ป้องกันการทำงาน default ของแท็ก <a>
+    router.push('/'); // หรือ router.push('/home');
+  };
+
   const handleSignup = async () => {
     setError(null);
     setLoading(true);
@@ -96,7 +101,7 @@ export default function SignupPage() {
 
         <Typography variant="body2" className="mt-4">
           มีบัญชีแล้ว?{' '}
-          <a href="" className="text-primary underline">
+          <a href="#" className="text-primary underline" onClick={handleLoginLinkClick}>
             เข้าสู่ระบบ
           </a>
         </Typography>
