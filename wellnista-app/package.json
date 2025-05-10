@@ -18,7 +18,7 @@
     "@supabase/supabase-js": "^2.49.1",
     "@undecaf/barcode-detector-polyfill": "^0.9.21",
     "@zxing/browser": "^0.1.5",
-    "next": "15.2.3",
+    "next": "15.2.4",
     "openai": "^4.77.0",
     "react": "^19.0.0",
     "react-datepicker": "^8.1.0",
