@@ -27,10 +27,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN') {
         setUser(session?.user ?? null);
-        router.push('/home');
       } else if (event === 'SIGNED_OUT') {
         setUser(null);
-        router.push('/');
       }
     });
 
@@ -43,7 +41,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => {
       subscription.unsubscribe();
     };
-  }, [router]);
+  }, []);
 
   const formatPhoneNumber = (rawPhone: string) => {
     const cleaned = rawPhone.replace(/\D/g, '');
