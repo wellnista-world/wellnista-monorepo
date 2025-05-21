@@ -52,6 +52,12 @@ export default function HomeScreen() {
 
       {/* Main Action Buttons */}
       <div className="flex flex-col gap-4 w-full max-w-xs">
+      <Link href="/profile">
+        <button className="w-full bg-primary text-secondary text-xl font-bold rounded-full px-6 py-3 shadow-md hover:bg-accent transition">
+          ไปที่โปรไฟล์
+        </button>
+      </Link>
+
         <Link href="/select">
           <button className="w-full bg-primary text-secondary text-xl font-bold rounded-full px-6 py-3 shadow-md hover:bg-accent transition">
             กินดีมั้ย ?
