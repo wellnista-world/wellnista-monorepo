@@ -5,6 +5,7 @@ import { fetchProductByBarcode, NutritionalInfo } from "@/app/lib/api/image-anal
 import IntroductionStatus from "@/app/components/util/IntroductionStatus";
 import IndicatorRow from "@/app/components/util/IndicatorRow";
 import Box from '@mui/material/Box';
+import Image from "next/image";
 
 export default function ResultPage() {
   const searchParams = useSearchParams();
@@ -82,10 +83,12 @@ export default function ResultPage() {
       <Box className="grid grid-cols-2 gap-4 mb-6">
         <Box className="rounded-full w-full h-full items-center">
           {product?.image_url ? (
-            <img
+            <Image
               src={(product?.image_url as string) || "/placeholder-image.jpg"}
               alt={product?.product_name_en || "รูปภาพของผลิตภัณฑ์"}
               className="w-full h-full object-cover rounded-lg"
+              width={500}
+              height={500}
             />
           ) : (
             <Box className="flex items-center justify-center bg-gray-200 rounded-lg">
