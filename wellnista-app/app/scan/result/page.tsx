@@ -7,6 +7,7 @@ import IndicatorRow from "@/app/components/util/IndicatorRow";
 import Box from '@mui/material/Box';
 import Image from "next/image";
 import { supabase } from "@/app/lib/api/supabaseClient";
+import { useAuth } from "@/app/lib/context/AuthContext";
 
 export interface NutritionData {
   timestamp?: string; // or Date if you convert
@@ -43,6 +44,7 @@ export interface NutritionData {
   certified_vegan_symbol?: string;
   heart_healthy_food?: string;
   other_symbols?: string;
+  carbohydrates_per_serving_g?: number;
 }
 
 export default function ResultPage() {
@@ -52,6 +54,7 @@ export default function ResultPage() {
   const [product, setProduct] = useState<NutritionalInfo | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const { user } = useAuth();
   const maxCarbs = 8;
 
   // create handle function when click กิน it will save data to supabase
@@ -81,6 +84,7 @@ export default function ResultPage() {
         total_sodium_mg: product?.nutriments["sodium_value"],
         food_category: "อาหาร",
         timestamp: new Date().toISOString(),
+        carbohydrates_per_serving_g: product?.nutriments.carbohydrates,
       };
 
       // 3. Insert into nutritional_data
@@ -104,7 +108,7 @@ export default function ResultPage() {
       .insert({
         barcode: barcode,
         scanned_at: new Date(),
-        // user_id: user?.id, // add if you have user info
+        user_id: user?.id,
         nutrition_id: nutritionId, // if you have a relation
       });
 
