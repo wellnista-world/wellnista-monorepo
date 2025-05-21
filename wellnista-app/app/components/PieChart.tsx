@@ -3,16 +3,17 @@ type PieChartProps = {
   goal: number;
   color: string;
   label: string;
+  size?: number;
 };
 
-export default function PieChart({ value, goal, color, label }: PieChartProps) {
+export default function PieChart({ value, goal, color, label, size = 90 }: PieChartProps) {
   const percentage = Math.min((value / goal) * 100, 100);
   const radius = 36;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (percentage / 100) * circumference;
 
   return (
-    <svg width="90" height="90" viewBox="0 0 90 90" className="mb-2">
+    <svg width={size} height={size} viewBox="0 0 90 90" className="mb-2">
       <circle
         cx="45"
         cy="45"
