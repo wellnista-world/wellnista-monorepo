@@ -131,6 +131,41 @@ export default function ResultPage() {
 
     const fetchProduct = async () => {
       try {
+        // First, try to get data from Supabase nutrition_data table
+        const { data: nutritionData } = await supabase
+          .from("nutrition_data")
+          .select("*")
+          .eq("barcode", barcode)
+          .single();
+
+        if (nutritionData) {
+          // If found in Supabase, convert to NutritionalInfo format
+          const convertedData: NutritionalInfo = {
+            product_name: nutritionData.food_name_eng || nutritionData.food_name_thai,
+            product_name_th: nutritionData.food_name_thai,
+            product_name_en: nutritionData.food_name_eng,
+            image_url: nutritionData.food_image,
+            brands: nutritionData.brand_trademark_eng || nutritionData.brand_trademark_thai,
+            nutriments: {
+              "energy-kcal_serving": nutritionData.total_calories_kcal,
+              sugars_value: nutritionData.total_sugar,
+              fat: nutritionData.total_fat_g,
+              "sodium_value": nutritionData.total_sodium_mg,
+              carbohydrates: nutritionData.carbohydrates_per_serving_g,
+              proteins_serving: nutritionData.protein_per_serving_g,
+              "vitamin-a": nutritionData.vitamin_a_percentage,
+              "vitamin-b1": nutritionData.vitamin_b1_percentage,
+              "vitamin-b2": nutritionData.vitamin_b2_percentage,
+              calcium: nutritionData.calcium_percentage,
+              iron: nutritionData.iron_percentage
+            }
+          };
+          setProduct(convertedData);
+          setLoading(false);
+          return;
+        }
+
+        // If not found in Supabase, fetch from barcode API
         const data = await fetchProductByBarcode(barcode);
 
         if (!data) {
@@ -189,15 +224,21 @@ export default function ResultPage() {
       <Box className="grid grid-cols-2 gap-4 mb-6">
         <Box className="rounded-full w-full h-full items-center">
           {product?.image_url ? (
-            <Image
-              src={(product?.image_url as string) || "/placeholder-image.jpg"}
-              alt={product?.product_name_en || "รูปภาพของผลิตภัณฑ์"}
-              className="w-full h-full object-cover rounded-lg"
-              width={500}
-              height={500}
-            />
+            (product.image_url as string).includes('drive.google.com') ? (
+              <Box className="flex items-center justify-center bg-gray-200 rounded-lg h-full">
+                <p>ไม่มีรูปภาพ</p>
+              </Box>
+            ) : (
+              <Image
+                src={product.image_url as string}
+                alt={product?.product_name_en || "รูปภาพของผลิตภัณฑ์"}
+                className="w-full h-full object-cover rounded-lg"
+                width={500}
+                height={500}
+              />
+            )
           ) : (
-            <Box className="flex items-center justify-center bg-gray-200 rounded-lg">
+            <Box className="flex items-center justify-center bg-gray-200 rounded-lg h-full">
               <p>ไม่มีรูปภาพ</p>
             </Box>
           )}
