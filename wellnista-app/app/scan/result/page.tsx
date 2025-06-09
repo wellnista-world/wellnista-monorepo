@@ -112,13 +112,13 @@ export default function ResultPage() {
         nutrition_id: nutritionId, // if you have a relation
       });
 
-      router.push("/scan");
+      router.push("/profile");
 
     if (historyError) {
       console.error("Failed to save scan history:", historyError);
     } else {
       console.log("Scan history saved!");
-      router.push("/scan");
+      router.push("/profile");
     }
   };
 
@@ -322,6 +322,7 @@ export default function ResultPage() {
         </Box>
         <Box>
           <button
+          onClick={() => router.push("/scan")}
             className="px-6 py-3 w-full bg-[#DD524C] text-neutral text-xl font-semibold rounded-lg hover:bg-accent transition">
             ไม่ได้กิน
           </button>
@@ -329,15 +330,6 @@ export default function ResultPage() {
         <Box>
 
         </Box>
-      </Box>
-
-      <Box className="flex justify-center">
-        <button
-          className="px-6 py-3 bg-primary text-secondary font-semibold rounded-full hover:bg-accent transition"
-          onClick={() => router.push("/scan")}
-        >
-          ย้อนกลับ
-        </button>
       </Box>
     </Box>
   );
