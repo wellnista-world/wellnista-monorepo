@@ -18,6 +18,7 @@
     "@supabase/supabase-js": "^2.49.1",
     "@undecaf/barcode-detector-polyfill": "^0.9.21",
     "@zxing/browser": "^0.1.5",
+    "lucide-react": "^0.513.0",
     "next": "15.2.3",
     "openai": "^4.77.0",
     "react": "^19.0.0",
