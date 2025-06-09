@@ -172,7 +172,7 @@ export default function ScanImagePage() {
       console.error("Failed to save scan history:", historyError);
     } else {
       console.log("Scan history saved!");
-      router.push("/scan");
+      router.push("/profile");
     }
   };
 
