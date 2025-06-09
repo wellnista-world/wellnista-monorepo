@@ -4,9 +4,10 @@ import PieChart from "../components/PieChart";
 import { useAuth } from "../lib/context/AuthContext";
 import { supabase } from "../lib/api/supabaseClient";
 import { UserData } from "../lib/types/user";
+import Typography from "@mui/material/Typography";
+import { UserCircle, Activity, Scale, Ruler, Heart, Clock } from "lucide-react";
 
 export default function ProfilePage() {
-  const [view, setView] = useState<"info" | "carb">("info");
   const { user } = useAuth();
   const [userData, setUserData] = useState<UserData | null>(null);
 
@@ -28,75 +29,142 @@ export default function ProfilePage() {
   const carbGoal = 60;
   const calValue = 1200;
   const calGoal = 2000;
+  const proteinValue = 100;
+  const proteinGoal = 120;
   const bmi = 22.5;
 
+  const infoItems = [
+    {
+      icon: <UserCircle size={24} />,
+      label: "ชื่อ - นามสกุล",
+      value: userData?.name || "-",
+    },
+    {
+      icon: <Heart size={24} />,
+      label: "โรคประจำตัว",
+      value: userData?.diseases?.join(", ") || "-",
+    },
+    {
+      icon: <Activity size={24} />,
+      label: "เพศ",
+      value: userData?.gender || "-",
+    },
+    {
+      icon: <Clock size={24} />,
+      label: "อายุ",
+      value: `${userData?.age || "-"} ปี`,
+    },
+    {
+      icon: <Scale size={24} />,
+      label: "น้ำหนัก",
+      value: `${userData?.weight || "-"} กิโลกรัม`,
+    },
+    {
+      icon: <Ruler size={24} />,
+      label: "ส่วนสูง",
+      value: `${userData?.height || "-"} เซนติเมตร`,
+    },
+  ];
+
   return (
-    <div className="p-4">
-      <div className="flex flex-col items-center mb-6">
-        {/* Avatar */}
-        <div className="w-24 h-24 rounded-full bg-primary flex items-center justify-center mb-4 text-3xl font-bold text-secondary">
-          {userData?.name ? userData.name.charAt(0).toUpperCase() : "U"}
+    <div className="min-h-screen bg-secondary text-neutral font-garet px-4 py-6">
+      {/* Nutrition Progress */}
+      <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm">
+        <Typography className="text-lg font-semibold text-primary mb-6">
+          ความคืบหน้าวันนี้
+        </Typography>
+        <div className="grid grid-cols-3 gap-4">
+          <div className="flex flex-col items-center bg-secondary/5 rounded-xl p-4">
+            <PieChart
+              value={carbValue}
+              goal={carbGoal}
+              color="#9F9260"
+              label=""
+              size={100}
+            />
+            <Typography className="text-sm font-semibold text-primary mt-3">
+              {carbValue}/{carbGoal}
+            </Typography>
+            <Typography className="text-xs text-neutral/70">
+              คาร์โบไฮเดรต
+            </Typography>
+          </div>
+          <div className="flex flex-col items-center bg-secondary/5 rounded-xl p-4">
+            <PieChart
+              value={calValue}
+              goal={calGoal}
+              color="#5EC269"
+              label=""
+              size={100}
+            />
+            <Typography className="text-sm font-semibold text-primary mt-3">
+              {calValue}/{calGoal}
+            </Typography>
+            <Typography className="text-xs text-neutral/70">
+              แคลอรี่
+            </Typography>
+          </div>
+          <div className="flex flex-col items-center bg-secondary/5 rounded-xl p-4">
+            <PieChart
+              value={proteinValue}
+              goal={proteinGoal}
+              color="#3776A1"
+              label=""
+              size={100}
+            />
+            <Typography className="text-sm font-semibold text-primary mt-3">
+              {proteinValue}/{proteinGoal}
+            </Typography>
+            <Typography className="text-xs text-neutral/70">
+              โปรตีน
+            </Typography>
+          </div>
         </div>
       </div>
-      <div className="flex gap-2 mb-4">
-        <button
-          onClick={() => setView("info")}
-          className={`flex-1 px-6 py-3 rounded-full font-bold text-xl shadow-md transition
-            ${
-              view === "info"
-                ? "bg-primary text-secondary"
-                : "bg-white text-primary border border-primary"
-            }
-          `}
-        >
+
+      {/* Personal Information */}
+      <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm">
+        <Typography className="text-lg font-semibold text-primary mb-4">
           ข้อมูลส่วนตัว
-        </button>
-        <button
-          onClick={() => setView("carb")}
-          className={`flex-1 px-6 py-3 rounded-full font-bold text-xl shadow-md transition
-            ${
-              view === "carb"
-                ? "bg-primary text-secondary"
-                : "bg-white text-primary border border-primary"
-            }
-          `}
-        >
-          นับคาร์บ
-        </button>
+        </Typography>
+        <div className="space-y-4">
+          {infoItems.map((item, index) => (
+            <div key={index} className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="text-primary">{item.icon}</div>
+                <Typography className="text-neutral/70">
+                  {item.label}
+                </Typography>
+              </div>
+              <Typography className="font-semibold">{item.value}</Typography>
+            </div>
+          ))}
+        </div>
       </div>
-      {view === "info" ? (
-        <div className="text-xl font-semibold space-y-2">
-          {/* Personal info content */}
-          <p>ชื่อ - นามสกุล : {userData?.name}</p>
-          <p>โรคประจำตัว : {userData?.diseases.join(", ")}</p>
-          <p>เพศ {userData?.gender}</p>
-          <p>อายุ {userData?.age} ปี</p>
-          <p>น้ำหนัก : {userData?.weight} กิโลกรัม </p>
-          <p>ส่วนสูง : {userData?.height} เซนติเมตร</p>
-          <p>รอบเอว : {userData?.waist}</p>
-          <p>ระดับกิจกรรม : {userData?.activityLevel}</p>
-          <div className="text-xl font-bold">BMI: {bmi}</div>
+
+      {/* Health Stats Cards */}
+      <div className="grid grid-cols-2 gap-4">
+        <div className="bg-white rounded-2xl p-6 shadow-sm">
+          <Typography className="text-sm text-neutral/70 mb-2">BMI</Typography>
+          <Typography className="text-2xl font-bold text-primary">
+            {bmi}
+          </Typography>
+          <Typography className="text-xs text-neutral/70 mt-1">
+            ดัชนีมวลกาย
+          </Typography>
         </div>
-      ) : (
-        <div className="flex flex-col items-center justify-center gap-6 py-4">
-          {/* Centered and bigger charts */}
-          <PieChart
-            value={carbValue}
-            goal={carbGoal}
-            color="#9F9260"
-            label="Carb"
-            size={180}
-          />
-          <PieChart
-            value={calValue}
-            goal={calGoal}
-            color="#5EC269"
-            label="Cal"
-            size={180}
-          />
-          {/* BMI */}
+        <div className="bg-white rounded-2xl p-6 shadow-sm">
+          <Typography className="text-sm text-neutral/70 mb-2">
+            ระดับกิจกรรม
+          </Typography>
+          <Typography className="text-2xl font-bold text-primary">
+            {userData?.activityLevel || "-"}
+          </Typography>
+          <Typography className="text-xs text-neutral/70 mt-1">
+            กิจกรรมประจำวัน
+          </Typography>
         </div>
-      )}
+      </div>
     </div>
   );
 }
