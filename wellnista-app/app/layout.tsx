@@ -33,6 +33,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
       <html lang="en">
         <head>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+          <meta name="theme-color" content="#9F9260" />
+          <meta name="description" content="Your personal nutrition assistant" />
+          <link rel="manifest" href="/manifest.json" />
+          <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+          <link rel="icon" href="/icons/icon-192x192.png" />
           {/* Google Analytics */}
           <Script
             src="https://www.googletagmanager.com/gtag/js?id=G-QTTCWH3PP4"
@@ -67,6 +74,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
       <html lang="en">
         <head>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+          <meta name="theme-color" content="#9F9260" />
+          <meta name="description" content="Your personal nutrition assistant" />
+          <link rel="manifest" href="/manifest.json" />
+          <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+          <link rel="icon" href="/icons/icon-192x192.png" />
           {/* Google Analytics */}
           <Script
             src="https://www.googletagmanager.com/gtag/js?id=G-QTTCWH3PP4"
@@ -97,6 +111,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <meta name="theme-color" content="#9F9260" />
+        <meta name="description" content="Your personal nutrition assistant" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        <link rel="icon" href="/icons/icon-192x192.png" />
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-QTTCWH3PP4"
