@@ -8,6 +8,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
 import HamburgerMenu from './components/HamburgerMenu';
 import { AuthProvider } from './lib/context/AuthContext';
+import AddToHomeScreen from './components/AddToHomeScreen';
 
 //import { Kanit } from "next/font/google";
 //import { Leckerli_One } from "next/font/google";
@@ -163,6 +164,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               )}
             </header>
             <main className="p-4">{children}</main>
+            <AddToHomeScreen />
           </AuthProvider>
         </ThemeProvider>
       </body>
