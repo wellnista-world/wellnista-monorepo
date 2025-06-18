@@ -16,10 +16,28 @@ const activitiveLevel: string[] = [
   "ออกกำลังกายหนักมาก 2 ครั้ง/วัน เป็นนักกีฬา",
 ];
 
-const diseaseNames = ['เบาหวาน', 'ไต', 'หัวใจ', 'ความดัน', 'เก๊าต์', 'ไขมัน', 'อื่นๆ', 'ไม่มี'];
+const weigtText: string[] = [
+  "น้ำหนักตัวน้อย/ผอม",
+  "น้ำหนักตัวปกติ",
+  "น้ำหนักเกิน มีภาวะเสี่ยง",
+  "อ้วนระดับ 1",
+  "อ้วนระดับ 2",
+];
+
+const diseaseNames = [
+  "เบาหวาน",
+  "ไต",
+  "หัวใจ",
+  "ความดัน",
+  "เก๊าต์",
+  "ไขมัน",
+  "อื่นๆ",
+  "ไม่มี",
+];
 
 const activitiveLevelValue: number[] = [1.2, 1.375, 1.55, 1.725, 1.9];
 const activitiveLevelProtein: number[] = [1.0, 1.0, 1.2, 1.7, 2.2];
+const weightNumber: number[] = [18.5, 22.9, 24.9, 29.9, 30];
 
 export default function ProfilePage() {
   const { user } = useAuth();
@@ -75,7 +93,9 @@ export default function ProfilePage() {
             protein:
               acc.protein +
               (Number(item.nutrition?.protein_per_serving_g) || 0),
-            carbs: acc.carbs + (Number(item.nutrition?.total_carbohydrates_per_serving_g) || 0),
+            carbs:
+              acc.carbs +
+              (Number(item.nutrition?.total_carbohydrates_per_serving_g) || 0),
           }),
           { calories: 0, protein: 0, carbs: 0 }
         );
@@ -105,14 +125,32 @@ export default function ProfilePage() {
 
   const bmi = (userData?.weight ?? 0) / ((userData?.height ?? 0) / 100) ** 2;
 
+  const bmiText =
+    bmi > 30
+      ? "อ้วนระดับ 2"
+      : bmi > 25
+      ? "อ้วนระดับ 1"
+      : bmi > 23
+      ? "น้ำหนักเกิน มีภาวะเสี่ยง"
+      : bmi > 18.5
+      ? "น้ำหนักตัวปกติ"
+      : "น้ำหนักตัวน้อย/ผอม";
+
   // carbGoal is เบาหวาน use 8 อื่นๆ use 12 or bmi more than 30 use 8
-  const carbGoal = diseaseNames.indexOf(userData?.diseases?.[0] ?? "") === -1 || bmi < 30 ? 12 : 8;
+  const carbGoal =
+    diseaseNames.indexOf(userData?.diseases?.[0] ?? "") === -1 || bmi < 30
+      ? 12
+      : 8;
 
   const calValue = totalNutrition.calories;
   const calGoal = userData?.gender === "ชาย" ? teddMan : teddWoman;
 
   const proteinValue = totalNutrition.protein;
-  const proteinGoal = (userData?.weight ?? 0) * activitiveLevelProtein[activitiveLevel.indexOf(userData?.activityLevel ?? "")];
+  const proteinGoal =
+    (userData?.weight ?? 0) *
+    activitiveLevelProtein[
+      activitiveLevel.indexOf(userData?.activityLevel ?? "")
+    ];
 
   const infoItems = [
     {
@@ -166,9 +204,7 @@ export default function ProfilePage() {
             <Typography className="text-sm font-semibold text-primary mt-3">
               {carbValue.toFixed(0)}/{carbGoal.toFixed(0)} คาร์บ
             </Typography>
-            <Typography className="text-xs text-neutral/70">
-              คาร์บ
-            </Typography>
+            <Typography className="text-xs text-neutral/70">คาร์บ</Typography>
           </div>
           <div className="flex flex-col items-center bg-secondary/5 rounded-xl p-4">
             <PieChart
@@ -204,14 +240,14 @@ export default function ProfilePage() {
         <Typography className="text-lg font-semibold text-primary mb-6">
           ปฏิทินการกิน
         </Typography>
-        <Calendar 
+        <Calendar
           calGoal={calGoal}
           carbGoal={carbGoal}
           proteinGoal={proteinGoal}
           todayNutrition={{
             calories: totalNutrition.calories,
             carbs: totalNutrition.carbs,
-            protein: totalNutrition.protein
+            protein: totalNutrition.protein,
           }}
         />
       </div>
@@ -246,6 +282,7 @@ export default function ProfilePage() {
           <Typography className="text-xs text-neutral/70 mt-1">
             ดัชนีมวลกาย
           </Typography>
+          <Typography className="text-xs mt-1 text-primary">{bmiText}</Typography>
         </div>
         <div className="bg-white rounded-2xl p-6 shadow-sm">
           <Typography className="text-sm text-neutral/70 mb-2">
