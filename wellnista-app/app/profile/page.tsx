@@ -16,8 +16,11 @@ const activitiveLevel: string[] = [
   "ออกกำลังกายหนักมาก 2 ครั้ง/วัน เป็นนักกีฬา",
 ];
 
+const diseaseNames = ['เบาหวาน', 'ไต', 'หัวใจ', 'ความดัน', 'เก๊าต์', 'ไขมัน', 'อื่นๆ', 'ไม่มี'];
+
 const activitiveLevelValue: number[] = [1.2, 1.375, 1.55, 1.725, 1.9];
 const activitiveLevelProtein: number[] = [1.0, 1.0, 1.2, 1.7, 2.2];
+const diseaseNamesValue: number[] = [8, 12, 12, 12, 12, 12, 12, 12];
 
 export default function ProfilePage() {
   const { user } = useAuth();
@@ -100,15 +103,17 @@ export default function ProfilePage() {
 
   // value only today
   const carbValue = totalNutrition.carbs / 15;
-  const carbGoal = (userData?.gender === "ชาย" ? teddMan * 0.2 : teddWoman * 0.2) / 15;
+
+  const bmi = (userData?.weight ?? 0) / ((userData?.height ?? 0) / 100) ** 2;
+
+  // carbGoal is เบาหวาน use 8 อื่นๆ use 12 or bmi more than 30 use 8
+  const carbGoal = diseaseNames.indexOf(userData?.diseases?.[0] ?? "") === -1 || bmi < 30 ? 12 : 8;
 
   const calValue = totalNutrition.calories;
   const calGoal = userData?.gender === "ชาย" ? teddMan : teddWoman;
 
   const proteinValue = totalNutrition.protein;
   const proteinGoal = (userData?.weight ?? 0) * activitiveLevelProtein[activitiveLevel.indexOf(userData?.activityLevel ?? "")];
-
-  const bmi = 22.5;
 
   const infoItems = [
     {
@@ -237,7 +242,7 @@ export default function ProfilePage() {
         <div className="bg-white rounded-2xl p-6 shadow-sm">
           <Typography className="text-sm text-neutral/70 mb-2">BMI</Typography>
           <Typography className="text-2xl font-bold text-primary">
-            {bmi}
+            {bmi.toFixed(1)}
           </Typography>
           <Typography className="text-xs text-neutral/70 mt-1">
             ดัชนีมวลกาย
