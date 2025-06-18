@@ -28,6 +28,7 @@ export default function ScanImagePage() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<NutritionalInfo | null>(null);
   const [analysisError, setAnalysisError] = useState<string | null>(null);
+  const maxCarbs = 8;
 
   useEffect(() => {
     if (!isLiffReady || !cameraPermission) return;
@@ -142,6 +143,7 @@ export default function ScanImagePage() {
       total_fat_g: analysisResult.nutriments.fat,
       total_sodium_mg: analysisResult.nutriments["sodium_value"],
       protein_per_serving_g: analysisResult.nutriments.proteins_serving,
+      total_carbohydrates_per_serving_g: analysisResult.nutriments.carbohydrates,
       food_category: "อาหาร",
       timestamp: new Date().toISOString(),
       carbohydrates_per_serving_g: analysisResult.nutriments.carbohydrates,
@@ -294,7 +296,18 @@ export default function ScanImagePage() {
               )}
             </div>
             <div className="flex items-center mb-4 justify-center">
-              <p className="text-3xl font-bold ml-4">0 point</p>
+              <p className="text-3xl font-bold ml-4">
+                {(() => {
+                  const sugarValue = analysisResult.nutriments.sugars_value ?? 0;
+                  const fatValue = analysisResult.nutriments.fat ?? 0;
+                  const sodiumValue = analysisResult.nutriments["sodium_value"] ?? 0;
+                  let greenStarCount = 0;
+                  if (sugarValue >= 0 && sugarValue <= 2) greenStarCount++;
+                  if (fatValue >= 0 && fatValue <= 10) greenStarCount++;
+                  if (sodiumValue >= 0 && sodiumValue <= 700) greenStarCount++;
+                  return `${greenStarCount * 10} point`;
+                })()}
+              </p>
             </div>
           </div>
 
@@ -343,7 +356,7 @@ export default function ScanImagePage() {
                   />
                   <path
                     className="circle"
-                    strokeDasharray="0, 100"
+                    strokeDasharray={`${Math.min(((analysisResult.nutriments.carbohydrates ?? 0) / 15) / maxCarbs * 100, 100)}, 100`}
                     d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                     fill="none"
                     stroke="#9F9260"
@@ -352,7 +365,7 @@ export default function ScanImagePage() {
                 </svg>
               </div>
               <p className="text-sm text-neutral">
-                0 คาร์บ (0% ของ 8 คาร์บสูงสุด)
+                {analysisResult.nutriments.carbohydrates ?? 0} คาร์บ ({Math.min(((analysisResult.nutriments.carbohydrates ?? 0) / 15) / maxCarbs * 100, 100).toFixed(0)}% ของ {maxCarbs} คาร์บสูงสุด)
               </p>
             </div>
           </div>

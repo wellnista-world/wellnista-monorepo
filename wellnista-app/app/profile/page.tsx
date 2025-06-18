@@ -51,7 +51,7 @@ export default function ProfilePage() {
           nutrition:nutrition_id (
             total_calories_kcal,
             protein_per_serving_g,
-            total_sugar
+            total_carbohydrates_per_serving_g
           )
         `
         )
@@ -72,7 +72,7 @@ export default function ProfilePage() {
             protein:
               acc.protein +
               (Number(item.nutrition?.protein_per_serving_g) || 0),
-            carbs: acc.carbs + (Number(item.nutrition?.total_sugar) || 0),
+            carbs: acc.carbs + (Number(item.nutrition?.total_carbohydrates_per_serving_g) || 0),
           }),
           { calories: 0, protein: 0, carbs: 0 }
         );
@@ -159,7 +159,7 @@ export default function ProfilePage() {
               size={100}
             />
             <Typography className="text-sm font-semibold text-primary mt-3">
-              {carbValue}/{carbGoal.toFixed(0)}
+              {carbValue}/{carbGoal.toFixed(0)} กรัม
             </Typography>
             <Typography className="text-xs text-neutral/70">
               คาร์โบไฮเดรต
@@ -174,7 +174,7 @@ export default function ProfilePage() {
               size={100}
             />
             <Typography className="text-sm font-semibold text-primary mt-3">
-              {calValue}/{calGoal.toFixed(0)}
+              {calValue}/{calGoal.toFixed(0)} กิโลแคลอรี่
             </Typography>
             <Typography className="text-xs text-neutral/70">แคลอรี่</Typography>
           </div>
@@ -187,7 +187,7 @@ export default function ProfilePage() {
               size={100}
             />
             <Typography className="text-sm font-semibold text-primary mt-3">
-              {proteinValue}/{proteinGoal}
+              {proteinValue}/{proteinGoal} กรัม
             </Typography>
             <Typography className="text-xs text-neutral/70">โปรตีน</Typography>
           </div>
