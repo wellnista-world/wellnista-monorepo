@@ -141,6 +141,7 @@ export default function ScanImagePage() {
       total_sugar: analysisResult.nutriments.sugars_value,
       total_fat_g: analysisResult.nutriments.fat,
       total_sodium_mg: analysisResult.nutriments["sodium_value"],
+      protein_per_serving_g: analysisResult.nutriments.proteins_serving,
       food_category: "อาหาร",
       timestamp: new Date().toISOString(),
       carbohydrates_per_serving_g: analysisResult.nutriments.carbohydrates,
@@ -158,6 +159,7 @@ export default function ScanImagePage() {
     }
 
     const nutritionId = inserted?.[0]?.id;
+    console.log(nutritionId);
 
     // 3. Insert into food_scan_history
     const { error: historyError } = await supabase

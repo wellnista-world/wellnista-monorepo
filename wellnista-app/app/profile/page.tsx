@@ -10,6 +10,7 @@ import { UserCircle, Activity, Scale, Ruler, Heart, Clock } from "lucide-react";
 export default function ProfilePage() {
   const { user } = useAuth();
   const [userData, setUserData] = useState<UserData | null>(null);
+  const [totalNutrition, setTotalNutrition] = useState({ calories: 0, protein: 0, carbs: 0 });
 
   useEffect(() => {
     if (!user?.id || userData) return;
@@ -24,13 +25,54 @@ export default function ProfilePage() {
     fetchUserData();
   }, [user, userData]);
 
-  // Example data (replace with real data as needed)
-  const carbValue = 45;
-  const carbGoal = 60;
-  const calValue = 1200;
-  const calGoal = 2000;
-  const proteinValue = 100;
+  useEffect(() => {
+    const fetchHistoryData = async () => {
+      if (!user?.id) return;
+      const { data } = await supabase
+        .from("food_scan_history")
+        .select(`
+          *,
+          nutrition:nutrition_id (
+            total_calories_kcal,
+            protein_per_serving_g,
+            total_sugar
+          )
+        `)
+        .eq("user_id", user.id);
+      
+      if (data) {
+        // Calculate total nutrition only datetime today
+        const today = new Date();
+        const todayData = data.filter((item) => {
+          const itemDate = new Date(item.scanned_at);
+          return itemDate.toDateString() === today.toDateString();
+        });
+        console.log(todayData);
+        const totals = todayData.reduce((acc, item) => ({
+          calories: acc.calories + (Number(item.nutrition?.total_calories_kcal) || 0),
+          protein: acc.protein + (Number(item.nutrition?.protein_per_serving_g) || 0),
+          carbs: acc.carbs + (Number(item.nutrition?.total_sugar) || 0)
+        }), { calories: 0, protein: 0, carbs: 0 });
+        setTotalNutrition(totals);
+      }
+    };
+    fetchHistoryData();
+  }, [user]);
+
+  const bmrMan = 66 + (13.7 * (userData?.weight ?? 0)) + (5 * (userData?.height ?? 0)) - (6.8 * (userData?.age ?? 0));
+  const bmrWoman = 655 + (9.6 * (userData?.weight ?? 0)) + (1.8 * (userData?.height ?? 0)) - (4.7 * (userData?.age ?? 0));
+
+  console.log(totalNutrition);
+  // value only today
+  const carbValue = totalNutrition.carbs;
+  const carbGoal = 40;
+
+  const calValue = totalNutrition.calories;
+  const calGoal = userData?.gender === "ชาย" ? bmrMan : bmrWoman;
+
+  const proteinValue = totalNutrition.protein;
   const proteinGoal = 120;
+
   const bmi = 22.5;
 
   const infoItems = [
@@ -98,7 +140,7 @@ export default function ProfilePage() {
               size={100}
             />
             <Typography className="text-sm font-semibold text-primary mt-3">
-              {calValue}/{calGoal}
+              {calValue}/{calGoal.toFixed(0)}
             </Typography>
             <Typography className="text-xs text-neutral/70">
               แคลอรี่
