@@ -7,10 +7,25 @@ import { UserData } from "../lib/types/user";
 import Typography from "@mui/material/Typography";
 import { UserCircle, Activity, Scale, Ruler, Heart, Clock } from "lucide-react";
 
+const activitiveLevel: string[] = [
+  "ไม่ออกกำลังกาย/นั่งทำงานอยู่กับที่",
+  "ออกกำลังกายเล็กน้อย 1-3วัน/สัปดาห์",
+  "ออกกำลังกายปานกลาง 4-5วัน/สัปดาห์",
+  "ออกกำลังกายหนัก 6-7วัน/สัปดาห์",
+  "ออกกำลังกายหนักมาก 2 ครั้ง/วัน เป็นนักกีฬา",
+];
+
+const activitiveLevelValue: number[] = [1.2, 1.375, 1.55, 1.725, 1.9];
+const activitiveLevelProtein: number[] = [1.0, 1.0, 1.2, 1.7, 2.2];
+
 export default function ProfilePage() {
   const { user } = useAuth();
   const [userData, setUserData] = useState<UserData | null>(null);
-  const [totalNutrition, setTotalNutrition] = useState({ calories: 0, protein: 0, carbs: 0 });
+  const [totalNutrition, setTotalNutrition] = useState({
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+  });
 
   useEffect(() => {
     if (!user?.id || userData) return;
@@ -30,16 +45,18 @@ export default function ProfilePage() {
       if (!user?.id) return;
       const { data } = await supabase
         .from("food_scan_history")
-        .select(`
+        .select(
+          `
           *,
           nutrition:nutrition_id (
             total_calories_kcal,
             protein_per_serving_g,
             total_sugar
           )
-        `)
+        `
+        )
         .eq("user_id", user.id);
-      
+
       if (data) {
         // Calculate total nutrition only datetime today
         const today = new Date();
@@ -48,30 +65,47 @@ export default function ProfilePage() {
           return itemDate.toDateString() === today.toDateString();
         });
         console.log(todayData);
-        const totals = todayData.reduce((acc, item) => ({
-          calories: acc.calories + (Number(item.nutrition?.total_calories_kcal) || 0),
-          protein: acc.protein + (Number(item.nutrition?.protein_per_serving_g) || 0),
-          carbs: acc.carbs + (Number(item.nutrition?.total_sugar) || 0)
-        }), { calories: 0, protein: 0, carbs: 0 });
+        const totals = todayData.reduce(
+          (acc, item) => ({
+            calories:
+              acc.calories + (Number(item.nutrition?.total_calories_kcal) || 0),
+            protein:
+              acc.protein +
+              (Number(item.nutrition?.protein_per_serving_g) || 0),
+            carbs: acc.carbs + (Number(item.nutrition?.total_sugar) || 0),
+          }),
+          { calories: 0, protein: 0, carbs: 0 }
+        );
         setTotalNutrition(totals);
       }
     };
     fetchHistoryData();
   }, [user]);
 
-  const bmrMan = 66 + (13.7 * (userData?.weight ?? 0)) + (5 * (userData?.height ?? 0)) - (6.8 * (userData?.age ?? 0));
-  const bmrWoman = 655 + (9.6 * (userData?.weight ?? 0)) + (1.8 * (userData?.height ?? 0)) - (4.7 * (userData?.age ?? 0));
+  const teddMan =
+    (66 + 13.7 * (userData?.weight ?? 0) + 5 * (userData?.height ?? 0) - 6.8) *
+    activitiveLevelValue[
+      activitiveLevel.indexOf(userData?.activityLevel ?? "")
+    ];
 
-  console.log(totalNutrition);
+  const teddWoman =
+    (655 +
+      9.6 * (userData?.weight ?? 0) +
+      1.8 * (userData?.height ?? 0) -
+      4.7) *
+    activitiveLevelValue[
+      activitiveLevel.indexOf(userData?.activityLevel ?? "")
+    ];
+
   // value only today
   const carbValue = totalNutrition.carbs;
-  const carbGoal = 40;
+  const carbGoal = userData?.gender === "ชาย" ? teddMan * 0.2 : teddWoman * 0.2;
 
   const calValue = totalNutrition.calories;
-  const calGoal = userData?.gender === "ชาย" ? bmrMan : bmrWoman;
+  const calGoal = userData?.gender === "ชาย" ? teddMan : teddWoman;
 
   const proteinValue = totalNutrition.protein;
-  const proteinGoal = 120;
+  const proteinGoal = (userData?.weight ?? 0) * activitiveLevelProtein[activitiveLevel.indexOf(userData?.activityLevel ?? "")];
 
   const bmi = 22.5;
 
@@ -125,7 +159,7 @@ export default function ProfilePage() {
               size={100}
             />
             <Typography className="text-sm font-semibold text-primary mt-3">
-              {carbValue}/{carbGoal}
+              {carbValue}/{carbGoal.toFixed(0)}
             </Typography>
             <Typography className="text-xs text-neutral/70">
               คาร์โบไฮเดรต
@@ -142,9 +176,7 @@ export default function ProfilePage() {
             <Typography className="text-sm font-semibold text-primary mt-3">
               {calValue}/{calGoal.toFixed(0)}
             </Typography>
-            <Typography className="text-xs text-neutral/70">
-              แคลอรี่
-            </Typography>
+            <Typography className="text-xs text-neutral/70">แคลอรี่</Typography>
           </div>
           <div className="flex flex-col items-center bg-secondary/5 rounded-xl p-4">
             <PieChart
@@ -157,9 +189,7 @@ export default function ProfilePage() {
             <Typography className="text-sm font-semibold text-primary mt-3">
               {proteinValue}/{proteinGoal}
             </Typography>
-            <Typography className="text-xs text-neutral/70">
-              โปรตีน
-            </Typography>
+            <Typography className="text-xs text-neutral/70">โปรตีน</Typography>
           </div>
         </div>
       </div>
