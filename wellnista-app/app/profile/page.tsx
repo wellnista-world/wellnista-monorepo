@@ -219,7 +219,7 @@ export default function ProfilePage() {
               size={100}
             />
             <Typography className="text-sm font-semibold text-primary mt-3">
-              {proteinValue}/{proteinGoal} กรัม
+              {proteinValue.toFixed(0)}/{proteinGoal.toFixed(0)} กรัม
             </Typography>
             <Typography className="text-xs text-neutral/70">โปรตีน</Typography>
           </div>
