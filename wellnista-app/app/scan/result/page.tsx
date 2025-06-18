@@ -5,6 +5,47 @@ import { fetchProductByBarcode, NutritionalInfo } from "@/app/lib/api/image-anal
 import IntroductionStatus from "@/app/components/util/IntroductionStatus";
 import IndicatorRow from "@/app/components/util/IndicatorRow";
 import Box from '@mui/material/Box';
+import Image from "next/image";
+import { supabase } from "@/app/lib/api/supabaseClient";
+import { useAuth } from "@/app/lib/context/AuthContext";
+
+export interface NutritionData {
+  timestamp?: string; // or Date if you convert
+  food_category: string;
+  food_image?: string;
+  food_name_thai?: string;
+  food_name_eng?: string;
+  brand_trademark_thai?: string;
+  brand_trademark_eng?: string;
+  barcode?: string;
+  total_calories_kcal?: number;
+  total_sugar?: number;
+  total_fat_g?: number;
+  total_sodium_mg?: number;
+  serving_size_g?: string;
+  servings_per_container?: string;
+  calories_per_serving?: number;
+  total_fat_per_serving_g?: number;
+  saturated_fat_per_serving_g?: number;
+  cholesterol_per_serving_mg?: number;
+  protein_per_serving_g?: number;
+  total_carbohydrates_g?: number;
+  fiber_per_serving_g?: string;
+  sugar_per_serving_g?: string;
+  sodium_per_serving_mg?: string;
+  vitamin_a_percentage?: string;
+  vitamin_b1_percentage?: string;
+  vitamin_b2_percentage?: string;
+  calcium_percentage?: number;
+  iron_percentage?: number;
+  health_choice_symbol?: string;
+  halal_symbol?: string;
+  eec_symbol?: string;
+  certified_vegan_symbol?: string;
+  heart_healthy_food?: string;
+  other_symbols?: string;
+  carbohydrates_per_serving_g?: number;
+}
 
 export default function ResultPage() {
   const searchParams = useSearchParams();
@@ -13,7 +54,73 @@ export default function ResultPage() {
   const [product, setProduct] = useState<NutritionalInfo | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const { user } = useAuth();
   const maxCarbs = 8;
+
+  // create handle function when click กิน it will save data to supabase
+  // try to search barcode from supabase in nutritional_data table
+  // if found, insert data to food_scan_history table
+  // if not found, save nutritional_data to nutritional_data table
+  // then insert data to food_scan_history table
+  const handleEat = async () => {
+    // 1. Check if barcode exists in nutritional_data
+    const { data } = await supabase
+      .from("nutrition_data")
+      .select("*")
+      .eq("barcode", barcode);
+
+    let nutritionId;
+
+    if (!data || data.length === 0) {
+      // 2. Map product to NutritionData
+      const nutritionData: NutritionData = {
+        barcode: barcode ?? undefined,
+        food_name_thai: product?.product_name_th,
+        food_name_eng: product?.product_name_en,
+        food_image: product?.image_url as string,
+        total_calories_kcal: product?.nutriments["energy-kcal_serving"],
+        total_sugar: product?.nutriments.sugars_value,
+        total_fat_g: product?.nutriments.fat,
+        total_sodium_mg: product?.nutriments["sodium_value"],
+        food_category: "อาหาร",
+        timestamp: new Date().toISOString(),
+        carbohydrates_per_serving_g: product?.nutriments.carbohydrates,
+      };
+
+      // 3. Insert into nutritional_data
+      const { data: inserted, error: insertError } = await supabase
+        .from("nutrition_data")
+        .insert([nutritionData])
+        .select();
+
+      if (insertError) {
+        console.error("Failed to save nutritional data:", insertError);
+        return;
+      }
+      nutritionId = inserted?.[0]?.id; // or use barcode as key
+    } else {
+      nutritionId = data[0].id; // or use barcode as key
+    }
+
+    // 4. Insert into food_scan_history
+    const { error: historyError } = await supabase
+      .from("food_scan_history")
+      .insert({
+        barcode: barcode,
+        scanned_at: new Date(),
+        user_id: user?.id,
+        nutrition_id: nutritionId, // if you have a relation
+      });
+
+      router.push("/profile");
+
+    if (historyError) {
+      console.error("Failed to save scan history:", historyError);
+    } else {
+      console.log("Scan history saved!");
+      router.push("/profile");
+    }
+  };
 
   useEffect(() => {
     if (!barcode) {
@@ -24,6 +131,41 @@ export default function ResultPage() {
 
     const fetchProduct = async () => {
       try {
+        // First, try to get data from Supabase nutrition_data table
+        const { data: nutritionData } = await supabase
+          .from("nutrition_data")
+          .select("*")
+          .eq("barcode", barcode)
+          .single();
+
+        if (nutritionData) {
+          // If found in Supabase, convert to NutritionalInfo format
+          const convertedData: NutritionalInfo = {
+            product_name: nutritionData.food_name_eng || nutritionData.food_name_thai,
+            product_name_th: nutritionData.food_name_thai,
+            product_name_en: nutritionData.food_name_eng,
+            image_url: nutritionData.food_image,
+            brands: nutritionData.brand_trademark_eng || nutritionData.brand_trademark_thai,
+            nutriments: {
+              "energy-kcal_serving": nutritionData.total_calories_kcal,
+              sugars_value: nutritionData.total_sugar,
+              fat: nutritionData.total_fat_g,
+              "sodium_value": nutritionData.total_sodium_mg,
+              carbohydrates: nutritionData.carbohydrates_per_serving_g,
+              proteins_serving: nutritionData.protein_per_serving_g,
+              "vitamin-a": nutritionData.vitamin_a_percentage,
+              "vitamin-b1": nutritionData.vitamin_b1_percentage,
+              "vitamin-b2": nutritionData.vitamin_b2_percentage,
+              calcium: nutritionData.calcium_percentage,
+              iron: nutritionData.iron_percentage
+            }
+          };
+          setProduct(convertedData);
+          setLoading(false);
+          return;
+        }
+
+        // If not found in Supabase, fetch from barcode API
         const data = await fetchProductByBarcode(barcode);
 
         if (!data) {
@@ -82,13 +224,21 @@ export default function ResultPage() {
       <Box className="grid grid-cols-2 gap-4 mb-6">
         <Box className="rounded-full w-full h-full items-center">
           {product?.image_url ? (
-            <img
-              src={(product?.image_url as string) || "/placeholder-image.jpg"}
-              alt={product?.product_name_en || "รูปภาพของผลิตภัณฑ์"}
-              className="w-full h-full object-cover rounded-lg"
-            />
+            (product.image_url as string).includes('drive.google.com') ? (
+              <Box className="flex items-center justify-center bg-gray-200 rounded-lg h-full">
+                <p>ไม่มีรูปภาพ</p>
+              </Box>
+            ) : (
+              <Image
+                src={product.image_url as string}
+                alt={product?.product_name_en || "รูปภาพของผลิตภัณฑ์"}
+                className="w-full h-full object-cover rounded-lg"
+                width={500}
+                height={500}
+              />
+            )
           ) : (
-            <Box className="flex items-center justify-center bg-gray-200 rounded-lg">
+            <Box className="flex items-center justify-center bg-gray-200 rounded-lg h-full">
               <p>ไม่มีรูปภาพ</p>
             </Box>
           )}
@@ -165,12 +315,14 @@ export default function ResultPage() {
       <Box className="grid grid-cols-2 grid-flow-col gap-4 mb-6">
         <Box>
           <button
+            onClick={handleEat}
             className="px-6 py-3 w-full bg-[#5EC269] text-neutral text-xl font-semibold rounded-lg hover:bg-accent transition">
             กินแล้ว
           </button>
         </Box>
         <Box>
           <button
+          onClick={() => router.push("/scan")}
             className="px-6 py-3 w-full bg-[#DD524C] text-neutral text-xl font-semibold rounded-lg hover:bg-accent transition">
             ไม่ได้กิน
           </button>
@@ -178,15 +330,6 @@ export default function ResultPage() {
         <Box>
 
         </Box>
-      </Box>
-
-      <Box className="flex justify-center">
-        <button
-          className="px-6 py-3 bg-primary text-secondary font-semibold rounded-full hover:bg-accent transition"
-          onClick={() => router.push("/scan")}
-        >
-          ย้อนกลับ
-        </button>
       </Box>
     </Box>
   );

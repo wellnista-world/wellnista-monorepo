@@ -5,6 +5,7 @@ import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library";
 import { useRouter } from "next/navigation";
 import { useLiff } from "../lib/api/use-liff";
 
+
 export default function ScanPage() {
   const {
     isLiffReady,

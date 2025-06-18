@@ -1,31 +1,70 @@
+"use client";
+
 import Link from "next/link";
+import Typography from '@mui/material/Typography';
+import { Barcode, Camera } from 'lucide-react';
 
 export default function SelectScreen() {
-    return (
-    <div>
-    
-    {/*Body*/}
-    <div className="text-center mt-8">
-      <h1 className="text-2xl font-magnolia mb-2">ยินดีต้อนรับเข้าสู่</h1>
-      <h1 className="text-3xl font-magnolia font-bold text-[#000000]">Wellnista</h1>
-      <p className="text-sm font-magnolia text-[#000000] mt-4">Choose your action below to get start</p>
-    </div>
-      
-    <h3 className="text-center text-lg text-[#000000] mt-6">ตรวจสอบโภชนาการอาหาร</h3>
-      <div className="mt-6 flex flex-col gap-6 w-full items-center justify-center">
-        {/* ปุ่มใช้ได้ */}
-        <Link href="/scan">
-          <button className="w-80 py-4 bg-primary text-2xl text-secondary font-bold rounded-lg hover:bg-accent transition">
-            สแกน บาร์โค้ด
-          </button>
-        </Link>
-        {/* ปุ่มกำลังพัฒนา */}
-            <Link href="/menu">
-          <button className="w-80 py-4 bg-primary text-2xl text-secondary font-bold rounded-lg hover:bg-accent transition">
-            ถ่ายรูป / พิมพ์ชื่ออาหาร
-          </button>
-        </Link>
+  const menuItems = [
+    {
+      icon: <Barcode size={50} />,
+      label: "สแกน บาร์โค้ด",
+      href: "/scan",
+      color: "bg-[#9F9260]"
+    },
+    {
+      icon: <Camera size={50} />,
+      label: "ถ่ายรูปอาหาร",
+      href: "/scan/scan-image",
+      color: "bg-[#9F9260]"
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-secondary text-neutral font-garet px-4 py-6">
+      {/* Header Section */}
+      <div className="text-center mb-8">
+        <Typography className="!text-2xl font-bold text-primary mb-2">
+          ยินดีต้อนรับเข้าสู่
+        </Typography>
+        <Typography className="!text-3xl font-bold text-primary mb-4">
+          Wellnista
+        </Typography>
+        <Typography className="!text-sm text-neutral/70">
+          Choose your action below to get start
+        </Typography>
+      </div>
+
+      {/* Main Menu Grid */}
+      <div className="mb-8">
+        <Typography className="!text-xl font-semibold text-primary mb-6 pb-3">
+          ตรวจสอบโภชนาการอาหาร
+        </Typography>
+        <div className="grid grid-cols-2 gap-4">
+          {menuItems.map((item, index) => (
+            <Link 
+              key={index} 
+              href={item.href}
+              className="block"
+            >
+              <div className="bg-white rounded-2xl p-6 h-32 flex flex-col text-primary justify-between shadow-lg hover:opacity-90 transition-all">
+                <div className="flex justify-between items-start">
+                  {item.icon}
+                </div>
+                <Typography className="!text-xl font-semibold">
+                  {item.label}
+                </Typography>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* Footer Note */}
+      <div className="text-center text-sm text-neutral/70">
+        <p>เลือกวิธีการตรวจสอบอาหารที่คุณต้องการ</p>
+        <p>เพื่อดูข้อมูลโภชนาการ</p>
       </div>
     </div>
-    );
-  }
+  );
+}

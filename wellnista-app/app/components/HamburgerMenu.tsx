@@ -2,12 +2,11 @@
 import { useState } from 'react';
 import { Menu, MenuItem, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useRouter } from 'next/navigation';
 import { supabase } from '../lib/api/supabaseClient';
+import Link from "next/link";
 
 export default function HamburgerMenu() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const router = useRouter();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -55,6 +54,11 @@ export default function HamburgerMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
+        <MenuItem onClick={handleClose}>
+          <Link href="/profile" className="w-full block">
+            โปรไฟล์
+          </Link>
+        </MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </div>

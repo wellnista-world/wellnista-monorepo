@@ -27,10 +27,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN') {
         setUser(session?.user ?? null);
-        router.push('/home');
       } else if (event === 'SIGNED_OUT') {
         setUser(null);
-        router.push('/');
       }
     });
 
@@ -43,7 +41,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => {
       subscription.unsubscribe();
     };
-  }, [router]);
+  }, []);
 
   const formatPhoneNumber = (rawPhone: string) => {
     const cleaned = rawPhone.replace(/\D/g, '');
@@ -66,8 +64,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (error) throw error;
       setUser(data.user);
       router.push('/home');
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError(String(error));
+      }
     } finally {
       setLoading(false);
     }
@@ -82,8 +84,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       sessionStorage.clear();
       setUser(null);
       router.push('/');
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError(String(error));
+      }
     } finally {
       setLoading(false);
     }
@@ -109,8 +115,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (profileError) throw profileError;
       router.push('/register');
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError(String(error));
+      }
     } finally {
       setLoading(false);
     }

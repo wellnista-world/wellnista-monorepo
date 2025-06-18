@@ -19,6 +19,7 @@ const mealNames: string[] = ['เช้า', 'กลางวัน', 'เย็
 const mealTime: string[] = ['ก่อนอาหาร', 'หลังอาหาร 2 ชม.'];
 
 interface DtxRecord {
+  id: number;
   date: string;
   dtx_value: number | null;
   meal_phase: string;
@@ -57,7 +58,7 @@ export default function InforDtx() {
 
       const { data } = await supabase
         .from('dtx_records')
-        .select('date, dtx_value, meal_phase, meal, time')
+        .select('id, date, dtx_value, meal_phase, meal, time')
         .eq('user_id', user.id)
         .order('date', { ascending: true })
         .limit(30);
@@ -123,9 +124,7 @@ export default function InforDtx() {
       .from('dtx_records')
       .update(newData)
       .eq('user_id', user.id)
-      .eq('date', oldData.date)
-      .eq('meal_phase', oldData.meal_phase);
-
+      .eq('id', oldData.id);
 
     if (error) {
       console.error('Error updating DTX:', error);

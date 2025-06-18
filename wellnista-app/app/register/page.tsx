@@ -17,7 +17,7 @@ import StdSelect from '../components/std/StdSelect';
 import theme from '..//components/theme/theme';
 import { useRouter } from 'next/navigation';
 
-interface UserData {
+export interface UserData {
   name: string;
   nickname: string;
   diseases: string[];
