@@ -20,7 +20,6 @@ const diseaseNames = ['เบาหวาน', 'ไต', 'หัวใจ', 'ค
 
 const activitiveLevelValue: number[] = [1.2, 1.375, 1.55, 1.725, 1.9];
 const activitiveLevelProtein: number[] = [1.0, 1.0, 1.2, 1.7, 2.2];
-const diseaseNamesValue: number[] = [8, 12, 12, 12, 12, 12, 12, 12];
 
 export default function ProfilePage() {
   const { user } = useAuth();
