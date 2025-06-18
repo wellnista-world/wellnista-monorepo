@@ -21,12 +21,12 @@ export interface UserData {
   name: string;
   nickname: string;
   diseases: string[];
-  madicines: string;
+  medicines: string;
   gender: string;
   age: number | null;
   weight: number | null;
   height: number | null;
-  activityLevel: string;
+  activitylevel: string;
   waist?: number | null;
 }
 
@@ -47,12 +47,12 @@ export default function Register() {
     name: '',
     nickname: '',
     diseases: [],
-    madicines: '',
+    medicines: '',
     gender: '',
     age: null,
     weight: null,
     height: null,
-    activityLevel: '',
+    activitylevel: '',
     waist: null,
   });
 
@@ -183,8 +183,8 @@ export default function Register() {
             label="ยาประจำตัว"
             fullWidth
             variant="outlined"
-            value={userData.madicines}
-            onChange={(e) => handleInputChange('madicines', e.target.value)}
+            value={userData.medicines}
+            onChange={(e) => handleInputChange('medicines', e.target.value)}
           />
      
           <StdSelect label='เพศ' names={genderName} onChangeValue={(val) => handleInputChange('gender', val)} />
@@ -220,7 +220,7 @@ export default function Register() {
             onChange={(e) => handleInputChange('waist', e.target.value === '' ? null : Number(e.target.value))}
           />
 
-          <StdSelect label='ระดับกิจกรรม' names={activitiveLevel} onChangeValue={(val) => handleInputChange('activityLevel', val)} />
+          <StdSelect label='ระดับกิจกรรม' names={activitiveLevel} onChangeValue={(val) => handleInputChange('activitylevel', val)} />
           
           <Button
             variant="contained"

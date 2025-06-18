@@ -57,10 +57,11 @@ export default function SignupPage() {
     if (insertError) {
       setError('สมัครสำเร็จ แต่เกิดข้อผิดพลาดในการบันทึกข้อมูลเพิ่มเติม');
       console.error(insertError);
-    }
+    } else {
 
     router.push('/register');
     setLoading(false);
+    }
   };
 
   return (
