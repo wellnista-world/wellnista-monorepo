@@ -6,6 +6,7 @@ import { supabase } from "../lib/api/supabaseClient";
 import { UserData } from "../lib/types/user";
 import Typography from "@mui/material/Typography";
 import { UserCircle, Activity, Scale, Ruler, Heart, Clock } from "lucide-react";
+import { Calendar } from "@/app/components/Calendar";
 
 const activitiveLevel: string[] = [
   "ไม่ออกกำลังกาย/นั่งทำงานอยู่กับที่",
@@ -98,8 +99,8 @@ export default function ProfilePage() {
     ];
 
   // value only today
-  const carbValue = totalNutrition.carbs;
-  const carbGoal = userData?.gender === "ชาย" ? teddMan * 0.2 : teddWoman * 0.2;
+  const carbValue = totalNutrition.carbs / 15;
+  const carbGoal = (userData?.gender === "ชาย" ? teddMan * 0.2 : teddWoman * 0.2) / 15;
 
   const calValue = totalNutrition.calories;
   const calGoal = userData?.gender === "ชาย" ? teddMan : teddWoman;
@@ -159,10 +160,10 @@ export default function ProfilePage() {
               size={100}
             />
             <Typography className="text-sm font-semibold text-primary mt-3">
-              {carbValue}/{carbGoal.toFixed(0)} กรัม
+              {carbValue}/{carbGoal.toFixed(0)} คาร์บ
             </Typography>
             <Typography className="text-xs text-neutral/70">
-              คาร์โบไฮเดรต
+              คาร์บ
             </Typography>
           </div>
           <div className="flex flex-col items-center bg-secondary/5 rounded-xl p-4">
@@ -192,6 +193,14 @@ export default function ProfilePage() {
             <Typography className="text-xs text-neutral/70">โปรตีน</Typography>
           </div>
         </div>
+      </div>
+
+      {/* Calendar */}
+      <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm">
+        <Typography className="text-lg font-semibold text-primary mb-6">
+          ปฏิทินการกิน
+        </Typography>
+        <Calendar />
       </div>
 
       {/* Personal Information */}
