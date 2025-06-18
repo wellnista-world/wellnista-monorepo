@@ -99,7 +99,7 @@ export default function ProfilePage() {
   const teddMan =
     (66 + 13.7 * (userData?.weight ?? 0) + 5 * (userData?.height ?? 0) - 6.8) *
     activitiveLevelValue[
-      activitiveLevel.indexOf(userData?.activityLevel ?? "")
+      activitiveLevel.indexOf(userData?.activitylevel ?? "")
     ];
 
   const teddWoman =
@@ -108,7 +108,7 @@ export default function ProfilePage() {
       1.8 * (userData?.height ?? 0) -
       4.7) *
     activitiveLevelValue[
-      activitiveLevel.indexOf(userData?.activityLevel ?? "")
+      activitiveLevel.indexOf(userData?.activitylevel ?? "")
     ];
 
   // value only today
@@ -140,7 +140,7 @@ export default function ProfilePage() {
   const proteinGoal =
     (userData?.weight ?? 0) *
     activitiveLevelProtein[
-      activitiveLevel.indexOf(userData?.activityLevel ?? "")
+      activitiveLevel.indexOf(userData?.activitylevel ?? "")
     ];
 
   const infoItems = [
@@ -280,7 +280,7 @@ export default function ProfilePage() {
             ระดับกิจกรรม
           </Typography>
           <Typography className="text-2xl font-bold text-primary">
-            {userData?.activityLevel || "-"}
+            {userData?.activitylevel || "-"}
           </Typography>
           <Typography className="text-xs text-neutral/70 mt-1">
             กิจกรรมประจำวัน

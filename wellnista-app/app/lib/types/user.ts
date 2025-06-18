@@ -7,6 +7,6 @@ export interface UserData {
   age: number | null;
   weight: number | null;
   height: number | null;
-  activityLevel: string;
+  activitylevel: string;
   waist?: number | null;
 } 
