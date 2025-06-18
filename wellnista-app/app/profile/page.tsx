@@ -16,14 +16,6 @@ const activitiveLevel: string[] = [
   "ออกกำลังกายหนักมาก 2 ครั้ง/วัน เป็นนักกีฬา",
 ];
 
-const weigtText: string[] = [
-  "น้ำหนักตัวน้อย/ผอม",
-  "น้ำหนักตัวปกติ",
-  "น้ำหนักเกิน มีภาวะเสี่ยง",
-  "อ้วนระดับ 1",
-  "อ้วนระดับ 2",
-];
-
 const diseaseNames = [
   "เบาหวาน",
   "ไต",
@@ -37,7 +29,6 @@ const diseaseNames = [
 
 const activitiveLevelValue: number[] = [1.2, 1.375, 1.55, 1.725, 1.9];
 const activitiveLevelProtein: number[] = [1.0, 1.0, 1.2, 1.7, 2.2];
-const weightNumber: number[] = [18.5, 22.9, 24.9, 29.9, 30];
 
 export default function ProfilePage() {
   const { user } = useAuth();
