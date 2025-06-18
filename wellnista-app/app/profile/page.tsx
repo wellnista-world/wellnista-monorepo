@@ -6,7 +6,7 @@ import { supabase } from "../lib/api/supabaseClient";
 import { UserData } from "../lib/types/user";
 import Typography from "@mui/material/Typography";
 import { UserCircle, Activity, Scale, Ruler, Heart, Clock } from "lucide-react";
-import { Calendar } from "@/app/components/Calendar";
+import { Calendar } from "../components/Calendar";
 
 const activitiveLevel: string[] = [
   "ไม่ออกกำลังกาย/นั่งทำงานอยู่กับที่",
@@ -24,8 +24,8 @@ export default function ProfilePage() {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [totalNutrition, setTotalNutrition] = useState({
     calories: 0,
-    protein: 0,
     carbs: 0,
+    protein: 0,
   });
 
   useEffect(() => {
@@ -160,7 +160,7 @@ export default function ProfilePage() {
               size={100}
             />
             <Typography className="text-sm font-semibold text-primary mt-3">
-              {carbValue}/{carbGoal.toFixed(0)} คาร์บ
+              {carbValue.toFixed(0)}/{carbGoal.toFixed(0)} คาร์บ
             </Typography>
             <Typography className="text-xs text-neutral/70">
               คาร์บ
@@ -200,7 +200,16 @@ export default function ProfilePage() {
         <Typography className="text-lg font-semibold text-primary mb-6">
           ปฏิทินการกิน
         </Typography>
-        <Calendar />
+        <Calendar 
+          calGoal={calGoal}
+          carbGoal={carbGoal}
+          proteinGoal={proteinGoal}
+          todayNutrition={{
+            calories: totalNutrition.calories,
+            carbs: totalNutrition.carbs,
+            protein: totalNutrition.protein
+          }}
+        />
       </div>
 
       {/* Personal Information */}
