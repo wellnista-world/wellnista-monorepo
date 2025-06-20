@@ -365,7 +365,7 @@ export default function ScanImagePage() {
                 </svg>
               </div>
               <p className="text-sm text-neutral">
-                {analysisResult.nutriments.carbohydrates ?? 0} คาร์บ ({Math.min(((analysisResult.nutriments.carbohydrates ?? 0) / 15) / maxCarbs * 100, 100).toFixed(0)}% ของ {maxCarbs} คาร์บสูงสุด)
+                {analysisResult.nutriments.carbohydrates || 0} คาร์บ ({Math.min(((analysisResult.nutriments.carbohydrates ?? 0) / 15) / maxCarbs * 100, 100).toFixed(0)}% ของ {maxCarbs} คาร์บสูงสุด)
               </p>
             </div>
           </div>
