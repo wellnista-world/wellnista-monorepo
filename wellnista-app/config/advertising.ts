@@ -19,28 +19,28 @@ export const advertisingItems = [
     link: "/settings",
     translations: {
       th: {
-        title: "ขอโปรโมชั่น",
-        description: "ติดต่อเราเพื่อขอโปรโมชั่นพิเศษ"
+        title: "ขอลงโฆษณา",
+        description: "ติดต่อเราเพื่อขอลงโฆษณา"
       },
       en: {
-        title: "Request Promotion",
-        description: "Contact us to request special promotions"
+        title: "Request Advertising",
+        description: "Contact us to request advertising"
       },
       zh: {
-        title: "申请促销",
-        description: "联系我们申请特别促销活动"
+        title: "申请广告",
+        description: "联系我们申请广告投放"
       },
       ja: {
-        title: "プロモーション申請",
-        description: "特別なプロモーションについてお問い合わせください"
+        title: "広告掲載申請",
+        description: "広告掲載についてお問い合わせください"
       },
       ko: {
-        title: "프로모션 요청",
-        description: "특별한 프로모션을 요청하려면 문의하세요"
+        title: "광고 신청",
+        description: "광고를 원하시면 문의하세요"
       },
       id: {
-        title: "Minta Promosi",
-        description: "Hubungi kami untuk meminta promosi khusus"
+        title: "Minta Iklan",
+        description: "Hubungi kami untuk meminta iklan"
       }
     }
   },
@@ -50,28 +50,28 @@ export const advertisingItems = [
     link: "/settings",
     translations: {
       th: {
-        title: "ขอโปรโมชั่น",
-        description: "ติดต่อเราเพื่อขอโปรโมชั่นพิเศษ"
+        title: "ขอลงโฆษณา",
+        description: "ติดต่อเราเพื่อขอลงโฆษณา"
       },
       en: {
-        title: "Request Promotion",
-        description: "Contact us to request special promotions"
+        title: "Request Advertising",
+        description: "Contact us to request advertising"
       },
       zh: {
-        title: "申请促销",
-        description: "联系我们申请特别促销活动"
+        title: "申请广告",
+        description: "联系我们申请广告投放"
       },
       ja: {
-        title: "プロモーション申請",
-        description: "特別なプロモーションについてお問い合わせください"
+        title: "広告掲載申請",
+        description: "広告掲載についてお問い合わせください"
       },
       ko: {
-        title: "프로모션 요청",
-        description: "특별한 프로모션을 요청하려면 문의하세요"
+        title: "광고 신청",
+        description: "광고를 원하시면 문의하세요"
       },
       id: {
-        title: "Minta Promosi",
-        description: "Hubungi kami untuk meminta promosi khusus"
+        title: "Minta Iklan",
+        description: "Hubungi kami untuk meminta iklan"
       }
     }
   },
@@ -81,28 +81,28 @@ export const advertisingItems = [
     link: "https://line.me/ti/p/v4PViJexdz",
     translations: {
       th: {
-        title: "ขอโปรโมชั่น",
-        description: "ติดต่อเราเพื่อขอโปรโมชั่นพิเศษ"
+        title: "ขอลงโฆษณา",
+        description: "ติดต่อเราเพื่อขอลงโฆษณา"
       },
       en: {
-        title: "Request Promotion",
-        description: "Contact us to request special promotions"
+        title: "Request Advertising",
+        description: "Contact us to request advertising"
       },
       zh: {
-        title: "申请促销",
-        description: "联系我们申请特别促销活动"
+        title: "申请广告",
+        description: "联系我们申请广告投放"
       },
       ja: {
-        title: "プロモーション申請",
-        description: "特別なプロモーションについてお問い合わせください"
+        title: "広告掲載申請",
+        description: "広告掲載についてお問い合わせください"
       },
       ko: {
-        title: "프로모션 요청",
-        description: "특별한 프로모션을 요청하려면 문의하세요"
+        title: "광고 신청",
+        description: "광고를 원하시면 문의하세요"
       },
       id: {
-        title: "Minta Promosi",
-        description: "Hubungi kami untuk meminta promosi khusus"
+        title: "Minta Iklan",
+        description: "Hubungi kami untuk meminta iklan"
       }
     }
   },
@@ -112,28 +112,28 @@ export const advertisingItems = [
     link: "/settings",
     translations: {
       th: {
-        title: "ขอโปรโมชั่น",
-        description: "ติดต่อเราเพื่อขอโปรโมชั่นพิเศษ"
+        title: "ขอลงโฆษณา",
+        description: "ติดต่อเราเพื่อขอลงโฆษณา"
       },
       en: {
-        title: "Request Promotion",
-        description: "Contact us to request special promotions"
+        title: "Request Advertising",
+        description: "Contact us to request advertising"
       },
       zh: {
-        title: "申请促销",
-        description: "联系我们申请特别促销活动"
+        title: "申请广告",
+        description: "联系我们申请广告投放"
       },
       ja: {
-        title: "プロモーション申請",
-        description: "特別なプロモーションについてお問い合わせください"
+        title: "広告掲載申請",
+        description: "広告掲載についてお問い合わせください"
       },
       ko: {
-        title: "프로모션 요청",
-        description: "특별한 프로모션을 요청하려면 문의하세요"
+        title: "광고 신청",
+        description: "광고를 원하시면 문의하세요"
       },
       id: {
-        title: "Minta Promosi",
-        description: "Hubungi kami untuk meminta promosi khusus"
+        title: "Minta Iklan",
+        description: "Hubungi kami untuk meminta iklan"
       }
     }
   },
@@ -143,28 +143,28 @@ export const advertisingItems = [
     link: "/settings",
     translations: {
       th: {
-        title: "ขอโปรโมชั่น",
-        description: "ติดต่อเราเพื่อขอโปรโมชั่นพิเศษ"
+        title: "ขอลงโฆษณา",
+        description: "ติดต่อเราเพื่อขอลงโฆษณา"
       },
       en: {
-        title: "Request Promotion",
-        description: "Contact us to request special promotions"
+        title: "Request Advertising",
+        description: "Contact us to request advertising"
       },
       zh: {
-        title: "申请促销",
-        description: "联系我们申请特别促销活动"
+        title: "申请广告",
+        description: "联系我们申请广告投放"
       },
       ja: {
-        title: "プロモーション申請",
-        description: "特別なプロモーションについてお問い合わせください"
+        title: "広告掲載申請",
+        description: "広告掲載についてお問い合わせください"
       },
       ko: {
-        title: "프로모션 요청",
-        description: "특별한 프로모션을 요청하려면 문의하세요"
+        title: "광고 신청",
+        description: "광고를 원하시면 문의하세요"
       },
       id: {
-        title: "Minta Promosi",
-        description: "Hubungi kami untuk meminta promosi khusus"
+        title: "Minta Iklan",
+        description: "Hubungi kami untuk meminta iklan"
       }
     }
   }
