@@ -6,6 +6,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import Link from 'next/link';
 import Typography from '@mui/material/Typography';
 import { TextField, Button, Paper, Divider } from '@mui/material';
+import { useI18n } from '../../i18n';
 
 const stripePromise = (() => {
   const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
@@ -28,6 +29,7 @@ interface AddressForm {
 
 export default function CheckoutPage() {
   const { cart } = useCart();
+  const { t } = useI18n();
   const [isLoading, setIsLoading] = useState(false);
   const [addressForm, setAddressForm] = useState<AddressForm>({
     firstName: '',
@@ -52,7 +54,7 @@ export default function CheckoutPage() {
 
   const handleCheckout = async () => {
     if (cart.length === 0) {
-      alert('Your cart is empty');
+      alert(t('common.yourCartIsEmpty'));
       return;
     }
 
@@ -61,7 +63,7 @@ export default function CheckoutPage() {
     const missingFields = requiredFields.filter(field => !addressForm[field]);
     
     if (missingFields.length > 0) {
-      alert(`Please fill in all required fields: ${missingFields.join(', ')}`);
+      alert(t('common.pleaseFillAllFields'));
       return;
     }
 
@@ -88,12 +90,12 @@ export default function CheckoutPage() {
       }
 
       if (!stripePromise) {
-        throw new Error('Stripe is not configured. Please add NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY to your .env.local file');
+        throw new Error(t('common.stripeNotConfigured'));
       }
 
       const stripe = await stripePromise;
       if (!stripe) {
-        throw new Error('Stripe failed to load');
+        throw new Error(t('common.stripeFailedToLoad'));
       }
 
       console.log(stripe);
@@ -104,13 +106,12 @@ export default function CheckoutPage() {
 
       console.log(stripeError);
 
-
       if (stripeError) {
         throw new Error(stripeError.message);
       }
     } catch (error) {
       console.error('Checkout error:', error);
-      alert('Failed to proceed to checkout. Please try again.');
+      alert(t('common.failedToCheckout'));
     } finally {
       setIsLoading(false);
     }
@@ -127,12 +128,12 @@ export default function CheckoutPage() {
               </svg>
             </div>
           </Link>
-          <Typography variant="h5" component="h1" className="font-bold text-primary">Checkout</Typography>
+          <Typography variant="h5" component="h1" className="font-bold text-primary">{t('common.checkout')}</Typography>
           <div className="w-6"></div>
         </div>
         <div className="text-center text-gray-500 mt-20">
-          <Typography variant="h6">Your cart is empty.</Typography>
-          <Link href="/product" className="text-primary underline mt-4 inline-block">Continue Shopping</Link>
+          <Typography variant="h6">{t('common.cartEmpty')}</Typography>
+          <Link href="/product" className="text-primary underline mt-4 inline-block">{t('common.continueShopping')}</Link>
         </div>
       </div>
     );
@@ -148,20 +149,20 @@ export default function CheckoutPage() {
             </svg>
           </div>
         </Link>
-        <Typography variant="h5" component="h1" className="font-bold text-primary">Checkout</Typography>
+        <Typography variant="h5" component="h1" className="font-bold text-primary">{t('common.checkout')}</Typography>
         <div className="w-6"></div>
       </div>
 
       <div className="max-w-2xl mx-auto space-y-6">
         {/* Order Summary */}
         <Paper className="p-6">
-          <Typography variant="h6" className="font-bold mb-4">Order Summary</Typography>
+          <Typography variant="h6" className="font-bold mb-4">{t('common.orderSummary')}</Typography>
           <div className="space-y-3">
             {cart.map(item => (
               <div key={item.product.id} className="flex justify-between items-center">
                 <div>
                   <Typography className="font-medium">{item.product.name}</Typography>
-                  <Typography className="text-sm text-gray-600">Qty: {item.quantity}</Typography>
+                  <Typography className="text-sm text-gray-600">{t('common.qty')}: {item.quantity}</Typography>
                 </div>
                 <Typography className="font-medium">
                   {item.product.currency}{(item.product.price * item.quantity).toFixed(2)}
@@ -171,7 +172,7 @@ export default function CheckoutPage() {
           </div>
           <Divider className="my-4" />
           <div className="flex justify-between items-center">
-            <Typography variant="h6" className="font-bold">Total:</Typography>
+            <Typography variant="h6" className="font-bold">{t('common.total')}</Typography>
             <Typography variant="h6" className="font-bold text-primary">
               {cart[0]?.product.currency || ''}{total.toFixed(2)}
             </Typography>
@@ -180,24 +181,24 @@ export default function CheckoutPage() {
 
         {/* Shipping Address Form */}
         <Paper className="p-6">
-          <Typography variant="h6" className="font-bold mb-4">Shipping Address</Typography>
+          <Typography variant="h6" className="font-bold mb-4">{t('common.shippingAddress')}</Typography>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <TextField
-              label="First Name"
+              label={t('common.firstName')}
               value={addressForm.firstName}
               onChange={handleInputChange('firstName')}
               required
               fullWidth
             />
             <TextField
-              label="Last Name"
+              label={t('common.lastName')}
               value={addressForm.lastName}
               onChange={handleInputChange('lastName')}
               required
               fullWidth
             />
             <TextField
-              label="Email"
+              label={t('common.email')}
               type="email"
               value={addressForm.email}
               onChange={handleInputChange('email')}
@@ -205,14 +206,14 @@ export default function CheckoutPage() {
               fullWidth
             />
             <TextField
-              label="Phone"
+              label={t('common.phone')}
               value={addressForm.phone}
               onChange={handleInputChange('phone')}
               required
               fullWidth
             />
             <TextField
-              label="Address"
+              label={t('common.address')}
               value={addressForm.address}
               onChange={handleInputChange('address')}
               required
@@ -222,14 +223,14 @@ export default function CheckoutPage() {
               className="md:col-span-2"
             />
             <TextField
-              label="City"
+              label={t('common.city')}
               value={addressForm.city}
               onChange={handleInputChange('city')}
               required
               fullWidth
             />
             <TextField
-              label="Postal Code"
+              label={t('common.postalCode')}
               value={addressForm.postalCode}
               onChange={handleInputChange('postalCode')}
               required
@@ -240,7 +241,7 @@ export default function CheckoutPage() {
 
         {/* Payment Method */}
         <Paper className="p-6">
-          <Typography variant="h6" className="font-bold mb-4">Payment Method</Typography>
+          <Typography variant="h6" className="font-bold mb-4">{t('common.paymentMethod')}</Typography>
           <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg">
             <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
               <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -248,8 +249,8 @@ export default function CheckoutPage() {
               </svg>
             </div>
             <div>
-              <Typography className="font-medium">PromptPay</Typography>
-              <Typography className="text-sm text-gray-600">Secure payment via PromptPay</Typography>
+              <Typography className="font-medium">{t('common.promptpay')}</Typography>
+              <Typography className="text-sm text-gray-600">{t('common.securePaymentViaPromptPay')}</Typography>
             </div>
           </div>
         </Paper>
@@ -257,14 +258,13 @@ export default function CheckoutPage() {
         {/* Checkout Button */}
         <Button
           variant="contained"
+          color="primary"
           fullWidth
-          size="large"
           onClick={handleCheckout}
           disabled={isLoading}
-          className="bg-primary hover:bg-accent"
-          sx={{ py: 2, fontSize: '1.1rem' }}
+          className="mt-6"
         >
-          {isLoading ? 'Processing...' : `Pay ${cart[0]?.product.currency || ''}${total.toFixed(2)}`}
+          {isLoading ? t('common.processingYourOrder') : t('common.promptpay')}
         </Button>
       </div>
     </div>

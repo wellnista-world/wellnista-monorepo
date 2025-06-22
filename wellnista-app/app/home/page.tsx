@@ -123,7 +123,7 @@ export default function HomeScreen() {
         </Typography>
         {recommendedProduct && (
           <div 
-            onClick={() => window.open(recommendedProduct.link, "_blank")}
+            onClick={() => router.push(`/product/${recommendedProduct.id}`)}
             className="bg-white rounded-2xl p-4 shadow-lg hover:opacity-90 transition-all cursor-pointer"
           >
             <div className="flex items-center gap-4">

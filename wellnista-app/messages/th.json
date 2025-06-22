@@ -23,7 +23,57 @@
     "ok": "ตกลง",
     "success": "สำเร็จ",
     "warning": "คำเตือน",
-    "info": "ข้อมูล"
+    "info": "ข้อมูล",
+    "addToHomeScreen": {
+      "title": "ติดตั้ง Wellnista",
+      "description": "เพิ่ม Wellnista ลงในหน้าจอหลักเพื่อการเข้าถึงที่เร็วขึ้นและใช้งานง่ายขึ้น",
+      "install": "ติดตั้ง",
+      "notNow": "ไม่ใช่ตอนนี้"
+    },
+    "chat": "แชท",
+    "addToCart": "เพิ่มลงตะกร้า",
+    "buyNow": "ซื้อเลย",
+    "viewDetails": "ดูรายละเอียด",
+    "quantity": "จำนวน",
+    "stock": "สินค้าคงเหลือ",
+    "available": "มีสินค้า",
+    "unavailable": "ไม่มีสินค้า",
+    "total": "รวม:",
+    "price": "ราคา",
+    "currency": "฿",
+    "proceedToCheckout": "ดำเนินการสั่งซื้อ",
+    "continueShopping": "ช้อปปิ้งต่อ",
+    "backToHome": "กลับหน้าหลัก",
+    "orderSummary": "สรุปคำสั่งซื้อ",
+    "shippingAddress": "ที่อยู่จัดส่ง",
+    "paymentMethod": "วิธีการชำระเงิน",
+    "firstName": "ชื่อ",
+    "lastName": "นามสกุล",
+    "email": "อีเมล",
+    "phone": "เบอร์โทรศัพท์",
+    "address": "ที่อยู่",
+    "city": "เมือง",
+    "postalCode": "รหัสไปรษณีย์",
+    "required": "จำเป็น",
+    "processing": "กำลังประมวลผล...",
+    "pay": "ชำระเงิน",
+    "paymentSuccessful": "ชำระเงินสำเร็จ!",
+    "thankYouForOrder": "ขอบคุณสำหรับการสั่งซื้อ การชำระเงินของคุณได้รับการประมวลผลสำเร็จผ่าน PromptPay",
+    "orderReference": "อ้างอิงคำสั่งซื้อ",
+    "emailConfirmation": "คุณจะได้รับอีเมลยืนยันในไม่ช้า ทีมงานของเราจะประมวลผลคำสั่งซื้อและจัดส่งไปยังที่อยู่ของคุณ",
+    "myCart": "ตะกร้าของฉัน",
+    "cartEmpty": "ตะกร้าของคุณว่างเปล่า",
+    "securePayment": "การชำระเงินที่ปลอดภัยผ่าน PromptPay",
+    "promptpay": "PromptPay",
+    "checkout": "ชำระเงิน",
+    "processingYourOrder": "กำลังประมวลผลคำสั่งซื้อของคุณ...",
+    "pleaseFillAllFields": "กรุณากรอกข้อมูลที่จำเป็นให้ครบถ้วน",
+    "failedToCheckout": "ไม่สามารถดำเนินการสั่งซื้อได้ กรุณาลองใหม่อีกครั้ง",
+    "stripeNotConfigured": "Stripe ยังไม่ได้ตั้งค่า กรุณาเพิ่ม NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ในไฟล์ .env.local ของคุณ",
+    "stripeFailedToLoad": "ไม่สามารถโหลด Stripe ได้",
+    "yourCartIsEmpty": "ตะกร้าของคุณว่างเปล่า",
+    "qty": "จำนวน",
+    "securePaymentViaPromptPay": "การชำระเงินที่ปลอดภัยผ่าน PromptPay"
   },
   "auth": {
     "welcome": "ยินดีต้อนรับสู่ wellnista",
@@ -325,10 +375,5 @@
       "sat": "ส"
     }
   },
-  "addToHomeScreen": {
-    "title": "ติดตั้ง Wellnista",
-    "description": "เพิ่ม Wellnista ลงในหน้าจอหลักของคุณเพื่อใช้งานได้เร็วขึ้นและเข้าถึงได้ง่ายขึ้น",
-    "install": "ติดตั้ง",
-    "notNow": "ไม่ใช่ตอนนี้"
-  }
+  "securePaymentViaPromptPay": "การชำระเงินที่ปลอดภัยผ่าน PromptPay"
 } 

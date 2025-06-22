@@ -12,6 +12,7 @@ import { BuySheet } from '../../components/BuySheet';
 const ProductView = ({ product, locale, onBuyClick }: { product: Product, locale: string, onBuyClick: () => void }) => {
   const localized = getProductForLocale(product, locale);
   const { cart } = useCart();
+  const { t } = useI18n();
   const cartItemCount = cart.reduce((acc: number, item: CartItem) => acc + item.quantity, 0);
 
   return (
@@ -72,7 +73,7 @@ const ProductView = ({ product, locale, onBuyClick }: { product: Product, locale
           <div className="flex justify-between items-center mt-4">
             <div className="text-3xl text-primary">{localized.currency}{localized.price}</div>
             <button onClick={onBuyClick} className="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-accent transition text-sm">
-              Buy Product
+              {t('common.buyNow')}
             </button>
           </div>
         </div>

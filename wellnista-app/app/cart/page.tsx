@@ -1,11 +1,13 @@
 "use client";
 import { useCart } from '../lib/context/CartContext';
+import { useI18n } from '../../i18n';
 import Image from 'next/image';
 import Link from 'next/link';
 import Typography from '@mui/material/Typography';
 
 export default function CartPage() {
   const { cart, removeFromCart, incrementQuantity, decrementQuantity } = useCart();
+  const { t } = useI18n();
   const total = cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
 
   return (
@@ -18,14 +20,14 @@ export default function CartPage() {
             </svg>
           </div>
         </Link>
-        <Typography variant="h5" component="h1" className="font-bold text-primary">My Cart</Typography>
+        <Typography variant="h5" component="h1" className="font-bold text-primary">{t('common.myCart')}</Typography>
         <div className="w-6"></div>
       </div>
 
       {cart.length === 0 ? (
         <div className="text-center text-gray-500 mt-20">
-          <Typography variant="h6">Your cart is empty.</Typography>
-          <Link href="/product" className="text-primary underline mt-4 inline-block">Continue Shopping</Link>
+          <Typography variant="h6">{t('common.cartEmpty')}</Typography>
+          <Link href="/product" className="text-primary underline mt-4 inline-block">{t('common.continueShopping')}</Link>
         </div>
       ) : (
         <>
@@ -53,12 +55,12 @@ export default function CartPage() {
 
           <div className="mt-8 bg-white p-4 rounded-lg shadow-md">
             <div className="flex justify-between items-center">
-              <Typography className="text-lg font-semibold">Total:</Typography>
+              <Typography className="text-lg font-semibold">{t('common.total')}:</Typography>
               <Typography className="text-xl font-bold">{cart[0]?.product.currency || ''}{total.toFixed(2)}</Typography>
             </div>
             <Link href="/checkout" className="block">
               <button className="w-full mt-4 bg-primary text-white py-3 rounded-lg font-semibold hover:bg-accent transition">
-                Proceed to Checkout
+                {t('common.proceedToCheckout')}
               </button>
             </Link>
           </div>

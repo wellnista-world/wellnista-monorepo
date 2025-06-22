@@ -6,11 +6,13 @@ import Link from 'next/link';
 import Typography from '@mui/material/Typography';
 import { Paper, Button } from '@mui/material';
 import { useCart } from '../../lib/context/CartContext';
+import { useI18n } from '../../../i18n';
 
 export default function CheckoutSuccessPage() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
   const { clearCart } = useCart();
+  const { t } = useI18n();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -26,7 +28,7 @@ export default function CheckoutSuccessPage() {
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-          <Typography className="mt-4">Processing your order...</Typography>
+          <Typography className="mt-4">{t('common.processing')}</Typography>
         </div>
       </div>
     );
@@ -43,22 +45,22 @@ export default function CheckoutSuccessPage() {
           </div>
           
           <Typography variant="h4" className="font-bold text-green-600 mb-2">
-            Payment Successful!
+            {t('common.paymentSuccessful')}
           </Typography>
           
           <Typography className="text-gray-600 mb-6">
-            Thank you for your order. Your payment has been processed successfully via PromptPay.
+            {t('common.thankYouForOrder')}
           </Typography>
 
           {sessionId && (
             <div className="bg-gray-50 p-4 rounded-lg mb-6">
-              <Typography className="text-sm text-gray-600 mb-1">Order Reference:</Typography>
+              <Typography className="text-sm text-gray-600 mb-1">{t('common.orderReference')}:</Typography>
               <Typography className="font-mono text-sm">{sessionId}</Typography>
             </div>
           )}
 
           <Typography className="text-gray-600 mb-6">
-            You will receive an email confirmation shortly. Our team will process your order and ship it to your address.
+            {t('common.emailConfirmation')}
           </Typography>
 
           <div className="space-y-3">
@@ -68,7 +70,7 @@ export default function CheckoutSuccessPage() {
                 fullWidth
                 className="bg-primary hover:bg-accent"
               >
-                Continue Shopping
+                {t('common.continueShopping')}
               </Button>
             </Link>
             
@@ -78,7 +80,7 @@ export default function CheckoutSuccessPage() {
                 fullWidth
                 className="border-primary text-primary hover:bg-primary hover:text-white"
               >
-                Back to Home
+                {t('common.backToHome')}
               </Button>
             </Link>
           </div>

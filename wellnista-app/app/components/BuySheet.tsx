@@ -3,9 +3,10 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Drawer, Box, Typography, Button, IconButton } from '@mui/material';
 import Image from 'next/image';
-import { Product } from '../../config/products';
+import { Product, getProductForLocale } from '../../config/products';
 import CloseIcon from '@mui/icons-material/Close';
 import { useCart } from '../lib/context/CartContext';
+import { useI18n } from '../../i18n';
 
 interface BuySheetProps {
   product: Product | null;
@@ -15,6 +16,7 @@ interface BuySheetProps {
 
 export const BuySheet = ({ product, open, onClose }: BuySheetProps) => {
   const { addToCart } = useCart();
+  const { t, locale } = useI18n();
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
@@ -26,13 +28,16 @@ export const BuySheet = ({ product, open, onClose }: BuySheetProps) => {
   const displayProduct = useMemo(() => {
     if (!product) return null;
 
+    // Get localized product data
+    const localizedProduct = getProductForLocale(product, locale);
+
     return {
-      ...product,
-      name: product.name,
-      price: product.price,
-      image: product.image
+      ...localizedProduct,
+      name: localizedProduct.name,
+      price: localizedProduct.price,
+      image: localizedProduct.image
     };
-  }, [product]);
+  }, [product, locale]);
 
   if (!displayProduct || !product) return null;
 
@@ -58,6 +63,7 @@ export const BuySheet = ({ product, open, onClose }: BuySheetProps) => {
           <Image src={displayProduct.image} alt={displayProduct.name} width={100} height={100} style={{ objectFit: 'cover', borderRadius: '8px' }}/>
           <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'flex-end'}}>
             <Typography sx={{ color: 'error.main', fontWeight: 'bold', fontSize: '1.2rem' }}>{product.currency}{displayProduct.price}</Typography>
+            <Typography variant="body2" color="text.secondary">{t('common.stock')}: {t('common.available')}</Typography>
           </Box>
         </Box>
 
@@ -71,7 +77,7 @@ export const BuySheet = ({ product, open, onClose }: BuySheetProps) => {
         </Box>
 
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 3, borderTop: '1px solid #eee', pt: 2 }}>
-          <Typography variant="subtitle1" fontWeight="bold">Quantity</Typography>
+          <Typography variant="subtitle1" fontWeight="bold">{t('common.quantity')}</Typography>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: '4px', border: '1px solid #ccc', borderRadius: '4px' }}>
             <Button onClick={() => setQuantity(q => Math.max(1, q - 1))} sx={{minWidth: '30px'}} size="small">-</Button>
             <Typography sx={{minWidth: '20px', textAlign: 'center'}}>{quantity}</Typography>
@@ -80,7 +86,7 @@ export const BuySheet = ({ product, open, onClose }: BuySheetProps) => {
         </Box>
       </Box>
       <Button variant="contained" fullWidth sx={{ borderRadius: 0, height: '56px', fontSize: '1rem' }} onClick={handleAddToCart}>
-        Add to Cart
+        {t('common.addToCart')}
       </Button>
     </Drawer>
   );
