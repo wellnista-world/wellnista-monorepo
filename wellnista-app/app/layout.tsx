@@ -9,6 +9,8 @@ import theme from './theme';
 import HamburgerMenu from './components/HamburgerMenu';
 import { AuthProvider } from './lib/context/AuthContext';
 import AddToHomeScreen from './components/AddToHomeScreen';
+import { I18nProvider } from '../i18n';
+import LanguageSwitcher from './components/LanguageSwitcher';
 
 //import { Kanit } from "next/font/google";
 //import { Leckerli_One } from "next/font/google";
@@ -138,35 +140,40 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-secondary text-neutral">
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <AuthProvider>
-            <header className="p-4 bg-accent text-secondary relative">
-              {showBackButton && (
-                <button
-                  onClick={() => window.history.back()}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 hover:bg-primary/80 text-accent hover:text-white shadow z-10"
-                  aria-label="Back"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-              )}
-              <div className="flex items-center justify-center">
-                <h1 className="text-2xl font-leckerli text-center flex-1">Wellnista</h1>
-                <div className="ml-auto w-8">
-                  <HamburgerMenu />
+        <I18nProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <AuthProvider>
+              <header className="p-4 bg-accent text-secondary relative">
+                {showBackButton && (
+                  <button
+                    onClick={() => window.history.back()}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 hover:bg-primary/80 text-accent hover:text-white shadow z-10"
+                    aria-label="Back"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                )}
+                <div className="flex items-center justify-center">
+                  <h1 className="text-2xl font-leckerli text-center flex-1">Wellnista</h1>
+                  <div className="flex items-center gap-2">
+                    <LanguageSwitcher />
+                    <div className="w-8">
+                      <HamburgerMenu />
+                    </div>
+                  </div>
                 </div>
-              </div>
-              {isInLineApp && (
-                <p className="text-sm text-accent text-center">Running inside LINE</p>
-              )}
-            </header>
-            <main className="p-4">{children}</main>
-            <AddToHomeScreen />
-          </AuthProvider>
-        </ThemeProvider>
+                {isInLineApp && (
+                  <p className="text-sm text-accent text-center">Running inside LINE</p>
+                )}
+              </header>
+              <main className="p-4">{children}</main>
+              <AddToHomeScreen />
+            </AuthProvider>
+          </ThemeProvider>
+        </I18nProvider>
       </body>
     </html>
   );

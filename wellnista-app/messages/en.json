@@ -1,0 +1,99 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "close": "Close",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "auth": {
+    "welcome": "Welcome to",
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
+    "forgotPassword": "Forgot Password?",
+    "phoneNumber": "Phone Number (e.g., 0812345678)",
+    "password": "Password",
+    "welcomeUser": "Welcome, {phone}",
+    "tagline": "Making good health easy for everyone"
+  },
+  "navigation": {
+    "home": "Home",
+    "menu": "Menu",
+    "profile": "Profile",
+    "scan": "Scan",
+    "library": "Library",
+    "book": "Book"
+  },
+  "scan": {
+    "title": "Scan Barcode",
+    "loadingLiff": "Loading LIFF...",
+    "runningInLine": "Running in LINE App",
+    "requestCameraPermission": "Request Camera Permission",
+    "cameraError": "Unable to access camera. Please check settings.",
+    "failedToAccessCamera": "Failed to access the camera.",
+    "failedToStartScanning": "Failed to start scanning.",
+    "barcodeScanningError": "Barcode scanning error"
+  },
+  "profile": {
+    "title": "Profile",
+    "todayProgress": "Today's Progress",
+    "carb": "Carbs",
+    "calories": "Calories",
+    "protein": "Protein",
+    "personalInfo": "Personal Information",
+    "name": "Full Name",
+    "diseases": "Medical Conditions",
+    "gender": "Gender",
+    "age": "Age",
+    "weight": "Weight",
+    "height": "Height",
+    "activityLevel": "Activity Level",
+    "years": "years",
+    "kg": "kg",
+    "cm": "cm",
+    "bmi": "BMI",
+    "bmiCategories": {
+      "obese2": "Obese Class II",
+      "obese1": "Obese Class I",
+      "overweight": "Overweight",
+      "normal": "Normal Weight",
+      "underweight": "Underweight"
+    }
+  },
+  "activityLevels": {
+    "sedentary": "Sedentary (little or no exercise)",
+    "lightlyActive": "Lightly active (light exercise 1-3 days/week)",
+    "moderatelyActive": "Moderately active (moderate exercise 4-5 days/week)",
+    "veryActive": "Very active (hard exercise 6-7 days/week)",
+    "extremelyActive": "Extremely active (very hard exercise, physical job, or training twice a day)"
+  },
+  "diseases": {
+    "diabetes": "Diabetes",
+    "kidney": "Kidney Disease",
+    "heart": "Heart Disease",
+    "hypertension": "Hypertension",
+    "gout": "Gout",
+    "cholesterol": "High Cholesterol",
+    "other": "Other",
+    "none": "None"
+  },
+  "menu": {
+    "title": "Wellnista",
+    "underDevelopment": "This feature is under development"
+  },
+  "errors": {
+    "general": "An error occurred. Please try again.",
+    "network": "Network error. Please check your connection.",
+    "auth": "Authentication error",
+    "camera": "Unable to access camera"
+  }
+} 

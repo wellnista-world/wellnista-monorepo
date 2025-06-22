@@ -1,0 +1,99 @@
+{
+  "common": {
+    "loading": "กำลังโหลด...",
+    "error": "เกิดข้อผิดพลาด",
+    "save": "บันทึก",
+    "cancel": "ยกเลิก",
+    "back": "กลับ",
+    "next": "ถัดไป",
+    "submit": "ส่ง",
+    "close": "ปิด",
+    "edit": "แก้ไข",
+    "delete": "ลบ",
+    "confirm": "ยืนยัน",
+    "yes": "ใช่",
+    "no": "ไม่"
+  },
+  "auth": {
+    "welcome": "ยินดีต้อนรับเข้าสู่",
+    "login": "เข้าสู่ระบบ",
+    "logout": "ออกจากระบบ",
+    "register": "ลงทะเบียน",
+    "forgotPassword": "ลืมรหัสผ่าน?",
+    "phoneNumber": "เบอร์โทร (เช่น 0812345678)",
+    "password": "รหัสผ่าน",
+    "welcomeUser": "ยินดีต้อนรับ, {phone}",
+    "tagline": "ทำให้สุขภาพดี กลายเป็นเรื่องง่ายของทุกคน"
+  },
+  "navigation": {
+    "home": "หน้าแรก",
+    "menu": "เมนู",
+    "profile": "โปรไฟล์",
+    "scan": "สแกน",
+    "library": "ไลบรารี",
+    "book": "หนังสือ"
+  },
+  "scan": {
+    "title": "สแกน บาร์โค๊ด",
+    "loadingLiff": "Loading LIFF...",
+    "runningInLine": "Running in LINE App",
+    "requestCameraPermission": "ขออนุญาติเข้าถึงกล้อง",
+    "cameraError": "ไม่สามารถเข้าถึงกล้องได้ กรุณาตรวจสอบการตั้งค่า",
+    "failedToAccessCamera": "ไม่สามารถเข้าถึงกล้องได้",
+    "failedToStartScanning": "ไม่สามารถเริ่มการสแกนได้",
+    "barcodeScanningError": "ข้อผิดพลาดในการสแกนบาร์โค้ด"
+  },
+  "profile": {
+    "title": "โปรไฟล์",
+    "todayProgress": "ความคืบหน้าวันนี้",
+    "carb": "คาร์บ",
+    "calories": "แคลอรี่",
+    "protein": "โปรตีน",
+    "personalInfo": "ข้อมูลส่วนตัว",
+    "name": "ชื่อ - นามสกุล",
+    "diseases": "โรคประจำตัว",
+    "gender": "เพศ",
+    "age": "อายุ",
+    "weight": "น้ำหนัก",
+    "height": "ส่วนสูง",
+    "activityLevel": "ระดับกิจกรรม",
+    "years": "ปี",
+    "kg": "กิโลกรัม",
+    "cm": "เซนติเมตร",
+    "bmi": "ดัชนีมวลกาย",
+    "bmiCategories": {
+      "obese2": "อ้วนระดับ 2",
+      "obese1": "อ้วนระดับ 1",
+      "overweight": "น้ำหนักเกิน มีภาวะเสี่ยง",
+      "normal": "น้ำหนักตัวปกติ",
+      "underweight": "น้ำหนักตัวน้อย/ผอม"
+    }
+  },
+  "activityLevels": {
+    "sedentary": "ไม่ออกกำลังกาย/นั่งทำงานอยู่กับที่",
+    "lightlyActive": "ออกกำลังกายเล็กน้อย 1-3วัน/สัปดาห์",
+    "moderatelyActive": "ออกกำลังกายปานกลาง 4-5วัน/สัปดาห์",
+    "veryActive": "ออกกำลังกายหนัก 6-7วัน/สัปดาห์",
+    "extremelyActive": "ออกกำลังกายหนักมาก 2 ครั้ง/วัน เป็นนักกีฬา"
+  },
+  "diseases": {
+    "diabetes": "เบาหวาน",
+    "kidney": "ไต",
+    "heart": "หัวใจ",
+    "hypertension": "ความดัน",
+    "gout": "เก๊าต์",
+    "cholesterol": "ไขมัน",
+    "other": "อื่นๆ",
+    "none": "ไม่มี"
+  },
+  "menu": {
+    "title": "Wellnista",
+    "underDevelopment": "ฟีเจอร์นี้อยู่ระหว่างการพัฒนา"
+  },
+  "errors": {
+    "general": "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง",
+    "network": "ข้อผิดพลาดเครือข่าย กรุณาตรวจสอบการเชื่อมต่อ",
+    "auth": "ข้อผิดพลาดการยืนยันตัวตน",
+    "camera": "ไม่สามารถเข้าถึงกล้องได้"
+  }
+} 

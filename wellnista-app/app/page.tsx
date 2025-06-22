@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from './lib/api/supabaseClient';
 import Link from 'next/link';
-
+import { useI18n } from '../i18n';
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -19,6 +19,7 @@ interface User {
 }
 
 export default function Home() {
+  const { t } = useI18n();
   const [user, setUser] = useState<User | null>(null);
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
@@ -85,7 +86,7 @@ export default function Home() {
         variant="h4"
         className="font-bold text-center"
       >
-        ยินดีต้อนรับเข้าสู่
+        {t('auth.welcome')}
       </Typography>
       <Box>
         <WellnistaLogo />
@@ -100,14 +101,14 @@ export default function Home() {
         variant="subtitle1"
         className="mt-10 text-lg text-center font-semibold"
       >
-        ทำให้สุขภาพดี กลายเป็นเรื่องง่ายของทุกคน
+        {t('auth.tagline')}
       </Typography>
 
       <Box className="mt-6 w-full max-w-sm flex flex-col gap-4">
         {user ? (
           <>
             <Typography className="text-xl text-center">
-              ยินดีต้อนรับ, {user.phone}
+              {t('auth.welcomeUser', { phone: user.phone || '' })}
             </Typography>
             <Button
               variant="contained"
@@ -115,14 +116,14 @@ export default function Home() {
               className="bg-red-500 hover:bg-red-600 text-white font-garet"
               fullWidth
             >
-              ออกจากระบบ
+              {t('auth.logout')}
             </Button>
           </>
         ) : (
           <>
             <TextField
               fullWidth
-              label="เบอร์โทร (เช่น 0812345678)"
+              label={t('auth.phoneNumber')}
               variant="outlined"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
@@ -130,7 +131,7 @@ export default function Home() {
             />
             <TextField
               fullWidth
-              label="รหัสผ่าน"
+              label={t('auth.password')}
               variant="outlined"
               type="password"
               value={password}
@@ -142,7 +143,7 @@ export default function Home() {
               disabled={loading}
               className="px-6 py-3 bg-primary text-secondary rounded-full hover:bg-accent transition font-garet"
             >
-              {loading ? <CircularProgress size={24} color="inherit" /> : 'เข้าสู่ระบบ'}
+              {loading ? <CircularProgress size={24} color="inherit" /> : t('auth.login')}
             </button>
             {error && (
               <Typography color="error" variant="body2">
@@ -152,10 +153,10 @@ export default function Home() {
 
             <Box className="flex justify-between text-sm text-gray-500">
               <Link href="/register/signup" passHref legacyBehavior>
-                <Typography className="cursor-pointer hover:underline">ลงทะเบียน</Typography>
+                <Typography className="cursor-pointer hover:underline">{t('auth.register')}</Typography>
               </Link>
               <Typography className="cursor-pointer hover:underline" onClick={() => {}}>
-                ลืมรหัสผ่าน?
+                {t('auth.forgotPassword')}
               </Typography>
             </Box>
           </>
