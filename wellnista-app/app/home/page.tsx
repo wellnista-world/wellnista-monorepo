@@ -20,14 +20,14 @@ import {
 } from "lucide-react";
 import AdvertisingCarousel from "../components/AdvertisingCarousel";
 import { getAdvertisingItems } from "../../config/advertising";
-import { getRecommendedProductForLocale, RecommendedProduct } from "../../config/recommendedProducts";
+import { getRandomProduct, getProductForLocale, Product } from "../../config/products";
 
 export default function HomeScreen() {
   const router = useRouter();
   const { user } = useAuth();
   const { t, locale } = useI18n();
   const [userName, setUserName] = useState<string | null>(null);
-  const [recommendedProduct, setRecommendedProduct] = useState<RecommendedProduct | null>(null);
+  const [recommendedProduct, setRecommendedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     const fetchUserName = async () => {
@@ -52,8 +52,9 @@ export default function HomeScreen() {
 
   useEffect(() => {
     // Get a random recommended product for the current locale
-    const product = getRecommendedProductForLocale(locale);
-    setRecommendedProduct(product);
+    const randomProduct = getRandomProduct();
+    const localizedProduct = getProductForLocale(randomProduct, locale);
+    setRecommendedProduct(localizedProduct);
   }, [locale]);
 
   const handleLogout = async () => {
@@ -158,7 +159,7 @@ export default function HomeScreen() {
       {/* Wellnista Market - Top Section */}
       <div className="mb-8">
         <div
-          onClick={() => window.open("https://lin.ee/AwaT0wg", "_blank")}
+          onClick={() => router.push("/product")}
           className="bg-white rounded-2xl p-6 flex items-center justify-between shadow-lg hover:bg-primary/5 transition-all cursor-pointer"
         >
           <div className="flex items-center gap-4">
