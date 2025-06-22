@@ -49,7 +49,25 @@ export default function HomeScreen() {
   }, [user]);
 
   const handleLogout = async () => {
-    await signOut();
+    try {
+      // Clear local storage and session storage first
+      localStorage.clear();
+      sessionStorage.clear();
+      
+      // Attempt to sign out from Supabase
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) {
+        console.warn('Supabase logout error:', error);
+      }
+      
+      // Force redirect to login page regardless of Supabase error
+      window.location.href = '/';
+    } catch (error) {
+      console.error('Logout error:', error);
+      // Force redirect even if there's an error
+      window.location.href = '/';
+    }
   };
 
   if (!user) {
