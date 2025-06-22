@@ -5,7 +5,7 @@ import zhMessages from '../messages/zh.json';
 import jaMessages from '../messages/ja.json';
 import koMessages from '../messages/ko.json';
 
-export type Locale = 'en' | 'th' | 'zh' | 'ja' | 'ko';
+export type Locale = 'th' | 'en' | 'zh' | 'ja' | 'ko';
 
 interface I18nContextType {
   locale: Locale;

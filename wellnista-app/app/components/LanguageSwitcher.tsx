@@ -7,8 +7,8 @@ export default function LanguageSwitcher() {
   const { locale, setLocale } = useI18n();
 
   const languages = [
-    { code: 'en', label: 'EN' },
     { code: 'th', label: 'ไทย' },
+    { code: 'en', label: 'EN' },
     { code: 'zh', label: '中文' },
     { code: 'ja', label: '日本語' },
     { code: 'ko', label: '한국어' }
