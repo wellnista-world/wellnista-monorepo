@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import Typography from "@mui/material/Typography";
 import { supabase } from "@/app/lib/api/supabaseClient";
 import { useAuth } from "@/app/lib/context/AuthContext";
+import { useI18n } from "../../i18n";
 
 interface NutritionData {
   date: string;
@@ -38,6 +39,7 @@ interface CalendarProps {
 
 export function Calendar({ calGoal, carbGoal, proteinGoal, todayNutrition }: CalendarProps) {
   const { user } = useAuth();
+  const { t } = useI18n();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [nutritionData, setNutritionData] = useState<NutritionData[]>([]);
 
@@ -174,8 +176,18 @@ export function Calendar({ calGoal, carbGoal, proteinGoal, todayNutrition }: Cal
   ).getDay();
 
   const monthNames = [
-    "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
-    "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+    t('calendar.months.january'),
+    t('calendar.months.february'),
+    t('calendar.months.march'),
+    t('calendar.months.april'),
+    t('calendar.months.may'),
+    t('calendar.months.june'),
+    t('calendar.months.july'),
+    t('calendar.months.august'),
+    t('calendar.months.september'),
+    t('calendar.months.october'),
+    t('calendar.months.november'),
+    t('calendar.months.december')
   ];
 
   const prevMonth = () => {
@@ -233,7 +245,15 @@ export function Calendar({ calGoal, carbGoal, proteinGoal, todayNutrition }: Cal
         </button>
       </div>
       <div className="grid grid-cols-7 gap-1 text-center mb-2">
-        {["อา", "จ", "อ", "พ", "พฤ", "ศ", "ส"].map((day) => (
+        {[
+          t('calendar.days.sun'),
+          t('calendar.days.mon'),
+          t('calendar.days.tue'),
+          t('calendar.days.wed'),
+          t('calendar.days.thu'),
+          t('calendar.days.fri'),
+          t('calendar.days.sat')
+        ].map((day) => (
           <Typography key={day} className="text-sm text-neutral/70">
             {day}
           </Typography>
