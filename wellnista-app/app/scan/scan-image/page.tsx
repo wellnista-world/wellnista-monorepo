@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/app/lib/api/supabaseClient";
 import { useAuth } from "@/app/lib/context/AuthContext";
 import { useI18n } from "../../../i18n";
+import Image from 'next/image';
 
 export default function ScanImagePage() {
   const router = useRouter();
@@ -257,9 +258,11 @@ export default function ScanImagePage() {
 
       {capturedImage && !analysisResult && (
         <div className="flex flex-col items-center">
-          <img
+          <Image
             src={capturedImage}
             alt="Captured food"
+            width={400}
+            height={300}
             className="w-full max-w-md border-4 border-primary rounded-lg"
           />
           <div className="flex gap-4 mt-4">
@@ -289,9 +292,11 @@ export default function ScanImagePage() {
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div className="rounded-full w-full h-full items-center">
               {capturedImage ? (
-                <img
+                <Image
                   src={capturedImage}
                   alt={analysisResult.product_name || analysisResult.product_name_en || t('scan.noImage')}
+                  width={200}
+                  height={200}
                   className="w-full h-full object-cover rounded-lg"
                 />
               ) : (

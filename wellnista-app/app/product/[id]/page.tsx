@@ -3,6 +3,7 @@ import { getProductById, getProductForLocale } from '../../../config/products';
 import { useI18n } from '../../../i18n';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
   const { t, locale } = useI18n();
@@ -14,7 +15,13 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   return (
     <div className="min-h-screen bg-secondary px-4 py-8 flex flex-col items-center">
       <div className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-md flex flex-col items-center">
-        <img src={localized.image} alt={localized.name} className="w-48 h-48 object-cover rounded-xl mb-4" />
+        <Image 
+          src={localized.image} 
+          alt={localized.name} 
+          width={192}
+          height={192}
+          className="w-48 h-48 object-cover rounded-xl mb-4" 
+        />
         <Typography className="text-2xl font-bold text-primary mb-2 text-center">{localized.name}</Typography>
         <Typography className="text-base text-neutral/70 mb-4 text-center">{localized.description}</Typography>
         <Typography className="text-2xl font-bold text-primary mb-6">{localized.currency}{localized.price}</Typography>

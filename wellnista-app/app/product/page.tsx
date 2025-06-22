@@ -1,6 +1,7 @@
 "use client"
 import { products, getProductForLocale } from '../../config/products';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useI18n } from '../../i18n';
 import Typography from '@mui/material/Typography';
 
@@ -17,7 +18,13 @@ export default function ProductListPage() {
         {localizedProducts.map(product => (
           <Link key={product.id} href={`/product/${product.id}`} className="block">
             <div className="bg-white shadow-lg p-2 flex flex-col hover:shadow-xl transition">
-              <img src={product.image} alt={product.name} className="w-full h-32 object-cover mb-2" />
+              <Image 
+                src={product.image} 
+                alt={product.name} 
+                width={128}
+                height={128}
+                className="w-full h-32 object-cover mb-2" 
+              />
               <Typography className="text-sm font-semibold text-primary text-left line-clamp-2 mb-1">
                 {product.name}
               </Typography>
