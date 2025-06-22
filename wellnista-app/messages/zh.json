@@ -208,7 +208,31 @@
     "specializedFood": "为您所爱的人提供的专业食品",
     "carbLogging": "记录碳水化合物比您想象的更容易。它有助于预防非传染性慢性疾病。",
     "wellnistaMarket": "Wellnista 市场",
-    "wellnistaLibrary": "Wellnista 图书馆"
+    "wellnistaLibrary": "Wellnista 图书馆",
+    "advertising": {
+      "title": "广告",
+      "clickToSeeMore": "点击查看更多",
+      "promotion1": {
+        "title": "特别促销",
+        "description": "健康产品最高50%折扣"
+      },
+      "promotion2": {
+        "title": "新服务",
+        "description": "免费在线营养咨询！"
+      },
+      "promotion3": {
+        "title": "新应用",
+        "description": "下载新应用获得更好的健康"
+      },
+      "promotion4": {
+        "title": "健康追踪",
+        "description": "持续监测和追踪您的健康状况"
+      },
+      "promotion5": {
+        "title": "食品扫描",
+        "description": "扫描食品查看准确的营养信息"
+      }
+    }
   },
   "settings": {
     "title": "设置",

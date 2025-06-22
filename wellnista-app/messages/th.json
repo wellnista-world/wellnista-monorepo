@@ -207,7 +207,31 @@
     "specializedFood": "อาหารเฉพาะโรคเพื่อคนที่คุณรัก",
     "carbLogging": "การบันทึกคาร์บง่ายกว่าที่คิด ช่วยป้องกันโรคไม่ติดต่อเรื้อรัง",
     "wellnistaMarket": "Wellnista Market",
-    "wellnistaLibrary": "Wellnista Library"
+    "wellnistaLibrary": "Wellnista Library",
+    "advertising": {
+      "title": "โฆษณา",
+      "clickToSeeMore": "คลิกเพื่อดูเพิ่มเติม",
+      "promotion1": {
+        "title": "โปรโมชั่นพิเศษ",
+        "description": "ลดราคาสูงสุด 50% สำหรับผลิตภัณฑ์สุขภาพ"
+      },
+      "promotion2": {
+        "title": "บริการใหม่",
+        "description": "ปรึกษานักโภชนาการออนไลน์ ฟรี!"
+      },
+      "promotion3": {
+        "title": "แอปพลิเคชันใหม่",
+        "description": "ดาวน์โหลดแอปใหม่เพื่อสุขภาพที่ดีกว่า"
+      },
+      "promotion4": {
+        "title": "ติดตามสุขภาพ",
+        "description": "ตรวจสอบและติดตามสุขภาพของคุณอย่างต่อเนื่อง"
+      },
+      "promotion5": {
+        "title": "สแกนอาหาร",
+        "description": "สแกนอาหารเพื่อดูข้อมูลโภชนาการที่แม่นยำ"
+      }
+    }
   },
   "settings": {
     "title": "ตั้งค่า",

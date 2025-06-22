@@ -203,12 +203,36 @@
   },
   "home": {
     "eatThisScan": "이것을 먹을까요? 지금 스캔하세요!",
-    "whatToEat": "뭘 먹을까요?",
+    "whatToEat": "무엇을 먹을까요?",
     "bloodSugarLog": "혈당 기록",
     "specializedFood": "사랑하는 사람을 위한 전문 식품",
     "carbLogging": "탄수화물 기록은 생각보다 쉽습니다. 비감염성 만성 질환 예방에 도움이 됩니다.",
     "wellnistaMarket": "Wellnista 마켓",
-    "wellnistaLibrary": "Wellnista 라이브러리"
+    "wellnistaLibrary": "Wellnista 라이브러리",
+    "advertising": {
+      "title": "광고",
+      "clickToSeeMore": "자세히 보기",
+      "promotion1": {
+        "title": "특별 프로모션",
+        "description": "건강 제품 최대 50% 할인"
+      },
+      "promotion2": {
+        "title": "새로운 서비스",
+        "description": "무료 온라인 영양 상담!"
+      },
+      "promotion3": {
+        "title": "새로운 앱",
+        "description": "더 나은 건강을 위한 새로운 앱 다운로드"
+      },
+      "promotion4": {
+        "title": "건강 추적",
+        "description": "건강 상태를 지속적으로 모니터링하고 추적"
+      },
+      "promotion5": {
+        "title": "식품 스캔",
+        "description": "식품을 스캔하여 정확한 영양 정보 확인"
+      }
+    }
   },
   "settings": {
     "title": "설정",

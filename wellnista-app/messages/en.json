@@ -208,7 +208,31 @@
     "specializedFood": "Specialized food for your loved ones",
     "carbLogging": "Carb logging is easier than you think. It helps prevent non-communicable chronic diseases.",
     "wellnistaMarket": "Wellnista Market",
-    "wellnistaLibrary": "Wellnista Library"
+    "wellnistaLibrary": "Wellnista Library",
+    "advertising": {
+      "title": "Advertising",
+      "clickToSeeMore": "Click to see more",
+      "promotion1": {
+        "title": "Special Promotion",
+        "description": "Up to 50% off on health products"
+      },
+      "promotion2": {
+        "title": "New Service",
+        "description": "Free online nutrition consultation!"
+      },
+      "promotion3": {
+        "title": "New App",
+        "description": "Download new app for better health"
+      },
+      "promotion4": {
+        "title": "Health Tracking",
+        "description": "Monitor and track your health continuously"
+      },
+      "promotion5": {
+        "title": "Food Scanning",
+        "description": "Scan food to see accurate nutritional information"
+      }
+    }
   },
   "settings": {
     "title": "Settings",

@@ -202,12 +202,36 @@
   },
   "home": {
     "eatThisScan": "これを食べる？今すぐスキャン！",
-    "whatToEat": "何を食べよう？",
+    "whatToEat": "何を食べる？",
     "bloodSugarLog": "血糖記録",
     "specializedFood": "大切な人のための専門食品",
     "carbLogging": "炭水化物の記録は思ったより簡単です。非感染性慢性疾患の予防に役立ちます。",
     "wellnistaMarket": "Wellnista マーケット",
-    "wellnistaLibrary": "Wellnista ライブラリ"
+    "wellnistaLibrary": "Wellnista ライブラリ",
+    "advertising": {
+      "title": "広告",
+      "clickToSeeMore": "詳細を見る",
+      "promotion1": {
+        "title": "特別プロモーション",
+        "description": "健康製品最大50%オフ"
+      },
+      "promotion2": {
+        "title": "新サービス",
+        "description": "無料オンライン栄養相談！"
+      },
+      "promotion3": {
+        "title": "新アプリ",
+        "description": "より良い健康のための新しいアプリをダウンロード"
+      },
+      "promotion4": {
+        "title": "健康トラッキング",
+        "description": "健康状態を継続的に監視・追跡"
+      },
+      "promotion5": {
+        "title": "食品スキャン",
+        "description": "食品をスキャンして正確な栄養情報を確認"
+      }
+    }
   },
   "settings": {
     "title": "設定",

@@ -18,11 +18,13 @@ import {
   ChevronRight,
   Settings
 } from 'lucide-react';
+import AdvertisingCarousel from '../components/AdvertisingCarousel';
+import { getAdvertisingItems } from '../../config/advertising';
 
 export default function HomeScreen() {
   const router = useRouter();
   const { user, signOut } = useAuth();
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
@@ -81,6 +83,9 @@ export default function HomeScreen() {
     }
   ];
 
+  // Get advertising items from configuration
+  const advertisingItems = getAdvertisingItems(locale);
+
   return (
     <div className="min-h-screen bg-secondary text-neutral font-garet px-4 py-6">
       {/* Header with Welcome Message */}
@@ -111,6 +116,14 @@ export default function HomeScreen() {
             </div>
           </Link>
         ))}
+      </div>
+
+      {/* Advertising Carousel */}
+      <div className="mb-8">
+        <Typography variant="h6" className="font-bold text-primary mb-4 pb-4">
+          {t('home.advertising.title')}
+        </Typography>
+        <AdvertisingCarousel items={advertisingItems} autoSlideInterval={4000} />
       </div>
 
       {/* Additional Services */}
