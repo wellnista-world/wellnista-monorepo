@@ -16,7 +16,7 @@ export const advertisingItems = [
   {
     id: 1,
     image: "/promote.webp",
-    link: "/settings",
+    link: "https://line.me/ti/p/v4PViJexdz",
     translations: {
       th: {
         title: "ขอลงโฆษณา",
@@ -47,7 +47,7 @@ export const advertisingItems = [
   {
     id: 2,
     image: "/promote.webp",
-    link: "/settings",
+    link: "https://line.me/ti/p/v4PViJexdz",
     translations: {
       th: {
         title: "ขอลงโฆษณา",
@@ -109,7 +109,7 @@ export const advertisingItems = [
   {
     id: 4,
     image: "/promote.webp",
-    link: "/settings",
+    link: "https://line.me/ti/p/v4PViJexdz",
     translations: {
       th: {
         title: "ขอลงโฆษณา",
@@ -140,7 +140,7 @@ export const advertisingItems = [
   {
     id: 5,
     image: "/promote.webp",
-    link: "/settings",
+    link: "https://line.me/ti/p/v4PViJexdz",
     translations: {
       th: {
         title: "ขอลงโฆษณา",
