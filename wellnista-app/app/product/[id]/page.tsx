@@ -1,22 +1,15 @@
 "use client"
-import { getProductById, getProductForLocale } from '../../../config/products';
+import { getProductForLocale, products } from '../../../config/products';
 import { useI18n } from '../../../i18n';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Product } from '../../../config/products';
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
-  const { t, locale } = useI18n();
-  const product = getProductById(Number(params.id));
-
-  if (!product) {
-    return <div className="min-h-screen flex items-center justify-center text-xl">404 | Product Not Found</div>;
-  }
-
+const ProductView = ({ product, locale, t }: { product: Product, locale: string, t: (key: string) => string }) => {
   const localized = getProductForLocale(product, locale);
-
   return (
-    <div className="relative w-screen h-[80vh] overflow-hidden">
+    <div className="relative w-screen h-[80vh]  snap-start">
       <Image
         src={localized.image}
         alt={localized.name}
@@ -24,7 +17,6 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
         objectFit="cover"
         className="absolute inset-0"
       />
-
       <div className="absolute top-4 left-4 z-10">
         <Link href="/product">
           <div className="text-white bg-black bg-opacity-30 rounded-full p-2 inline-block cursor-pointer">
@@ -34,8 +26,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
           </div>
         </Link>
       </div>
-      
-      <div className="absolute bottom-[5%] left-4 right-4 sm:right-auto">
+      <div className="absolute bottom-[6%] left-4 right-4 sm:right-auto">
         <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-2xl p-4 w-full sm:max-w-sm">
           <div className="flex items-start gap-4">
             <div className="flex-shrink-0">
@@ -62,6 +53,31 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+export default function ProductDetailPage({ params }: { params: { id: string } }) {
+  const { t, locale } = useI18n();
+  const productId = Number(params.id);
+  const currentProductIndex = products.findIndex(p => p.id === productId);
+
+  if (currentProductIndex === -1) {
+    return <div className="min-h-screen flex items-center justify-center text-xl">404 | Product Not Found</div>;
+  }
+
+  const currentProduct = products[currentProductIndex];
+  const nextProductIndex = (currentProductIndex + 1) % products.length;
+  const nextProduct = products[nextProductIndex];
+
+  return (
+    <div className="h-screen w-screen overflow-y-scroll snap-y snap-mandatory">
+      <ProductView product={currentProduct} locale={locale} t={t} />
+      <Link href={`/product/${nextProduct.id}`} scroll={false}>
+        <div>
+            <ProductView product={nextProduct} locale={locale} t={t} />
+        </div>
+      </Link>
     </div>
   );
 } 
