@@ -18,7 +18,7 @@
     "filter": "筛选",
     "sort": "排序",
     "refresh": "刷新",
-    "previous": "上一步",
+    "previous": "上一个",
     "open": "打开",
     "ok": "确定",
     "success": "成功",
@@ -263,7 +263,13 @@
     "currentLanguage": "当前语言",
     "appInfo": "应用信息",
     "version": "版本",
-    "developer": "开发者"
+    "developer": "开发者",
+    "installApp": "安装应用",
+    "installAppDescription": "将 Wellnista 添加到主屏幕以获得更快的访问和离线使用",
+    "installAppButton": "安装到主屏幕",
+    "appInstalled": "应用已安装",
+    "installAppSuccess": "应用安装成功！",
+    "installAppError": "应用安装失败，请重试"
   },
   "errors": {
     "general": "发生错误。请重试。",
@@ -316,5 +322,11 @@
       "fri": "五",
       "sat": "六"
     }
+  },
+  "addToHomeScreen": {
+    "title": "安装 Wellnista",
+    "description": "将 Wellnista 添加到主屏幕以获得更快的访问和更便捷的使用",
+    "install": "安装",
+    "notNow": "暂不安装"
   }
 } 

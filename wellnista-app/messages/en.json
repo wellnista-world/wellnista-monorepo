@@ -23,7 +23,13 @@
     "ok": "OK",
     "success": "Success",
     "warning": "Warning",
-    "info": "Information"
+    "info": "Information",
+    "addToHomeScreen": {
+      "title": "Install Wellnista",
+      "description": "Add Wellnista to your home screen for faster access and easier use",
+      "install": "Install",
+      "notNow": "Not now"
+    }
   },
   "auth": {
     "welcome": "Welcome to wellnista",
@@ -263,7 +269,13 @@
     "currentLanguage": "Current Language",
     "appInfo": "App Information",
     "version": "Version",
-    "developer": "Developer"
+    "developer": "Developer",
+    "installApp": "Install App",
+    "installAppDescription": "Add Wellnista to your home screen for faster access and offline use",
+    "installAppButton": "Install to Home Screen",
+    "appInstalled": "App is already installed",
+    "installAppSuccess": "App installed successfully!",
+    "installAppError": "Failed to install app. Please try again."
   },
   "errors": {
     "general": "An error occurred. Please try again.",

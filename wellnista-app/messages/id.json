@@ -263,7 +263,13 @@
     "currentLanguage": "Bahasa Saat Ini",
     "appInfo": "Informasi Aplikasi",
     "version": "Versi",
-    "developer": "Pengembang"
+    "developer": "Pengembang",
+    "installApp": "Instal Aplikasi",
+    "installAppDescription": "Tambahkan Wellnista ke layar utama Anda untuk akses yang lebih cepat dan penggunaan offline",
+    "installAppButton": "Instal ke Layar Utama",
+    "appInstalled": "Aplikasi sudah terinstal",
+    "installAppSuccess": "Aplikasi berhasil diinstal!",
+    "installAppError": "Gagal menginstal aplikasi. Silakan coba lagi"
   },
   "errors": {
     "general": "Terjadi kesalahan. Silakan coba lagi.",
@@ -316,5 +322,11 @@
       "fri": "Jum",
       "sat": "Sab"
     }
+  },
+  "addToHomeScreen": {
+    "title": "Instal Wellnista",
+    "description": "Tambahkan Wellnista ke layar utama Anda untuk akses yang lebih cepat dan penggunaan yang lebih mudah",
+    "install": "Instal",
+    "notNow": "Tidak sekarang"
   }
 } 

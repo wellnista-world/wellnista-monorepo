@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
+import { useI18n } from '../../i18n';
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -9,6 +10,7 @@ interface BeforeInstallPromptEvent extends Event {
 }
 
 export default function AddToHomeScreen() {
+  const { t } = useI18n();
   const [showPrompt, setShowPrompt] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
 
@@ -65,30 +67,30 @@ export default function AddToHomeScreen() {
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-lg z-50 animate-slide-up">
       <div className="flex items-center justify-between mb-2">
-        <h3 className="text-lg font-semibold text-primary">ติดตั้ง Wellnista</h3>
+        <h3 className="text-lg font-semibold text-primary">{t('addToHomeScreen.title')}</h3>
         <button
           onClick={handleDismiss}
           className="p-1 hover:bg-gray-100 rounded-full"
-          aria-label="Close"
+          aria-label={t('common.close')}
         >
           <X size={20} className="text-gray-500" />
         </button>
       </div>
       <p className="text-sm text-gray-600 mb-4">
-        เพิ่ม Wellnista ลงในหน้าจอหลักของคุณเพื่อใช้งานได้เร็วขึ้นและเข้าถึงได้ง่ายขึ้น
+        {t('addToHomeScreen.description')}
       </p>
       <div className="flex gap-2">
         <button
           onClick={handleInstall}
           className="flex-1 bg-primary text-white py-2 px-4 rounded-lg font-semibold hover:opacity-90 transition"
         >
-          ติดตั้ง
+          {t('addToHomeScreen.install')}
         </button>
         <button
           onClick={handleDismiss}
           className="flex-1 border border-gray-300 text-gray-600 py-2 px-4 rounded-lg font-semibold hover:bg-gray-50 transition"
         >
-          ไม่ใช่ตอนนี้
+          {t('addToHomeScreen.notNow')}
         </button>
       </div>
     </div>

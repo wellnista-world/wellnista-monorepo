@@ -258,11 +258,17 @@
   "settings": {
     "title": "ตั้งค่า",
     "language": "ภาษา",
-    "languageDescription": "เลือกภาษาที่คุณต้องการใช้ในแอป",
+    "languageDescription": "เลือกภาษาที่คุณต้องการสำหรับแอป",
     "currentLanguage": "ภาษาปัจจุบัน",
     "appInfo": "ข้อมูลแอป",
     "version": "เวอร์ชัน",
-    "developer": "ผู้พัฒนา"
+    "developer": "ผู้พัฒนา",
+    "installApp": "ติดตั้งแอป",
+    "installAppDescription": "เพิ่ม Wellnista ลงในหน้าจอหลักของคุณเพื่อเข้าถึงได้เร็วขึ้นและใช้งานแบบออฟไลน์",
+    "installAppButton": "ติดตั้งลงหน้าจอหลัก",
+    "appInstalled": "แอปได้รับการติดตั้งแล้ว",
+    "installAppSuccess": "ติดตั้งแอปสำเร็จ!",
+    "installAppError": "ไม่สามารถติดตั้งแอปได้ กรุณาลองใหม่อีกครั้ง"
   },
   "errors": {
     "general": "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง",
@@ -315,5 +321,11 @@
       "fri": "ศ",
       "sat": "ส"
     }
+  },
+  "addToHomeScreen": {
+    "title": "ติดตั้ง Wellnista",
+    "description": "เพิ่ม Wellnista ลงในหน้าจอหลักของคุณเพื่อใช้งานได้เร็วขึ้นและเข้าถึงได้ง่ายขึ้น",
+    "install": "ติดตั้ง",
+    "notNow": "ไม่ใช่ตอนนี้"
   }
 } 

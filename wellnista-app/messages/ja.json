@@ -18,6 +18,7 @@
     "filter": "フィルター",
     "sort": "並び替え",
     "refresh": "更新",
+    "previous": "前へ",
     "open": "開く",
     "ok": "OK",
     "success": "成功",
@@ -262,7 +263,13 @@
     "currentLanguage": "現在の言語",
     "appInfo": "アプリ情報",
     "version": "バージョン",
-    "developer": "開発者"
+    "developer": "開発者",
+    "installApp": "アプリをインストール",
+    "installAppDescription": "Wellnista をホーム画面に追加して、より速いアクセスとオフライン使用を実現",
+    "installAppButton": "ホーム画面にインストール",
+    "appInstalled": "アプリは既にインストールされています",
+    "installAppSuccess": "アプリのインストールが完了しました！",
+    "installAppError": "アプリのインストールに失敗しました。もう一度お試しください"
   },
   "errors": {
     "general": "エラーが発生しました。もう一度お試しください。",
@@ -315,5 +322,11 @@
       "fri": "金",
       "sat": "土"
     }
+  },
+  "addToHomeScreen": {
+    "title": "Wellnista をインストール",
+    "description": "Wellnista をホーム画面に追加して、より速いアクセスと使いやすさを実現",
+    "install": "インストール",
+    "notNow": "今はしない"
   }
 } 
