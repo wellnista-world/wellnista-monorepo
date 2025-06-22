@@ -7,6 +7,7 @@ import { UserData } from "../lib/types/user";
 import Typography from "@mui/material/Typography";
 import { UserCircle, Activity, Scale, Ruler, Heart, Clock } from "lucide-react";
 import { Calendar } from "../components/Calendar";
+import { useI18n } from "../../i18n";
 
 const activitiveLevel: string[] = [
   "ไม่ออกกำลังกาย/นั่งทำงานอยู่กับที่",
@@ -32,6 +33,7 @@ const activitiveLevelProtein: number[] = [1.0, 1.0, 1.2, 1.7, 2.2];
 
 export default function ProfilePage() {
   const { user } = useAuth();
+  const { t } = useI18n();
   const [userData, setUserData] = useState<UserData | null>(null);
   const [totalNutrition, setTotalNutrition] = useState({
     calories: 0,
@@ -118,14 +120,14 @@ export default function ProfilePage() {
 
   const bmiText =
     bmi > 30
-      ? "อ้วนระดับ 2"
+      ? t('profile.bmiCategories.obese2')
       : bmi > 25
-      ? "อ้วนระดับ 1"
+      ? t('profile.bmiCategories.obese1')
       : bmi > 23
-      ? "น้ำหนักเกิน มีภาวะเสี่ยง"
+      ? t('profile.bmiCategories.overweight')
       : bmi > 18.5
-      ? "น้ำหนักตัวปกติ"
-      : "น้ำหนักตัวน้อย/ผอม";
+      ? t('profile.bmiCategories.normal')
+      : t('profile.bmiCategories.underweight');
 
   // carbGoal is เบาหวาน use 8 อื่นๆ use 12 or bmi more than 30 use 8
   const carbGoal =
@@ -146,33 +148,33 @@ export default function ProfilePage() {
   const infoItems = [
     {
       icon: <UserCircle size={24} />,
-      label: "ชื่อ - นามสกุล",
+      label: t('profile.name'),
       value: userData?.name || "-",
     },
     {
       icon: <Heart size={24} />,
-      label: "โรคประจำตัว",
+      label: t('profile.diseases'),
       value: userData?.diseases?.join(", ") || "-",
     },
     {
       icon: <Activity size={24} />,
-      label: "เพศ",
+      label: t('profile.gender'),
       value: userData?.gender || "-",
     },
     {
       icon: <Clock size={24} />,
-      label: "อายุ",
-      value: `${userData?.age || "-"} ปี`,
+      label: t('profile.age'),
+      value: `${userData?.age || "-"} ${t('profile.years')}`,
     },
     {
       icon: <Scale size={24} />,
-      label: "น้ำหนัก",
-      value: `${userData?.weight || "-"} กิโลกรัม`,
+      label: t('profile.weight'),
+      value: `${userData?.weight || "-"} ${t('profile.kg')}`,
     },
     {
       icon: <Ruler size={24} />,
-      label: "ส่วนสูง",
-      value: `${userData?.height || "-"} เซนติเมตร`,
+      label: t('profile.height'),
+      value: `${userData?.height || "-"} ${t('profile.cm')}`,
     },
   ];
 
@@ -181,7 +183,7 @@ export default function ProfilePage() {
       {/* Nutrition Progress */}
       <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm">
         <Typography className="text-lg font-semibold text-primary mb-6">
-          ความคืบหน้าวันนี้
+          {t('profile.todayProgress')}
         </Typography>
         <div className="grid grid-cols-3 gap-4">
           <div className="flex flex-col items-center bg-secondary/5 rounded-xl p-4">
@@ -193,9 +195,9 @@ export default function ProfilePage() {
               size={100}
             />
             <Typography className="text-sm font-semibold text-primary mt-3">
-              {carbValue.toFixed(0)}/{carbGoal.toFixed(0)} คาร์บ
+              {carbValue.toFixed(0)}/{carbGoal.toFixed(0)} {t('profile.carb')}
             </Typography>
-            <Typography className="text-xs text-neutral/70">คาร์บ</Typography>
+            <Typography className="text-xs text-neutral/70">{t('profile.carb')}</Typography>
           </div>
           <div className="flex flex-col items-center bg-secondary/5 rounded-xl p-4">
             <PieChart
@@ -206,9 +208,9 @@ export default function ProfilePage() {
               size={100}
             />
             <Typography className="text-sm font-semibold text-primary mt-3">
-              {calValue}/{calGoal.toFixed(0)} กิโลแคลอรี่
+              {calValue}/{calGoal.toFixed(0)} {t('profile.kilocalories')}
             </Typography>
-            <Typography className="text-xs text-neutral/70">แคลอรี่</Typography>
+            <Typography className="text-xs text-neutral/70">{t('profile.calories')}</Typography>
           </div>
           <div className="flex flex-col items-center bg-secondary/5 rounded-xl p-4">
             <PieChart
@@ -219,9 +221,9 @@ export default function ProfilePage() {
               size={100}
             />
             <Typography className="text-sm font-semibold text-primary mt-3">
-              {proteinValue.toFixed(0)}/{proteinGoal.toFixed(0)} กรัม
+              {proteinValue.toFixed(0)}/{proteinGoal.toFixed(0)} {t('profile.grams')}
             </Typography>
-            <Typography className="text-xs text-neutral/70">โปรตีน</Typography>
+            <Typography className="text-xs text-neutral/70">{t('profile.protein')}</Typography>
           </div>
         </div>
       </div>
@@ -229,7 +231,7 @@ export default function ProfilePage() {
       {/* Calendar */}
       <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm">
         <Typography className="text-lg font-semibold text-primary mb-6">
-          ปฏิทินการกิน
+          {t('profile.eatingCalendar')}
         </Typography>
         <Calendar
           calGoal={calGoal}
@@ -246,7 +248,7 @@ export default function ProfilePage() {
       {/* Personal Information */}
       <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm">
         <Typography className="text-lg font-semibold text-primary mb-4">
-          ข้อมูลส่วนตัว
+          {t('profile.personalInfo')}
         </Typography>
         <div className="space-y-4">
           {infoItems.map((item, index) => (
@@ -266,24 +268,24 @@ export default function ProfilePage() {
       {/* Health Stats Cards */}
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-white rounded-2xl p-6 shadow-sm">
-          <Typography className="text-sm text-neutral/70 mb-2">BMI</Typography>
+          <Typography className="text-sm text-neutral/70 mb-2">{t('profile.bmi')}</Typography>
           <Typography className="text-2xl font-bold text-primary">
             {bmi.toFixed(1)}
           </Typography>
           <Typography className="text-xs text-neutral/70 mt-1">
-            ดัชนีมวลกาย
+            {t('profile.bmi')}
           </Typography>
           <Typography className="text-xs mt-1 text-primary">{bmiText}</Typography>
         </div>
         <div className="bg-white rounded-2xl p-6 shadow-sm">
           <Typography className="text-sm text-neutral/70 mb-2">
-            ระดับกิจกรรม
+            {t('profile.activityLevel')}
           </Typography>
           <Typography className="text-2xl font-bold text-primary">
             {userData?.activitylevel || "-"}
           </Typography>
           <Typography className="text-xs text-neutral/70 mt-1">
-            กิจกรรมประจำวัน
+            {t('profile.dailyActivity')}
           </Typography>
         </div>
       </div>

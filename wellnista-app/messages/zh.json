@@ -60,7 +60,7 @@
     "carbCounting": "碳水化合物计数",
     "name": "姓名",
     "diseases": "基础疾病",
-    "gender": "出生时性别",
+    "gender": "出生性别",
     "age": "年龄",
     "weight": "体重",
     "height": "身高",
@@ -70,14 +70,18 @@
     "kg": "公斤",
     "cm": "厘米",
     "inch": "英寸",
-    "bmi": "BMI",
+    "bmi": "体重指数",
     "bmiCategories": {
-      "obese2": "肥胖 II 级",
-      "obese1": "肥胖 I 级",
+      "obese2": "肥胖2级",
+      "obese1": "肥胖1级",
       "overweight": "超重",
       "normal": "正常体重",
       "underweight": "体重不足"
-    }
+    },
+    "eatingCalendar": "饮食日历",
+    "dailyActivity": "日常活动",
+    "grams": "克",
+    "kilocalories": "千卡"
   },
   "activityLevels": {
     "sedentary": "久坐不动（很少或没有运动）",
@@ -136,8 +140,10 @@
     "eatThisScan": "吃这个？立即扫描！",
     "whatToEat": "吃什么好？",
     "bloodSugarLog": "血糖记录",
-    "specializedFood": "为您的亲人提供专业食品",
-    "carbLogging": "记录碳水化合物比您想象的更容易。它有助于预防非传染性慢性疾病。"
+    "specializedFood": "为您所爱的人提供的专业食品",
+    "carbLogging": "记录碳水化合物比您想象的更容易。它有助于预防非传染性慢性疾病。",
+    "wellnistaMarket": "Wellnista 市场",
+    "wellnistaLibrary": "Wellnista 图书馆"
   },
   "settings": {
     "title": "设置",

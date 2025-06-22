@@ -77,7 +77,11 @@
       "overweight": "Overweight",
       "normal": "Normal Weight",
       "underweight": "Underweight"
-    }
+    },
+    "eatingCalendar": "Eating Calendar",
+    "dailyActivity": "Daily Activity",
+    "grams": "grams",
+    "kilocalories": "kilocalories"
   },
   "activityLevels": {
     "sedentary": "Sedentary / Little to no exercise",
@@ -137,7 +141,9 @@
     "whatToEat": "What to eat?",
     "bloodSugarLog": "Blood Sugar Log",
     "specializedFood": "Specialized food for your loved ones",
-    "carbLogging": "Carb logging is easier than you think. It helps prevent non-communicable chronic diseases."
+    "carbLogging": "Carb logging is easier than you think. It helps prevent non-communicable chronic diseases.",
+    "wellnistaMarket": "Wellnista Market",
+    "wellnistaLibrary": "Wellnista Library"
   },
   "settings": {
     "title": "Settings",

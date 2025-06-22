@@ -63,7 +63,7 @@
     "gender": "출생 시 성별",
     "age": "나이",
     "weight": "체중",
-    "height": "키",
+    "height": "신장",
     "waist": "허리둘레",
     "activityLevel": "활동 수준",
     "years": "세",
@@ -72,12 +72,16 @@
     "inch": "인치",
     "bmi": "BMI",
     "bmiCategories": {
-      "obese2": "비만 2단계",
-      "obese1": "비만 1단계",
+      "obese2": "비만 2도",
+      "obese1": "비만 1도",
       "overweight": "과체중",
-      "normal": "정상 체중",
+      "normal": "정상체중",
       "underweight": "저체중"
-    }
+    },
+    "eatingCalendar": "식사 캘린더",
+    "dailyActivity": "일상 활동",
+    "grams": "그램",
+    "kilocalories": "킬로칼로리"
   },
   "activityLevels": {
     "sedentary": "거의 활동하지 않음 (운동 거의 없음)",
@@ -137,7 +141,9 @@
     "whatToEat": "뭘 먹을까요?",
     "bloodSugarLog": "혈당 기록",
     "specializedFood": "사랑하는 사람을 위한 전문 식품",
-    "carbLogging": "탄수화물 기록은 생각보다 쉽습니다. 비감염성 만성질환 예방에 도움이 됩니다."
+    "carbLogging": "탄수화물 기록은 생각보다 쉽습니다. 비감염성 만성 질환 예방에 도움이 됩니다.",
+    "wellnistaMarket": "Wellnista 마켓",
+    "wellnistaLibrary": "Wellnista 라이브러리"
   },
   "settings": {
     "title": "설정",

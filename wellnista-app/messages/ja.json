@@ -77,7 +77,11 @@
       "overweight": "肥満",
       "normal": "標準体重",
       "underweight": "低体重"
-    }
+    },
+    "eatingCalendar": "食事カレンダー",
+    "dailyActivity": "日常活動",
+    "grams": "グラム",
+    "kilocalories": "キロカロリー"
   },
   "activityLevels": {
     "sedentary": "座りがち（運動なしまたは少ない）",
@@ -137,7 +141,9 @@
     "whatToEat": "何を食べよう？",
     "bloodSugarLog": "血糖記録",
     "specializedFood": "大切な人のための専門食品",
-    "carbLogging": "炭水化物の記録は思ったより簡単です。非感染性慢性疾患の予防に役立ちます。"
+    "carbLogging": "炭水化物の記録は思ったより簡単です。非感染性慢性疾患の予防に役立ちます。",
+    "wellnistaMarket": "Wellnista マーケット",
+    "wellnistaLibrary": "Wellnista ライブラリ"
   },
   "settings": {
     "title": "設定",

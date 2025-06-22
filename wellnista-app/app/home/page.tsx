@@ -63,19 +63,19 @@ export default function HomeScreen() {
     },
     {
       icon: <Camera size={24} />,
-      label: "กินดีมั้ย สแกนเลย !",
+      label: t('home.eatThisScan'),
       href: "/select",
       color: "bg-[#9F9260]"
     },
     {
       icon: <Heart size={24} />,
-      label: "กินอะไรดี ?",
+      label: t('home.whatToEat'),
       href: "/menu",
       color: "bg-[#DD524C]"
     },
     {
       icon: <BookOpen size={24} />,
-      label: "สมุดบันทึกน้ำตาล",
+      label: t('home.bloodSugarLog'),
       href: "/book",
       color: "bg-[#8A7F5F]"
     }
@@ -86,10 +86,10 @@ export default function HomeScreen() {
       {/* Header with Welcome Message */}
       <div className="mb-8">
         <Typography className="text-2xl font-bold text-primary mb-1">
-          สวัสดี คุณ {userName}
+          {t('auth.welcomeUser').replace('{phone}', userName || '')}
         </Typography>
         <Typography className="text-sm text-neutral/70">
-          ยินดีต้อนรับกลับสู่ Wellnista
+          {t('auth.welcomeBack')}
         </Typography>
       </div>
 
@@ -123,10 +123,10 @@ export default function HomeScreen() {
             <Store size={24} className="text-primary" />
             <div>
               <Typography className="font-semibold text-primary">
-                Wellnista Market
+                {t('home.wellnistaMarket')}
               </Typography>
               <Typography className="text-sm text-neutral/70">
-                อาหารเฉพาะโรคเพื่อคนที่คุณรัก
+                {t('home.specializedFood')}
               </Typography>
             </div>
           </div>
@@ -140,7 +140,7 @@ export default function HomeScreen() {
           <div className="flex items-center gap-4">
             <Library size={24} className="text-primary" />
             <Typography className="font-semibold text-primary">
-              Wellnista Library
+              {t('home.wellnistaLibrary')}
             </Typography>
           </div>
           <ChevronRight size={20} className="text-primary" />
@@ -162,8 +162,7 @@ export default function HomeScreen() {
 
       {/* Footer Note */}
       <div className="text-center text-sm text-neutral/70 mb-8">
-        <p>การบันทึกคาร์บง่ายกว่าที่คิด</p>
-        <p>ช่วยป้องกันโรคไม่ติดต่อเรื้อรัง</p>
+        <p>{t('home.carbLogging')}</p>
       </div>
 
       {/* Logout Button */}

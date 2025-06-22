@@ -77,7 +77,11 @@
       "overweight": "น้ำหนักเกิน มีภาวะเสี่ยง",
       "normal": "น้ำหนักตัวปกติ",
       "underweight": "น้ำหนักตัวน้อย/ผอม"
-    }
+    },
+    "eatingCalendar": "ปฏิทินการกิน",
+    "dailyActivity": "กิจกรรมประจำวัน",
+    "grams": "กรัม",
+    "kilocalories": "กิโลแคลอรี่"
   },
   "activityLevels": {
     "sedentary": "ไม่ออกกำลังกาย/นั่งทำงานอยู่กับที่",
@@ -137,7 +141,9 @@
     "whatToEat": "กินอะไรดี ?",
     "bloodSugarLog": "สมุดบันทึกน้ำตาล",
     "specializedFood": "อาหารเฉพาะโรคเพื่อคนที่คุณรัก",
-    "carbLogging": "การบันทึกคาร์บง่ายกว่าที่คิด ช่วยป้องกันโรคไม่ติดต่อเรื้อรัง"
+    "carbLogging": "การบันทึกคาร์บง่ายกว่าที่คิด ช่วยป้องกันโรคไม่ติดต่อเรื้อรัง",
+    "wellnistaMarket": "Wellnista Market",
+    "wellnistaLibrary": "Wellnista Library"
   },
   "settings": {
     "title": "ตั้งค่า",
