@@ -26,7 +26,17 @@
     "phoneNumber": "電話番号",
     "password": "パスワード",
     "welcomeUser": "こんにちは、{phone}",
-    "welcomeBack": "Wellnistaへおかえりなさい"
+    "welcomeBack": "Wellnistaへおかえりなさい",
+    "signup": "サインアップ",
+    "signupTitle": "アカウント作成",
+    "signupSubtitle": "電話番号とパスワードで登録",
+    "phonePlaceholder": "電話番号（例：0812345678）",
+    "alreadyHaveAccount": "すでにアカウントをお持ちですか？",
+    "loginHere": "ここでログイン",
+    "notLoggedIn": "ログインしていません",
+    "registrationError": "登録エラーが発生しました",
+    "registrationSuccess": "登録が完了しました！",
+    "signupSuccess": "サインアップは成功しましたが、追加データの保存中にエラーが発生しました"
   },
   "navigation": {
     "home": "ホーム",
@@ -160,5 +170,20 @@
     "network": "ネットワークエラー。接続を確認してください。",
     "auth": "認証エラー",
     "camera": "カメラにアクセスできません"
+  },
+  "register": {
+    "title": "登録",
+    "fullName": "氏名",
+    "nickname": "ニックネーム",
+    "diseases": "基礎疾患",
+    "otherDiseases": "その他の基礎疾患",
+    "medicines": "常用薬",
+    "gender": "性別",
+    "age": "年齢",
+    "weight": "体重",
+    "height": "身長",
+    "waist": "ウエスト",
+    "activityLevel": "活動レベル",
+    "submit": "登録"
   }
 } 

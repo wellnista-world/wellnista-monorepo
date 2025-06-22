@@ -16,6 +16,7 @@ import MultipleSelectCheckmarks from '../components/util/SelectChecker';
 import StdSelect from '../components/std/StdSelect';
 import theme from '..//components/theme/theme';
 import { useRouter } from 'next/navigation';
+import { useI18n } from '../../i18n';
 
 export interface UserData {
   name: string;
@@ -43,6 +44,7 @@ const diseaseNames = ['เบาหวาน', 'ไต', 'หัวใจ', 'ค
 
 export default function Register() {
   const router = useRouter();
+  const { t } = useI18n();
   const [userData, setUserData] = useState<UserData>({
     name: '',
     nickname: '',
@@ -117,7 +119,7 @@ export default function Register() {
     } = await supabase.auth.getUser();
 
     if (userError || !user) {
-      alert('คุณยังไม่ได้เข้าสู่ระบบ');
+      alert(t('auth.notLoggedIn'));
       setLoading(false);
       return;
     }
@@ -128,9 +130,9 @@ export default function Register() {
 
     if (error) {
       console.error('Error inserting data:', error);
-      alert('เกิดข้อผิดพลาดในการลงทะเบียน');
+      alert(t('auth.registrationError'));
     } else {
-      alert('ลงทะเบียนสำเร็จ!');
+      alert(t('auth.registrationSuccess'));
       router.push('/home');
     }
 
@@ -142,12 +144,12 @@ export default function Register() {
       <Box className="min-h-screen bg-secondary flex justify-center items-start px-4 pt-6 pb-12">
         <Box className="w-full max-w-sm p-6 space-y-4">
           <Typography variant="h5" className="text-primary text-neutral font-garet text-center">
-            ลงทะเบียน
+            {t('register.title')}
           </Typography>
 
           <TextField
             id="outlined-basic"
-            label="ชื่อ - นามสกุล"
+            label={t('register.fullName')}
             fullWidth
             variant="outlined"
             value={userData.name}
@@ -155,7 +157,7 @@ export default function Register() {
           />
 
           <TextField
-            label="ชื่อเล่น"
+            label={t('register.nickname')}
             fullWidth
             variant="outlined"
             value={userData.nickname}
@@ -163,13 +165,13 @@ export default function Register() {
           />
 
           <FormControl fullWidth>
-            <MultipleSelectCheckmarks labelInput='โรคประจำตัว' names={diseaseNames} onChangeValue={handleDiseaseChangeValue} >
+            <MultipleSelectCheckmarks labelInput={t('register.diseases')} names={diseaseNames} onChangeValue={handleDiseaseChangeValue} >
             </MultipleSelectCheckmarks> 
           </FormControl>
 
           { popUp &&(
               <TextField
-              label="โรคประจำตัวอื่นๆ"
+              label={t('register.otherDiseases')}
               fullWidth
               variant='outlined'
               value={newDisease}
@@ -180,17 +182,17 @@ export default function Register() {
           
 
           <TextField
-            label="ยาประจำตัว"
+            label={t('register.medicines')}
             fullWidth
             variant="outlined"
             value={userData.medicines}
             onChange={(e) => handleInputChange('medicines', e.target.value)}
           />
      
-          <StdSelect label='เพศ' names={genderName} onChangeValue={(val) => handleInputChange('gender', val)} />
+          <StdSelect label={t('register.gender')} names={genderName} onChangeValue={(val) => handleInputChange('gender', val)} />
 
           <TextField
-            label="อายุ"
+            label={t('register.age')}
             fullWidth
             type="number"
             value={userData.age ?? ''}
@@ -199,13 +201,13 @@ export default function Register() {
 
           <div className="grid grid-cols-2 gap-4">
             <TextField
-              label="น้ำหนัก"
+              label={t('register.weight')}
               type="number"
               value={userData.weight ?? ''}
               onChange={(e) => handleInputChange('weight', e.target.value === '' ? null : Number(e.target.value))}
             />
             <TextField
-              label="ส่วนสูง"
+              label={t('register.height')}
               type="number"
               value={userData.height ?? ''}
               onChange={(e) => handleInputChange('height', e.target.value === '' ? null : Number(e.target.value))}
@@ -213,14 +215,14 @@ export default function Register() {
           </div>
 
           <TextField
-            label="รอบเอว"
+            label={t('register.waist')}
             fullWidth
             type="number"
             value={userData.waist ?? ''}
             onChange={(e) => handleInputChange('waist', e.target.value === '' ? null : Number(e.target.value))}
           />
 
-          <StdSelect label='ระดับกิจกรรม' names={activitiveLevel} onChangeValue={(val) => handleInputChange('activitylevel', val)} />
+          <StdSelect label={t('register.activityLevel')} names={activitiveLevel} onChangeValue={(val) => handleInputChange('activitylevel', val)} />
           
           <Button
             variant="contained"
@@ -229,7 +231,7 @@ export default function Register() {
             disabled={loading}
             className="!bg-primary hover:!bg-accent !text-white mt-4 rounded-full"
           >
-            {loading ? <CircularProgress size={24} color="inherit" /> : 'ลงทะเบียน'}
+            {loading ? <CircularProgress size={24} color="inherit" /> : t('register.submit')}
           </Button>
         </Box>
       </Box>

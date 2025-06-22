@@ -26,7 +26,17 @@
     "phoneNumber": "Telephone number",
     "password": "Password",
     "welcomeUser": "Hello, {phone}",
-    "welcomeBack": "Welcome back to Wellnista"
+    "welcomeBack": "Welcome back to Wellnista",
+    "signup": "Sign Up",
+    "signupTitle": "Create Account",
+    "signupSubtitle": "Register with your phone number and password",
+    "phonePlaceholder": "Phone number (e.g., 0812345678)",
+    "alreadyHaveAccount": "Already have an account?",
+    "loginHere": "Log in here",
+    "notLoggedIn": "You are not logged in",
+    "registrationError": "Registration error occurred",
+    "registrationSuccess": "Registration successful!",
+    "signupSuccess": "Sign up successful but error occurred while saving additional data"
   },
   "navigation": {
     "home": "Home",
@@ -160,5 +170,20 @@
     "network": "Network error. Please check your connection.",
     "auth": "Authentication error",
     "camera": "Unable to access camera"
+  },
+  "register": {
+    "title": "Register",
+    "fullName": "Full Name",
+    "nickname": "Nickname",
+    "diseases": "Medical Conditions",
+    "otherDiseases": "Other Medical Conditions",
+    "medicines": "Regular Medications",
+    "gender": "Gender",
+    "age": "Age",
+    "weight": "Weight",
+    "height": "Height",
+    "waist": "Waist",
+    "activityLevel": "Activity Level",
+    "submit": "Register"
   }
 } 

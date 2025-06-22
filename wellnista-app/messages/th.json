@@ -26,7 +26,17 @@
     "phoneNumber": "เบอร์โทรศัพท์",
     "password": "รหัสผ่าน",
     "welcomeUser": "สวัสดี คุณ {phone}",
-    "welcomeBack": "ยินดีต้อนรับกลับสู่ Wellnista"
+    "welcomeBack": "ยินดีต้อนรับกลับสู่ Wellnista",
+    "signup": "สมัครสมาชิก",
+    "signupTitle": "สร้างบัญชี",
+    "signupSubtitle": "ลงทะเบียนด้วยเบอร์โทรและรหัสผ่านของคุณ",
+    "phonePlaceholder": "เบอร์โทร (เช่น 0812345678)",
+    "alreadyHaveAccount": "มีบัญชีแล้ว?",
+    "loginHere": "เข้าสู่ระบบ",
+    "notLoggedIn": "คุณยังไม่ได้เข้าสู่ระบบ",
+    "registrationError": "เกิดข้อผิดพลาดในการลงทะเบียน",
+    "registrationSuccess": "ลงทะเบียนสำเร็จ!",
+    "signupSuccess": "สมัครสำเร็จ แต่เกิดข้อผิดพลาดในการบันทึกข้อมูลเพิ่มเติม"
   },
   "navigation": {
     "home": "หน้าแรก",
@@ -160,5 +170,20 @@
     "network": "ข้อผิดพลาดเครือข่าย กรุณาตรวจสอบการเชื่อมต่อ",
     "auth": "ข้อผิดพลาดการยืนยันตัวตน",
     "camera": "ไม่สามารถเข้าถึงกล้องได้"
+  },
+  "register": {
+    "title": "ลงทะเบียน",
+    "fullName": "ชื่อ - นามสกุล",
+    "nickname": "ชื่อเล่น",
+    "diseases": "โรคประจำตัว",
+    "otherDiseases": "โรคประจำตัวอื่นๆ",
+    "medicines": "ยาประจำตัว",
+    "gender": "เพศ",
+    "age": "อายุ",
+    "weight": "น้ำหนัก",
+    "height": "ส่วนสูง",
+    "waist": "รอบเอว",
+    "activityLevel": "ระดับกิจกรรม",
+    "submit": "ลงทะเบียน"
   }
 } 

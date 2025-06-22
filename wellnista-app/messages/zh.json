@@ -20,13 +20,23 @@
     "wellnistaBrand": "Wellnista",
     "tagline": "轻松维持健康的生活方式，每一天",
     "login": "登录",
-    "logout": "退出登录",
+    "logout": "登出",
     "register": "注册",
     "forgotPassword": "忘记密码？",
     "phoneNumber": "电话号码",
     "password": "密码",
     "welcomeUser": "你好，{phone}",
-    "welcomeBack": "欢迎回到 Wellnista"
+    "welcomeBack": "欢迎回到 Wellnista",
+    "signup": "注册",
+    "signupTitle": "创建账户",
+    "signupSubtitle": "使用您的电话号码和密码注册",
+    "phonePlaceholder": "电话号码（例如：0812345678）",
+    "alreadyHaveAccount": "已有账户？",
+    "loginHere": "在此登录",
+    "notLoggedIn": "您尚未登录",
+    "registrationError": "注册时发生错误",
+    "registrationSuccess": "注册成功！",
+    "signupSuccess": "注册成功，但保存额外数据时发生错误"
   },
   "navigation": {
     "home": "首页",
@@ -160,5 +170,20 @@
     "network": "网络错误。请检查您的连接。",
     "auth": "身份验证错误",
     "camera": "无法访问相机"
+  },
+  "register": {
+    "title": "注册",
+    "fullName": "姓名",
+    "nickname": "昵称",
+    "diseases": "基础疾病",
+    "otherDiseases": "其他基础疾病",
+    "medicines": "常规药物",
+    "gender": "性别",
+    "age": "年龄",
+    "weight": "体重",
+    "height": "身高",
+    "waist": "腰围",
+    "activityLevel": "活动水平",
+    "submit": "注册"
   }
 } 

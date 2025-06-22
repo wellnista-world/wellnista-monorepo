@@ -26,7 +26,17 @@
     "phoneNumber": "전화번호",
     "password": "비밀번호",
     "welcomeUser": "안녕하세요, {phone}",
-    "welcomeBack": "Wellnista에 다시 오신 것을 환영합니다"
+    "welcomeBack": "Wellnista에 다시 오신 것을 환영합니다",
+    "signup": "회원가입",
+    "signupTitle": "계정 만들기",
+    "signupSubtitle": "전화번호와 비밀번호로 가입하세요",
+    "phonePlaceholder": "전화번호 (예: 0812345678)",
+    "alreadyHaveAccount": "이미 계정이 있으신가요?",
+    "loginHere": "여기서 로그인",
+    "notLoggedIn": "로그인하지 않았습니다",
+    "registrationError": "등록 중 오류가 발생했습니다",
+    "registrationSuccess": "등록이 완료되었습니다!",
+    "signupSuccess": "가입은 성공했지만 추가 데이터 저장 중 오류가 발생했습니다"
   },
   "navigation": {
     "home": "홈",
@@ -160,5 +170,20 @@
     "network": "네트워크 오류. 연결을 확인해주세요.",
     "auth": "인증 오류",
     "camera": "카메라에 접근할 수 없습니다"
+  },
+  "register": {
+    "title": "등록",
+    "fullName": "이름",
+    "nickname": "닉네임",
+    "diseases": "기저질환",
+    "otherDiseases": "기타 기저질환",
+    "medicines": "정기 복용약",
+    "gender": "성별",
+    "age": "나이",
+    "weight": "체중",
+    "height": "신장",
+    "waist": "허리둘레",
+    "activityLevel": "활동 수준",
+    "submit": "등록"
   }
 } 
