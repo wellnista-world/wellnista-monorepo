@@ -56,9 +56,11 @@ export default function CartPage() {
               <Typography className="text-lg font-semibold">Total:</Typography>
               <Typography className="text-xl font-bold">{cart[0]?.product.currency || ''}{total.toFixed(2)}</Typography>
             </div>
-            <button className="w-full mt-4 bg-primary text-white py-3 rounded-lg font-semibold hover:bg-accent transition">
-              Proceed to Checkout
-            </button>
+            <Link href="/checkout" className="block">
+              <button className="w-full mt-4 bg-primary text-white py-3 rounded-lg font-semibold hover:bg-accent transition">
+                Proceed to Checkout
+              </button>
+            </Link>
           </div>
         </>
       )}
