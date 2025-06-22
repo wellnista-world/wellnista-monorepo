@@ -15,15 +15,17 @@
     "no": "否"
   },
   "auth": {
-    "welcome": "欢迎来到",
+    "welcome": "欢迎来到 Wellnista",
+    "wellnista": "Wellnista",
+    "tagline": "轻松维持健康生活方式，每一天",
     "login": "登录",
     "logout": "退出登录",
     "register": "注册",
     "forgotPassword": "忘记密码？",
-    "phoneNumber": "手机号码 (例如: 0812345678)",
+    "phoneNumber": "电话号码",
     "password": "密码",
-    "welcomeUser": "欢迎, {phone}",
-    "tagline": "让健康生活变得简单"
+    "welcomeUser": "你好，{phone}",
+    "welcomeBack": "欢迎回到 Wellnista"
   },
   "navigation": {
     "home": "首页",
@@ -36,6 +38,10 @@
   },
   "scan": {
     "title": "扫描条形码",
+    "scanBarcode": "扫描条形码",
+    "requestCameraAccess": "请求相机访问",
+    "scanFood": "扫描食物",
+    "takePhoto": "拍照",
     "loadingLiff": "加载 LIFF...",
     "runningInLine": "在 LINE 应用中运行",
     "requestCameraPermission": "请求相机权限",
@@ -51,16 +57,19 @@
     "calories": "卡路里",
     "protein": "蛋白质",
     "personalInfo": "个人信息",
+    "carbCounting": "碳水化合物计数",
     "name": "姓名",
-    "diseases": "疾病状况",
-    "gender": "性别",
+    "diseases": "基础疾病",
+    "gender": "出生时性别",
     "age": "年龄",
     "weight": "体重",
     "height": "身高",
+    "waist": "腰围",
     "activityLevel": "活动水平",
     "years": "岁",
     "kg": "公斤",
     "cm": "厘米",
+    "inch": "英寸",
     "bmi": "BMI",
     "bmiCategories": {
       "obese2": "肥胖 II 级",
@@ -83,13 +92,52 @@
     "heart": "心脏病",
     "hypertension": "高血压",
     "gout": "痛风",
-    "cholesterol": "高胆固醇",
+    "dyslipidemia": "血脂异常",
     "other": "其他",
-    "none": "无"
+    "none": "无基础疾病"
+  },
+  "gender": {
+    "female": "女性",
+    "male": "男性",
+    "preferNotToSay": "不愿透露"
+  },
+  "bloodSugar": {
+    "title": "血糖记录",
+    "dateTime": "日期时间",
+    "selectMeal": "选择餐次",
+    "beforeAfter": "餐前/餐后",
+    "bloodGlucoseValue": "血糖值",
+    "record": "记录",
+    "save": "保存",
+    "beforeMeal": "餐前",
+    "afterMeal": "餐后2小时",
+    "morning": "早餐",
+    "lunch": "午餐",
+    "evening": "晚餐",
+    "beforeBed": "睡前"
+  },
+  "knowledge": {
+    "library": "知识库",
+    "carbs": "碳水化合物知识",
+    "protein": "蛋白质",
+    "foodExchange": "食物交换",
+    "sodium": "钠"
   },
   "menu": {
     "title": "Wellnista",
+    "welcome": "欢迎来到 Wellnista",
+    "chooseAction": "选择以下操作开始使用",
+    "checkNutrition": "检查食物营养",
+    "scanBarcode": "扫描条形码",
+    "takePhoto": "拍摄食物照片",
     "underDevelopment": "此功能正在开发中"
+  },
+  "home": {
+    "eatThisScan": "吃这个？立即扫描！",
+    "whatToEat": "吃什么好？",
+    "bloodSugarLog": "血糖记录",
+    "specializedFood": "为您的亲人提供专业食品",
+    "carbLogging": "记录碳水化合物比您想象的更容易。它有助于预防非传染性慢性疾病。"
   },
   "settings": {
     "title": "设置",

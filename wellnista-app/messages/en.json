@@ -15,15 +15,17 @@
     "no": "No"
   },
   "auth": {
-    "welcome": "Welcome to",
-    "login": "Login",
-    "logout": "Logout",
+    "welcome": "Welcome to wellnista",
+    "wellnista": "Wellnista",
+    "tagline": "Sustain Your Healthy Lifestyle-Easily, Every day",
+    "login": "Log in",
+    "logout": "Log out",
     "register": "Register",
     "forgotPassword": "Forgot Password?",
-    "phoneNumber": "Phone Number (e.g., 0812345678)",
+    "phoneNumber": "Telephone number",
     "password": "Password",
-    "welcomeUser": "Welcome, {phone}",
-    "tagline": "Making good health easy for everyone"
+    "welcomeUser": "Hello, {phone}",
+    "welcomeBack": "Welcome back to Wellnista"
   },
   "navigation": {
     "home": "Home",
@@ -36,6 +38,10 @@
   },
   "scan": {
     "title": "Scan Barcode",
+    "scanBarcode": "Scan Barcode",
+    "requestCameraAccess": "Request camera access",
+    "scanFood": "Scan Food",
+    "takePhoto": "Take Photo",
     "loadingLiff": "Loading LIFF...",
     "runningInLine": "Running in LINE App",
     "requestCameraPermission": "Request Camera Permission",
@@ -51,16 +57,19 @@
     "calories": "Calories",
     "protein": "Protein",
     "personalInfo": "Personal Information",
-    "name": "Full Name",
-    "diseases": "Medical Conditions",
-    "gender": "Gender",
+    "carbCounting": "Carb Counting",
+    "name": "Name - Surname",
+    "diseases": "Underlying medical conditions",
+    "gender": "Sex assigned at birth",
     "age": "Age",
     "weight": "Weight",
     "height": "Height",
+    "waist": "Waist",
     "activityLevel": "Activity Level",
     "years": "years",
-    "kg": "kg",
-    "cm": "cm",
+    "kg": "Kilograms",
+    "cm": "Centimeters",
+    "inch": "inch",
     "bmi": "BMI",
     "bmiCategories": {
       "obese2": "Obese Class II",
@@ -71,25 +80,64 @@
     }
   },
   "activityLevels": {
-    "sedentary": "Sedentary (little or no exercise)",
-    "lightlyActive": "Lightly active (light exercise 1-3 days/week)",
-    "moderatelyActive": "Moderately active (moderate exercise 4-5 days/week)",
-    "veryActive": "Very active (hard exercise 6-7 days/week)",
-    "extremelyActive": "Extremely active (very hard exercise, physical job, or training twice a day)"
+    "sedentary": "Sedentary / Little to no exercise",
+    "lightlyActive": "Lightly Active (exercise 1-3 days/week)",
+    "moderatelyActive": "Moderately Active (exercise 4-5 days/week)",
+    "veryActive": "Very Active (exercise 6-7 days/week)",
+    "extremelyActive": "Extremely Active (athlete, 2x per day)"
   },
   "diseases": {
     "diabetes": "Diabetes",
-    "kidney": "Kidney Disease",
-    "heart": "Heart Disease",
+    "kidney": "Kidney disease",
+    "heart": "Heart disease",
     "hypertension": "Hypertension",
     "gout": "Gout",
-    "cholesterol": "High Cholesterol",
-    "other": "Other",
-    "none": "None"
+    "dyslipidemia": "Dyslipidemia",
+    "other": "Others",
+    "none": "No underlying medical conditions"
+  },
+  "gender": {
+    "female": "Female",
+    "male": "Male",
+    "preferNotToSay": "Prefer not to say"
+  },
+  "bloodSugar": {
+    "title": "Blood Sugar Log",
+    "dateTime": "Date-Time",
+    "selectMeal": "Select meal",
+    "beforeAfter": "Before/After",
+    "bloodGlucoseValue": "Blood Glucose Value",
+    "record": "Record",
+    "save": "Save",
+    "beforeMeal": "Before meal",
+    "afterMeal": "2 hours after meal",
+    "morning": "Morning",
+    "lunch": "Lunch",
+    "evening": "Evening",
+    "beforeBed": "Before bed"
+  },
+  "knowledge": {
+    "library": "Knowledge Library",
+    "carbs": "Knowledge about Carbs",
+    "protein": "Protein",
+    "foodExchange": "Food Exchange",
+    "sodium": "Sodium"
   },
   "menu": {
     "title": "Wellnista",
+    "welcome": "Welcome to Wellnista",
+    "chooseAction": "Choose your action below to get started",
+    "checkNutrition": "Check food nutrition",
+    "scanBarcode": "Scan Barcode",
+    "takePhoto": "Take a photo of food",
     "underDevelopment": "This feature is under development"
+  },
+  "home": {
+    "eatThisScan": "Eat this? Scan now!",
+    "whatToEat": "What to eat?",
+    "bloodSugarLog": "Blood Sugar Log",
+    "specializedFood": "Specialized food for your loved ones",
+    "carbLogging": "Carb logging is easier than you think. It helps prevent non-communicable chronic diseases."
   },
   "settings": {
     "title": "Settings",

@@ -15,15 +15,17 @@
     "no": "いいえ"
   },
   "auth": {
-    "welcome": "ようこそ",
+    "welcome": "Wellnistaへようこそ",
+    "wellnista": "Wellnista",
+    "tagline": "健康的なライフスタイルを簡単に、毎日維持",
     "login": "ログイン",
     "logout": "ログアウト",
     "register": "登録",
     "forgotPassword": "パスワードを忘れた？",
-    "phoneNumber": "電話番号 (例: 0812345678)",
+    "phoneNumber": "電話番号",
     "password": "パスワード",
-    "welcomeUser": "ようこそ, {phone}",
-    "tagline": "健康を簡単に"
+    "welcomeUser": "こんにちは、{phone}",
+    "welcomeBack": "Wellnistaへおかえりなさい"
   },
   "navigation": {
     "home": "ホーム",
@@ -36,6 +38,10 @@
   },
   "scan": {
     "title": "バーコードスキャン",
+    "scanBarcode": "バーコードスキャン",
+    "requestCameraAccess": "カメラアクセスを要求",
+    "scanFood": "食品スキャン",
+    "takePhoto": "写真撮影",
     "loadingLiff": "LIFF読み込み中...",
     "runningInLine": "LINEアプリで実行中",
     "requestCameraPermission": "カメラ権限を要求",
@@ -51,16 +57,19 @@
     "calories": "カロリー",
     "protein": "タンパク質",
     "personalInfo": "個人情報",
+    "carbCounting": "炭水化物カウント",
     "name": "氏名",
-    "diseases": "疾患",
-    "gender": "性別",
+    "diseases": "基礎疾患",
+    "gender": "出生時性別",
     "age": "年齢",
     "weight": "体重",
     "height": "身長",
+    "waist": "ウエスト",
     "activityLevel": "活動レベル",
     "years": "歳",
     "kg": "kg",
     "cm": "cm",
+    "inch": "インチ",
     "bmi": "BMI",
     "bmiCategories": {
       "obese2": "肥満2度",
@@ -83,13 +92,52 @@
     "heart": "心臓病",
     "hypertension": "高血圧",
     "gout": "痛風",
-    "cholesterol": "高コレステロール",
+    "dyslipidemia": "脂質異常症",
     "other": "その他",
-    "none": "なし"
+    "none": "基礎疾患なし"
+  },
+  "gender": {
+    "female": "女性",
+    "male": "男性",
+    "preferNotToSay": "回答を避ける"
+  },
+  "bloodSugar": {
+    "title": "血糖記録",
+    "dateTime": "日時",
+    "selectMeal": "食事を選択",
+    "beforeAfter": "食前/食後",
+    "bloodGlucoseValue": "血糖値",
+    "record": "記録",
+    "save": "保存",
+    "beforeMeal": "食前",
+    "afterMeal": "食後2時間",
+    "morning": "朝食",
+    "lunch": "昼食",
+    "evening": "夕食",
+    "beforeBed": "就寝前"
+  },
+  "knowledge": {
+    "library": "知識ライブラリ",
+    "carbs": "炭水化物についての知識",
+    "protein": "タンパク質",
+    "foodExchange": "食品交換",
+    "sodium": "ナトリウム"
   },
   "menu": {
     "title": "Wellnista",
+    "welcome": "Wellnistaへようこそ",
+    "chooseAction": "以下の操作を選択して開始",
+    "checkNutrition": "食品栄養をチェック",
+    "scanBarcode": "バーコードスキャン",
+    "takePhoto": "食品の写真を撮る",
     "underDevelopment": "この機能は開発中です"
+  },
+  "home": {
+    "eatThisScan": "これを食べる？今すぐスキャン！",
+    "whatToEat": "何を食べよう？",
+    "bloodSugarLog": "血糖記録",
+    "specializedFood": "大切な人のための専門食品",
+    "carbLogging": "炭水化物の記録は思ったより簡単です。非感染性慢性疾患の予防に役立ちます。"
   },
   "settings": {
     "title": "設定",

@@ -15,15 +15,17 @@
     "no": "ไม่"
   },
   "auth": {
-    "welcome": "ยินดีต้อนรับเข้าสู่",
+gx    "welcome": "ยินดีต้อนรับสู่ เวลล์นิสต้า",
+    "wellnista": "เวลล์นิสต้า",
+    "tagline": "ทำให้สุขภาพดี กลายเป็นเรื่องง่ายของทุกคน",
     "login": "เข้าสู่ระบบ",
     "logout": "ออกจากระบบ",
     "register": "ลงทะเบียน",
     "forgotPassword": "ลืมรหัสผ่าน?",
-    "phoneNumber": "เบอร์โทร (เช่น 0812345678)",
+    "phoneNumber": "เบอร์โทรศัพท์",
     "password": "รหัสผ่าน",
-    "welcomeUser": "ยินดีต้อนรับ, {phone}",
-    "tagline": "ทำให้สุขภาพดี กลายเป็นเรื่องง่ายของทุกคน"
+    "welcomeUser": "สวัสดี คุณ {phone}",
+    "welcomeBack": "ยินดีต้อนรับกลับสู่ Wellnista"
   },
   "navigation": {
     "home": "หน้าแรก",
@@ -36,6 +38,10 @@
   },
   "scan": {
     "title": "สแกน บาร์โค๊ด",
+    "scanBarcode": "สแกน บาร์โค้ด",
+    "requestCameraAccess": "ขออนุญาตเข้าถึงกล้อง",
+    "scanFood": "สแกน อาหาร",
+    "takePhoto": "ถ่ายรูป",
     "loadingLiff": "Loading LIFF...",
     "runningInLine": "Running in LINE App",
     "requestCameraPermission": "ขออนุญาติเข้าถึงกล้อง",
@@ -51,16 +57,19 @@
     "calories": "แคลอรี่",
     "protein": "โปรตีน",
     "personalInfo": "ข้อมูลส่วนตัว",
+    "carbCounting": "นับคาร์บ",
     "name": "ชื่อ - นามสกุล",
     "diseases": "โรคประจำตัว",
-    "gender": "เพศ",
+    "gender": "เพศโดยกำเนิด",
     "age": "อายุ",
     "weight": "น้ำหนัก",
     "height": "ส่วนสูง",
+    "waist": "รอบเอว",
     "activityLevel": "ระดับกิจกรรม",
     "years": "ปี",
     "kg": "กิโลกรัม",
     "cm": "เซนติเมตร",
+    "inch": "นิ้ว",
     "bmi": "ดัชนีมวลกาย",
     "bmiCategories": {
       "obese2": "อ้วนระดับ 2",
@@ -79,17 +88,56 @@
   },
   "diseases": {
     "diabetes": "เบาหวาน",
-    "kidney": "ไต",
-    "heart": "หัวใจ",
-    "hypertension": "ความดัน",
-    "gout": "เก๊าต์",
-    "cholesterol": "ไขมัน",
+    "kidney": "โรคไต",
+    "heart": "โรคหัวใจ",
+    "hypertension": "ความดันโลหิตสูง",
+    "gout": "เกาต์",
+    "dyslipidemia": "ไขมันในเลือดผิดปกติ",
     "other": "อื่นๆ",
-    "none": "ไม่มี"
+    "none": "ไม่มีโรคประจำตัว"
+  },
+  "gender": {
+    "female": "หญิง",
+    "male": "ชาย",
+    "preferNotToSay": "ไม่ระบุ"
+  },
+  "bloodSugar": {
+    "title": "สมุดบันทึกน้ำตาล",
+    "dateTime": "วัน-เวลา",
+    "selectMeal": "เลือกมื้อ",
+    "beforeAfter": "ก่อน/หลัง",
+    "bloodGlucoseValue": "ค่า DTX",
+    "record": "บันทึก",
+    "save": "บันทึก",
+    "beforeMeal": "ก่อนอาหาร",
+    "afterMeal": "หลังอาหาร 2 ชม.",
+    "morning": "เช้า",
+    "lunch": "กลางวัน",
+    "evening": "เย็น",
+    "beforeBed": "ก่อนนอน"
+  },
+  "knowledge": {
+    "library": "ห้องสมุดความรู้",
+    "carbs": "ความรู้เรื่องคาร์บ",
+    "protein": "โปรตีน",
+    "foodExchange": "อาหารแลกเปลี่ยน",
+    "sodium": "โซเดียม"
   },
   "menu": {
     "title": "Wellnista",
+    "welcome": "ยินดีต้อนรับเข้าสู่ Wellnista",
+    "chooseAction": "เลือกการดำเนินการด้านล่างเพื่อเริ่มต้น",
+    "checkNutrition": "ตรวจสอบโภชนาการอาหาร",
+    "scanBarcode": "สแกน บาร์โค้ด",
+    "takePhoto": "ถ่ายรูปอาหาร",
     "underDevelopment": "ฟีเจอร์นี้อยู่ระหว่างการพัฒนา"
+  },
+  "home": {
+    "eatThisScan": "กินนี้มั้ย สแกนเลย !",
+    "whatToEat": "กินอะไรดี ?",
+    "bloodSugarLog": "สมุดบันทึกน้ำตาล",
+    "specializedFood": "อาหารเฉพาะโรคเพื่อคนที่คุณรัก",
+    "carbLogging": "การบันทึกคาร์บง่ายกว่าที่คิด ช่วยป้องกันโรคไม่ติดต่อเรื้อรัง"
   },
   "settings": {
     "title": "ตั้งค่า",

@@ -15,15 +15,17 @@
     "no": "아니오"
   },
   "auth": {
-    "welcome": "환영합니다",
+    "welcome": "Wellnista에 오신 것을 환영합니다",
+    "wellnista": "Wellnista",
+    "tagline": "건강한 라이프스타일을 쉽게, 매일 유지하세요",
     "login": "로그인",
     "logout": "로그아웃",
     "register": "회원가입",
     "forgotPassword": "비밀번호를 잊으셨나요?",
-    "phoneNumber": "전화번호 (예: 0812345678)",
+    "phoneNumber": "전화번호",
     "password": "비밀번호",
-    "welcomeUser": "환영합니다, {phone}",
-    "tagline": "건강한 삶을 쉽게"
+    "welcomeUser": "안녕하세요, {phone}",
+    "welcomeBack": "Wellnista에 다시 오신 것을 환영합니다"
   },
   "navigation": {
     "home": "홈",
@@ -36,6 +38,10 @@
   },
   "scan": {
     "title": "바코드 스캔",
+    "scanBarcode": "바코드 스캔",
+    "requestCameraAccess": "카메라 접근 요청",
+    "scanFood": "음식 스캔",
+    "takePhoto": "사진 촬영",
     "loadingLiff": "LIFF 로딩 중...",
     "runningInLine": "LINE 앱에서 실행 중",
     "requestCameraPermission": "카메라 권한 요청",
@@ -51,16 +57,19 @@
     "calories": "칼로리",
     "protein": "단백질",
     "personalInfo": "개인정보",
+    "carbCounting": "탄수화물 계산",
     "name": "이름",
-    "diseases": "질병",
-    "gender": "성별",
+    "diseases": "기저질환",
+    "gender": "출생 시 성별",
     "age": "나이",
     "weight": "체중",
     "height": "키",
+    "waist": "허리둘레",
     "activityLevel": "활동 수준",
     "years": "세",
     "kg": "kg",
     "cm": "cm",
+    "inch": "인치",
     "bmi": "BMI",
     "bmiCategories": {
       "obese2": "비만 2단계",
@@ -83,13 +92,52 @@
     "heart": "심장 질환",
     "hypertension": "고혈압",
     "gout": "통풍",
-    "cholesterol": "고콜레스테롤",
+    "dyslipidemia": "이상지질혈증",
     "other": "기타",
-    "none": "없음"
+    "none": "기저질환 없음"
+  },
+  "gender": {
+    "female": "여성",
+    "male": "남성",
+    "preferNotToSay": "답변을 원하지 않음"
+  },
+  "bloodSugar": {
+    "title": "혈당 기록",
+    "dateTime": "날짜-시간",
+    "selectMeal": "식사 선택",
+    "beforeAfter": "식전/식후",
+    "bloodGlucoseValue": "혈당 수치",
+    "record": "기록",
+    "save": "저장",
+    "beforeMeal": "식전",
+    "afterMeal": "식후 2시간",
+    "morning": "아침",
+    "lunch": "점심",
+    "evening": "저녁",
+    "beforeBed": "취침 전"
+  },
+  "knowledge": {
+    "library": "지식 라이브러리",
+    "carbs": "탄수화물에 대한 지식",
+    "protein": "단백질",
+    "foodExchange": "식품 교환",
+    "sodium": "나트륨"
   },
   "menu": {
     "title": "Wellnista",
+    "welcome": "Wellnista에 오신 것을 환영합니다",
+    "chooseAction": "아래 작업을 선택하여 시작하세요",
+    "checkNutrition": "식품 영양 확인",
+    "scanBarcode": "바코드 스캔",
+    "takePhoto": "음식 사진 촬영",
     "underDevelopment": "이 기능은 개발 중입니다"
+  },
+  "home": {
+    "eatThisScan": "이것을 먹을까요? 지금 스캔하세요!",
+    "whatToEat": "뭘 먹을까요?",
+    "bloodSugarLog": "혈당 기록",
+    "specializedFood": "사랑하는 사람을 위한 전문 식품",
+    "carbLogging": "탄수화물 기록은 생각보다 쉽습니다. 비감염성 만성질환 예방에 도움이 됩니다."
   },
   "settings": {
     "title": "설정",
