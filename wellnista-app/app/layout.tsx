@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
-import HamburgerMenu from './components/HamburgerMenu';
 import { AuthProvider } from './lib/context/AuthContext';
 import AddToHomeScreen from './components/AddToHomeScreen';
 import { I18nProvider } from '../i18n';
@@ -157,9 +156,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 )}
                 <div className="flex items-center justify-center">
                   <h1 className="text-2xl font-leckerli text-center flex-1">Wellnista</h1>
-                  <div className="ml-auto w-8">
-                    <HamburgerMenu />
-                  </div>
                 </div>
                 {isInLineApp && (
                   <p className="text-sm text-accent text-center">Running inside LINE</p>

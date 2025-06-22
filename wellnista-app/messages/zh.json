@@ -17,7 +17,8 @@
   "auth": {
     "welcome": "欢迎来到 Wellnista",
     "wellnista": "Wellnista",
-    "tagline": "轻松维持健康生活方式，每一天",
+    "wellnistaBrand": "Wellnista",
+    "tagline": "轻松维持健康的生活方式，每一天",
     "login": "登录",
     "logout": "退出登录",
     "register": "注册",

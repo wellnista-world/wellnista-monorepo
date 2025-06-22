@@ -17,6 +17,7 @@
   "auth": {
     "welcome": "Wellnistaへようこそ",
     "wellnista": "Wellnista",
+    "wellnistaBrand": "Wellnista",
     "tagline": "健康的なライフスタイルを簡単に、毎日維持",
     "login": "ログイン",
     "logout": "ログアウト",

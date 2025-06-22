@@ -1,17 +1,18 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { supabase } from './lib/api/supabaseClient';
-import Link from 'next/link';
-import { useI18n } from '../i18n';
+import { useEffect, useState } from "react";
+import { supabase } from "./lib/api/supabaseClient";
+import Link from "next/link";
+import { useI18n } from "../i18n";
 
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
-import { useRouter } from 'next/navigation';
-import WellnistaLogo from './components/WellnistaLogo';
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+import { useRouter } from "next/navigation";
+import WellnistaLogo from "./components/WellnistaLogo";
+import LanguageSwitcher from "./components/LanguageSwitcher";
 
 interface User {
   phone?: string;
@@ -21,30 +22,33 @@ interface User {
 export default function Home() {
   const { t } = useI18n();
   const [user, setUser] = useState<User | null>(null);
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const formatPhoneNumber = (rawPhone: string) => {
-    const cleaned = rawPhone.replace(/\D/g, ''); // ลบ non-numeric ออก
-    if (cleaned.startsWith('0')) {
-      return '+66' + cleaned.slice(1);
+    const cleaned = rawPhone.replace(/\D/g, ""); // ลบ non-numeric ออก
+    if (cleaned.startsWith("0")) {
+      return "+66" + cleaned.slice(1);
     }
-    return '+66' + cleaned; // fallback กรณี user ลืมใส่ 0
+    return "+66" + cleaned; // fallback กรณี user ลืมใส่ 0
   };
 
   useEffect(() => {
     const checkAuth = async () => {
-      const { data: { user }, error } = await supabase.auth.getUser();
-      
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser();
+
       if (!error && user) {
         // If already authenticated, redirect to home
-        router.push('/home');
+        router.push("/home");
         return;
       }
-      
+
       setUser(null);
     };
 
@@ -64,7 +68,7 @@ export default function Home() {
       setError(error.message);
     } else {
       setUser(data.user);
-      router.push('/home');
+      router.push("/home");
     }
     setLoading(false);
   };
@@ -76,39 +80,33 @@ export default function Home() {
       localStorage.clear();
       sessionStorage.clear();
       // Force a hard refresh of the page
-      window.location.href = '/';
+      window.location.href = "/";
     }
   };
 
   return (
     <Box className="justify-center items-center flex flex-col gap-1 bg-secondary px-4 mt-6">
-      <Typography
-        variant="h4"
-        className="font-bold text-center"
-      >
-        {t('auth.welcome')}
+      <Typography variant="h4" className="font-bold text-center">
+        {t("auth.welcome")}
       </Typography>
       <Box>
         <WellnistaLogo />
       </Box>
-      <Typography
-        variant="h5"
-        className="font-bold mt-10 text-center"
-      >
-        เวลล์นิสต้า
+      <Typography variant="h5" className="font-bold mt-10 text-center">
+        {t("auth.wellnistaBrand")}
       </Typography>
       <Typography
         variant="subtitle1"
         className="mt-10 text-lg text-center font-semibold"
       >
-        {t('auth.tagline')}
+        {t("auth.tagline")}
       </Typography>
 
       <Box className="mt-6 w-full max-w-sm flex flex-col gap-4">
         {user ? (
           <>
             <Typography className="text-xl text-center">
-              {t('auth.welcomeUser', { phone: user.phone || '' })}
+              {t("auth.welcomeUser", { phone: user.phone || "" })}
             </Typography>
             <Button
               variant="contained"
@@ -116,14 +114,14 @@ export default function Home() {
               className="bg-red-500 hover:bg-red-600 text-white font-garet"
               fullWidth
             >
-              {t('auth.logout')}
+              {t("auth.logout")}
             </Button>
           </>
         ) : (
           <>
             <TextField
               fullWidth
-              label={t('auth.phoneNumber')}
+              label={t("auth.phoneNumber")}
               variant="outlined"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
@@ -131,7 +129,7 @@ export default function Home() {
             />
             <TextField
               fullWidth
-              label={t('auth.password')}
+              label={t("auth.password")}
               variant="outlined"
               type="password"
               value={password}
@@ -143,7 +141,11 @@ export default function Home() {
               disabled={loading}
               className="px-6 py-3 bg-primary text-secondary rounded-full hover:bg-accent transition font-garet"
             >
-              {loading ? <CircularProgress size={24} color="inherit" /> : t('auth.login')}
+              {loading ? (
+                <CircularProgress size={24} color="inherit" />
+              ) : (
+                t("auth.login")
+              )}
             </button>
             {error && (
               <Typography color="error" variant="body2">
@@ -153,11 +155,20 @@ export default function Home() {
 
             <Box className="flex justify-between text-sm text-gray-500">
               <Link href="/register/signup" passHref legacyBehavior>
-                <Typography className="cursor-pointer hover:underline">{t('auth.register')}</Typography>
+                <Typography className="cursor-pointer hover:underline">
+                  {t("auth.register")}
+                </Typography>
               </Link>
-              <Typography className="cursor-pointer hover:underline" onClick={() => {}}>
-                {t('auth.forgotPassword')}
+              <Typography
+                className="cursor-pointer hover:underline"
+                onClick={() => {}}
+              >
+                {t("auth.forgotPassword")}
               </Typography>
+            </Box>
+            {/* Language Switcher */}
+            <Box className="w-full flex justify-end mb-4">
+              <LanguageSwitcher />
             </Box>
           </>
         )}
