@@ -23,7 +23,7 @@ import { getAdvertisingItems } from '../../config/advertising';
 
 export default function HomeScreen() {
   const router = useRouter();
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
   const { t, locale } = useI18n();
   const [userName, setUserName] = useState<string | null>(null);
 
