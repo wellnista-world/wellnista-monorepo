@@ -29,14 +29,18 @@
       "description": "Add Wellnista to your home screen for faster access and easier use",
       "install": "Install",
       "notNow": "Not now"
-    }
+    },
+    "chat": "Chat",
+    "addToCart": "Add to Cart",
+    "buyNow": "Buy Now",
+    "viewDetails": "View Details"
   },
   "auth": {
     "welcome": "Welcome to wellnista",
     "wellnista": "Wellnista",
     "wellnistaBrand": "Wellnista",
     "tagline": "Sustain Your Healthy Lifestyle-Easily, Every day",
-    "login": "Log in",
+    "login": "Login",
     "logout": "Log out",
     "register": "Register",
     "forgotPassword": "Forgot Password?",
@@ -263,7 +267,9 @@
         "title": "Food Scanning",
         "description": "Scan food to see accurate nutritional information"
       }
-    }
+    },
+    "install": "Install",
+    "notNow": "Not now"
   },
   "settings": {
     "title": "Settings",
