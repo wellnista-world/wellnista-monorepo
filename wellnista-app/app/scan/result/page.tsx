@@ -221,7 +221,7 @@ export default function ResultPage() {
   return (
     <Box className="flex flex-col min-h-screen bg-secondary text-neutral font-garet p-4">
       <p className="text-3xl font-bold mb-4">
-        {product?.product_name_th || product?.product_name_en || product?.product_name || t('scan.noProductName')}
+        {product?.product_name || product?.product_name_en || product?.product_name_th || t('scan.noProductName')}
       </p>
       <Box className="grid grid-cols-2 gap-4 mb-6">
         <Box className="rounded-full w-full h-full items-center">
@@ -233,7 +233,7 @@ export default function ResultPage() {
             ) : (
               <Image
                 src={product.image_url as string}
-                alt={product?.product_name_en || t('scan.noImage')}
+                alt={product?.product_name || product?.product_name_en || t('scan.noImage')}
                 className="w-full h-full object-cover rounded-lg"
                 width={500}
                 height={500}

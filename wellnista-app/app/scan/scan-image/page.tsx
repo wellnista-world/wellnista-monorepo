@@ -14,7 +14,7 @@ import { useI18n } from "../../../i18n";
 export default function ScanImagePage() {
   const router = useRouter();
   const { user } = useAuth();
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const {
     isLiffReady,
     error: liffError,
@@ -109,7 +109,10 @@ export default function ScanImagePage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ image: capturedImage }),
+        body: JSON.stringify({ 
+          image: capturedImage,
+          language: locale 
+        }),
       });
 
       const data = await response.json();
@@ -280,7 +283,7 @@ export default function ScanImagePage() {
       {analysisResult && (
         <div className="flex flex-col min-h-screen bg-secondary text-neutral font-garet p-4">
           <p className="text-3xl font-bold mb-4">
-            {analysisResult.product_name_th || analysisResult.product_name_en || analysisResult.product_name || t('scan.noProductName')}
+            {analysisResult.product_name || analysisResult.product_name_en || analysisResult.product_name_th || t('scan.noProductName')}
           </p>
 
           <div className="grid grid-cols-2 gap-4 mb-6">
@@ -288,7 +291,7 @@ export default function ScanImagePage() {
               {capturedImage ? (
                 <img
                   src={capturedImage}
-                  alt={analysisResult.product_name_en || t('scan.noImage')}
+                  alt={analysisResult.product_name || analysisResult.product_name_en || t('scan.noImage')}
                   className="w-full h-full object-cover rounded-lg"
                 />
               ) : (

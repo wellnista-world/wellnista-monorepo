@@ -3,7 +3,7 @@ import { analyzeFoodImage } from '../../lib/api/analyze-food';
 
 export async function POST(request: Request) {
   try {
-    const { image } = await request.json();
+    const { image, language = 'th' } = await request.json();
 
     if (!image) {
       return NextResponse.json(
@@ -12,7 +12,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const result = await analyzeFoodImage(image);
+    const result = await analyzeFoodImage(image, language);
     return NextResponse.json(result);
 
   } catch (error) {
