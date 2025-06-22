@@ -1,0 +1,317 @@
+{
+  "common": {
+    "loading": "Memuat...",
+    "error": "Error",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "back": "Kembali",
+    "next": "Selanjutnya",
+    "submit": "Kirim",
+    "close": "Tutup",
+    "edit": "Edit",
+    "delete": "Hapus",
+    "confirm": "Konfirmasi",
+    "yes": "Ya",
+    "no": "Tidak",
+    "add": "Tambah",
+    "search": "Cari",
+    "filter": "Filter",
+    "sort": "Urutkan",
+    "refresh": "Segarkan",
+    "previous": "Sebelumnya",
+    "open": "Buka",
+    "ok": "OK",
+    "success": "Berhasil",
+    "warning": "Peringatan",
+    "info": "Informasi"
+  },
+  "auth": {
+    "welcome": "Selamat datang di Wellnista",
+    "wellnista": "Wellnista",
+    "wellnistaBrand": "Wellnista",
+    "tagline": "Jaga Gaya Hidup Sehat Anda - Mudah, Setiap Hari",
+    "login": "Masuk",
+    "logout": "Keluar",
+    "register": "Daftar",
+    "forgotPassword": "Lupa Password?",
+    "phoneNumber": "Nomor telepon",
+    "password": "Password",
+    "welcomeUser": "Halo, {phone}",
+    "welcomeBack": "Selamat datang kembali ke Wellnista",
+    "signup": "Daftar",
+    "signupTitle": "Buat Akun",
+    "signupSubtitle": "Daftar dengan nomor telepon dan password Anda",
+    "phonePlaceholder": "Nomor telepon (contoh: 0812345678)",
+    "alreadyHaveAccount": "Sudah punya akun?",
+    "loginHere": "Masuk di sini",
+    "notLoggedIn": "Anda belum masuk",
+    "registrationError": "Terjadi kesalahan saat pendaftaran",
+    "registrationSuccess": "Pendaftaran berhasil!",
+    "signupSuccess": "Pendaftaran berhasil tetapi terjadi kesalahan saat menyimpan data tambahan"
+  },
+  "navigation": {
+    "home": "Beranda",
+    "menu": "Menu",
+    "profile": "Profil",
+    "scan": "Pindai",
+    "library": "Perpustakaan",
+    "book": "Buku",
+    "settings": "Pengaturan"
+  },
+  "scan": {
+    "title": "Pindai Barcode",
+    "scanBarcode": "Pindai Barcode",
+    "requestCameraAccess": "Minta akses kamera",
+    "scanFood": "Pindai Makanan",
+    "takePhoto": "Ambil Foto",
+    "loadingLiff": "Memuat LIFF...",
+    "runningInLine": "Berjalan di Aplikasi LINE",
+    "requestCameraPermission": "Minta Izin Kamera",
+    "cameraError": "Tidak dapat mengakses kamera. Silakan periksa pengaturan.",
+    "failedToAccessCamera": "Gagal mengakses kamera.",
+    "failedToStartScanning": "Gagal memulai pemindaian.",
+    "barcodeScanningError": "Error pemindaian barcode",
+    "capturePhoto": "Ambil Foto",
+    "retakePhoto": "Ambil Ulang Foto",
+    "analyzeFood": "Analisis Makanan",
+    "analyzing": "Menganalisis...",
+    "noProductName": "Tidak ada nama produk",
+    "noImage": "Tidak ada gambar",
+    "noData": "Tidak ada data",
+    "points": "poin",
+    "nutritionalInfo": "Informasi Nutrisi",
+    "carbAmount": "Jumlah Karbohidrat",
+    "carbOfMax": "karb ({percentage}% dari {max} karb maks)",
+    "ate": "Dimakan",
+    "didNotEat": "Tidak dimakan",
+    "takeNewPhoto": "Ambil Foto Baru",
+    "noFoodDataInImage": "Tidak ada data makanan dalam gambar",
+    "cannotAnalyzeImage": "Tidak dapat menganalisis gambar",
+    "noBarcodeInUrl": "Tidak ada barcode dalam URL",
+    "productNotFound": "Produk tidak ditemukan atau data tidak lengkap",
+    "unknownError": "Terjadi kesalahan yang tidak diketahui",
+    "sugar": "Gula",
+    "sodium": "Natrium",
+    "fat": "Lemak",
+    "calories": "Kalori",
+    "protein": "Protein",
+    "carbohydrates": "Karbohidrat",
+    "vitaminA": "Vitamin A",
+    "vitaminB1": "Vitamin B1",
+    "vitaminB2": "Vitamin B2",
+    "calcium": "Kalsium",
+    "iron": "Zat Besi",
+    "grams": "gram",
+    "milligrams": "miligram",
+    "mg": "mg"
+  },
+  "profile": {
+    "title": "Profil",
+    "todayProgress": "Kemajuan Hari Ini",
+    "carb": "Karbohidrat",
+    "calories": "Kalori",
+    "protein": "Protein",
+    "personalInfo": "Informasi Pribadi",
+    "carbCounting": "Penghitungan Karbohidrat",
+    "name": "Nama - Nama Belakang",
+    "diseases": "Kondisi medis yang mendasari",
+    "gender": "Jenis kelamin saat lahir",
+    "age": "Usia",
+    "weight": "Berat Badan",
+    "height": "Tinggi Badan",
+    "waist": "Lingkar Pinggang",
+    "activityLevel": "Tingkat Aktivitas",
+    "years": "tahun",
+    "kg": "Kilogram",
+    "cm": "Sentimeter",
+    "inch": "inci",
+    "bmi": "IMT",
+    "bmiCategories": {
+      "obese2": "Obesitas Kelas II",
+      "obese1": "Obesitas Kelas I",
+      "overweight": "Kelebihan Berat Badan",
+      "normal": "Berat Badan Normal",
+      "underweight": "Kekurangan Berat Badan"
+    },
+    "eatingCalendar": "Kalender Makan",
+    "dailyActivity": "Aktivitas Harian",
+    "grams": "gram",
+    "kilocalories": "kilokalori"
+  },
+  "activityLevels": {
+    "sedentary": "Sedentari / Sedikit atau tidak ada olahraga",
+    "lightlyActive": "Aktif Ringan (olahraga 1-3 hari/minggu)",
+    "moderatelyActive": "Aktif Sedang (olahraga 4-5 hari/minggu)",
+    "veryActive": "Sangat Aktif (olahraga 6-7 hari/minggu)",
+    "extremelyActive": "Ekstrem Aktif (atlet, 2x per hari)"
+  },
+  "diseases": {
+    "diabetes": "Diabetes",
+    "kidney": "Penyakit ginjal",
+    "heart": "Penyakit jantung",
+    "hypertension": "Hipertensi",
+    "gout": "Asam urat",
+    "dyslipidemia": "Dislipidemia",
+    "other": "Lainnya",
+    "none": "Tidak ada kondisi medis yang mendasari"
+  },
+  "gender": {
+    "female": "Perempuan",
+    "male": "Laki-laki",
+    "preferNotToSay": "Lebih suka tidak mengatakan"
+  },
+  "bloodSugar": {
+    "title": "Catatan Gula Darah",
+    "dateTime": "Tanggal-Waktu",
+    "selectMeal": "Pilih waktu makan",
+    "beforeAfter": "Sebelum/Sesudah",
+    "bloodGlucoseValue": "Nilai Glukosa Darah",
+    "record": "Catat",
+    "save": "Simpan",
+    "beforeMeal": "Sebelum makan",
+    "afterMeal": "2 jam setelah makan",
+    "morning": "Pagi",
+    "lunch": "Siang",
+    "evening": "Malam",
+    "beforeBed": "Sebelum tidur",
+    "pleaseCompleteData": "Silakan lengkapi semua field yang diperlukan",
+    "pleaseLoginFirst": "Silakan masuk terlebih dahulu sebelum menyimpan data",
+    "errorSavingData": "Terjadi kesalahan saat menyimpan data",
+    "dataSavedSuccessfully": "Data berhasil disimpan!",
+    "errorUpdatingData": "Terjadi kesalahan saat memperbarui data",
+    "beforeMealGraph": "Sebelum Makan",
+    "afterMealGraph": "Sesudah Makan"
+  },
+  "knowledge": {
+    "library": "Perpustakaan Pengetahuan",
+    "carbs": "Pengetahuan tentang Karbohidrat",
+    "protein": "Protein",
+    "foodExchange": "Pertukaran Makanan",
+    "sodium": "Natrium",
+    "title": "Perpustakaan Pengetahuan",
+    "subtitle": "Pelajari tentang nutrisi dan kesehatan",
+    "topics": {
+      "carbs": {
+        "title": "Pengetahuan Karbohidrat",
+        "description": "Pelajari tentang karbohidrat dan pengelolaannya"
+      },
+      "protein": {
+        "title": "Protein",
+        "description": "Informasi tentang protein dan manfaat kesehatan"
+      },
+      "foodExchange": {
+        "title": "Pertukaran Makanan",
+        "description": "Cara menukar makanan untuk kesehatan yang lebih baik"
+      },
+      "sodium": {
+        "title": "Natrium",
+        "description": "Pentingnya natrium dan pengendaliannya"
+      }
+    }
+  },
+  "menu": {
+    "title": "Wellnista",
+    "welcome": "Selamat datang di Wellnista",
+    "chooseAction": "Pilih tindakan di bawah untuk memulai",
+    "checkNutrition": "Periksa nutrisi makanan",
+    "scanBarcode": "Pindai Barcode",
+    "takePhoto": "Ambil foto makanan",
+    "underDevelopment": "Fitur ini sedang dalam pengembangan",
+    "welcomeTo": "Selamat datang di",
+    "selectMethod": "Pilih metode yang ingin Anda gunakan untuk memeriksa makanan Anda",
+    "toViewNutrition": "untuk melihat informasi nutrisi"
+  },
+  "home": {
+    "eatThisScan": "Makan ini? Pindai sekarang!",
+    "whatToEat": "Apa yang harus dimakan?",
+    "bloodSugarLog": "Catatan Gula Darah",
+    "specializedFood": "Makanan khusus untuk orang yang Anda cintai",
+    "carbLogging": "Pencatatan karbohidrat lebih mudah dari yang Anda pikirkan. Ini membantu mencegah penyakit kronis non-menular.",
+    "wellnistaMarket": "Wellnista Market",
+    "wellnistaLibrary": "Wellnista Library",
+    "advertising": {
+      "title": "Iklan",
+      "clickToSeeMore": "Klik untuk melihat lebih lanjut",
+      "promotion1": {
+        "title": "Promosi Khusus",
+        "description": "Hingga 50% diskon untuk produk kesehatan"
+      },
+      "promotion2": {
+        "title": "Layanan Baru",
+        "description": "Konsultasi nutrisi online gratis!"
+      },
+      "promotion3": {
+        "title": "Aplikasi Baru",
+        "description": "Unduh aplikasi baru untuk kesehatan yang lebih baik"
+      },
+      "promotion4": {
+        "title": "Pelacakan Kesehatan",
+        "description": "Pantau dan lacak kesehatan Anda secara berkelanjutan"
+      },
+      "promotion5": {
+        "title": "Pemindaian Makanan",
+        "description": "Pindai makanan untuk melihat informasi nutrisi yang akurat"
+      }
+    }
+  },
+  "settings": {
+    "title": "Pengaturan",
+    "language": "Bahasa",
+    "languageDescription": "Pilih bahasa yang Anda inginkan untuk aplikasi",
+    "currentLanguage": "Bahasa Saat Ini",
+    "appInfo": "Informasi Aplikasi",
+    "version": "Versi",
+    "developer": "Pengembang"
+  },
+  "errors": {
+    "general": "Terjadi kesalahan. Silakan coba lagi.",
+    "network": "Kesalahan jaringan. Silakan periksa koneksi Anda.",
+    "auth": "Kesalahan autentikasi",
+    "camera": "Tidak dapat mengakses kamera"
+  },
+  "register": {
+    "title": "Daftar",
+    "fullName": "Nama Lengkap",
+    "nickname": "Nama Panggilan",
+    "diseases": "Kondisi Medis",
+    "otherDiseases": "Kondisi Medis Lainnya",
+    "medicines": "Obat Rutin",
+    "gender": "Jenis Kelamin",
+    "age": "Usia",
+    "weight": "Berat Badan",
+    "height": "Tinggi Badan",
+    "waist": "Lingkar Pinggang",
+    "activityLevel": "Tingkat Aktivitas",
+    "submit": "Daftar"
+  },
+  "introductionStatus": {
+    "safe": "Aman - Dalam rentang yang direkomendasikan",
+    "moderate": "Sedikit di atas nilai yang direkomendasikan",
+    "high": "Secara signifikan di atas nilai yang direkomendasikan"
+  },
+  "calendar": {
+    "months": {
+      "january": "Januari",
+      "february": "Februari",
+      "march": "Maret",
+      "april": "April",
+      "may": "Mei",
+      "june": "Juni",
+      "july": "Juli",
+      "august": "Agustus",
+      "september": "September",
+      "october": "Oktober",
+      "november": "November",
+      "december": "Desember"
+    },
+    "days": {
+      "sun": "Min",
+      "mon": "Sen",
+      "tue": "Sel",
+      "wed": "Rab",
+      "thu": "Kam",
+      "fri": "Jum",
+      "sat": "Sab"
+    }
+  }
+} 

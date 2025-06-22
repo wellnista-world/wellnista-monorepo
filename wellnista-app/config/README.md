@@ -42,6 +42,10 @@ Contains the main advertising configuration including:
     ko: {
       title: "Korean Title",
       description: "Korean Description"
+    },
+    id: {
+      title: "Indonesian Title",
+      description: "Indonesian Description"
     }
   }
 }

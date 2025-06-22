@@ -4,7 +4,7 @@ import { useI18n } from '../../i18n';
 import { Button } from '@mui/material';
 
 interface Language {
-  code: 'th' | 'en' | 'zh' | 'ja' | 'ko';
+  code: 'th' | 'en' | 'zh' | 'ja' | 'ko' | 'id';
   label: string;
   isDefault?: boolean;
 }
@@ -17,7 +17,8 @@ export default function LanguageSwitcher() {
     { code: 'en', label: 'EN' },
     { code: 'zh', label: '中文' },
     { code: 'ja', label: '日本語' },
-    { code: 'ko', label: '한국어' }
+    { code: 'ko', label: '한국어' },
+    { code: 'id', label: 'ID' }
   ];
 
   return (

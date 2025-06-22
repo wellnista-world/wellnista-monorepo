@@ -13,7 +13,8 @@ export default function SettingsPage() {
       th: 'ไทย (Default)',
       zh: '中文',
       ja: '日本語',
-      ko: '한국어'
+      ko: '한국어',
+      id: 'Bahasa Indonesia'
     };
     return languageNames[code as keyof typeof languageNames] || code;
   };

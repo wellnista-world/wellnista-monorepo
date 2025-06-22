@@ -8,6 +8,7 @@ export interface AdvertisingItem {
     zh: { title: string; description: string };
     ja: { title: string; description: string };
     ko: { title: string; description: string };
+    id: { title: string; description: string };
   };
 }
 
@@ -36,6 +37,10 @@ export const advertisingConfig: AdvertisingItem[] = [
       ko: {
         title: "특별 프로모션",
         description: "건강 제품 최대 50% 할인"
+      },
+      id: {
+        title: "Promo Khusus",
+        description: "Diskon hingga 50% untuk produk kesehatan"
       }
     }
   },
@@ -63,6 +68,10 @@ export const advertisingConfig: AdvertisingItem[] = [
       ko: {
         title: "새로운 서비스",
         description: "무료 온라인 영양 상담!"
+      },
+      id: {
+        title: "Layanan Baru",
+        description: "Konsultasi Gizi Online Gratis!"
       }
     }
   },
@@ -90,6 +99,10 @@ export const advertisingConfig: AdvertisingItem[] = [
       ko: {
         title: "새로운 앱",
         description: "더 나은 건강을 위한 새로운 앱 다운로드"
+      },
+      id: {
+        title: "Aplikasi Baru",
+        description: "Unduh aplikasi baru untuk kesehatan yang lebih baik"
       }
     }
   },
@@ -117,6 +130,10 @@ export const advertisingConfig: AdvertisingItem[] = [
       ko: {
         title: "건강 추적",
         description: "건강 상태를 지속적으로 모니터링하고 추적"
+      },
+      id: {
+        title: "Pelacakan Kesehatan",
+        description: "Mengawasi dan melacak kesehatan Anda secara kontinu"
       }
     }
   },
@@ -144,6 +161,10 @@ export const advertisingConfig: AdvertisingItem[] = [
       ko: {
         title: "식품 스캔",
         description: "식품을 스캔하여 정확한 영양 정보 확인"
+      },
+      id: {
+        title: "Pemindaian Makanan",
+        description: "Pindai makanan untuk melihat informasi gizi yang akurat"
       }
     }
   }

@@ -4,8 +4,9 @@ import thMessages from '../messages/th.json';
 import zhMessages from '../messages/zh.json';
 import jaMessages from '../messages/ja.json';
 import koMessages from '../messages/ko.json';
+import idMessages from '../messages/id.json';
 
-export type Locale = 'th' | 'en' | 'zh' | 'ja' | 'ko';
+export type Locale = 'th' | 'en' | 'zh' | 'ja' | 'ko' | 'id';
 
 interface I18nContextType {
   locale: Locale;
@@ -19,6 +20,7 @@ const messages = {
   zh: zhMessages,
   ja: jaMessages,
   ko: koMessages,
+  id: idMessages,
 };
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined);
@@ -29,7 +31,7 @@ const getStoredLanguage = (): Locale => {
   
   try {
     const stored = localStorage.getItem('wellnista-language');
-    if (stored && ['th', 'en', 'zh', 'ja', 'ko'].includes(stored)) {
+    if (stored && ['th', 'en', 'zh', 'ja', 'ko', 'id'].includes(stored)) {
       return stored as Locale;
     }
   } catch (error) {
