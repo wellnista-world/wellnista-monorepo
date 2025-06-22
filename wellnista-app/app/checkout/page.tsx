@@ -5,7 +5,7 @@ import { useCart } from '../lib/context/CartContext';
 import { loadStripe } from '@stripe/stripe-js';
 import Link from 'next/link';
 import Typography from '@mui/material/Typography';
-import { TextField, Button, Paper, Divider } from '@mui/material';
+import { Button, Paper, Divider } from '@mui/material';
 import { useI18n } from '../../i18n';
 
 const stripePromise = (() => {
@@ -17,53 +17,16 @@ const stripePromise = (() => {
   return loadStripe(publishableKey);
 })();
 
-interface AddressForm {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  address: string;
-  city: string;
-  postalCode: string;
-}
-
 export default function CheckoutPage() {
   const { cart } = useCart();
   const { t } = useI18n();
   const [isLoading, setIsLoading] = useState(false);
-  const [addressForm, setAddressForm] = useState<AddressForm>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    address: '',
-    city: '',
-    postalCode: '',
-  });
 
   const total = cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
-
-  const handleInputChange = (field: keyof AddressForm) => (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setAddressForm(prev => ({
-      ...prev,
-      [field]: event.target.value,
-    }));
-  };
 
   const handleCheckout = async () => {
     if (cart.length === 0) {
       alert(t('common.yourCartIsEmpty'));
-      return;
-    }
-
-    // Validate form
-    const requiredFields: (keyof AddressForm)[] = ['firstName', 'lastName', 'email', 'phone', 'address', 'city', 'postalCode'];
-    const missingFields = requiredFields.filter(field => !addressForm[field]);
-    
-    if (missingFields.length > 0) {
-      alert(t('common.pleaseFillAllFields'));
       return;
     }
 
@@ -77,13 +40,10 @@ export default function CheckoutPage() {
         },
         body: JSON.stringify({
           items: cart,
-          address: addressForm,
         }),
       });
 
       const { sessionId, error } = await response.json();
-
-      console.log(sessionId);
 
       if (error) {
         throw new Error(error);
@@ -98,13 +58,9 @@ export default function CheckoutPage() {
         throw new Error(t('common.stripeFailedToLoad'));
       }
 
-      console.log(stripe);
-
       const { error: stripeError } = await stripe.redirectToCheckout({
         sessionId,
       });
-
-      console.log(stripeError);
 
       if (stripeError) {
         throw new Error(stripeError.message);
@@ -179,67 +135,7 @@ export default function CheckoutPage() {
           </div>
         </Paper>
 
-        {/* Shipping Address Form */}
-        <Paper className="p-6">
-          <Typography variant="h6" className="font-bold mb-4">{t('common.shippingAddress')}</Typography>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <TextField
-              label={t('common.firstName')}
-              value={addressForm.firstName}
-              onChange={handleInputChange('firstName')}
-              required
-              fullWidth
-            />
-            <TextField
-              label={t('common.lastName')}
-              value={addressForm.lastName}
-              onChange={handleInputChange('lastName')}
-              required
-              fullWidth
-            />
-            <TextField
-              label={t('common.email')}
-              type="email"
-              value={addressForm.email}
-              onChange={handleInputChange('email')}
-              required
-              fullWidth
-            />
-            <TextField
-              label={t('common.phone')}
-              value={addressForm.phone}
-              onChange={handleInputChange('phone')}
-              required
-              fullWidth
-            />
-            <TextField
-              label={t('common.address')}
-              value={addressForm.address}
-              onChange={handleInputChange('address')}
-              required
-              fullWidth
-              multiline
-              rows={3}
-              className="md:col-span-2"
-            />
-            <TextField
-              label={t('common.city')}
-              value={addressForm.city}
-              onChange={handleInputChange('city')}
-              required
-              fullWidth
-            />
-            <TextField
-              label={t('common.postalCode')}
-              value={addressForm.postalCode}
-              onChange={handleInputChange('postalCode')}
-              required
-              fullWidth
-            />
-          </div>
-        </Paper>
-
-        {/* Payment Method */}
+        {/* Payment Method Info */}
         <Paper className="p-6">
           <Typography variant="h6" className="font-bold mb-4">{t('common.paymentMethod')}</Typography>
           <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg">

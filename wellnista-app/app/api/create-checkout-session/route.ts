@@ -2,23 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { CartItem } from '../../lib/context/CartContext';
 
-interface Address {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  address: string;
-  city: string;
-  postalCode: string;
-}
-
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-05-28.basil',
 });
 
 export async function POST(request: NextRequest) {
   try {
-    const { items, address }: { items: CartItem[], address: Address } = await request.json();
+    const { items }: { items: CartItem[] } = await request.json();
 
     if (!items || items.length === 0) {
       return NextResponse.json(
@@ -44,8 +34,8 @@ export async function POST(request: NextRequest) {
       shipping_address_collection: {
         allowed_countries: ['TH'], // Thailand only
       },
+      customer_creation: 'always',
       metadata: {
-        address: JSON.stringify(address),
         items: JSON.stringify(items.map((item: CartItem) => ({
           id: item.product.id,
           name: item.product.name,
