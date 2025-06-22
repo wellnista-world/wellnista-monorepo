@@ -36,186 +36,78 @@ export interface Product {
 }
 
 export const products: Product[] = [
-  {
-    id: 1,
-    name: "Specialized Health Food",
-    description: "Professional nutrition for your loved ones",
-    price: 299,
-    currency: "฿",
-    image: "/promote.webp",
-    link: "https://lin.ee/AwaT0wg",
-    category: "health-food",
-    translations: {
-      th: {
-        name: "อาหารสุขภาพเฉพาะทาง",
-        description: "โภชนาการมืออาชีพสำหรับคนที่คุณรัก"
+    {
+        id: 1,
+        name: "เซตน้ำจิ้มรักษ์ไต 5 รสชาติ สูตรโซเดียมต่ำ โดยอาจารย์เปิ้ล ส่งฟรีทั่วไทย!!!",
+        description: "มีถึง 5 รสชาติ อร่อย โซเดียมต่ำ ผัดกะเพรา น้ำจิ้มไก่, น้ำจิ้มซีฟู้ด, น้ำจิ้มสุกี้, น้ำจิ้มแจ่ว",
+        price: 580,
+        currency: "฿",
+        image: "/product1.png",
+        link: "product/1",
+        category: "sauce",
+        translations: {
+          th: {
+            name: "เซตน้ำจิ้มรักษ์ไต 5 รสชาติ สูตรโซเดียมต่ำ โดยอาจารย์เปิ้ล ส่งฟรีทั่วไทย!!!",
+            description: "มีถึง 5 รสชาติ อร่อย โซเดียมต่ำ ผัดกะเพรา น้ำจิ้มไก่, น้ำจิ้มซีฟู้ด, น้ำจิ้มสุกี้, น้ำจิ้มแจ่ว"
+          },
+          en: {
+            name: "Kidney-friendly dipping sauce set, 5 flavors, low sodium recipe by Professor Ple, free delivery throughout Thailand!!!",
+            description: "There are 5 flavors, delicious, low sodium, Pad Krapow, Chicken sauce, Seafood sauce, Suki sauce, Jaew sauce"
+          },
+          zh: {
+            name: "肾脏友好型蘸酱套装，5 种口味，由 Ple 教授研发的低钠配方，泰国全境免费送货！！！",
+            description: "有5种口味，美味，低钠，Pad Krapow，鸡肉酱，海鲜酱，Suki酱，Jaew酱"
+          },
+          ja: {
+            name: "腎臓に優しいつけダレセット、5種類の味、プル教授の低ナトリウムレシピ、タイ全土に送料無料!!!",
+            description: "5種類の味があり、おいしい、低ナトリウム、パックラポー、チキンソース、シーフードソース、スキソース、ジャオソース"
+          },
+          ko: {
+            name: "신장에 좋은 디핑소스 세트, 5가지 맛, Ple 교수의 저염 레시피, 태국 전역 무료 배송!!!",
+            description: "5가지 맛이 있습니다. 맛있고 저염, 패드 크라파우, 치킨 소스, 해산물 소스, 스키 소스, 재우 소스"
+          },
+          id: {
+            name: "Set saus cocol ramah ginjal, 5 rasa, resep rendah sodium oleh Profesor Ple, pengiriman gratis ke seluruh Thailand!!!",
+            description: "Ada 5 rasa, lezat, rendah sodium, Pad Krapow, Saus ayam, Saus seafood, Saus suki, Saus jaew"
+          }
+        }
       },
-      en: {
-        name: "Specialized Health Food",
-        description: "Professional nutrition for your loved ones"
-      },
-      zh: {
-        name: "专业健康食品",
-        description: "为您的亲人提供专业营养"
-      },
-      ja: {
-        name: "専門健康食品",
-        description: "大切な人のための専門栄養"
-      },
-      ko: {
-        name: "전문 건강식품",
-        description: "사랑하는 사람을 위한 전문 영양"
-      },
-      id: {
-        name: "Makanan Kesehatan Khusus",
-        description: "Nutrisi profesional untuk orang yang Anda cintai"
+      {
+        id: 2,
+        name: "เซต หวานกาย สุขใจ ส่งฟรีทั่วไทย!!!",
+        description: "เซตนี้ ได้ขนม 2 + น้ำจิ้ม 2 รสชาติ (แจ้งรสชาติได้หลังกดสั่ง) ขนม 2 อย่างจะได้คุกกี้ไข่ขาว หอม อร่อย หวานน้อย ฟอสฟอรัสต่ำ สูตร อาจารย์เปิ้ล, ขนมปั้นขลิบไส้สัปปะรด ทำจากไข่ขาว กรอบอร่อย",
+        price: 550,
+        currency: "฿",
+        image: "/product2.png",
+        link: "product/2",
+        category: "give_set",
+        translations: {
+          th: {
+            name: "เซต หวานกาย สุขใจ ส่งฟรีทั่วไทย!!!",
+            description: "เซตนี้ ได้ขนม 2 + น้ำจิ้ม 2 รสชาติ (แจ้งรสชาติได้หลังกดสั่ง) ขนม 2 อย่างจะได้คุกกี้ไข่ขาว หอม อร่อย หวานน้อย ฟอสฟอรัสต่ำ สูตร อาจารย์เปิ้ล, ขนมปั้นขลิบไส้สัปปะรด ทำจากไข่ขาว กรอบอร่อย"
+          },
+          en: {
+            name: "Sweet Body, Happy Heart Set, free shipping nationwide!!!",
+            description: "This set includes 2 snacks + 2 dipping sauces (you can specify the flavors after ordering). The 2 snacks include egg white cookies, fragrant, delicious, slightly sweet, low phosphorus, Teacher Ple's recipe, and pineapple-filled crispy pancakes made from egg whites."
+          },
+          zh: {
+            name: "甜蜜身体，快乐心灵套装，全国包邮！！！",
+            description: "此套餐包含2款小吃+2款蘸酱（下单后可指定口味），2款小吃分别是Ple老师食谱的蛋清饼干，香浓可口，微甜，低磷，以及蛋清做的菠萝馅酥脆煎饼。"
+          },
+          ja: {
+            name: "スウィートボディ、ハッピーハートセット、全国送料無料!!!",
+            description: "このセットには、スナック2品とディップソース2種類が含まれています（ご注文後にフレーバーをご指定いただけます）。スナック2品は、プル先生のレシピによる、香ばしく、美味しく、ほんのり甘く、低リンの卵白クッキーと、卵白で作ったパイナップル入りのサクサクパンケーキです。"
+          },
+          ko: {
+            name: "스위트바디, 해피하트 세트, 전국 무료배송!!!",
+            description: "이 세트에는 스낵 2개와 디핑 소스 2개가 포함되어 있습니다(주문 후 맛을 선택하실 수 있습니다). 스낵 2개에는 향긋하고 맛있으며 약간 달콤하고 인 함량이 낮은 계란 흰자 쿠키(선생님 Ple 레시피)와 계란 흰자로 만든 파인애플이 들어간 바삭한 팬케이크가 포함됩니다."
+          },
+          id: {
+            name: "Set Tubuh Manis, Hati Bahagia, gratis ongkos kirim ke seluruh negeri!!!",
+            description: "Paket ini berisi 2 camilan + 2 saus cocol (Anda dapat menentukan rasa setelah memesan). 2 camilan tersebut meliputi kue putih telur, harum, lezat, sedikit manis, rendah fosfor, resep Guru Ple, dan panekuk renyah isi nanas yang terbuat dari putih telur."
+          }
+        }
       }
-    }
-  },
-  {
-    id: 2,
-    name: "Diabetes Management Kit",
-    description: "Complete solution for blood sugar control",
-    price: 599,
-    currency: "฿",
-    image: "/promote.webp",
-    link: "https://lin.ee/AwaT0wg",
-    category: "diabetes-care",
-    translations: {
-      th: {
-        name: "ชุดจัดการเบาหวาน",
-        description: "โซลูชันครบครันสำหรับการควบคุมน้ำตาลในเลือด"
-      },
-      en: {
-        name: "Diabetes Management Kit",
-        description: "Complete solution for blood sugar control"
-      },
-      zh: {
-        name: "糖尿病管理套装",
-        description: "血糖控制的完整解决方案"
-      },
-      ja: {
-        name: "糖尿病管理キット",
-        description: "血糖コントロールの完全ソリューション"
-      },
-      ko: {
-        name: "당뇨병 관리 키트",
-        description: "혈당 조절을 위한 완전한 솔루션"
-      },
-      id: {
-        name: "Kit Manajemen Diabetes",
-        description: "Solusi lengkap untuk kontrol gula darah"
-      }
-    }
-  },
-  {
-    id: 3,
-    name: "Low Carb Meal Plan",
-    description: "Personalized meal plans for better health",
-    price: 399,
-    currency: "฿",
-    image: "/promote.webp",
-    link: "https://lin.ee/AwaT0wg",
-    category: "meal-plans",
-    translations: {
-      th: {
-        name: "แผนมื้ออาหารคาร์บต่ำ",
-        description: "แผนมื้ออาหารส่วนบุคคลเพื่อสุขภาพที่ดีกว่า"
-      },
-      en: {
-        name: "Low Carb Meal Plan",
-        description: "Personalized meal plans for better health"
-      },
-      zh: {
-        name: "低碳水化合物膳食计划",
-        description: "个性化膳食计划，促进健康"
-      },
-      ja: {
-        name: "低炭水化物食事プラン",
-        description: "より良い健康のためのパーソナライズされた食事プラン"
-      },
-      ko: {
-        name: "저탄수화물 식단 계획",
-        description: "더 나은 건강을 위한 맞춤형 식단 계획"
-      },
-      id: {
-        name: "Rencana Makan Rendah Karbohidrat",
-        description: "Rencana makan yang dipersonalisasi untuk kesehatan yang lebih baik"
-      }
-    }
-  },
-  {
-    id: 4,
-    name: "Nutrition Consultation",
-    description: "Expert advice from certified nutritionists",
-    price: 799,
-    currency: "฿",
-    image: "/promote.webp",
-    link: "https://lin.ee/AwaT0wg",
-    category: "consultation",
-    translations: {
-      th: {
-        name: "ปรึกษาโภชนาการ",
-        description: "คำแนะนำจากผู้เชี่ยวชาญด้านโภชนาการที่ได้รับการรับรอง"
-      },
-      en: {
-        name: "Nutrition Consultation",
-        description: "Expert advice from certified nutritionists"
-      },
-      zh: {
-        name: "营养咨询",
-        description: "来自认证营养师的专业建议"
-      },
-      ja: {
-        name: "栄養相談",
-        description: "認定栄養士からの専門的なアドバイス"
-      },
-      ko: {
-        name: "영양 상담",
-        description: "인증된 영양사로부터의 전문 조언"
-      },
-      id: {
-        name: "Konsultasi Nutrisi",
-        description: "Saran ahli dari ahli gizi bersertifikat"
-      }
-    }
-  },
-  {
-    id: 5,
-    name: "Health Monitoring Device",
-    description: "Advanced technology for health tracking",
-    price: 1299,
-    currency: "฿",
-    image: "/promote.webp",
-    link: "https://lin.ee/AwaT0wg",
-    category: "devices",
-    translations: {
-      th: {
-        name: "อุปกรณ์ติดตามสุขภาพ",
-        description: "เทคโนโลยีขั้นสูงสำหรับการติดตามสุขภาพ"
-      },
-      en: {
-        name: "Health Monitoring Device",
-        description: "Advanced technology for health tracking"
-      },
-      zh: {
-        name: "健康监测设备",
-        description: "健康追踪的先进技术"
-      },
-      ja: {
-        name: "健康モニタリングデバイス",
-        description: "健康追跡のための先進技術"
-      },
-      ko: {
-        name: "건강 모니터링 기기",
-        description: "건강 추적을 위한 첨단 기술"
-      },
-      id: {
-        name: "Perangkat Pemantauan Kesehatan",
-        description: "Teknologi canggih untuk pelacakan kesehatan"
-      }
-    }
-  }
 ];
 
 export const getRandomProduct = (): Product => {

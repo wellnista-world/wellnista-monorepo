@@ -21,6 +21,7 @@ import {
 import AdvertisingCarousel from "../components/AdvertisingCarousel";
 import { getAdvertisingItems } from "../../config/advertising";
 import { getRandomProduct, getProductForLocale, Product } from "../../config/products";
+import Image from "next/image";
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -127,7 +128,7 @@ export default function HomeScreen() {
           >
             <div className="flex items-center gap-4">
               <div className="w-24 h-24 bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl flex items-center justify-center">
-                <Store size={48} className="text-primary" />
+                <Image src={recommendedProduct.image} alt={recommendedProduct.name} width={96} height={96} />
               </div>
               <div className="flex-1">
                 <Typography className="text-lg font-bold text-primary mb-1">
