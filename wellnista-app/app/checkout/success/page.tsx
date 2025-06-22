@@ -11,20 +11,12 @@ export default function CheckoutSuccessPage() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
   const { clearCart } = useCart();
-  const [orderDetails, setOrderDetails] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (sessionId) {
       // Clear the cart after successful payment
       clearCart();
-      
-      // You can fetch order details from your backend here if needed
-      // For now, we'll just show a success message
-      setOrderDetails({
-        sessionId,
-        status: 'success'
-      });
       setIsLoading(false);
     }
   }, [sessionId, clearCart]);
