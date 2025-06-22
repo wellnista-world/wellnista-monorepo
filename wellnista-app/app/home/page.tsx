@@ -20,12 +20,14 @@ import {
 } from "lucide-react";
 import AdvertisingCarousel from "../components/AdvertisingCarousel";
 import { getAdvertisingItems } from "../../config/advertising";
+import { getRecommendedProductForLocale, RecommendedProduct } from "../../config/recommendedProducts";
 
 export default function HomeScreen() {
   const router = useRouter();
   const { user } = useAuth();
   const { t, locale } = useI18n();
   const [userName, setUserName] = useState<string | null>(null);
+  const [recommendedProduct, setRecommendedProduct] = useState<RecommendedProduct | null>(null);
 
   useEffect(() => {
     const fetchUserName = async () => {
@@ -47,6 +49,12 @@ export default function HomeScreen() {
 
     fetchUserName();
   }, [user]);
+
+  useEffect(() => {
+    // Get a random recommended product for the current locale
+    const product = getRecommendedProductForLocale(locale);
+    setRecommendedProduct(product);
+  }, [locale]);
 
   const handleLogout = async () => {
     try {
@@ -111,34 +119,29 @@ export default function HomeScreen() {
         <Typography variant="h6" className="font-bold text-primary mb-4 pb-4">
           {t("home.recommendedProducts")}
         </Typography>
-        <div className="bg-white rounded-2xl p-4 shadow-lg">
-          <div className="flex items-center gap-4">
-            <div className="w-20 h-20 bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl flex items-center justify-center">
-              <Store size={40} className="text-primary" />
-            </div>
-            <div className="flex-1">
-              <Typography className="text-lg font-bold text-primary mb-1">
-                {t("home.recommendedProduct")}
-              </Typography>
-              <Typography className="text-sm text-neutral/60 mb-2">
-                {t("home.specializedFood")}
-              </Typography>
-              <div className="flex items-center justify-between">
-                <Typography className="text-lg font-bold text-primary">
-                  ฿299
+        {recommendedProduct && (
+          <div 
+            onClick={() => window.open(recommendedProduct.link, "_blank")}
+            className="bg-white rounded-2xl p-4 shadow-lg hover:opacity-90 transition-all cursor-pointer"
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-24 h-24 bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl flex items-center justify-center">
+                <Store size={48} className="text-primary" />
+              </div>
+              <div className="flex-1">
+                <Typography className="text-lg font-bold text-primary mb-1">
+                  {recommendedProduct.name}
                 </Typography>
-                <button
-                  onClick={() =>
-                    window.open("https://lin.ee/AwaT0wg", "_blank")
-                  }
-                  className="bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-accent transition-colors"
-                >
-                  {t("home.viewProduct")}
-                </button>
+                <Typography className="text-sm text-neutral/60 mb-2">
+                  {recommendedProduct.description}
+                </Typography>
+                <Typography className="text-lg font-bold text-primary">
+                  {recommendedProduct.currency}{recommendedProduct.price}
+                </Typography>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Advertising Carousel */}
