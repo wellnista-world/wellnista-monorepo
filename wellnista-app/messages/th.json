@@ -230,6 +230,9 @@
     "carbLogging": "การบันทึกคาร์บง่ายกว่าที่คิด ช่วยป้องกันโรคไม่ติดต่อเรื้อรัง",
     "wellnistaMarket": "Wellnista Market",
     "wellnistaLibrary": "Wellnista Library",
+    "recommendedProducts": "สินค้าแนะนำ",
+    "recommendedProduct": "สินค้าแนะนำ",
+    "viewProduct": "ดูสินค้า",
     "advertising": {
       "title": "โฆษณา",
       "clickToSeeMore": "คลิกเพื่อดูเพิ่มเติม",

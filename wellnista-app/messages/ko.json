@@ -225,12 +225,15 @@
   },
   "home": {
     "eatThisScan": "이것을 먹을까요? 지금 스캔하세요!",
-    "whatToEat": "무엇을 먹을까요?",
+    "whatToEat": "뭘 먹을까요?",
     "bloodSugarLog": "혈당 기록",
-    "specializedFood": "사랑하는 사람을 위한 전문 식품",
-    "carbLogging": "탄수화물 기록은 생각보다 쉽습니다. 비감염성 만성 질환 예방에 도움이 됩니다.",
     "wellnistaMarket": "Wellnista 마켓",
     "wellnistaLibrary": "Wellnista 라이브러리",
+    "specializedFood": "사랑하는 사람을 위한 전문 식품",
+    "carbLogging": "탄수화물 기록은 생각보다 쉽습니다. 만성 비감염성 질환 예방에 도움이 됩니다",
+    "recommendedProducts": "추천 상품",
+    "recommendedProduct": "추천 상품",
+    "viewProduct": "상품 보기",
     "advertising": {
       "title": "광고",
       "clickToSeeMore": "자세히 보기",
