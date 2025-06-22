@@ -9,10 +9,12 @@ import Box from '@mui/material/Box';
 import { useRouter } from "next/navigation";
 import { supabase } from "@/app/lib/api/supabaseClient";
 import { useAuth } from "@/app/lib/context/AuthContext";
+import { useI18n } from "../../../i18n";
 
 export default function ScanImagePage() {
   const router = useRouter();
   const { user } = useAuth();
+  const { t } = useI18n();
   const {
     isLiffReady,
     error: liffError,
@@ -45,12 +47,12 @@ export default function ScanImagePage() {
         setSelectedCameraId(backCamera?.deviceId || videoDevices[0]?.deviceId);
       } catch (err) {
         console.error("Failed to initialize cameras:", err);
-        setCameraError("Failed to access the camera.");
+        setCameraError(t('scan.failedToAccessCamera'));
       }
     };
 
     initCamera();
-  }, [isLiffReady, cameraPermission]);
+  }, [isLiffReady, cameraPermission, t]);
 
   useEffect(() => {
     if (!selectedCameraId || !videoRef.current) return;
@@ -65,7 +67,7 @@ export default function ScanImagePage() {
         }
       } catch (err) {
         console.error("Failed to start camera:", err);
-        setCameraError("Failed to start camera.");
+        setCameraError(t('scan.failedToStartScanning'));
       }
     };
 
@@ -77,7 +79,7 @@ export default function ScanImagePage() {
         tracks.forEach((track) => track.stop());
       }
     };
-  }, [selectedCameraId]);
+  }, [selectedCameraId, t]);
 
   const captureImage = () => {
     if (!videoRef.current || !canvasRef.current) return;
@@ -113,13 +115,13 @@ export default function ScanImagePage() {
       const data = await response.json();
       console.log(data);
       if (data === null) {
-        setAnalysisError('ไม่พบข้อมูลอาหารในรูปภาพ');
+        setAnalysisError(t('scan.noFoodDataInImage'));
       } else {
         setAnalysisResult(data);
       }
     } catch (error) {
       console.error('Error analyzing image:', error);
-      setAnalysisError('ไม่สามารถวิเคราะห์รูปภาพได้');
+      setAnalysisError(t('scan.cannotAnalyzeImage'));
     } finally {
       setIsAnalyzing(false);
     }
@@ -183,7 +185,7 @@ export default function ScanImagePage() {
   if (!isLiffReady) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-secondary text-neutral font-garet">
-        <p>Loading LIFF...</p>
+        <p>{t('scan.loadingLiff')}</p>
       </div>
     );
   }
@@ -198,7 +200,7 @@ export default function ScanImagePage() {
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-secondary text-neutral font-garet">
-      <h1 className="mt-6 text-3xl font-magnolia text-primary mb-6">สแกน อาหาร</h1>
+      <h1 className="mt-6 text-3xl font-magnolia text-primary mb-6">{t('scan.scanFood')}</h1>
       
       {cameraPermission === false && (
         <button
@@ -207,12 +209,12 @@ export default function ScanImagePage() {
               await requestCameraPermission();
             } catch (err) {
               console.error("Failed to request camera permission:", err);
-              setCameraError("Unable to access the camera. Please check settings.");
+              setCameraError(t('scan.cameraError'));
             }
           }}
           className="px-6 py-3 bg-primary text-secondary font-semibold rounded-full hover:bg-accent transition mb-4"
         >
-          ขออนุญาติเข้าถึงกล้อง
+          {t('scan.requestCameraPermission')}
         </button>
       )}
 
@@ -245,7 +247,7 @@ export default function ScanImagePage() {
             onClick={captureImage}
             className="mt-4 px-8 py-3 bg-primary text-secondary font-semibold rounded-full hover:bg-accent transition"
           >
-            ถ่ายรูป
+            {t('scan.capturePhoto')}
           </button>
         </>
       )}
@@ -262,14 +264,14 @@ export default function ScanImagePage() {
               onClick={retakePhoto}
               className="px-6 py-3 bg-muted text-neutral font-semibold rounded-full hover:bg-accent transition"
             >
-              ถ่ายใหม่
+              {t('scan.retakePhoto')}
             </button>
             <button
               onClick={analyzeImage}
               disabled={isAnalyzing}
               className="px-6 py-3 bg-primary text-secondary font-semibold rounded-full hover:bg-accent transition"
             >
-              {isAnalyzing ? 'กำลังวิเคราะห์...' : 'วิเคราะห์อาหาร'}
+              {isAnalyzing ? t('scan.analyzing') : t('scan.analyzeFood')}
             </button>
           </div>
         </div>
@@ -278,7 +280,7 @@ export default function ScanImagePage() {
       {analysisResult && (
         <div className="flex flex-col min-h-screen bg-secondary text-neutral font-garet p-4">
           <p className="text-3xl font-bold mb-4">
-            {analysisResult.product_name_th || analysisResult.product_name_en || analysisResult.product_name || "ไม่มีชื่อผลิตภัณฑ์"}
+            {analysisResult.product_name_th || analysisResult.product_name_en || analysisResult.product_name || t('scan.noProductName')}
           </p>
 
           <div className="grid grid-cols-2 gap-4 mb-6">
@@ -286,12 +288,12 @@ export default function ScanImagePage() {
               {capturedImage ? (
                 <img
                   src={capturedImage}
-                  alt={analysisResult.product_name_en || "รูปภาพของผลิตภัณฑ์"}
+                  alt={analysisResult.product_name_en || t('scan.noImage')}
                   className="w-full h-full object-cover rounded-lg"
                 />
               ) : (
                 <div className="flex items-center justify-center bg-gray-200 rounded-lg h-full">
-                  <p>ไม่มีรูปภาพ</p>
+                  <p>{t('scan.noImage')}</p>
                 </div>
               )}
             </div>
@@ -305,7 +307,7 @@ export default function ScanImagePage() {
                   if (sugarValue >= 0 && sugarValue <= 2) greenStarCount++;
                   if (fatValue >= 0 && fatValue <= 10) greenStarCount++;
                   if (sodiumValue >= 0 && sodiumValue <= 700) greenStarCount++;
-                  return `${greenStarCount * 10} point`;
+                  return `${greenStarCount * 10} ${t('scan.points')}`;
                 })()}
               </p>
             </div>
@@ -313,38 +315,38 @@ export default function ScanImagePage() {
 
           <IntroductionStatus />
           <Box className="flex flex-col space-y-6 mb-6 w-full max-w-md">
-            <IndicatorRow label="น้ำตาล" value={analysisResult.nutriments.sugars_value || 0} thresholds={[2, 7]} />
-            <IndicatorRow label="โซเดียม" value={analysisResult.nutriments["sodium_value"] || 0} thresholds={[700, 1050]} />
-            <IndicatorRow label="ไขมัน" value={analysisResult.nutriments.fat || 0} thresholds={[10, 13]} />
+            <IndicatorRow label={t('scan.sugar')} value={analysisResult.nutriments.sugars_value || 0} thresholds={[2, 7]} />
+            <IndicatorRow label={t('scan.sodium')} value={analysisResult.nutriments["sodium_value"] || 0} thresholds={[700, 1050]} />
+            <IndicatorRow label={t('scan.fat')} value={analysisResult.nutriments.fat || 0} thresholds={[10, 13]} />
           </Box>
 
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div className="bg-white p-4 rounded-lg shadow w-full text-lg font-bold">
-              <p>แคลอรี่: {analysisResult.nutriments["energy-kcal_serving"] || "ไม่มีข้อมูล"} kcal</p>
+              <p>{t('scan.calories')}: {analysisResult.nutriments["energy-kcal_serving"] || t('scan.noData')} kcal</p>
             </div>
             <div className="bg-white p-4 rounded-lg shadow w-full text-lg font-bold">
-              <p>โปรตีน: {analysisResult.nutriments.proteins_serving || "ไม่มีข้อมูล"} กรัม</p>
+              <p>{t('scan.protein')}: {analysisResult.nutriments.proteins_serving || t('scan.noData')} {t('scan.grams')}</p>
             </div>
           </div>
 
           <div className="flex flex-col md:flex-row w-full gap-6">
             <div className="flex flex-col items-start bg-white p-4 rounded-lg shadow w-full">
-              <h2 className="text-lg font-bold mb-2">ข้อมูลทางโภชนาการ</h2>
+              <h2 className="text-lg font-bold mb-2">{t('scan.nutritionalInfo')}</h2>
               <ul className="text-sm space-y-1">
-                <li>ไขมัน: {analysisResult.nutriments.fat || 0} กรัม</li>
-                <li>โซเดียม: {analysisResult.nutriments["sodium_value"] || 0} มิลลิกรัม</li>
-                <li>น้ำตาล: {analysisResult.nutriments.sugars_value || 0} กรัม</li>
-                <li>คาร์โบไฮเดรต: {analysisResult.nutriments.carbohydrates || 0} กรัม</li>
-                <li>วิตามินเอ: {analysisResult.nutriments["vitamin-a"] || "ไม่มีข้อมูล"} มก.</li>
-                <li>วิตามินบี1: {analysisResult.nutriments["vitamin-b1"] || "ไม่มีข้อมูล"} มก.</li>
-                <li>วิตามินบี2: {analysisResult.nutriments["vitamin-b2"] || "ไม่มีข้อมูล"} มก.</li>
-                <li>แคลเซียม: {analysisResult.nutriments.calcium || "ไม่มีข้อมูล"} มก.</li>
-                <li>ธาตุเหล็ก: {analysisResult.nutriments.iron || "ไม่มีข้อมูล"} มก.</li>
+                <li>{t('scan.fat')}: {analysisResult.nutriments.fat || 0} {t('scan.grams')}</li>
+                <li>{t('scan.sodium')}: {analysisResult.nutriments["sodium_value"] || 0} {t('scan.milligrams')}</li>
+                <li>{t('scan.sugar')}: {analysisResult.nutriments.sugars_value || 0} {t('scan.grams')}</li>
+                <li>{t('scan.carbohydrates')}: {analysisResult.nutriments.carbohydrates || 0} {t('scan.grams')}</li>
+                <li>{t('scan.vitaminA')}: {analysisResult.nutriments["vitamin-a"] || t('scan.noData')} {t('scan.mg')}</li>
+                <li>{t('scan.vitaminB1')}: {analysisResult.nutriments["vitamin-b1"] || t('scan.noData')} {t('scan.mg')}</li>
+                <li>{t('scan.vitaminB2')}: {analysisResult.nutriments["vitamin-b2"] || t('scan.noData')} {t('scan.mg')}</li>
+                <li>{t('scan.calcium')}: {analysisResult.nutriments.calcium || t('scan.noData')} {t('scan.mg')}</li>
+                <li>{t('scan.iron')}: {analysisResult.nutriments.iron || t('scan.noData')} {t('scan.mg')}</li>
               </ul>
             </div>
 
             <div className="flex flex-col items-center justify-center bg-white p-4 rounded-lg shadow w-full mb-8">
-              <h2 className="text-lg font-bold mb-2">ปริมาณคาร์บ</h2>
+              <h2 className="text-lg font-bold mb-2">{t('scan.carbAmount')}</h2>
               <div className="w-24 h-24 mb-4">
                 <svg viewBox="0 0 36 36" className="circular-chart">
                   <path
@@ -365,7 +367,10 @@ export default function ScanImagePage() {
                 </svg>
               </div>
               <p className="text-sm text-neutral">
-                {Math.round((analysisResult.nutriments.carbohydrates ?? 0) / 15)} คาร์บ ({Math.min(((analysisResult.nutriments.carbohydrates ?? 0) / 15) / maxCarbs * 100, 100).toFixed(0)}% ของ {maxCarbs} คาร์บสูงสุด)
+                {t('scan.carbOfMax', { 
+                  percentage: Math.min(((analysisResult.nutriments.carbohydrates ?? 0) / 15) / maxCarbs * 100, 100).toFixed(0), 
+                  max: maxCarbs 
+                })}
               </p>
             </div>
           </div>
@@ -375,14 +380,14 @@ export default function ScanImagePage() {
               <button
                 onClick={handleEat}
                 className="px-6 py-3 w-full bg-[#5EC269] text-neutral text-xl font-semibold rounded-lg hover:bg-accent transition">
-                กินแล้ว
+                {t('scan.ate')}
               </button>
             </div>
             <div>
               <button
                 onClick={() => router.push("/scan")}
                 className="px-6 py-3 w-full bg-[#DD524C] text-neutral text-xl font-semibold rounded-lg hover:bg-accent transition">
-                ไม่ได้กิน
+                {t('scan.didNotEat')}
               </button>
             </div>
           </div>
@@ -392,7 +397,7 @@ export default function ScanImagePage() {
               onClick={retakePhoto}
               className="px-6 py-3 bg-primary text-secondary font-semibold rounded-full hover:bg-accent transition"
             >
-              ถ่ายรูปใหม่
+              {t('scan.takeNewPhoto')}
             </button>
           </div>
         </div>
@@ -405,7 +410,7 @@ export default function ScanImagePage() {
             onClick={retakePhoto}
             className="mt-4 px-6 py-3 bg-primary text-secondary font-semibold rounded-full hover:bg-accent transition w-full"
           >
-            ถ่ายรูปใหม่
+            {t('scan.retakePhoto')}
           </button>
         </div>
       )}

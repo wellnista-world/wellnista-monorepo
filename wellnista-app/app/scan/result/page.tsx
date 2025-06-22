@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import Image from "next/image";
 import { supabase } from "@/app/lib/api/supabaseClient";
 import { useAuth } from "@/app/lib/context/AuthContext";
+import { useI18n } from "../../../i18n";
 
 export interface NutritionData {
   timestamp?: string; // or Date if you convert
@@ -50,6 +51,7 @@ export interface NutritionData {
 export default function ResultPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { t } = useI18n();
   const barcode = searchParams.get("barcode");
   const [product, setProduct] = useState<NutritionalInfo | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -124,7 +126,7 @@ export default function ResultPage() {
 
   useEffect(() => {
     if (!barcode) {
-      setError("ไม่พบบาร์โค้ดใน URL");
+      setError(t('scan.noBarcodeInUrl'));
       setLoading(false);
       return;
     }
@@ -169,25 +171,25 @@ export default function ResultPage() {
         const data = await fetchProductByBarcode(barcode);
 
         if (!data) {
-          throw new Error("ไม่พบข้อมูลผลิตภัณฑ์ หรือข้อมูลไม่สมบูรณ์");
+          throw new Error(t('scan.productNotFound'));
         }
 
         setProduct(data);
       } catch (err) {
-        setError((err as Error).message || "เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ");
+        setError((err as Error).message || t('scan.unknownError'));
       } finally {
         setLoading(false);
       }
     };
 
     fetchProduct();
-  }, [barcode]);
+  }, [barcode, t]);
 
   if (loading) {
     return (
       <Box className="mt-10 flex items-center justify-center">
         <Box className="mt-8 w-48 h-48 flex items-center text-2xl text-secondary bg-primary justify-center rounded-full border-[#8A7F5F] border-t-transparent animate-spin">
-          <p className="text-[#FFFFFF]">Loading...</p>
+          <p className="text-[#FFFFFF]">{t('common.loading')}</p>
         </Box>
       </Box>
     );
@@ -219,19 +221,19 @@ export default function ResultPage() {
   return (
     <Box className="flex flex-col min-h-screen bg-secondary text-neutral font-garet p-4">
       <p className="text-3xl font-bold mb-4">
-        {product?.product_name_th || product?.product_name_en || product?.product_name || "ไม่มีชื่อผลิตภัณฑ์"}
+        {product?.product_name_th || product?.product_name_en || product?.product_name || t('scan.noProductName')}
       </p>
       <Box className="grid grid-cols-2 gap-4 mb-6">
         <Box className="rounded-full w-full h-full items-center">
           {product?.image_url ? (
             (product.image_url as string).includes('drive.google.com') ? (
               <Box className="flex items-center justify-center bg-gray-200 rounded-lg h-full">
-                <p>ไม่มีรูปภาพ</p>
+                <p>{t('scan.noImage')}</p>
               </Box>
             ) : (
               <Image
                 src={product.image_url as string}
-                alt={product?.product_name_en || "รูปภาพของผลิตภัณฑ์"}
+                alt={product?.product_name_en || t('scan.noImage')}
                 className="w-full h-full object-cover rounded-lg"
                 width={500}
                 height={500}
@@ -239,54 +241,49 @@ export default function ResultPage() {
             )
           ) : (
             <Box className="flex items-center justify-center bg-gray-200 rounded-lg h-full">
-              <p>ไม่มีรูปภาพ</p>
+              <p>{t('scan.noImage')}</p>
             </Box>
           )}
         </Box>
         <Box className="flex items-center mb-4 justify-center">
-          {/* <Box className="flex space-x-1 text-primary">
-          {[...Array(greenStarCount)].map((_, index) => (
-            <span key={index} className="text-2xl">★</span>
-          ))}
-        </Box> */}
-          <p className="text-3xl font-bold ml-4">{greenStarCount * 10} point</p>
+          <p className="text-3xl font-bold ml-4">{greenStarCount * 10} {t('scan.points')}</p>
         </Box>
       </Box>
       {/* Labels for Color Explanation */}
       <IntroductionStatus />
       <Box className="flex flex-col space-y-6 mb-6 w-full max-w-md">
-        <IndicatorRow label="น้ำตาล" value={sugarValue} thresholds={[2, 7]} />
-        <IndicatorRow label="โซเดียม" value={sodiumValue} thresholds={[700, 1050]} />
-        <IndicatorRow label="ไขมัน" value={fatValue} thresholds={[10, 13]} />
+        <IndicatorRow label={t('scan.sugar')} value={sugarValue} thresholds={[2, 7]} />
+        <IndicatorRow label={t('scan.sodium')} value={sodiumValue} thresholds={[700, 1050]} />
+        <IndicatorRow label={t('scan.fat')} value={fatValue} thresholds={[10, 13]} />
       </Box>
 
       <Box className="grid grid-cols-2 gap-4 mb-6">
         <Box className="bg-white p-4 rounded-lg shadow w-full text-lg font-bold">
-          <p>แคลอรี่: {kcal ?? "ไม่มีข้อมูล"} kcal</p>
+          <p>{t('scan.calories')}: {kcal ?? t('scan.noData')} kcal</p>
         </Box>
         <Box className="bg-white p-4 rounded-lg shadow w-full text-lg font-bold">
-          <p>โปรตีน: {protein ?? "ไม่มีข้อมูล"} กรัม</p>
+          <p>{t('scan.protein')}: {protein ?? t('scan.noData')} {t('scan.grams')}</p>
         </Box>
       </Box>
 
       <Box className="flex flex-col md:flex-row w-full gap-6">
         <Box className="flex flex-col items-start bg-white p-4 rounded-lg shadow w-full">
-          <h2 className="text-lg font-bold mb-2">ข้อมูลทางโภชนาการ</h2>
+          <h2 className="text-lg font-bold mb-2">{t('scan.nutritionalInfo')}</h2>
           <ul className="text-sm space-y-1">
-            <li>ไขมัน: {fatValue} กรัม</li>
-            <li>โซเดียม: {sodiumValue} มิลลิกรัม</li>
-            <li>น้ำตาล: {sugarValue} กรัม</li>
-            <li>คาร์โบไฮเดรต: {carbValue} กรัม</li>
-            <li>วิตามินเอ: {product?.nutriments["vitamin-a"] ?? "ไม่มีข้อมูล"} มก.</li>
-            <li>วิตามินบี1: {product?.nutriments["vitamin-b1"] ?? "ไม่มีข้อมูล"} มก.</li>
-            <li>วิตามินบี2: {product?.nutriments["vitamin-b2"] ?? "ไม่มีข้อมูล"} มก.</li>
-            <li>แคลเซียม: {product?.nutriments.calcium ?? "ไม่มีข้อมูล"} มก.</li>
-            <li>ธาตุเหล็ก: {product?.nutriments.iron ?? "ไม่มีข้อมูล"} มก.</li>
+            <li>{t('scan.fat')}: {fatValue} {t('scan.grams')}</li>
+            <li>{t('scan.sodium')}: {sodiumValue} {t('scan.milligrams')}</li>
+            <li>{t('scan.sugar')}: {sugarValue} {t('scan.grams')}</li>
+            <li>{t('scan.carbohydrates')}: {carbValue} {t('scan.grams')}</li>
+            <li>{t('scan.vitaminA')}: {product?.nutriments["vitamin-a"] ?? t('scan.noData')} {t('scan.mg')}</li>
+            <li>{t('scan.vitaminB1')}: {product?.nutriments["vitamin-b1"] ?? t('scan.noData')} {t('scan.mg')}</li>
+            <li>{t('scan.vitaminB2')}: {product?.nutriments["vitamin-b2"] ?? t('scan.noData')} {t('scan.mg')}</li>
+            <li>{t('scan.calcium')}: {product?.nutriments.calcium ?? t('scan.noData')} {t('scan.mg')}</li>
+            <li>{t('scan.iron')}: {product?.nutriments.iron ?? t('scan.noData')} {t('scan.mg')}</li>
           </ul>
         </Box>
 
         <Box className="flex flex-col items-center justify-center bg-white p-4 rounded-lg shadow w-full mb-8">
-          <h2 className="text-lg font-bold mb-2">ปริมาณคาร์บ</h2>
+          <h2 className="text-lg font-bold mb-2">{t('scan.carbAmount')}</h2>
           <Box className="w-24 h-24 mb-4">
             <svg viewBox="0 0 36 36" className="circular-chart">
               <path
@@ -307,7 +304,10 @@ export default function ResultPage() {
             </svg>
           </Box>
           <p className="text-sm text-neutral">
-            {Math.round(carbValue / 15)} คาร์บ ({Math.round(carbPercentage)}% ของ {maxCarbs} คาร์บสูงสุด)
+            {t('scan.carbOfMax', { 
+              percentage: Math.round(carbPercentage), 
+              max: maxCarbs 
+            })}
           </p>
         </Box>
       </Box>
@@ -317,14 +317,14 @@ export default function ResultPage() {
           <button
             onClick={handleEat}
             className="px-6 py-3 w-full bg-[#5EC269] text-neutral text-xl font-semibold rounded-lg hover:bg-accent transition">
-            กินแล้ว
+            {t('scan.ate')}
           </button>
         </Box>
         <Box>
           <button
           onClick={() => router.push("/scan")}
             className="px-6 py-3 w-full bg-[#DD524C] text-neutral text-xl font-semibold rounded-lg hover:bg-accent transition">
-            ไม่ได้กิน
+            {t('scan.didNotEat')}
           </button>
         </Box>
         <Box>

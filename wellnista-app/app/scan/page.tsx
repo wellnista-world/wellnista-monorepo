@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library";
 import { useRouter } from "next/navigation";
 import { useLiff } from "../lib/api/use-liff";
-
+import { useI18n } from "../../i18n";
 
 export default function ScanPage() {
   const {
@@ -14,6 +14,7 @@ export default function ScanPage() {
     cameraPermission,
     requestCameraPermission,
   } = useLiff();
+  const { t } = useI18n();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [codeReader, setCodeReader] = useState<BrowserMultiFormatReader>();
   const [cameraError, setCameraError] = useState<string | null>(null);
@@ -38,12 +39,12 @@ export default function ScanPage() {
         setSelectedCameraId(backCamera?.deviceId || videoInputDevices[0]?.deviceId);
       } catch (err) {
         console.error("Failed to initialize cameras:", err);
-        setCameraError("Failed to access the camera.");
+        setCameraError(t('scan.failedToAccessCamera'));
       }
     };
 
     initScanner();
-  }, [isLiffReady, cameraPermission, codeReader]);
+  }, [isLiffReady, cameraPermission, codeReader, t]);
 
   useEffect(() => {
     if (!selectedCameraId || !videoRef.current || !codeReader) return;
@@ -65,7 +66,7 @@ export default function ScanPage() {
         );
       } catch (err) {
         console.error("Failed to start scanning:", err);
-        setCameraError("Failed to start scanning.");
+        setCameraError(t('scan.failedToStartScanning'));
       }
     };
 
@@ -77,12 +78,12 @@ export default function ScanPage() {
         tracks.forEach((track) => track.stop());
       }
     };
-  }, [selectedCameraId, codeReader, router]);
+  }, [selectedCameraId, codeReader, router, t]);
 
   if (!isLiffReady) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-secondary text-neutral font-garet">
-        <p>Loading LIFF...</p>
+        <p>{t('scan.loadingLiff')}</p>
       </div>
     );
   }
@@ -97,9 +98,9 @@ export default function ScanPage() {
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-secondary text-neutral font-garet">
-      <h1 className="mt-6 text-3xl font-magnolia text-primary mb-6">สแกน บาร์โค๊ด</h1>
+      <h1 className="mt-6 text-3xl font-magnolia text-primary mb-6">{t('scan.scanBarcode')}</h1>
       {isInLineApp && (
-        <p className="text-sm text-accent mb-4">Running in LINE App</p>
+        <p className="text-sm text-accent mb-4">{t('scan.runningInLine')}</p>
       )}
       {/* {!isInLineApp && (
         <p className="text-sm text-accent mb-4">Running in Browser</p>
@@ -111,12 +112,12 @@ export default function ScanPage() {
               await requestCameraPermission();
             } catch (err) {
               console.error("Failed to request camera permission:", err);
-              setCameraError("Unable to access the camera. Please check settings.");
+              setCameraError(t('scan.cameraError'));
             }
           }}
           className="px-6 py-3 bg-primary text-secondary font-semibold rounded-full hover:bg-accent transition mb-4"
         >
-          ขออนุญาติเข้าถึงกล้อง
+          {t('scan.requestCameraPermission')}
         </button>
       )}
       {cameraError && (
