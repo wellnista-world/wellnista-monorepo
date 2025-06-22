@@ -161,8 +161,8 @@
     "preferNotToSay": "不愿透露"
   },
   "bloodSugar": {
-    "title": "血糖记录",
-    "dateTime": "日期时间",
+    "title": "血糖记录本",
+    "dateTime": "日期-时间",
     "selectMeal": "选择餐次",
     "beforeAfter": "餐前/餐后",
     "bloodGlucoseValue": "血糖值",
@@ -173,7 +173,14 @@
     "morning": "早餐",
     "lunch": "午餐",
     "evening": "晚餐",
-    "beforeBed": "睡前"
+    "beforeBed": "睡前",
+    "pleaseCompleteData": "请完整填写所有必填字段",
+    "pleaseLoginFirst": "请先登录再保存数据",
+    "errorSavingData": "保存数据时发生错误",
+    "dataSavedSuccessfully": "数据保存成功！",
+    "errorUpdatingData": "更新数据时发生错误",
+    "beforeMealGraph": "餐前",
+    "afterMealGraph": "餐后"
   },
   "knowledge": {
     "library": "知识库",

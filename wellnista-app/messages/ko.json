@@ -161,7 +161,7 @@
     "preferNotToSay": "답변을 원하지 않음"
   },
   "bloodSugar": {
-    "title": "혈당 기록",
+    "title": "혈당 기록장",
     "dateTime": "날짜-시간",
     "selectMeal": "식사 선택",
     "beforeAfter": "식전/식후",
@@ -173,7 +173,14 @@
     "morning": "아침",
     "lunch": "점심",
     "evening": "저녁",
-    "beforeBed": "취침 전"
+    "beforeBed": "취침 전",
+    "pleaseCompleteData": "모든 필수 항목을 입력해 주세요",
+    "pleaseLoginFirst": "데이터를 저장하기 전에 로그인해 주세요",
+    "errorSavingData": "데이터 저장 중 오류가 발생했습니다",
+    "dataSavedSuccessfully": "데이터가 성공적으로 저장되었습니다!",
+    "errorUpdatingData": "데이터 업데이트 중 오류가 발생했습니다",
+    "beforeMealGraph": "식전",
+    "afterMealGraph": "식후"
   },
   "knowledge": {
     "library": "지식 라이브러리",

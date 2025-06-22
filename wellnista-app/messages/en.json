@@ -173,7 +173,14 @@
     "morning": "Morning",
     "lunch": "Lunch",
     "evening": "Evening",
-    "beforeBed": "Before bed"
+    "beforeBed": "Before bed",
+    "pleaseCompleteData": "Please complete all required fields",
+    "pleaseLoginFirst": "Please log in before saving data",
+    "errorSavingData": "Error occurred while saving data",
+    "dataSavedSuccessfully": "Data saved successfully!",
+    "errorUpdatingData": "Error occurred while updating data",
+    "beforeMealGraph": "Before Meal",
+    "afterMealGraph": "After Meal"
   },
   "knowledge": {
     "library": "Knowledge Library",

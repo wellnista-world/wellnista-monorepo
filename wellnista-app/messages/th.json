@@ -172,7 +172,14 @@
     "morning": "เช้า",
     "lunch": "กลางวัน",
     "evening": "เย็น",
-    "beforeBed": "ก่อนนอน"
+    "beforeBed": "ก่อนนอน",
+    "pleaseCompleteData": "กรุณากรอกข้อมูลให้ครบถ้วน",
+    "pleaseLoginFirst": "กรุณาเข้าสู่ระบบก่อนบันทึกข้อมูล",
+    "errorSavingData": "เกิดข้อผิดพลาดในการบันทึกข้อมูล",
+    "dataSavedSuccessfully": "บันทึกข้อมูลสำเร็จ!",
+    "errorUpdatingData": "เกิดข้อผิดพลาดในการแก้ไขข้อมูล",
+    "beforeMealGraph": "ก่อนอาหาร",
+    "afterMealGraph": "หลังอาหาร"
   },
   "knowledge": {
     "library": "ห้องสมุดความรู้",

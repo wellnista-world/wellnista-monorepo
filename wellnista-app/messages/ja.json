@@ -160,7 +160,7 @@
     "preferNotToSay": "回答を避ける"
   },
   "bloodSugar": {
-    "title": "血糖記録",
+    "title": "血糖記録帳",
     "dateTime": "日時",
     "selectMeal": "食事を選択",
     "beforeAfter": "食前/食後",
@@ -172,7 +172,14 @@
     "morning": "朝食",
     "lunch": "昼食",
     "evening": "夕食",
-    "beforeBed": "就寝前"
+    "beforeBed": "就寝前",
+    "pleaseCompleteData": "すべての必須項目を入力してください",
+    "pleaseLoginFirst": "データを保存する前にログインしてください",
+    "errorSavingData": "データの保存中にエラーが発生しました",
+    "dataSavedSuccessfully": "データが正常に保存されました！",
+    "errorUpdatingData": "データの更新中にエラーが発生しました",
+    "beforeMealGraph": "食前",
+    "afterMealGraph": "食後"
   },
   "knowledge": {
     "library": "知識ライブラリ",
