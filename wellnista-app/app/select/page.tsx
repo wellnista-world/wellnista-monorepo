@@ -3,18 +3,21 @@
 import Link from "next/link";
 import Typography from '@mui/material/Typography';
 import { Barcode, Camera } from 'lucide-react';
+import { useI18n } from '../../i18n';
 
 export default function SelectScreen() {
+  const { t } = useI18n();
+  
   const menuItems = [
     {
       icon: <Barcode size={50} />,
-      label: "สแกน บาร์โค้ด",
+      label: t('menu.scanBarcode'),
       href: "/scan",
       color: "bg-[#9F9260]"
     },
     {
       icon: <Camera size={50} />,
-      label: "ถ่ายรูปอาหาร",
+      label: t('menu.takePhoto'),
       href: "/scan/scan-image",
       color: "bg-[#9F9260]"
     }
@@ -25,20 +28,20 @@ export default function SelectScreen() {
       {/* Header Section */}
       <div className="text-center mb-8">
         <Typography className="!text-2xl font-bold text-primary mb-2">
-          ยินดีต้อนรับเข้าสู่
+          {t('menu.welcomeTo')}
         </Typography>
         <Typography className="!text-3xl font-bold text-primary mb-4">
           Wellnista
         </Typography>
         <Typography className="!text-sm text-neutral/70">
-          Choose your action below to get start
+          {t('menu.chooseAction')}
         </Typography>
       </div>
 
       {/* Main Menu Grid */}
       <div className="mb-8">
         <Typography className="!text-xl font-semibold text-primary mb-6 pb-3">
-          ตรวจสอบโภชนาการอาหาร
+          {t('menu.checkNutrition')}
         </Typography>
         <div className="grid grid-cols-2 gap-4">
           {menuItems.map((item, index) => (
@@ -62,8 +65,8 @@ export default function SelectScreen() {
 
       {/* Footer Note */}
       <div className="text-center text-sm text-neutral/70">
-        <p>เลือกวิธีการตรวจสอบอาหารที่คุณต้องการ</p>
-        <p>เพื่อดูข้อมูลโภชนาการ</p>
+        <p>{t('menu.selectMethod')}</p>
+        <p>{t('menu.toViewNutrition')}</p>
       </div>
     </div>
   );

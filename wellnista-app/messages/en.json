@@ -145,7 +145,10 @@
     "checkNutrition": "Check food nutrition",
     "scanBarcode": "Scan Barcode",
     "takePhoto": "Take a photo of food",
-    "underDevelopment": "This feature is under development"
+    "underDevelopment": "This feature is under development",
+    "welcomeTo": "Welcome to",
+    "selectMethod": "Select the method you want to check your food",
+    "toViewNutrition": "to view nutritional information"
   },
   "home": {
     "eatThisScan": "Eat this? Scan now!",

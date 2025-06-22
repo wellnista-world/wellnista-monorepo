@@ -145,7 +145,10 @@
     "checkNutrition": "食品栄養をチェック",
     "scanBarcode": "バーコードスキャン",
     "takePhoto": "食品の写真を撮る",
-    "underDevelopment": "この機能は開発中です"
+    "underDevelopment": "この機能は開発中です",
+    "welcomeTo": "ようこそ",
+    "selectMethod": "食品をチェックしたい方法を選択してください",
+    "toViewNutrition": "栄養情報を表示するには"
   },
   "home": {
     "eatThisScan": "これを食べる？今すぐスキャン！",

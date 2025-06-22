@@ -141,11 +141,14 @@
   "menu": {
     "title": "Wellnista",
     "welcome": "欢迎来到 Wellnista",
-    "chooseAction": "选择以下操作开始使用",
-    "checkNutrition": "检查食物营养",
+    "chooseAction": "选择下面的操作开始",
+    "checkNutrition": "检查食品营养",
     "scanBarcode": "扫描条形码",
-    "takePhoto": "拍摄食物照片",
-    "underDevelopment": "此功能正在开发中"
+    "takePhoto": "拍摄食品照片",
+    "underDevelopment": "此功能正在开发中",
+    "welcomeTo": "欢迎来到",
+    "selectMethod": "选择您想要检查食品的方法",
+    "toViewNutrition": "查看营养信息"
   },
   "home": {
     "eatThisScan": "吃这个？立即扫描！",
