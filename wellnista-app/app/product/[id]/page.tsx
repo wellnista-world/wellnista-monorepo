@@ -1,15 +1,16 @@
 "use client"
-import { getProductForLocale, products } from '../../../config/products';
+import { getProductForLocale, products, Product } from '../../../config/products';
 import { useI18n } from '../../../i18n';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Product } from '../../../config/products';
+import { useEffect, useRef } from 'react';
+import { useParams } from 'next/navigation';
 
 const ProductView = ({ product, locale, t }: { product: Product, locale: string, t: (key: string) => string }) => {
   const localized = getProductForLocale(product, locale);
   return (
-    <div className="relative w-screen h-[80vh]  snap-start">
+    <div className="relative w-screen h-screen">
       <Image
         src={localized.image}
         alt={localized.name}
@@ -57,27 +58,60 @@ const ProductView = ({ product, locale, t }: { product: Product, locale: string,
   );
 }
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
+export default function ProductDetailPage() {
+  const params = useParams();
   const { t, locale } = useI18n();
-  const productId = Number(params.id);
-  const currentProductIndex = products.findIndex(p => p.id === productId);
+  const viewRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  if (currentProductIndex === -1) {
-    return <div className="min-h-screen flex items-center justify-center text-xl">404 | Product Not Found</div>;
-  }
+  useEffect(() => {
+    const initialProductIndex = products.findIndex(p => p.id === Number(params.id));
+    if (initialProductIndex !== -1 && viewRefs.current[initialProductIndex]) {
+      setTimeout(() => {
+        viewRefs.current[initialProductIndex]?.scrollIntoView({ behavior: 'auto', block: 'start' });
+      }, 100);
+    }
+  }, [params.id]);
 
-  const currentProduct = products[currentProductIndex];
-  const nextProductIndex = (currentProductIndex + 1) % products.length;
-  const nextProduct = products[nextProductIndex];
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const newProductId = entry.target.getAttribute('data-product-id');
+            const currentUrlId = window.location.pathname.split('/').pop();
+            if (newProductId && newProductId !== currentUrlId) {
+              window.history.replaceState(null, '', `/product/${newProductId}`);
+            }
+          }
+        }
+      },
+      { threshold: 0.7 }
+    );
+
+    const refs = viewRefs.current;
+    refs.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => {
+      refs.forEach((ref) => {
+        if (ref) observer.unobserve(ref);
+      });
+    };
+  }, []);
 
   return (
     <div className="h-screen w-screen overflow-y-scroll snap-y snap-mandatory">
-      <ProductView product={currentProduct} locale={locale} t={t} />
-      <Link href={`/product/${nextProduct.id}`} scroll={false}>
-        <div>
-            <ProductView product={nextProduct} locale={locale} t={t} />
+      {products.map((product, index) => (
+        <div
+          key={product.id}
+          ref={el => { viewRefs.current[index] = el; }}
+          data-product-id={product.id}
+          className="h-screen w-screen snap-start"
+        >
+          <ProductView product={product} locale={locale} t={t} />
         </div>
-      </Link>
+      ))}
     </div>
   );
-} 
+}
