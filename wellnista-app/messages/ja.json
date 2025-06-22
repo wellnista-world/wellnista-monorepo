@@ -183,10 +183,30 @@
   },
   "knowledge": {
     "library": "知識ライブラリ",
-    "carbs": "炭水化物についての知識",
+    "carbs": "炭水化物の知識",
     "protein": "タンパク質",
     "foodExchange": "食品交換",
-    "sodium": "ナトリウム"
+    "sodium": "ナトリウム",
+    "title": "知識ライブラリ",
+    "subtitle": "栄養と健康について学ぶ",
+    "topics": {
+      "carbs": {
+        "title": "炭水化物の知識",
+        "description": "炭水化物と管理について学ぶ"
+      },
+      "protein": {
+        "title": "タンパク質",
+        "description": "タンパク質と健康効果に関する情報"
+      },
+      "foodExchange": {
+        "title": "食品交換",
+        "description": "より良い健康のための食品交換方法"
+      },
+      "sodium": {
+        "title": "ナトリウム",
+        "description": "ナトリウムの重要性と制御"
+      }
+    }
   },
   "menu": {
     "title": "Wellnista",

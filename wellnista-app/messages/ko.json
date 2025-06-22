@@ -184,10 +184,30 @@
   },
   "knowledge": {
     "library": "지식 라이브러리",
-    "carbs": "탄수화물에 대한 지식",
+    "carbs": "탄수화물 지식",
     "protein": "단백질",
     "foodExchange": "식품 교환",
-    "sodium": "나트륨"
+    "sodium": "나트륨",
+    "title": "지식 라이브러리",
+    "subtitle": "영양과 건강에 대해 배우기",
+    "topics": {
+      "carbs": {
+        "title": "탄수화물 지식",
+        "description": "탄수화물과 관리에 대해 배우기"
+      },
+      "protein": {
+        "title": "단백질",
+        "description": "단백질과 건강상 이점에 대한 정보"
+      },
+      "foodExchange": {
+        "title": "식품 교환",
+        "description": "더 나은 건강을 위한 식품 교환 방법"
+      },
+      "sodium": {
+        "title": "나트륨",
+        "description": "나트륨의 중요성과 조절"
+      }
+    }
   },
   "menu": {
     "title": "Wellnista",

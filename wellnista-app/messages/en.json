@@ -187,7 +187,27 @@
     "carbs": "Knowledge about Carbs",
     "protein": "Protein",
     "foodExchange": "Food Exchange",
-    "sodium": "Sodium"
+    "sodium": "Sodium",
+    "title": "Knowledge Library",
+    "subtitle": "Learn about nutrition and health",
+    "topics": {
+      "carbs": {
+        "title": "Carbohydrate Knowledge",
+        "description": "Learn about carbohydrates and management"
+      },
+      "protein": {
+        "title": "Protein",
+        "description": "Information about protein and health benefits"
+      },
+      "foodExchange": {
+        "title": "Food Exchange",
+        "description": "How to exchange foods for better health"
+      },
+      "sodium": {
+        "title": "Sodium",
+        "description": "Importance of sodium and control"
+      }
+    }
   },
   "menu": {
     "title": "Wellnista",

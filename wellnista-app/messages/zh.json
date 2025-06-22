@@ -187,7 +187,27 @@
     "carbs": "碳水化合物知识",
     "protein": "蛋白质",
     "foodExchange": "食物交换",
-    "sodium": "钠"
+    "sodium": "钠",
+    "title": "知识库",
+    "subtitle": "学习营养和健康知识",
+    "topics": {
+      "carbs": {
+        "title": "碳水化合物知识",
+        "description": "学习碳水化合物和管理方法"
+      },
+      "protein": {
+        "title": "蛋白质",
+        "description": "关于蛋白质和健康益处的信息"
+      },
+      "foodExchange": {
+        "title": "食物交换",
+        "description": "如何交换食物以获得更好的健康"
+      },
+      "sodium": {
+        "title": "钠",
+        "description": "钠的重要性和控制方法"
+      }
+    }
   },
   "menu": {
     "title": "Wellnista",
