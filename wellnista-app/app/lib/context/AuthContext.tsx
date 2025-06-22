@@ -79,7 +79,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       setLoading(true);
       
-      // Clear local storage and session storage first
+      // Clear cart data specifically
+      if (user) {
+        localStorage.removeItem(`cart_${user.id}`);
+      }
+      localStorage.removeItem('cart_anonymous');
+      
+      // Clear other local storage and session storage
       localStorage.clear();
       sessionStorage.clear();
       
@@ -102,6 +108,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       console.error('Logout error:', error);
       
       // Even if there's an error, we should still clear local state and redirect
+      if (user) {
+        localStorage.removeItem(`cart_${user.id}`);
+      }
+      localStorage.removeItem('cart_anonymous');
       localStorage.clear();
       sessionStorage.clear();
       setUser(null);

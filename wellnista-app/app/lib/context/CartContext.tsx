@@ -1,5 +1,12 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { Product } from '../../../config/products';
+import { useAuth } from './AuthContext';
+import { 
+  saveCartToStorage, 
+  loadCartFromStorage, 
+  clearCartFromStorage, 
+  mergeCarts 
+} from '../utils/cartUtils';
 
 export interface CartItem {
   product: Product;
@@ -19,17 +26,32 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const { user } = useAuth();
 
   // Load cart from localStorage
   useEffect(() => {
-    const stored = localStorage.getItem('cart');
-    if (stored) setCart(JSON.parse(stored));
-  }, []);
+    const loadedCart = loadCartFromStorage(user?.id);
+    setCart(loadedCart);
+  }, [user]);
 
   // Save cart to localStorage
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
+    saveCartToStorage(cart, user?.id);
+  }, [cart, user]);
+
+  // Clear anonymous cart when user logs in
+  useEffect(() => {
+    if (user) {
+      const anonymousCart = loadCartFromStorage();
+      if (anonymousCart.length > 0) {
+        // Merge anonymous cart with user cart
+        const mergedCart = mergeCarts(cart, anonymousCart);
+        setCart(mergedCart);
+        // Clear anonymous cart
+        clearCartFromStorage();
+      }
+    }
+  }, [user]);
 
   const addToCart = (product: Product) => {
     setCart(prev => {
@@ -59,7 +81,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     ));
   };
 
-  const clearCart = () => setCart([]);
+  const clearCart = () => {
+    setCart([]);
+    clearCartFromStorage(user?.id);
+  };
 
   return (
     <CartContext.Provider value={{ cart, addToCart, removeFromCart, incrementQuantity, decrementQuantity, clearCart }}>
