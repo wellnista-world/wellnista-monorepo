@@ -12,7 +12,18 @@
     "delete": "삭제",
     "confirm": "확인",
     "yes": "예",
-    "no": "아니오"
+    "no": "아니오",
+    "add": "추가",
+    "search": "검색",
+    "filter": "필터",
+    "sort": "정렬",
+    "refresh": "새로고침",
+    "previous": "이전",
+    "open": "열기",
+    "ok": "확인",
+    "success": "성공",
+    "warning": "경고",
+    "info": "정보"
   },
   "auth": {
     "welcome": "Wellnista에 오신 것을 환영합니다",
@@ -221,5 +232,10 @@
     "waist": "허리둘레",
     "activityLevel": "활동 수준",
     "submit": "등록"
+  },
+  "introductionStatus": {
+    "safe": "안전 - 권장 범위 내",
+    "moderate": "권장값을 약간 초과",
+    "high": "권장값을 크게 초과"
   }
 } 

@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+import { useI18n } from '../../../i18n';
 
 interface LegendItemProps {
   color: string;
@@ -13,10 +14,12 @@ const LegendItem: React.FC<LegendItemProps> = ({ color, text }) => (
 );
 
 const IntroductionStatus: React.FC = () => {
+  const { t } = useI18n();
+  
   const items: LegendItemProps[] = [
-    { color: 'bg-green-500', text: 'ปลอดภัย อยู่ในช่วงค่าเเนะนำ' },
-    { color: 'bg-yellow-400', text: 'เกินค่าแนะนำ“เล็กน้อย”' },
-    { color: 'bg-red-500', text: 'เกินค่าแนะนำ“มาก”' },
+    { color: 'bg-green-500', text: t('introductionStatus.safe') },
+    { color: 'bg-yellow-400', text: t('introductionStatus.moderate') },
+    { color: 'bg-red-500', text: t('introductionStatus.high') },
   ];
 
   return (

@@ -12,7 +12,18 @@
     "delete": "删除",
     "confirm": "确认",
     "yes": "是",
-    "no": "否"
+    "no": "否",
+    "add": "添加",
+    "search": "搜索",
+    "filter": "筛选",
+    "sort": "排序",
+    "refresh": "刷新",
+    "previous": "上一步",
+    "open": "打开",
+    "ok": "确定",
+    "success": "成功",
+    "warning": "警告",
+    "info": "信息"
   },
   "auth": {
     "welcome": "欢迎来到 Wellnista",
@@ -221,5 +232,10 @@
     "waist": "腰围",
     "activityLevel": "活动水平",
     "submit": "注册"
+  },
+  "introductionStatus": {
+    "safe": "安全 - 在推荐范围内",
+    "moderate": "略高于推荐值",
+    "high": "显著高于推荐值"
   }
 } 

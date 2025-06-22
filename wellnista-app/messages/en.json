@@ -12,7 +12,18 @@
     "delete": "Delete",
     "confirm": "Confirm",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "refresh": "Refresh",
+    "previous": "Previous",
+    "open": "Open",
+    "ok": "OK",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Information"
   },
   "auth": {
     "welcome": "Welcome to wellnista",
@@ -221,5 +232,10 @@
     "waist": "Waist",
     "activityLevel": "Activity Level",
     "submit": "Register"
+  },
+  "introductionStatus": {
+    "safe": "Safe - Within recommended range",
+    "moderate": "Slightly above recommended value",
+    "high": "Significantly above recommended value"
   }
 } 

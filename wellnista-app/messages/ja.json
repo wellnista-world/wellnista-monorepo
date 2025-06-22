@@ -12,7 +12,17 @@
     "delete": "削除",
     "confirm": "確認",
     "yes": "はい",
-    "no": "いいえ"
+    "no": "いいえ",
+    "add": "追加",
+    "search": "検索",
+    "filter": "フィルター",
+    "sort": "並び替え",
+    "refresh": "更新",
+    "open": "開く",
+    "ok": "OK",
+    "success": "成功",
+    "warning": "警告",
+    "info": "情報"
   },
   "auth": {
     "welcome": "Wellnistaへようこそ",
@@ -221,5 +231,10 @@
     "waist": "ウエスト",
     "activityLevel": "活動レベル",
     "submit": "登録"
+  },
+  "introductionStatus": {
+    "safe": "安全 - 推奨範囲内",
+    "moderate": "推奨値をわずかに超過",
+    "high": "推奨値を大幅に超過"
   }
 } 
