@@ -7,6 +7,7 @@ export interface Product {
   image: string;
   link: string;
   category: string;
+  priceId: string;
   translations: {
     th: {
       name: string;
@@ -45,6 +46,7 @@ export const products: Product[] = [
         image: "/product1.png",
         link: "product/1",
         category: "sauce",
+        priceId: "price_1RcqFvAom1IgIvKKP8hNFzfQ",
         translations: {
           th: {
             name: "เซตน้ำจิ้มรักษ์ไต 5 รสชาติ สูตรโซเดียมต่ำ โดยอาจารย์เปิ้ล ส่งฟรีทั่วไทย!!!",
@@ -81,6 +83,7 @@ export const products: Product[] = [
         image: "/product2.png",
         link: "product/2",
         category: "give_set",
+        priceId: "price_1RcqH9Aom1IgIvKKdT2gHOYc",
         translations: {
           th: {
             name: "เซต หวานกาย สุขใจ ส่งฟรีทั่วไทย!!!",
