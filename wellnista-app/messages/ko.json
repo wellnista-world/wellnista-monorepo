@@ -1,0 +1,109 @@
+{
+  "common": {
+    "loading": "로딩 중...",
+    "error": "오류",
+    "save": "저장",
+    "cancel": "취소",
+    "back": "뒤로",
+    "next": "다음",
+    "submit": "제출",
+    "close": "닫기",
+    "edit": "편집",
+    "delete": "삭제",
+    "confirm": "확인",
+    "yes": "예",
+    "no": "아니오"
+  },
+  "auth": {
+    "welcome": "환영합니다",
+    "login": "로그인",
+    "logout": "로그아웃",
+    "register": "회원가입",
+    "forgotPassword": "비밀번호를 잊으셨나요?",
+    "phoneNumber": "전화번호 (예: 0812345678)",
+    "password": "비밀번호",
+    "welcomeUser": "환영합니다, {phone}",
+    "tagline": "건강한 삶을 쉽게"
+  },
+  "navigation": {
+    "home": "홈",
+    "menu": "메뉴",
+    "profile": "프로필",
+    "scan": "스캔",
+    "library": "라이브러리",
+    "book": "책",
+    "settings": "설정"
+  },
+  "scan": {
+    "title": "바코드 스캔",
+    "loadingLiff": "LIFF 로딩 중...",
+    "runningInLine": "LINE 앱에서 실행 중",
+    "requestCameraPermission": "카메라 권한 요청",
+    "cameraError": "카메라에 접근할 수 없습니다. 설정을 확인해주세요.",
+    "failedToAccessCamera": "카메라에 접근할 수 없습니다.",
+    "failedToStartScanning": "스캔을 시작할 수 없습니다.",
+    "barcodeScanningError": "바코드 스캔 오류"
+  },
+  "profile": {
+    "title": "프로필",
+    "todayProgress": "오늘의 진행상황",
+    "carb": "탄수화물",
+    "calories": "칼로리",
+    "protein": "단백질",
+    "personalInfo": "개인정보",
+    "name": "이름",
+    "diseases": "질병",
+    "gender": "성별",
+    "age": "나이",
+    "weight": "체중",
+    "height": "키",
+    "activityLevel": "활동 수준",
+    "years": "세",
+    "kg": "kg",
+    "cm": "cm",
+    "bmi": "BMI",
+    "bmiCategories": {
+      "obese2": "비만 2단계",
+      "obese1": "비만 1단계",
+      "overweight": "과체중",
+      "normal": "정상 체중",
+      "underweight": "저체중"
+    }
+  },
+  "activityLevels": {
+    "sedentary": "거의 활동하지 않음 (운동 거의 없음)",
+    "lightlyActive": "가벼운 활동 (주 1-3일 가벼운 운동)",
+    "moderatelyActive": "보통 활동 (주 4-5일 중간 강도 운동)",
+    "veryActive": "매우 활동적 (주 6-7일 격렬한 운동)",
+    "extremelyActive": "극도로 활동적 (격렬한 운동, 육체 노동, 또는 하루 두 번 훈련)"
+  },
+  "diseases": {
+    "diabetes": "당뇨병",
+    "kidney": "신장 질환",
+    "heart": "심장 질환",
+    "hypertension": "고혈압",
+    "gout": "통풍",
+    "cholesterol": "고콜레스테롤",
+    "other": "기타",
+    "none": "없음"
+  },
+  "menu": {
+    "title": "Wellnista",
+    "underDevelopment": "이 기능은 개발 중입니다"
+  },
+  "settings": {
+    "title": "설정",
+    "language": "언어",
+    "languageDescription": "앱 언어를 선택하세요",
+    "currentLanguage": "현재 언어",
+    "appInfo": "앱 정보",
+    "version": "버전",
+    "developer": "개발자"
+  },
+  "errors": {
+    "general": "오류가 발생했습니다. 다시 시도해주세요.",
+    "network": "네트워크 오류. 연결을 확인해주세요.",
+    "auth": "인증 오류",
+    "camera": "카메라에 접근할 수 없습니다"
+  }
+} 

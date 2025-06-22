@@ -1,8 +1,11 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 import enMessages from '../messages/en.json';
 import thMessages from '../messages/th.json';
+import zhMessages from '../messages/zh.json';
+import jaMessages from '../messages/ja.json';
+import koMessages from '../messages/ko.json';
 
-export type Locale = 'en' | 'th';
+export type Locale = 'en' | 'th' | 'zh' | 'ja' | 'ko';
 
 interface I18nContextType {
   locale: Locale;
@@ -13,6 +16,9 @@ interface I18nContextType {
 const messages = {
   en: enMessages,
   th: thMessages,
+  zh: zhMessages,
+  ja: jaMessages,
+  ko: koMessages,
 };
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined);

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "../lib/api/supabaseClient";
 import { useAuth } from "../lib/context/AuthContext";
+import { useI18n } from "../../i18n";
 import Link from 'next/link';
 import Typography from '@mui/material/Typography';
 import { 
@@ -14,12 +15,14 @@ import {
   Library, 
   LogOut,
   Heart,
-  ChevronRight
+  ChevronRight,
+  Settings
 } from 'lucide-react';
 
 export default function HomeScreen() {
   const router = useRouter();
   const { user, signOut } = useAuth();
+  const { t } = useI18n();
   const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
@@ -54,7 +57,7 @@ export default function HomeScreen() {
   const menuItems = [
     {
       icon: <UserCircle size={24} />,
-      label: "โปรไฟล์",
+      label: t('navigation.profile'),
       href: "/profile",
       color: "bg-[#5EC269]"
     },
@@ -142,6 +145,19 @@ export default function HomeScreen() {
           </div>
           <ChevronRight size={20} className="text-primary" />
         </div>
+
+        <div 
+          onClick={() => router.push('/settings')}
+          className="bg-white rounded-2xl p-6 flex items-center justify-between shadow-sm hover:bg-primary/5 transition-all cursor-pointer"
+        >
+          <div className="flex items-center gap-4">
+            <Settings size={24} className="text-primary" />
+            <Typography className="font-semibold text-primary">
+              {t('navigation.settings')}
+            </Typography>
+          </div>
+          <ChevronRight size={20} className="text-primary" />
+        </div>
       </div>
 
       {/* Footer Note */}
@@ -157,7 +173,7 @@ export default function HomeScreen() {
       >
         <LogOut size={20} />
         <Typography className="font-semibold">
-          ออกจากระบบ
+          {t('auth.logout')}
         </Typography>
       </button>
     </div>

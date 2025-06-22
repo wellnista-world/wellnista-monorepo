@@ -31,7 +31,8 @@
     "profile": "Profile",
     "scan": "Scan",
     "library": "Library",
-    "book": "Book"
+    "book": "Book",
+    "settings": "Settings"
   },
   "scan": {
     "title": "Scan Barcode",
@@ -89,6 +90,15 @@
   "menu": {
     "title": "Wellnista",
     "underDevelopment": "This feature is under development"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "languageDescription": "Choose your preferred language for the app",
+    "currentLanguage": "Current Language",
+    "appInfo": "App Information",
+    "version": "Version",
+    "developer": "Developer"
   },
   "errors": {
     "general": "An error occurred. Please try again.",

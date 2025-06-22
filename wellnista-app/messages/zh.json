@@ -1,0 +1,109 @@
+{
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "save": "保存",
+    "cancel": "取消",
+    "back": "返回",
+    "next": "下一步",
+    "submit": "提交",
+    "close": "关闭",
+    "edit": "编辑",
+    "delete": "删除",
+    "confirm": "确认",
+    "yes": "是",
+    "no": "否"
+  },
+  "auth": {
+    "welcome": "欢迎来到",
+    "login": "登录",
+    "logout": "退出登录",
+    "register": "注册",
+    "forgotPassword": "忘记密码？",
+    "phoneNumber": "手机号码 (例如: 0812345678)",
+    "password": "密码",
+    "welcomeUser": "欢迎, {phone}",
+    "tagline": "让健康生活变得简单"
+  },
+  "navigation": {
+    "home": "首页",
+    "menu": "菜单",
+    "profile": "个人资料",
+    "scan": "扫描",
+    "library": "图书馆",
+    "book": "书籍",
+    "settings": "设置"
+  },
+  "scan": {
+    "title": "扫描条形码",
+    "loadingLiff": "加载 LIFF...",
+    "runningInLine": "在 LINE 应用中运行",
+    "requestCameraPermission": "请求相机权限",
+    "cameraError": "无法访问相机。请检查设置。",
+    "failedToAccessCamera": "无法访问相机。",
+    "failedToStartScanning": "无法开始扫描。",
+    "barcodeScanningError": "条形码扫描错误"
+  },
+  "profile": {
+    "title": "个人资料",
+    "todayProgress": "今日进度",
+    "carb": "碳水化合物",
+    "calories": "卡路里",
+    "protein": "蛋白质",
+    "personalInfo": "个人信息",
+    "name": "姓名",
+    "diseases": "疾病状况",
+    "gender": "性别",
+    "age": "年龄",
+    "weight": "体重",
+    "height": "身高",
+    "activityLevel": "活动水平",
+    "years": "岁",
+    "kg": "公斤",
+    "cm": "厘米",
+    "bmi": "BMI",
+    "bmiCategories": {
+      "obese2": "肥胖 II 级",
+      "obese1": "肥胖 I 级",
+      "overweight": "超重",
+      "normal": "正常体重",
+      "underweight": "体重不足"
+    }
+  },
+  "activityLevels": {
+    "sedentary": "久坐不动（很少或没有运动）",
+    "lightlyActive": "轻度活动（每周轻度运动1-3天）",
+    "moderatelyActive": "中度活动（每周中度运动4-5天）",
+    "veryActive": "高度活动（每周剧烈运动6-7天）",
+    "extremelyActive": "极度活动（剧烈运动、体力工作或每天训练两次）"
+  },
+  "diseases": {
+    "diabetes": "糖尿病",
+    "kidney": "肾脏疾病",
+    "heart": "心脏病",
+    "hypertension": "高血压",
+    "gout": "痛风",
+    "cholesterol": "高胆固醇",
+    "other": "其他",
+    "none": "无"
+  },
+  "menu": {
+    "title": "Wellnista",
+    "underDevelopment": "此功能正在开发中"
+  },
+  "settings": {
+    "title": "设置",
+    "language": "语言",
+    "languageDescription": "选择您偏好的应用语言",
+    "currentLanguage": "当前语言",
+    "appInfo": "应用信息",
+    "version": "版本",
+    "developer": "开发者"
+  },
+  "errors": {
+    "general": "发生错误。请重试。",
+    "network": "网络错误。请检查您的连接。",
+    "auth": "身份验证错误",
+    "camera": "无法访问相机"
+  }
+} 

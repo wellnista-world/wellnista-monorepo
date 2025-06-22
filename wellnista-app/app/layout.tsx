@@ -10,7 +10,6 @@ import HamburgerMenu from './components/HamburgerMenu';
 import { AuthProvider } from './lib/context/AuthContext';
 import AddToHomeScreen from './components/AddToHomeScreen';
 import { I18nProvider } from '../i18n';
-import LanguageSwitcher from './components/LanguageSwitcher';
 
 //import { Kanit } from "next/font/google";
 //import { Leckerli_One } from "next/font/google";
@@ -158,11 +157,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 )}
                 <div className="flex items-center justify-center">
                   <h1 className="text-2xl font-leckerli text-center flex-1">Wellnista</h1>
-                  <div className="flex items-center gap-2">
-                    <LanguageSwitcher />
-                    <div className="w-8">
-                      <HamburgerMenu />
-                    </div>
+                  <div className="ml-auto w-8">
+                    <HamburgerMenu />
                   </div>
                 </div>
                 {isInLineApp && (

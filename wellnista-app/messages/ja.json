@@ -1,0 +1,109 @@
+{
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "back": "戻る",
+    "next": "次へ",
+    "submit": "送信",
+    "close": "閉じる",
+    "edit": "編集",
+    "delete": "削除",
+    "confirm": "確認",
+    "yes": "はい",
+    "no": "いいえ"
+  },
+  "auth": {
+    "welcome": "ようこそ",
+    "login": "ログイン",
+    "logout": "ログアウト",
+    "register": "登録",
+    "forgotPassword": "パスワードを忘れた？",
+    "phoneNumber": "電話番号 (例: 0812345678)",
+    "password": "パスワード",
+    "welcomeUser": "ようこそ, {phone}",
+    "tagline": "健康を簡単に"
+  },
+  "navigation": {
+    "home": "ホーム",
+    "menu": "メニュー",
+    "profile": "プロフィール",
+    "scan": "スキャン",
+    "library": "ライブラリ",
+    "book": "ブック",
+    "settings": "設定"
+  },
+  "scan": {
+    "title": "バーコードスキャン",
+    "loadingLiff": "LIFF読み込み中...",
+    "runningInLine": "LINEアプリで実行中",
+    "requestCameraPermission": "カメラ権限を要求",
+    "cameraError": "カメラにアクセスできません。設定を確認してください。",
+    "failedToAccessCamera": "カメラにアクセスできませんでした。",
+    "failedToStartScanning": "スキャンを開始できませんでした。",
+    "barcodeScanningError": "バーコードスキャンエラー"
+  },
+  "profile": {
+    "title": "プロフィール",
+    "todayProgress": "今日の進捗",
+    "carb": "炭水化物",
+    "calories": "カロリー",
+    "protein": "タンパク質",
+    "personalInfo": "個人情報",
+    "name": "氏名",
+    "diseases": "疾患",
+    "gender": "性別",
+    "age": "年齢",
+    "weight": "体重",
+    "height": "身長",
+    "activityLevel": "活動レベル",
+    "years": "歳",
+    "kg": "kg",
+    "cm": "cm",
+    "bmi": "BMI",
+    "bmiCategories": {
+      "obese2": "肥満2度",
+      "obese1": "肥満1度",
+      "overweight": "肥満",
+      "normal": "標準体重",
+      "underweight": "低体重"
+    }
+  },
+  "activityLevels": {
+    "sedentary": "座りがち（運動なしまたは少ない）",
+    "lightlyActive": "軽度活動（週1-3日の軽い運動）",
+    "moderatelyActive": "中度活動（週4-5日の中程度の運動）",
+    "veryActive": "高度活動（週6-7日の激しい運動）",
+    "extremelyActive": "極度活動（激しい運動、肉体労働、または1日2回のトレーニング）"
+  },
+  "diseases": {
+    "diabetes": "糖尿病",
+    "kidney": "腎臓病",
+    "heart": "心臓病",
+    "hypertension": "高血圧",
+    "gout": "痛風",
+    "cholesterol": "高コレステロール",
+    "other": "その他",
+    "none": "なし"
+  },
+  "menu": {
+    "title": "Wellnista",
+    "underDevelopment": "この機能は開発中です"
+  },
+  "settings": {
+    "title": "設定",
+    "language": "言語",
+    "languageDescription": "アプリの言語を選択してください",
+    "currentLanguage": "現在の言語",
+    "appInfo": "アプリ情報",
+    "version": "バージョン",
+    "developer": "開発者"
+  },
+  "errors": {
+    "general": "エラーが発生しました。もう一度お試しください。",
+    "network": "ネットワークエラー。接続を確認してください。",
+    "auth": "認証エラー",
+    "camera": "カメラにアクセスできません"
+  }
+} 

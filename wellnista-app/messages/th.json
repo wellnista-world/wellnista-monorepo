@@ -31,7 +31,8 @@
     "profile": "โปรไฟล์",
     "scan": "สแกน",
     "library": "ไลบรารี",
-    "book": "หนังสือ"
+    "book": "หนังสือ",
+    "settings": "ตั้งค่า"
   },
   "scan": {
     "title": "สแกน บาร์โค๊ด",
@@ -89,6 +90,15 @@
   "menu": {
     "title": "Wellnista",
     "underDevelopment": "ฟีเจอร์นี้อยู่ระหว่างการพัฒนา"
+  },
+  "settings": {
+    "title": "ตั้งค่า",
+    "language": "ภาษา",
+    "languageDescription": "เลือกภาษาที่คุณต้องการใช้ในแอป",
+    "currentLanguage": "ภาษาปัจจุบัน",
+    "appInfo": "ข้อมูลแอป",
+    "version": "เวอร์ชัน",
+    "developer": "ผู้พัฒนา"
   },
   "errors": {
     "general": "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง",
