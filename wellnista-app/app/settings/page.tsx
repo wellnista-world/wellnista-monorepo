@@ -10,7 +10,7 @@ export default function SettingsPage() {
   const getLanguageName = (code: string) => {
     const languageNames = {
       en: 'English',
-      th: 'ไทย',
+      th: 'ไทย (Default)',
       zh: '中文',
       ja: '日本語',
       ko: '한국어'
@@ -49,6 +49,11 @@ export default function SettingsPage() {
           <Typography variant="body1" className="text-primary font-medium">
             {getLanguageName(locale)}
           </Typography>
+          {locale === 'th' && (
+            <Typography variant="body2" className="text-green-600 mt-1">
+              ★ Default language
+            </Typography>
+          )}
         </Box>
 
         <Divider />
