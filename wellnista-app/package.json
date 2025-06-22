@@ -11,6 +11,7 @@
   "dependencies": {
     "@ericblade/quagga2": "^1.8.4",
     "@fontsource/kanit": "^5.1.1",
+    "@heroicons/react": "^2.2.0",
     "@line/liff": "^2.25.1",
     "@mui/icons-material": "^7.0.2",
     "@supabase/auth-helpers-nextjs": "^0.10.0",
@@ -18,8 +19,8 @@
     "@supabase/supabase-js": "^2.49.1",
     "@undecaf/barcode-detector-polyfill": "^0.9.21",
     "@zxing/browser": "^0.1.5",
-    "next": "15.2.4",
     "lucide-react": "^0.513.0",
+    "next": "15.2.4",
     "next-pwa": "^5.6.0",
     "openai": "^4.77.0",
     "react": "^19.0.0",

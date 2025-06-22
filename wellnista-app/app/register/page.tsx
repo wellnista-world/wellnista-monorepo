@@ -6,7 +6,6 @@ import {
   TextField,
   Button,
   Typography,
-  Box,
   CircularProgress,
   ThemeProvider,
   FormControl,
@@ -170,12 +169,19 @@ export default function Register() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box className="min-h-screen bg-secondary flex justify-center items-start px-4 pt-6 pb-12">
-        <Box className="w-full max-w-sm p-6 space-y-4">
-          <Typography variant="h5" className="text-primary text-neutral font-garet text-center">
+      <div className="min-h-screen bg-secondary text-neutral font-garet px-4 py-6">
+        {/* Header */}
+        <div className="mb-8 text-center">
+          <Typography className="text-2xl font-bold text-primary mb-1">
             {t('register.title')}
           </Typography>
+          <Typography className="text-sm text-neutral/70">
+            {t('register.subtitle')}
+          </Typography>
+        </div>
 
+        {/* Registration Form */}
+        <div className="max-w-md mx-auto space-y-4">
           <TextField
             id="outlined-basic"
             label={t('register.fullName')}
@@ -269,12 +275,12 @@ export default function Register() {
             fullWidth
             onClick={handleSubmit}
             disabled={loading}
-            className="!bg-primary hover:!bg-accent !text-white mt-4 rounded-full"
+            className="!bg-primary hover:!bg-accent !text-white mt-4 rounded-full font-semibold"
           >
             {loading ? <CircularProgress size={24} color="inherit" /> : t('register.submit')}
           </Button>
-        </Box>
-      </Box>
+        </div>
+      </div>
     </ThemeProvider>
   );
 }

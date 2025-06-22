@@ -42,6 +42,8 @@
     "signupTitle": "Create Account",
     "signupSubtitle": "Register with your phone number and password",
     "phonePlaceholder": "Phone number (e.g., 0812345678)",
+    "phoneNumberWithCountry": "Phone number",
+    "selectCountry": "Select country",
     "alreadyHaveAccount": "Already have an account?",
     "loginHere": "Log in here",
     "notLoggedIn": "You are not logged in",
@@ -270,19 +272,20 @@
     "camera": "Unable to access camera"
   },
   "register": {
-    "title": "Register",
+    "title": "Complete Your Profile",
+    "subtitle": "Please provide your personal information to complete registration",
     "fullName": "Full Name",
     "nickname": "Nickname",
-    "diseases": "Medical Conditions",
-    "otherDiseases": "Other Medical Conditions",
-    "medicines": "Regular Medications",
+    "diseases": "Underlying medical conditions",
+    "otherDiseases": "Other diseases",
+    "medicines": "Medicines",
     "gender": "Gender",
     "age": "Age",
-    "weight": "Weight",
-    "height": "Height",
-    "waist": "Waist",
+    "weight": "Weight (kg)",
+    "height": "Height (cm)",
+    "waist": "Waist (cm)",
     "activityLevel": "Activity Level",
-    "submit": "Register"
+    "submit": "Submit"
   },
   "introductionStatus": {
     "safe": "Safe - Within recommended range",

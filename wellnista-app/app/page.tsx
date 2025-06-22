@@ -13,6 +13,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useRouter } from "next/navigation";
 import WellnistaLogo from "./components/WellnistaLogo";
 import LanguageSwitcher from "./components/LanguageSwitcher";
+import CountryCodeSelector from "./components/CountryCodeSelector";
+import { CountryCode, getDefaultCountry } from "../config/countryCodes";
 
 interface User {
   phone?: string;
@@ -22,18 +24,20 @@ interface User {
 export default function Home() {
   const { t } = useI18n();
   const [user, setUser] = useState<User | null>(null);
+  const [selectedCountry, setSelectedCountry] = useState<CountryCode>(getDefaultCountry());
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const formatPhoneNumber = (rawPhone: string) => {
-    const cleaned = rawPhone.replace(/\D/g, ""); // ลบ non-numeric ออก
-    if (cleaned.startsWith("0")) {
-      return "+66" + cleaned.slice(1);
+  const formatPhoneNumber = (rawPhone: string, country: CountryCode) => {
+    const cleaned = rawPhone.replace(/\D/g, "");
+    // Remove leading 0 for Thailand
+    if (country.code === 'TH' && cleaned.startsWith('0')) {
+      return country.dialCode + cleaned.slice(1);
     }
-    return "+66" + cleaned; // fallback กรณี user ลืมใส่ 0
+    return country.dialCode + cleaned;
   };
 
   useEffect(() => {
@@ -58,7 +62,7 @@ export default function Home() {
   const handleLogin = async () => {
     setError(null);
     setLoading(true);
-    const formattedPhone = formatPhoneNumber(phone);
+    const formattedPhone = formatPhoneNumber(phone, selectedCountry);
     const { data, error } = await supabase.auth.signInWithPassword({
       phone: formattedPhone,
       password,
@@ -85,48 +89,57 @@ export default function Home() {
   };
 
   return (
-    <Box className="justify-center items-center flex flex-col gap-1 bg-secondary px-4 mt-6">
-      <Typography variant="h4" className="font-bold text-center">
-        {t("auth.welcome")}
-      </Typography>
-      <Box>
-        <WellnistaLogo />
-      </Box>
-      <Typography variant="h5" className="font-bold mt-10 text-center">
-        {t("auth.wellnistaBrand")}
-      </Typography>
-      <Typography
-        variant="subtitle1"
-        className="mt-10 text-lg text-center font-semibold"
-      >
-        {t("auth.tagline")}
-      </Typography>
+    <div className="min-h-screen bg-secondary text-neutral font-garet px-4 py-6">
+      {/* Header with Welcome Message */}
+      <div className="mb-8 text-center">
+        <Typography className="text-2xl font-bold text-primary mb-1">
+          {t("auth.welcome")}
+        </Typography>
+        <Box className="flex justify-center mt-4">
+          <WellnistaLogo />
+        </Box>
+        <Typography className="text-xl font-bold text-primary mt-6">
+          {t("auth.wellnistaBrand")}
+        </Typography>
+        <Typography className="text-sm text-neutral/70 mt-2">
+          {t("auth.tagline")}
+        </Typography>
+      </div>
 
-      <Box className="mt-6 w-full max-w-sm flex flex-col gap-4">
+      {/* Login Form */}
+      <div className="max-w-sm mx-auto space-y-4">
         {user ? (
-          <>
-            <Typography className="text-xl text-center">
+          <div className="text-center">
+            <Typography className="text-xl text-center text-primary mb-4">
               {t("auth.welcomeUser", { phone: user.phone || "" })}
             </Typography>
             <Button
               variant="contained"
               onClick={signOut}
-              className="bg-red-500 hover:bg-red-600 text-white font-garet"
-              fullWidth
+              className="w-full bg-red-500 hover:bg-red-600 text-white font-garet rounded-full"
             >
               {t("auth.logout")}
             </Button>
-          </>
+          </div>
         ) : (
           <>
-            <TextField
-              fullWidth
-              label={t("auth.phoneNumber")}
-              variant="outlined"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="bg-white rounded"
-            />
+            <div className="flex gap-2">
+              <div className="w-36">
+                <CountryCodeSelector
+                  selectedCountry={selectedCountry}
+                  onCountryChange={setSelectedCountry}
+                />
+              </div>
+              <TextField
+                fullWidth
+                label={t("auth.phoneNumberWithCountry")}
+                variant="outlined"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="bg-white rounded"
+                placeholder={t("auth.phonePlaceholder")}
+              />
+            </div>
             <TextField
               fullWidth
               label={t("auth.password")}
@@ -139,7 +152,7 @@ export default function Home() {
             <button
               onClick={handleLogin}
               disabled={loading}
-              className="px-6 py-3 bg-primary text-secondary rounded-full hover:bg-accent transition font-garet"
+              className="w-full px-6 py-3 bg-primary text-secondary rounded-full hover:bg-accent transition font-garet font-semibold"
             >
               {loading ? (
                 <CircularProgress size={24} color="inherit" />
@@ -148,31 +161,32 @@ export default function Home() {
               )}
             </button>
             {error && (
-              <Typography color="error" variant="body2">
+              <Typography color="error" variant="body2" className="text-center">
                 {error}
               </Typography>
             )}
 
-            <Box className="flex justify-between text-sm text-gray-500">
+            <div className="flex justify-between text-sm text-neutral/70 pt-2">
               <Link href="/register/signup" passHref legacyBehavior>
-                <Typography className="cursor-pointer hover:underline">
+                <Typography className="cursor-pointer hover:underline text-primary">
                   {t("auth.register")}
                 </Typography>
               </Link>
               <Typography
-                className="cursor-pointer hover:underline"
+                className="cursor-pointer hover:underline text-primary"
                 onClick={() => {}}
               >
                 {t("auth.forgotPassword")}
               </Typography>
-            </Box>
-            {/* Language Switcher */}
-            <Box className="w-full flex justify-end mb-4">
-              <LanguageSwitcher />
-            </Box>
+            </div>
           </>
         )}
-      </Box>
-    </Box>
+
+        {/* Language Switcher */}
+        <div className="flex justify-center">
+          <LanguageSwitcher />
+        </div>
+      </div>
+    </div>
   );
 }
