@@ -277,7 +277,7 @@
     "eatThisScan": "Makan ini? Pindai sekarang!",
     "whatToEat": "Apa yang harus dimakan?",
     "bloodSugarLog": "Catatan Gula Darah",
-    "specializedFood": "Makanan khusus untuk orang yang Anda cintai",
+    "specializedFood": "Makanan khusus untuk diabetes",
     "carbLogging": "Pencatatan karbohidrat lebih mudah dari yang Anda pikirkan. Ini membantu mencegah penyakit kronis non-menular.",
     "wellnistaMarket": "Wellnista Market",
     "wellnistaLibrary": "Wellnista Library",
@@ -307,7 +307,8 @@
         "title": "Pemindaian Makanan",
         "description": "Pindai makanan untuk melihat informasi nutrisi yang akurat"
       }
-    }
+    },
+    "contactLine": "Hubungi LINE"
   },
   "settings": {
     "title": "Pengaturan",

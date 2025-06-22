@@ -277,9 +277,9 @@
     "eatThisScan": "吃这个？现在扫描！",
     "whatToEat": "吃什么？",
     "bloodSugarLog": "血糖记录",
-    "wellnistaMarket": "Wellnista 市场",
+    "wellnistaMarket": "Wellnista Market",
     "wellnistaLibrary": "Wellnista 图书馆",
-    "specializedFood": "为您的亲人提供专业食品",
+    "specializedFood": "糖尿病专用食品",
     "carbLogging": "碳水化合物记录比您想象的更容易。帮助预防慢性非传染性疾病",
     "recommendedProducts": "推荐产品",
     "recommendedProduct": "推荐产品",
@@ -307,7 +307,8 @@
         "title": "食品扫描",
         "description": "扫描食品查看准确的营养信息"
       }
-    }
+    },
+    "contactLine": "联系 LINE"
   },
   "settings": {
     "title": "设置",

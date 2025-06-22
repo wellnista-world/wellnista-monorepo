@@ -277,9 +277,9 @@
     "eatThisScan": "これを食べる？今すぐスキャン！",
     "whatToEat": "何を食べる？",
     "bloodSugarLog": "血糖記録",
-    "specializedFood": "大切な人のための専門食品",
+    "specializedFood": "糖尿病専用食品",
     "carbLogging": "炭水化物の記録は思ったより簡単です。非感染性慢性疾患の予防に役立ちます。",
-    "wellnistaMarket": "Wellnista マーケット",
+    "wellnistaMarket": "Wellnista Market",
     "wellnistaLibrary": "Wellnista ライブラリ",
     "recommendedProducts": "おすすめ商品",
     "recommendedProduct": "おすすめ商品",
@@ -307,7 +307,8 @@
         "title": "食品スキャン",
         "description": "食品をスキャンして正確な栄養情報を確認"
       }
-    }
+    },
+    "contactLine": "LINEでお問い合わせ"
   },
   "settings": {
     "title": "設定",

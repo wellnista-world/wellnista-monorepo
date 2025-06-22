@@ -276,7 +276,7 @@
     "eatThisScan": "กินนี้มั้ย สแกนเลย !",
     "whatToEat": "กินอะไรดี ?",
     "bloodSugarLog": "สมุดบันทึกน้ำตาล",
-    "specializedFood": "อาหารเฉพาะโรคเพื่อคนที่คุณรัก",
+    "specializedFood": "อาหารเฉพาะสำหรับผู้ป่วยเบาหวาน",
     "carbLogging": "การบันทึกคาร์บง่ายกว่าที่คิด ช่วยป้องกันโรคไม่ติดต่อเรื้อรัง",
     "wellnistaMarket": "Wellnista Market",
     "wellnistaLibrary": "Wellnista Library",
@@ -306,7 +306,8 @@
         "title": "สแกนอาหาร",
         "description": "สแกนอาหารเพื่อดูข้อมูลโภชนาการที่แม่นยำ"
       }
-    }
+    },
+    "contactLine": "ติดต่อ LINE"
   },
   "settings": {
     "title": "ตั้งค่า",

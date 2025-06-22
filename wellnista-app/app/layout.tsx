@@ -2,7 +2,7 @@
 import "./globals.css";
 import { useLiff } from "./lib/api/use-liff";
 import Script from "next/script";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
@@ -29,6 +29,7 @@ import { CartProvider } from './lib/context/CartContext';
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const { isLiffReady, error, isInLineApp } = useLiff();
   const pathname = usePathname();
+  const router = useRouter();
   const showBackButton = pathname !== "/" && pathname !== "/home";
   const hideHeader = pathname.startsWith('/product/');
 
@@ -149,7 +150,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <header className="p-4 bg-accent text-secondary relative">
                     {showBackButton && (
                       <button
-                        onClick={() => window.history.back()}
+                        onClick={() => {
+                          if (pathname === '/product' || pathname.startsWith('/product/')) {
+                            router.push('/home');
+                          } else {
+                            window.history.back();
+                          }
+                        }}
                         className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 hover:bg-primary/80 text-accent hover:text-white shadow z-10"
                         aria-label="Back"
                       >

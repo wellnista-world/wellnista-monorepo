@@ -116,6 +116,18 @@ export default function HomeScreen() {
 
   return (
     <div className="min-h-screen bg-secondary text-neutral font-garet px-4 py-6">
+      {/* LINE Contact Link - Top Right */}
+      <div className="flex justify-end mb-4">
+        <a
+          href="https://lin.ee/q4tHGv0"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs text-primary hover:text-accent transition-colors underline"
+        >
+          {t("home.contactLine")}
+        </a>
+      </div>
+
       {/* Recommended Products Section */}
       <div className="mb-8">
         <Typography variant="h6" className="font-bold text-primary mb-4 pb-4">
