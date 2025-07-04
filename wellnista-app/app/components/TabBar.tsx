@@ -38,31 +38,31 @@ export default function TabBar() {
 
   const tabItems: TabItem[] = [
     {
-      icon: <Store size={20} />,
+      icon: <Store size={28} />,
       label: t("navigation.market"),
       href: "/product",
       color: "bg-primary",
     },
     {
-      icon: <Heart size={20} />,
+      icon: <Heart size={28} />,
       label: t("navigation.menu"),
       href: "/menu",
       color: "bg-primary",
     },
     {
-      icon: <Camera size={20} />,
+      icon: <Camera size={28} />,
       label: t("navigation.scan"),
       href: "/select",
       color: "bg-primary",
     },
     {
-      icon: <BookOpen size={20} />,
+      icon: <BookOpen size={28} />,
       label: t("navigation.book"),
       href: "/book",
       color: "bg-primary",
     },
     {
-      icon: <UserCircle size={20} />,
+      icon: <UserCircle size={28} />,
       label: t("navigation.profile"),
       href: "/profile",
       color: "bg-primary",
@@ -88,13 +88,13 @@ export default function TabBar() {
             <button
               key={index}
               onClick={() => router.push(item.href)}
-              className={`flex flex-col items-center justify-center flex-1 py-2 px-1 min-w-0 transition-all duration-200 ${
+              className={`flex flex-col items-center justify-center flex-1 py-3 px-1 min-w-0 transition-all duration-200 ${
                 active 
                   ? "text-primary" 
                   : "text-neutral/60 hover:text-primary/80"
               }`}
             >
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 transition-all duration-200 ${
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-2 transition-all duration-200 ${
                 active 
                   ? `${item.color} text-white shadow-md` 
                   : "bg-gray-100 text-neutral/60"
