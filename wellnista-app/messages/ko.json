@@ -120,7 +120,8 @@
     "library": "라이브러리",
     "book": "책",
     "settings": "설정",
-    "market": "마켓"
+    "market": "마켓",
+    "medicines": "약"
   },
   "scan": {
     "title": "바코드 스캔",
@@ -179,6 +180,7 @@
     "carbCounting": "탄수화물 계산",
     "name": "이름",
     "diseases": "기저질환",
+    "medicines": "약",
     "gender": "출생 시 성별",
     "age": "나이",
     "weight": "체중",

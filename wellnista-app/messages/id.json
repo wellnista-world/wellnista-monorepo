@@ -109,7 +109,8 @@
     "library": "Perpustakaan",
     "book": "Buku",
     "settings": "Pengaturan",
-    "market": "Pasar"
+    "market": "Pasar",
+    "medicines": "Obat-obatan"
   },
   "scan": {
     "title": "Pindai Barcode",
@@ -168,6 +169,7 @@
     "carbCounting": "Penghitungan Karbohidrat",
     "name": "Nama - Nama Belakang",
     "diseases": "Kondisi medis yang mendasari",
+    "medicines": "Obat-obatan",
     "gender": "Jenis kelamin saat lahir",
     "age": "Usia",
     "weight": "Berat Badan",

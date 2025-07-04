@@ -109,7 +109,8 @@
     "library": "图书馆",
     "book": "书籍",
     "settings": "设置",
-    "market": "市场"
+    "market": "市场",
+    "medicines": "药物"
   },
   "scan": {
     "title": "扫描条形码",
@@ -168,6 +169,7 @@
     "carbCounting": "碳水化合物计数",
     "name": "姓名",
     "diseases": "基础疾病",
+    "medicines": "药物",
     "gender": "出生性别",
     "age": "年龄",
     "weight": "体重",

@@ -119,7 +119,8 @@
     "library": "Library",
     "book": "Book",
     "settings": "Settings",
-    "market": "Market"
+    "market": "Market",
+    "medicines": "Medicines"
   },
   "scan": {
     "title": "Scan Barcode",
@@ -178,6 +179,7 @@
     "carbCounting": "Carb Counting",
     "name": "Name - Surname",
     "diseases": "Underlying medical conditions",
+    "medicines": "Medicines",
     "gender": "Sex assigned at birth",
     "age": "Age",
     "weight": "Weight",

@@ -2,7 +2,7 @@ export interface UserData {
   name: string;
   nickname: string;
   diseases: string[];
-  madicines: string;
+  medicines: string;
   gender: string;
   age: number | null;
   weight: number | null;

@@ -109,7 +109,8 @@
     "library": "ไลบรารี",
     "book": "หนังสือ",
     "settings": "ตั้งค่า",
-    "market": "ตลาด"
+    "market": "ตลาด",
+    "medicines": "ยา"
   },
   "scan": {
     "title": "สแกน บาร์โค๊ด",
@@ -168,6 +169,7 @@
     "carbCounting": "นับคาร์บ",
     "name": "ชื่อ - นามสกุล",
     "diseases": "โรคประจำตัว",
+    "medicines": "ยา",
     "gender": "เพศโดยกำเนิด",
     "age": "อายุ",
     "weight": "น้ำหนัก",
@@ -259,7 +261,8 @@
         "title": "โซเดียม",
         "description": "ความสำคัญของโซเดียมและการควบคุม"
       }
-    }
+    },
+    "medicines": "ยา"
   },
   "menu": {
     "title": "Wellnista",

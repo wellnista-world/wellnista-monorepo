@@ -109,7 +109,8 @@
     "library": "ライブラリ",
     "book": "ブック",
     "settings": "設定",
-    "market": "マーケット"
+    "market": "マーケット",
+    "medicines": "薬"
   },
   "scan": {
     "title": "バーコードスキャン",
@@ -168,6 +169,7 @@
     "carbCounting": "炭水化物カウント",
     "name": "氏名",
     "diseases": "基礎疾患",
+    "medicines": "薬",
     "gender": "出生時性別",
     "age": "年齢",
     "weight": "体重",

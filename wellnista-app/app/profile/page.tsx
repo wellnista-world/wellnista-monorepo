@@ -5,7 +5,7 @@ import { useAuth } from "../lib/context/AuthContext";
 import { supabase } from "../lib/api/supabaseClient";
 import { UserData } from "../lib/types/user";
 import Typography from "@mui/material/Typography";
-import { UserCircle, Activity, Scale, Ruler, Heart, Clock } from "lucide-react";
+import { UserCircle, Activity, Scale, Ruler, Heart, Clock, Pill } from "lucide-react";
 import { Calendar } from "../components/Calendar";
 import { useI18n } from "../../i18n";
 
@@ -175,6 +175,11 @@ export default function ProfilePage() {
       icon: <Ruler size={24} />,
       label: t('profile.height'),
       value: `${userData?.height || "-"} ${t('profile.cm')}`,
+    },
+    {
+      icon: <Pill size={24} />,
+      label: t('profile.medicines'),
+      value: userData?.medicines || "-",
     },
   ];
 
