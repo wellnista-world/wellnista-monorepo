@@ -1,7 +1,6 @@
 'use client';
 
 import { useI18n } from '../../i18n';
-import Typography from "@mui/material/Typography";
 
 export default function MenuScreen() {
   const { t } = useI18n();
