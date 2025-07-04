@@ -108,7 +108,8 @@
     "scan": "Pindai",
     "library": "Perpustakaan",
     "book": "Buku",
-    "settings": "Pengaturan"
+    "settings": "Pengaturan",
+    "market": "Pasar"
   },
   "scan": {
     "title": "Pindai Barcode",

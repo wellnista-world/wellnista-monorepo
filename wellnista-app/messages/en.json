@@ -118,7 +118,8 @@
     "scan": "Scan",
     "library": "Library",
     "book": "Book",
-    "settings": "Settings"
+    "settings": "Settings",
+    "market": "Market"
   },
   "scan": {
     "title": "Scan Barcode",

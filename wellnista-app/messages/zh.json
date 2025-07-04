@@ -108,7 +108,8 @@
     "scan": "扫描",
     "library": "图书馆",
     "book": "书籍",
-    "settings": "设置"
+    "settings": "设置",
+    "market": "市场"
   },
   "scan": {
     "title": "扫描条形码",

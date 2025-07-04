@@ -119,7 +119,8 @@
     "scan": "스캔",
     "library": "라이브러리",
     "book": "책",
-    "settings": "설정"
+    "settings": "설정",
+    "market": "마켓"
   },
   "scan": {
     "title": "바코드 스캔",

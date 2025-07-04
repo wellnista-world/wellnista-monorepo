@@ -10,6 +10,7 @@ import { AuthProvider } from './lib/context/AuthContext';
 import AddToHomeScreen from './components/AddToHomeScreen';
 import { I18nProvider } from '../i18n';
 import { CartProvider } from './lib/context/CartContext';
+import TabBar from './components/TabBar';
 
 //import { Kanit } from "next/font/google";
 //import { Leckerli_One } from "next/font/google";
@@ -173,8 +174,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     )}
                   </header>
                 )}
-                <main className={!hideHeader ? "p-4" : ""}>{children}</main>
+                <main className={`${!hideHeader ? "p-4" : ""}`}>{children}</main>
                 <AddToHomeScreen />
+                <TabBar />
               </CartProvider>
             </AuthProvider>
           </ThemeProvider>
