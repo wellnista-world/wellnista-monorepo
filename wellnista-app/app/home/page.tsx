@@ -147,7 +147,7 @@ export default function HomeScreen() {
                   {recommendedProduct.name}
                 </Typography>
                 <Typography className="text-sm text-neutral/60 mb-2">
-                  {recommendedProduct.description}
+                  {recommendedProduct.description.length > 80 ? recommendedProduct.description.slice(0, 80) + "..." : recommendedProduct.description}
                 </Typography>
                 <Typography className="text-lg font-bold text-primary">
                   {recommendedProduct.currency}{recommendedProduct.price}

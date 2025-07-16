@@ -45,12 +45,6 @@ export async function POST(request: NextRequest) {
       },
       customer_creation: 'always',
       metadata: {
-        items: JSON.stringify(items.map((item: CartItem) => ({
-          id: item.product.id,
-          name: item.product.name,
-          quantity: item.quantity,
-          price: item.product.price,
-        }))),
         usePointDiscount: usePointDiscount?.toString() || 'false',
         promotionCode: promotionCode || '',
       },
@@ -70,7 +64,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Error creating checkout session:', error);
     return NextResponse.json(
-      { error: 'Failed to create checkout session' },
+      { error: 'Failed to create checkout session:' + error },
       { status: 500 }
     );
   }
