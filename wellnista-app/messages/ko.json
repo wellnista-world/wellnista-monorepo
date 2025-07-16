@@ -86,6 +86,14 @@
     "paymentMethod": "결제 방법",
     "securePaymentViaPromptPay": "PromptPay를 통한 안전한 결제"
   },
+  "coins": {
+    "balance": "코인 잔액",
+    "earn": "코인 획득",
+    "spend": "코인 사용",
+    "insufficient": "코인이 부족합니다",
+    "earned": "코인을 획득했습니다!",
+    "spent": "코인을 사용했습니다!"
+  },
   "auth": {
     "welcome": "wellnista에 오신 것을 환영합니다",
     "wellnista": "Wellnista",

@@ -75,6 +75,14 @@
     "qty": "数量",
     "securePaymentViaPromptPay": "PromptPayによる安全な支払い"
   },
+  "coins": {
+    "balance": "コイン残高",
+    "earn": "コインを獲得",
+    "spend": "コインを使用",
+    "insufficient": "コインが不足しています",
+    "earned": "コインを獲得しました！",
+    "spent": "コインを使用しました！"
+  },
   "auth": {
     "welcome": "Wellnistaへようこそ",
     "wellnista": "Wellnista",

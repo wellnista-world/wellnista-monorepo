@@ -11,12 +11,7 @@ export default function WellnistaLogo({ variant = 'h4', className = '' }: Wellni
   return (
     <Typography
       variant={variant}
-      sx={{
-        fontFamily: 'Leckerli One, cursive',
-        fontWeight: 'bold',
-        textAlign: 'center'
-      }}
-      className={className}
+      className={`leckerli-one-regular text-center ${className}`}
     >
       Wellnista
     </Typography>

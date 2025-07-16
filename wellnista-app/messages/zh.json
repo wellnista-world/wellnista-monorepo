@@ -75,6 +75,14 @@
     "qty": "数量",
     "securePaymentViaPromptPay": "通过 PromptPay 安全支付"
   },
+  "coins": {
+    "balance": "硬币余额",
+    "earn": "赚取硬币",
+    "spend": "花费硬币",
+    "insufficient": "硬币不足",
+    "earned": "获得硬币！",
+    "spent": "花费硬币！"
+  },
   "auth": {
     "welcome": "欢迎来到 wellnista",
     "wellnista": "Wellnista",

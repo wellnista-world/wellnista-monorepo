@@ -85,6 +85,14 @@
     "paymentMethod": "Payment Method",
     "securePaymentViaPromptPay": "Secure payment via PromptPay"
   },
+  "coins": {
+    "balance": "Coin Balance",
+    "earn": "Earn Coins",
+    "spend": "Spend Coins",
+    "insufficient": "Insufficient coins",
+    "earned": "Coins earned!",
+    "spent": "Coins spent!"
+  },
   "auth": {
     "welcome": "Welcome to wellnista",
     "wellnista": "Wellnista",

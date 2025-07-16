@@ -75,6 +75,14 @@
     "qty": "จำนวน",
     "securePaymentViaPromptPay": "การชำระเงินที่ปลอดภัยผ่าน PromptPay"
   },
+  "coins": {
+    "balance": "ยอดเหรียญ",
+    "earn": "รับเหรียญ",
+    "spend": "ใช้เหรียญ",
+    "insufficient": "เหรียญไม่เพียงพอ",
+    "earned": "ได้รับเหรียญแล้ว!",
+    "spent": "ใช้เหรียญแล้ว!"
+  },
   "auth": {
     "welcome": "ยินดีต้อนรับสู่ wellnista",
     "wellnista": "Wellnista",

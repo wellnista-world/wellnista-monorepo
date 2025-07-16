@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import Image from "next/image";
 import { supabase } from "@/app/lib/api/supabaseClient";
 import { useAuth } from "@/app/lib/context/AuthContext";
+import { useCoins } from "@/app/lib/context/CoinContext";
 import { useI18n } from "../../../i18n";
 
 export interface NutritionData {
@@ -57,6 +58,7 @@ export default function ResultPage() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { user } = useAuth();
+  const { addCoins } = useCoins();
   const maxCarbs = 8;
 
   // create handle function when click กิน it will save data to supabase
@@ -114,12 +116,14 @@ export default function ResultPage() {
         nutrition_id: nutritionId, // if you have a relation
       });
 
-      router.push("/profile");
-
     if (historyError) {
       console.error("Failed to save scan history:", historyError);
     } else {
       console.log("Scan history saved!");
+      
+      // Award coins for scanning food
+      await addCoins(10);
+      
       router.push("/profile");
     }
   };

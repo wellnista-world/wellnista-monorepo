@@ -75,6 +75,14 @@
     "qty": "Jumlah",
     "securePaymentViaPromptPay": "Pembayaran aman melalui PromptPay"
   },
+  "coins": {
+    "balance": "Saldo Koin",
+    "earn": "Dapatkan Koin",
+    "spend": "Gunakan Koin",
+    "insufficient": "Koin tidak cukup",
+    "earned": "Koin diperoleh!",
+    "spent": "Koin digunakan!"
+  },
   "auth": {
     "welcome": "Selamat datang di wellnista",
     "wellnista": "Wellnista",
