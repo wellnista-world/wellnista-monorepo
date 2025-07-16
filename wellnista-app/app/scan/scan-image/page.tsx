@@ -9,14 +9,12 @@ import Box from '@mui/material/Box';
 import { useRouter } from "next/navigation";
 import { supabase } from "@/app/lib/api/supabaseClient";
 import { useAuth } from "@/app/lib/context/AuthContext";
-import { useCoins } from "@/app/lib/context/CoinContext";
 import { useI18n } from "../../../i18n";
 import Image from 'next/image';
 
 export default function ScanImagePage() {
   const router = useRouter();
   const { user } = useAuth();
-  const { addCoins } = useCoins();
   const { t, locale } = useI18n();
   const {
     isLiffReady,
@@ -184,10 +182,6 @@ export default function ScanImagePage() {
       console.error("Failed to save scan history:", historyError);
     } else {
       console.log("Scan history saved!");
-      
-      // Award coins for scanning food
-      await addCoins(10);
-      
       router.push("/profile");
     }
   };
