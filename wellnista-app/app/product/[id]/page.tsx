@@ -49,7 +49,7 @@ const ProductView = ({ product, locale, onBuyClick }: { product: Product, locale
           </div>
         </Link>
       </div>
-      <div className="absolute bottom-[6%] left-4 right-4 sm:right-auto">
+      <div className="absolute bottom-[11%] left-4 right-4 sm:right-auto">
         <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-2xl p-4 w-full sm:max-w-sm">
           <div className="flex items-start gap-4">
             <div className="flex-shrink-0">
