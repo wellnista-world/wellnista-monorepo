@@ -30,7 +30,7 @@ export default function CheckoutPage() {
   const subtotal = cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
   
   // Point discount configuration
-  const pointsRequired = 100; // Points needed for discount
+  const pointsRequired = 5000; // Points needed for discount
   const pointPromotion = promotions.find(p => p.code === 'POINT10');
   const canUsePoints = coins >= pointsRequired && pointPromotion;
   
@@ -192,7 +192,7 @@ export default function CheckoutPage() {
                   <Coins size={20} className="text-amber-400" />
                   <div>
                     <Typography className="font-medium">
-                      Use {pointsRequired} points for {pointPromotion?.discountType === 'fixed' ? 
+                      Use {pointsRequired.toLocaleString()} points for {pointPromotion?.discountType === 'fixed' ? 
                         `${cart[0]?.product.currency || ''}${pointPromotion.discount}` : 
                         `${pointPromotion?.discount}%`
                       } discount
