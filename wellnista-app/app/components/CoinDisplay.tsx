@@ -2,7 +2,6 @@
 
 import { useCoins } from '../lib/context/CoinContext';
 import { Coins } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 
 interface CoinDisplayProps {
   className?: string;
@@ -11,10 +10,10 @@ interface CoinDisplayProps {
 
 export default function CoinDisplay({ className = '', showLabel = false }: CoinDisplayProps) {
   const { coins, loading } = useCoins();
-  const router = useRouter();
+//   const router = useRouter();
 
   const handleClick = () => {
-    router.push('/coins');
+    // router.push('/coins');
   };
 
   if (loading) {

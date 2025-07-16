@@ -20,9 +20,8 @@ const ProductView = ({ product, locale, onBuyClick }: { product: Product, locale
       <Image
         src={localized.image}
         alt={localized.name}
-        layout="fill"
-        objectFit="cover"
-        className="absolute inset-0"
+        fill
+        className="object-contain object-top absolute inset-0 pt-16"
       />
       <div className="absolute top-4 left-4 z-10">
         <Link href="/product">
@@ -58,7 +57,7 @@ const ProductView = ({ product, locale, onBuyClick }: { product: Product, locale
                 alt={localized.name}
                 width={80}
                 height={80}
-                className="w-20 h-20 object-cover rounded-lg"
+                className="w-20 h-20 object-contain rounded-lg"
               />
             </div>
             <div className="flex-1 min-w-0">

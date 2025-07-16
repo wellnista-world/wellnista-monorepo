@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { CartItem } from '../../lib/context/CartContext';
+import { promotions } from '../../../config/promotion';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-05-28.basil',
@@ -8,7 +9,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function POST(request: NextRequest) {
   try {
-    const { items }: { items: CartItem[] } = await request.json();
+    const { items, usePointDiscount, promotionCode }: { 
+      items: CartItem[], 
+      usePointDiscount?: boolean,
+      promotionCode?: string 
+    } = await request.json();
 
     if (!items || items.length === 0) {
       return NextResponse.json(
@@ -23,8 +28,12 @@ export async function POST(request: NextRequest) {
       quantity: item.quantity,
     }));
 
-    // Create checkout session
-    const session = await stripe.checkout.sessions.create({
+    // Find promotion details if using point discount
+    const promotion = usePointDiscount && promotionCode ? 
+      promotions.find(p => p.code === promotionCode) : null;
+
+    // Prepare session configuration
+    const sessionConfig: Stripe.Checkout.SessionCreateParams = {
       payment_method_types: ['promptpay'],
       line_items: lineItems,
       mode: 'payment',
@@ -42,8 +51,20 @@ export async function POST(request: NextRequest) {
           quantity: item.quantity,
           price: item.product.price,
         }))),
+        usePointDiscount: usePointDiscount?.toString() || 'false',
+        promotionCode: promotionCode || '',
       },
-    });
+    };
+
+    // Add promotion code if using point discount
+    if (usePointDiscount && promotion?.stripeId) {
+      sessionConfig.discounts = [{
+        promotion_code: promotion.stripeId,
+      }];
+    }
+
+    // Create checkout session
+    const session = await stripe.checkout.sessions.create(sessionConfig);
 
     return NextResponse.json({ sessionId: session.id });
   } catch (error) {

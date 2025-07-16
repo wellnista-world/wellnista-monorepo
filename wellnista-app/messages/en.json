@@ -91,7 +91,12 @@
     "spend": "Spend Coins",
     "insufficient": "Insufficient coins",
     "earned": "Coins earned!",
-    "spent": "Coins spent!"
+    "spent": "Coins spent!",
+    "discount": "Point Discount",
+    "usePoints": "Use points for discount",
+    "pointsRequired": "Points required",
+    "pointsUsed": "points used for discount!",
+    "needMore": "Need more points"
   },
   "auth": {
     "welcome": "Welcome to wellnista",

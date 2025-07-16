@@ -2,11 +2,14 @@
 
 import { useState } from 'react';
 import { useCart } from '../lib/context/CartContext';
+import { useCoins } from '../lib/context/CoinContext';
 import { loadStripe } from '@stripe/stripe-js';
 import Link from 'next/link';
 import Typography from '@mui/material/Typography';
-import { Button, Paper, Divider } from '@mui/material';
+import { Button, Paper, Divider, Checkbox, FormControlLabel } from '@mui/material';
 import { useI18n } from '../../i18n';
+import { Coins } from 'lucide-react';
+import { promotions } from '../../config/promotion';
 
 const stripePromise = (() => {
   const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
@@ -19,10 +22,25 @@ const stripePromise = (() => {
 
 export default function CheckoutPage() {
   const { cart } = useCart();
+  const { coins } = useCoins();
   const { t } = useI18n();
   const [isLoading, setIsLoading] = useState(false);
+  const [usePointDiscount, setUsePointDiscount] = useState(false);
 
-  const total = cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
+  const subtotal = cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
+  
+  // Point discount configuration
+  const pointsRequired = 100; // Points needed for discount
+  const pointPromotion = promotions.find(p => p.code === 'POINT10');
+  const canUsePoints = coins >= pointsRequired && pointPromotion;
+  
+  // Calculate discount amount based on discount type
+  const discountAmount = usePointDiscount && canUsePoints ? 
+    (pointPromotion.discountType === 'fixed' ? 
+      pointPromotion.discount : 
+      (subtotal * pointPromotion.discount / 100)
+    ) : 0;
+  const total = Math.max(0, subtotal - discountAmount); // Ensure total doesn't go below 0
 
   const handleCheckout = async () => {
     if (cart.length === 0) {
@@ -40,6 +58,8 @@ export default function CheckoutPage() {
         },
         body: JSON.stringify({
           items: cart,
+          usePointDiscount,
+          promotionCode: usePointDiscount && canUsePoints ? pointPromotion.code : null,
         }),
       });
 
@@ -128,12 +148,84 @@ export default function CheckoutPage() {
           </div>
           <Divider className="my-4" />
           <div className="flex justify-between items-center">
+            <Typography className="font-medium">{t('common.total')}</Typography>
+            <Typography className="font-medium">
+              {cart[0]?.product.currency || ''}{subtotal.toFixed(2)}
+            </Typography>
+          </div>
+          {usePointDiscount && discountAmount > 0 && (
+            <div className="flex justify-between items-center text-green-600">
+              <Typography className="font-medium">
+                Point Discount {pointPromotion?.discountType === 'fixed' ? 
+                  `(${cart[0]?.product.currency || ''}${pointPromotion.discount})` : 
+                  `(${pointPromotion?.discount}%)`
+                }
+              </Typography>
+              <Typography className="font-medium">
+                -{cart[0]?.product.currency || ''}{discountAmount.toFixed(2)}
+              </Typography>
+            </div>
+          )}
+          <Divider className="my-2" />
+          <div className="flex justify-between items-center">
             <Typography variant="h6" className="font-bold">{t('common.total')}</Typography>
             <Typography variant="h6" className="font-bold text-primary">
               {cart[0]?.product.currency || ''}{total.toFixed(2)}
             </Typography>
           </div>
         </Paper>
+
+        {/* Point Discount Section */}
+        {canUsePoints && (
+          <Paper className="p-6">
+            <Typography variant="h6" className="font-bold mb-4">{t('coins.discount')}</Typography>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={usePointDiscount}
+                  onChange={(e) => setUsePointDiscount(e.target.checked)}
+                  color="primary"
+                />
+              }
+              label={
+                <div className="flex items-center gap-2">
+                  <Coins size={20} className="text-amber-400" />
+                  <div>
+                    <Typography className="font-medium">
+                      Use {pointsRequired} points for {pointPromotion?.discountType === 'fixed' ? 
+                        `${cart[0]?.product.currency || ''}${pointPromotion.discount}` : 
+                        `${pointPromotion?.discount}%`
+                      } discount
+                    </Typography>
+                    <Typography className="text-sm text-gray-600">
+                      You have {coins.toLocaleString()} points available
+                    </Typography>
+                  </div>
+                </div>
+              }
+            />
+          </Paper>
+        )}
+        
+        {!canUsePoints && (
+          <Paper className="p-6 bg-gray-50">
+            <Typography variant="h6" className="font-bold mb-2">{t('coins.discount')}</Typography>
+            <div className="flex items-center gap-2 text-gray-500">
+              <Coins size={20} className="text-gray-400" />
+              <div>
+                <Typography className="font-medium">
+                  Need {pointsRequired} points for {pointPromotion?.discountType === 'fixed' ? 
+                    `${cart[0]?.product.currency || ''}${pointPromotion?.discount || 0}` : 
+                    `${pointPromotion?.discount || 0}%`
+                  } discount
+                </Typography>
+                <Typography className="text-sm">
+                  You have {coins.toLocaleString()} points ({t('coins.needMore')}: {pointsRequired - (coins || 0)})
+                </Typography>
+              </div>
+            </div>
+          </Paper>
+        )}
 
         {/* Payment Method Info */}
         <Paper className="p-6">
