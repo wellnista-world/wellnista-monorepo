@@ -203,6 +203,7 @@
     },
     "eatingCalendar": "ปฏิทินการกิน",
     "dailyActivity": "กิจกรรมประจำวัน",
+    "grams": "กรัม",
     "kilocalories": "กิโลแคลอรี่"
   },
   "activityLevels": {
