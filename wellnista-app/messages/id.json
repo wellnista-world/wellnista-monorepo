@@ -143,7 +143,7 @@
     "points": "poin",
     "nutritionalInfo": "Informasi Nutrisi",
     "carbAmount": "Jumlah Karbohidrat",
-    "carbOfMax": "karb ({percentage}% dari {max} karb maks)",
+    "carbOfMax": "karb ({percentage} dari {max} karb maks)",
     "ate": "Dimakan",
     "didNotEat": "Tidak dimakan",
     "takeNewPhoto": "Ambil Foto Baru",

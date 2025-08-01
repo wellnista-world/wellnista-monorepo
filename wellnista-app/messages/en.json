@@ -158,7 +158,7 @@
     "points": "points",
     "nutritionalInfo": "Nutritional Information",
     "carbAmount": "Carb Amount",
-    "carbOfMax": "carb ({percentage}% of {max} max carbs)",
+    "carbOfMax": "carb ({percentage} of {max} max carbs)",
     "ate": "Ate",
     "didNotEat": "Did not eat",
     "takeNewPhoto": "Take New Photo",

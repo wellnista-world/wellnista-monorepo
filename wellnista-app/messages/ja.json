@@ -143,7 +143,7 @@
     "points": "ポイント",
     "nutritionalInfo": "栄養情報",
     "carbAmount": "炭水化物量",
-    "carbOfMax": "炭水化物（{max}最大炭水化物の{percentage}%）",
+    "carbOfMax": "炭水化物（{max}最大炭水化物の{percentage}）",
     "ate": "食べた",
     "didNotEat": "食べなかった",
     "takeNewPhoto": "新しい写真を撮る",

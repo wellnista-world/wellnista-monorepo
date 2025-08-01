@@ -154,7 +154,7 @@
     "points": "포인트",
     "nutritionalInfo": "영양 정보",
     "carbAmount": "탄수화물 양",
-    "carbOfMax": "탄수화물 ({max} 최대 탄수화물의 {percentage}%)",
+    "carbOfMax": "탄수화물 ({max} 최대 탄수화물의 {percentage})",
     "ate": "먹었음",
     "didNotEat": "먹지 않음",
     "takeNewPhoto": "새 사진 촬영",

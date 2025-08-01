@@ -9,6 +9,7 @@ import Image from "next/image";
 import { supabase } from "@/app/lib/api/supabaseClient";
 import { useAuth } from "@/app/lib/context/AuthContext";
 import { useI18n } from "../../../i18n";
+import { UserData } from "@/app/lib/types/user";
 
 export interface NutritionData {
   timestamp?: string; // or Date if you convert
@@ -57,7 +58,24 @@ export default function ResultPage() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { user } = useAuth();
-  const maxCarbs = 8;
+
+  const [userData, setUserData] = useState<UserData | null>(null);
+  useEffect(() => {
+    if (!user?.id || userData) return;
+    const fetchUserData = async () => {
+      const { data } = await supabase
+        .from("users")
+        .select("*")
+        .eq("user_id", user.id)
+        .single();
+      setUserData(data);
+    };
+    fetchUserData();
+  }, [user, userData]);
+
+  const bmi = (userData?.weight ?? 0) / ((userData?.height ?? 0) / 100) ** 2;
+  const isDiabetes = userData?.diseases?.includes("เบาหวาน");
+  const maxCarbs = bmi > 30 || isDiabetes ? 8 : 12;
 
   // create handle function when click กิน it will save data to supabase
   // try to search barcode from supabase in nutritional_data table
@@ -210,7 +228,7 @@ export default function ResultPage() {
   const protein = product?.nutriments.proteins_serving ?? 0;
   const kcal = product?.nutriments["energy-kcal_serving"] ?? 0;
 
-  const carbPercentage = Math.min(((carbValue / 15) / maxCarbs) * 100, 100);
+  const carbPercentage = Math.round(carbValue / 15);
 
   // Calculate green stars based on nutritional values
   let greenStarCount = 0;

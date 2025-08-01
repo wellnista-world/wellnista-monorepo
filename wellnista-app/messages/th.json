@@ -148,7 +148,7 @@
     "points": "point",
     "nutritionalInfo": "ข้อมูลทางโภชนาการ",
     "carbAmount": "ปริมาณคาร์บ",
-    "carbOfMax": "คาร์บ ({percentage}% ของ {max} คาร์บสูงสุด)",
+    "carbOfMax": "คาร์บ ({percentage} ของ {max} คาร์บสูงสุด)",
     "ate": "กินแล้ว",
     "didNotEat": "ไม่ได้กิน",
     "takeNewPhoto": "ถ่ายรูปใหม่",

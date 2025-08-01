@@ -11,6 +11,7 @@ import { supabase } from "@/app/lib/api/supabaseClient";
 import { useAuth } from "@/app/lib/context/AuthContext";
 import { useI18n } from "../../../i18n";
 import Image from 'next/image';
+import { UserData } from "@/app/lib/types/user";
 
 export default function ScanImagePage() {
   const router = useRouter();
@@ -31,7 +32,24 @@ export default function ScanImagePage() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<NutritionalInfo | null>(null);
   const [analysisError, setAnalysisError] = useState<string | null>(null);
-  const maxCarbs = 8;
+
+  const [userData, setUserData] = useState<UserData | null>(null);
+  useEffect(() => {
+    if (!user?.id || userData) return;
+    const fetchUserData = async () => {
+      const { data } = await supabase
+        .from("users")
+        .select("*")
+        .eq("user_id", user.id)
+        .single();
+      setUserData(data);
+    };
+    fetchUserData();
+  }, [user, userData]);
+
+  const bmi = (userData?.weight ?? 0) / ((userData?.height ?? 0) / 100) ** 2;
+  const isDiabetes = userData?.diseases?.includes("เบาหวาน");
+  const maxCarbs = bmi > 30 || isDiabetes ? 8 : 12;
 
   useEffect(() => {
     if (!isLiffReady || !cameraPermission) return;
@@ -376,7 +394,7 @@ export default function ScanImagePage() {
               </div>
               <p className="text-sm text-neutral">
                 {t('scan.carbOfMax', { 
-                  percentage: Math.min(((analysisResult.nutriments.carbohydrates ?? 0) / 15) / maxCarbs * 100, 100).toFixed(0), 
+                  percentage: Math.round(analysisResult.nutriments.carbohydrates ?? 0 / 15), 
                   max: maxCarbs 
                 })}
               </p>
