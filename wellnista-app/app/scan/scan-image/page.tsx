@@ -13,6 +13,16 @@ import { useI18n } from "../../../i18n";
 import Image from 'next/image';
 import { UserData } from "@/app/lib/types/user";
 
+const activitiveLevel: string[] = [
+  "ไม่ออกกำลังกาย/นั่งทำงานอยู่กับที่",
+  "ออกกำลังกายเล็กน้อย 1-3วัน/สัปดาห์",
+  "ออกกำลังกายปานกลาง 4-5วัน/สัปดาห์",
+  "ออกกำลังกายหนัก 6-7วัน/สัปดาห์",
+  "ออกกำลังกายหนักมาก 2 ครั้ง/วัน เป็นนักกีฬา",
+];
+
+const activitiveLevelValue: number[] = [1.2, 1.375, 1.55, 1.725, 1.9];
+
 export default function ScanImagePage() {
   const router = useRouter();
   const { user } = useAuth();
@@ -47,9 +57,25 @@ export default function ScanImagePage() {
     fetchUserData();
   }, [user, userData]);
 
-  const bmi = (userData?.weight ?? 0) / ((userData?.height ?? 0) / 100) ** 2;
-  const isDiabetes = userData?.diseases?.includes("เบาหวาน");
-  const maxCarbs = bmi > 30 || isDiabetes ? 8 : 12;
+  // TEDD calculation for carb goal (same as profile page)
+  const teddMan =
+    (66 + 13.7 * (userData?.weight ?? 0) + 5 * (userData?.height ?? 0) - 6.8) *
+    activitiveLevelValue[
+      activitiveLevel.indexOf(userData?.activitylevel ?? "")
+    ];
+
+  const teddWoman =
+    (655 +
+      9.6 * (userData?.weight ?? 0) +
+      1.8 * (userData?.height ?? 0) -
+      4.7) *
+    activitiveLevelValue[
+      activitiveLevel.indexOf(userData?.activitylevel ?? "")
+    ];
+
+  // carbGoal calculation (same as profile page)
+  const carbGoalWithTedd = userData?.gender === "ชาย" ? teddMan : teddWoman;
+  const carbGoal = ((carbGoalWithTedd * 0.2) / 4) / 15;
 
   useEffect(() => {
     if (!isLiffReady || !cameraPermission) return;
@@ -384,7 +410,7 @@ export default function ScanImagePage() {
                   />
                   <path
                     className="circle"
-                    strokeDasharray={`${Math.min(((analysisResult.nutriments.carbohydrates ?? 0) / 15) / maxCarbs * 100, 100)}, 100`}
+                    strokeDasharray={`${Math.min(((analysisResult.nutriments.carbohydrates ?? 0) / 15) / carbGoal * 100, 100)}, 100`}
                     d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                     fill="none"
                     stroke="#9F9260"
@@ -393,10 +419,7 @@ export default function ScanImagePage() {
                 </svg>
               </div>
               <p className="text-sm text-neutral">
-                {t('scan.carbOfMax', { 
-                  percentage: Math.round(analysisResult.nutriments.carbohydrates ?? 0 / 15), 
-                  max: maxCarbs 
-                })}
+                {Math.round((analysisResult.nutriments.carbohydrates ?? 0) / 15)}/{Math.round(carbGoal)} {t('profile.carb')}
               </p>
             </div>
           </div>

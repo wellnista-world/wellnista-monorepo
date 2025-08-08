@@ -49,6 +49,16 @@ export interface NutritionData {
   carbohydrates_per_serving_g?: number;
 }
 
+const activitiveLevel: string[] = [
+  "ไม่ออกกำลังกาย/นั่งทำงานอยู่กับที่",
+  "ออกกำลังกายเล็กน้อย 1-3วัน/สัปดาห์",
+  "ออกกำลังกายปานกลาง 4-5วัน/สัปดาห์",
+  "ออกกำลังกายหนัก 6-7วัน/สัปดาห์",
+  "ออกกำลังกายหนักมาก 2 ครั้ง/วัน เป็นนักกีฬา",
+];
+
+const activitiveLevelValue: number[] = [1.2, 1.375, 1.55, 1.725, 1.9];
+
 export default function ResultPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -73,9 +83,25 @@ export default function ResultPage() {
     fetchUserData();
   }, [user, userData]);
 
-  const bmi = (userData?.weight ?? 0) / ((userData?.height ?? 0) / 100) ** 2;
-  const isDiabetes = userData?.diseases?.includes("เบาหวาน");
-  const maxCarbs = bmi > 30 || isDiabetes ? 8 : 12;
+  // TEDD calculation for carb goal (same as profile page)
+  const teddMan =
+    (66 + 13.7 * (userData?.weight ?? 0) + 5 * (userData?.height ?? 0) - 6.8) *
+    activitiveLevelValue[
+      activitiveLevel.indexOf(userData?.activitylevel ?? "")
+    ];
+
+  const teddWoman =
+    (655 +
+      9.6 * (userData?.weight ?? 0) +
+      1.8 * (userData?.height ?? 0) -
+      4.7) *
+    activitiveLevelValue[
+      activitiveLevel.indexOf(userData?.activitylevel ?? "")
+    ];
+
+  // carbGoal calculation (same as profile page)
+  const carbGoalWithTedd = userData?.gender === "ชาย" ? teddMan : teddWoman;
+  const carbGoal = ((carbGoalWithTedd * 0.2) / 4) / 15;
 
   // create handle function when click กิน it will save data to supabase
   // try to search barcode from supabase in nutritional_data table
@@ -322,10 +348,7 @@ export default function ResultPage() {
             </svg>
           </Box>
           <p className="text-sm text-neutral">
-            {t('scan.carbOfMax', { 
-              percentage: Math.round(carbPercentage), 
-              max: maxCarbs 
-            })}
+            {Math.round(carbValue / 15)} of {Math.round(carbGoal)} {t('profile.carb')}
           </p>
         </Box>
       </Box>

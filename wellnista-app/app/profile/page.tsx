@@ -130,8 +130,9 @@ export default function ProfilePage() {
       : t('profile.bmiCategories.underweight');
 
   // carbGoal is เบาหวาน use 8 อื่นๆ use 12 or bmi more than 30 use 8
-  const isDiabetes = userData?.diseases?.includes("เบาหวาน");
-  const carbGoal = bmi > 30 || isDiabetes ? 8 : 12;
+  // const isDiabetes = userData?.diseases?.includes("เบาหวาน");
+  const carbGoalWithTedd = userData?.gender === "ชาย" ? teddMan : teddWoman;
+  const carbGoal = ((carbGoalWithTedd * 0.2) / 4) / 15;
 
   const calValue = totalNutrition.calories;
   const calGoal = userData?.gender === "ชาย" ? teddMan : teddWoman;
