@@ -15,12 +15,12 @@ export interface AdvertisingItem {
 export const advertisingItems = [
   {
     id: 1,
-    image: "/promote.webp",
-    link: "https://line.me/ti/p/v4PViJexdz",
+    image: "/promote2.jpg",
+    link: "https://lin.ee/ySh4XzY",
     translations: {
       th: {
-        title: "ขอลงโฆษณา",
-        description: "ติดต่อเราเพื่อขอลงโฆษณา"
+        title: "ผูกปิ่นโต",
+        description: "สุขภาพดีแบบยั่งยืน ด้วยอาหารที่ดี"
       },
       en: {
         title: "Request Advertising",
