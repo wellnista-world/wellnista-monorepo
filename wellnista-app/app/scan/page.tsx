@@ -73,8 +73,9 @@ export default function ScanPage() {
     startScanner();
 
     return () => {
-      if (videoRef.current && videoRef.current.srcObject) {
-        const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
+      const videoElement = videoRef.current;
+      if (videoElement && videoElement.srcObject) {
+        const tracks = (videoElement.srcObject as MediaStream).getTracks();
         tracks.forEach((track) => track.stop());
       }
     };

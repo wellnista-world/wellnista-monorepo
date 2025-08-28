@@ -14,10 +14,8 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Chip from "@mui/material/Chip";
-import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
-import { ArrowLeft, Save, User, Heart, Activity, Scale, Ruler, Pill } from "lucide-react";
+import { ArrowLeft, Save, User, Heart, Activity } from "lucide-react";
 import { useI18n } from "../../../i18n";
 
 const activityLevels = [
@@ -47,6 +45,7 @@ export default function EditProfilePage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [userData, setUserData] = useState<UserData | null>(null);
   const [formData, setFormData] = useState<UserData>({
     name: "",
@@ -102,7 +101,7 @@ export default function EditProfilePage() {
     fetchUserData();
   }, [user]);
 
-  const handleInputChange = (field: keyof UserData, value: any) => {
+  const handleInputChange = (field: keyof UserData, value: string | number | null) => {
     setFormData(prev => ({
       ...prev,
       [field]: value

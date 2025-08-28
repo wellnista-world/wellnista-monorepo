@@ -49,7 +49,7 @@ export const CoinProvider = ({ children }: { children: ReactNode }) => {
   // Load coins when user changes
   useEffect(() => {
     fetchCoins();
-  }, [user]);
+  }, [user?.id]);
 
   // Add coins to user account
   const addCoins = async (amount: number) => {

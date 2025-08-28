@@ -37,7 +37,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   // Save cart to localStorage
   useEffect(() => {
     saveCartToStorage(cart, user?.id);
-  }, [cart, user]);
+  }, [cart, user?.id]);
 
   // Clear anonymous cart when user logs in
   useEffect(() => {

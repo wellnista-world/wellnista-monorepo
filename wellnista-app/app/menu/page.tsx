@@ -11,7 +11,6 @@ import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import Chip from '@mui/material/Chip';
 import { 
-  Utensils, 
   Clock, 
   ChefHat, 
   Users, 
@@ -36,6 +35,7 @@ export default function MenuScreen() {
   const { user } = useAuth();
   const router = useRouter();
   const [userData, setUserData] = useState<UserData | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedProtein, setSelectedProtein] = useState<string | null>(null);
   const [recommendation, setRecommendation] = useState<MenuRecommendation | null>(null);
   const [loading, setLoading] = useState(false);
