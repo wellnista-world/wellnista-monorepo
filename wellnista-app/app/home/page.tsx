@@ -17,6 +17,7 @@ import {
   Heart,
   ChevronRight,
   Settings,
+  Activity,
 } from "lucide-react";
 import AdvertisingCarousel from "../components/AdvertisingCarousel";
 import { getAdvertisingItems } from "../../config/advertising";
@@ -108,6 +109,12 @@ export default function HomeScreen() {
       label: t("home.bloodSugarLog"),
       href: "/book",
       color: "bg-[#8A7F5F]",
+    },
+    {
+      icon: <Activity size={24} />,
+      label: t("home.bmiTracking"),
+      href: "/bmi",
+      color: "bg-[#4ECDC4]",
     },
   ];
 
