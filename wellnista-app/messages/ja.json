@@ -3,6 +3,7 @@
     "loading": "読み込み中...",
     "error": "エラー",
     "save": "保存",
+    "saving": "保存中...",
     "cancel": "キャンセル",
     "back": "戻る",
     "next": "次へ",
@@ -199,7 +200,14 @@
     "eatingCalendar": "食事カレンダー",
     "dailyActivity": "日常活動",
     "grams": "グラム",
-    "kilocalories": "キロカロリー"
+    "kilocalories": "キロカロリー",
+    "editProfile": "プロフィール編集",
+    "backToProfile": "プロフィールに戻る",
+    "basicInfo": "基本情報",
+    "healthInfo": "健康情報",
+    "physicalInfo": "身体情報",
+    "nickname": "ニックネーム",
+    "medicinesPlaceholder": "現在服用中の薬を記載してください..."
   },
   "activityLevels": {
     "sedentary": "座りがち（運動なしまたは少ない）",

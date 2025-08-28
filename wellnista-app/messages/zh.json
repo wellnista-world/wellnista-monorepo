@@ -3,6 +3,7 @@
     "loading": "加载中...",
     "error": "错误",
     "save": "保存",
+    "saving": "保存中...",
     "cancel": "取消",
     "back": "返回",
     "next": "下一步",
@@ -199,7 +200,14 @@
     "eatingCalendar": "饮食日历",
     "dailyActivity": "日常活动",
     "grams": "克",
-    "kilocalories": "千卡"
+    "kilocalories": "千卡",
+    "editProfile": "编辑个人资料",
+    "backToProfile": "返回个人资料",
+    "basicInfo": "基本信息",
+    "healthInfo": "健康信息",
+    "physicalInfo": "身体信息",
+    "nickname": "昵称",
+    "medicinesPlaceholder": "列出您目前正在服用的药物..."
   },
   "activityLevels": {
     "sedentary": "久坐不动（很少或没有运动）",

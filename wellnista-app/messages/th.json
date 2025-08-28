@@ -3,6 +3,7 @@
     "loading": "กำลังโหลด...",
     "error": "เกิดข้อผิดพลาด",
     "save": "บันทึก",
+    "saving": "กำลังบันทึก...",
     "cancel": "ยกเลิก",
     "back": "กลับ",
     "next": "ถัดไป",
@@ -204,7 +205,14 @@
     "eatingCalendar": "ปฏิทินการกิน",
     "dailyActivity": "กิจกรรมประจำวัน",
     "grams": "กรัม",
-    "kilocalories": "กิโลแคลอรี่"
+    "kilocalories": "กิโลแคลอรี่",
+    "editProfile": "แก้ไขโปรไฟล์",
+    "backToProfile": "กลับไปยังโปรไฟล์",
+    "basicInfo": "ข้อมูลพื้นฐาน",
+    "healthInfo": "ข้อมูลสุขภาพ",
+    "physicalInfo": "ข้อมูลร่างกาย",
+    "nickname": "ชื่อเล่น",
+    "medicinesPlaceholder": "ระบุยาที่คุณกำลังรับประทานอยู่..."
   },
   "activityLevels": {
     "sedentary": "ไม่ออกกำลังกาย/นั่งทำงานอยู่กับที่",

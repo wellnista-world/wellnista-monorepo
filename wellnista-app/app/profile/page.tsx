@@ -1,11 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import PieChart from "../components/PieChart";
 import { useAuth } from "../lib/context/AuthContext";
 import { supabase } from "../lib/api/supabaseClient";
 import { UserData } from "../lib/types/user";
 import Typography from "@mui/material/Typography";
-import { UserCircle, Activity, Scale, Ruler, Heart, Clock, Pill } from "lucide-react";
+import { UserCircle, Activity, Scale, Ruler, Heart, Clock, Pill, Edit } from "lucide-react";
 import { Calendar } from "../components/Calendar";
 import { useI18n } from "../../i18n";
 
@@ -34,6 +35,7 @@ const activitiveLevelProtein: number[] = [1.0, 1.0, 1.2, 1.7, 2.2];
 export default function ProfilePage() {
   const { user } = useAuth();
   const { t } = useI18n();
+  const router = useRouter();
   const [userData, setUserData] = useState<UserData | null>(null);
   const [totalNutrition, setTotalNutrition] = useState({
     calories: 0,
@@ -251,9 +253,18 @@ export default function ProfilePage() {
 
       {/* Personal Information */}
       <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm">
-        <Typography className="text-lg font-semibold text-primary mb-4">
-          {t('profile.personalInfo')}
-        </Typography>
+        <div className="flex items-center justify-between mb-4">
+          <Typography className="text-lg font-semibold text-primary">
+            {t('profile.personalInfo')}
+          </Typography>
+          <button
+            onClick={() => router.push('/profile/edit')}
+            className="flex items-center gap-2 px-4 py-2 bg-primary text-secondary rounded-full hover:bg-accent transition"
+          >
+            <Edit size={16} />
+            <span className="text-sm font-medium">{t('profile.editProfile')}</span>
+          </button>
+        </div>
         <div className="space-y-4">
           {infoItems.map((item, index) => (
             <div key={index} className="flex items-center justify-between">

@@ -3,6 +3,7 @@
     "loading": "Loading...",
     "error": "Error",
     "save": "Save",
+    "saving": "Saving...",
     "cancel": "Cancel",
     "back": "Back",
     "next": "Next",
@@ -214,7 +215,14 @@
     "eatingCalendar": "Eating Calendar",
     "dailyActivity": "Daily Activity",
     "grams": "grams",
-    "kilocalories": "kilocalories"
+    "kilocalories": "kilocalories",
+    "editProfile": "Edit Profile",
+    "backToProfile": "Back to Profile",
+    "basicInfo": "Basic Information",
+    "healthInfo": "Health Information",
+    "physicalInfo": "Physical Information",
+    "nickname": "Nickname",
+    "medicinesPlaceholder": "List any medications you are currently taking..."
   },
   "activityLevels": {
     "sedentary": "Sedentary / Little to no exercise",

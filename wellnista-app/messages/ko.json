@@ -3,6 +3,7 @@
     "loading": "로딩 중...",
     "error": "오류",
     "save": "저장",
+    "saving": "저장 중...",
     "cancel": "취소",
     "back": "뒤로",
     "next": "다음",
@@ -210,7 +211,14 @@
     "eatingCalendar": "식사 캘린더",
     "dailyActivity": "일상 활동",
     "grams": "그램",
-    "kilocalories": "킬로칼로리"
+    "kilocalories": "킬로칼로리",
+    "editProfile": "프로필 편집",
+    "backToProfile": "프로필로 돌아가기",
+    "basicInfo": "기본 정보",
+    "healthInfo": "건강 정보",
+    "physicalInfo": "신체 정보",
+    "nickname": "닉네임",
+    "medicinesPlaceholder": "현재 복용 중인 약물을 나열하세요..."
   },
   "activityLevels": {
     "sedentary": "거의 활동하지 않음 (운동 거의 없음)",

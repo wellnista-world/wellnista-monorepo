@@ -3,6 +3,7 @@
     "loading": "Memuat...",
     "error": "Error",
     "save": "Simpan",
+    "saving": "Menyimpan...",
     "cancel": "Batal",
     "back": "Kembali",
     "next": "Selanjutnya",
@@ -199,7 +200,14 @@
     "eatingCalendar": "Kalender Makan",
     "dailyActivity": "Aktivitas Harian",
     "grams": "gram",
-    "kilocalories": "kilokalori"
+    "kilocalories": "kilokalori",
+    "editProfile": "Edit Profil",
+    "backToProfile": "Kembali ke Profil",
+    "basicInfo": "Informasi Dasar",
+    "healthInfo": "Informasi Kesehatan",
+    "physicalInfo": "Informasi Fisik",
+    "nickname": "Nama Panggilan",
+    "medicinesPlaceholder": "Daftar obat yang sedang Anda konsumsi..."
   },
   "activityLevels": {
     "sedentary": "Sedentari / Sedikit atau tidak ada olahraga",
