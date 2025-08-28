@@ -286,6 +286,12 @@
     "unitKg": "公斤",
     "unitCm": "厘米"
   },
+  "dailyPopup": {
+    "title": "欢迎使用 Wellnista！",
+    "message": "今天开始您的健康之旅。跟踪营养，监测健康，为更健康的生活方式做出更好的选择。",
+    "later": "稍后",
+    "gotIt": "知道了！"
+  },
   "knowledge": {
     "library": "知识库",
     "carbs": "碳水化合物知识",

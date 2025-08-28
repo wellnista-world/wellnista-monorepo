@@ -1,119 +1,143 @@
-# Advertising Configuration System
+# Configuration Files
 
-This directory contains configuration files for the Wellnista app's advertising system.
+This directory contains configuration files for the Wellnista app.
 
-## Files
+## Feature Flags (`featureFlags.ts`)
 
-### `advertising.ts`
-Contains the main advertising configuration including:
-- Advertising items with images, links, and translations
-- Carousel configuration settings
-- Helper functions for getting localized content
+The feature flags system allows you to enable/disable specific features of the app without deploying new code.
 
-## How to Use
-
-### Adding New Advertising Items
-
-1. Open `advertising.ts`
-2. Add a new item to the `advertisingConfig` array:
+### Usage
 
 ```typescript
-{
-  id: 6, // Unique ID
-  image: "https://your-image-url.com/image.jpg",
-  link: "/your-page-or-external-url",
-  translations: {
-    th: {
-      title: "Thai Title",
-      description: "Thai Description"
-    },
-    en: {
-      title: "English Title", 
-      description: "English Description"
-    },
-    zh: {
-      title: "Chinese Title",
-      description: "Chinese Description"
-    },
-    ja: {
-      title: "Japanese Title",
-      description: "Japanese Description"
-    },
-    ko: {
-      title: "Korean Title",
-      description: "Korean Description"
-    },
-    id: {
-      title: "Indonesian Title",
-      description: "Indonesian Description"
-    }
-  }
+import { isDailyPopupEnabled, isBmiTrackingEnabled } from '../config/featureFlags';
+
+// Check if a feature is enabled
+if (isDailyPopupEnabled()) {
+  // Show daily popup
+}
+
+if (isBmiTrackingEnabled()) {
+  // Show BMI tracking features
 }
 ```
 
-### Modifying Carousel Settings
+### Available Features
 
-Update the `carouselConfig` object in `advertising.ts`:
+#### Daily Popup
+- **Flag**: `dailyPopup.enabled`
+- **Helper**: `isDailyPopupEnabled()`
+- **Description**: Controls the daily welcome popup that appears on first visit of the day
+
+#### BMI Tracking
+- **Flag**: `bmiTracking.enabled`
+- **Helper**: `isBmiTrackingEnabled()`
+- **Description**: Controls the BMI tracking feature and related charts
+
+#### Menu Recommendation
+- **Flag**: `menuRecommendation.enabled`
+- **Helper**: `isMenuRecommendationEnabled()`
+- **Description**: Controls the AI-powered menu recommendation feature
+
+#### Blood Sugar Tracking
+- **Flag**: `bloodSugarTracking.enabled`
+- **Helper**: `isBloodSugarTrackingEnabled()`
+- **Description**: Controls the blood sugar tracking feature and graphs
+
+#### Advertising
+- **Flag**: `advertising.enabled`
+- **Helper**: `isAdvertisingEnabled()`
+- **Description**: Controls advertising carousel and promotions
+
+#### Market
+- **Flag**: `market.enabled`
+- **Helper**: `isMarketEnabled()`
+- **Description**: Controls the Wellnista Market features
+
+#### Profile
+- **Flag**: `profile.enabled`
+- **Helper**: `isProfileEnabled()`
+- **Description**: Controls profile editing and health stats display
+
+#### Scanning
+- **Flag**: `scanning.enabled`
+- **Helper**: `isScanningEnabled()`
+- **Description**: Controls barcode and photo scanning features
+
+### Environment Variables
+
+You can control feature flags using environment variables:
+
+```bash
+# Disable daily popup in production
+NEXT_PUBLIC_ENABLE_DAILY_POPUP=false
+
+# Enable all features (default)
+NEXT_PUBLIC_ENABLE_DAILY_POPUP=true
+```
+
+### Environment-Specific Behavior
+
+- **Development**: All features enabled by default
+- **Production**: Features can be controlled via environment variables
+- **Test**: Daily popup disabled by default
+
+### Adding New Features
+
+To add a new feature flag:
+
+1. Add the feature to the `FeatureFlags` interface
+2. Add default values to `defaultFeatureFlags`
+3. Add environment-specific overrides in `getFeatureFlags()`
+4. Create a helper function for easy checking
+5. Use the helper function in your components
+
+Example:
 
 ```typescript
-export const carouselConfig = {
-  autoSlideInterval: 4000, // Auto-slide interval in milliseconds
-  transitionDuration: 500, // Transition duration in milliseconds
-  height: "h-48", // Tailwind class for carousel height
-  showNavigation: true, // Show navigation arrows
-  showDots: true, // Show dot indicators
-  showProgressBar: true, // Show progress bar
-  showClickIndicator: true // Show "click to see more" indicator
+// 1. Add to interface
+export interface FeatureFlags {
+  newFeature: {
+    enabled: boolean;
+    // additional settings
+  };
+}
+
+// 2. Add to default flags
+export const defaultFeatureFlags: FeatureFlags = {
+  newFeature: {
+    enabled: true,
+  },
 };
+
+// 3. Add helper function
+export const isNewFeatureEnabled = (): boolean => {
+  return isFeatureEnabled('newFeature');
+};
+
+// 4. Use in component
+if (isNewFeatureEnabled()) {
+  // Show new feature
+}
 ```
 
-### Using in Components
+### Best Practices
+
+1. **Always check feature flags** before rendering feature-specific components
+2. **Use helper functions** instead of directly accessing the flags object
+3. **Test with flags disabled** to ensure graceful degradation
+4. **Document new features** in this README
+5. **Use environment variables** for production control
+
+### Testing
 
 ```typescript
-import { getAdvertisingItems } from '../../config/advertising';
+// Test with feature disabled
+jest.mock('../config/featureFlags', () => ({
+  isDailyPopupEnabled: () => false,
+}));
 
-// In your component
-const { locale } = useI18n();
-const advertisingItems = getAdvertisingItems(locale);
-
-// Use with AdvertisingCarousel component
-<AdvertisingCarousel items={advertisingItems} />
-```
-
-### Customizing Carousel Behavior
-
-You can override default settings when using the component:
-
-```typescript
-<AdvertisingCarousel 
-  items={advertisingItems}
-  autoSlideInterval={5000} // Override auto-slide interval
-  showNavigation={false} // Hide navigation arrows
-  showDots={true} // Show dots
-  height="h-64" // Custom height
-/>
-```
-
-## Benefits
-
-- **Centralized Configuration**: All advertising content in one place
-- **Easy Maintenance**: Update images, links, and text without touching components
-- **Multi-language Support**: Built-in translation support
-- **Flexible**: Configurable carousel behavior
-- **Type Safety**: Full TypeScript support with interfaces
-
-## Image Requirements
-
-- Use high-quality images (recommended: 2070px width)
-- Ensure good contrast for text overlay
-- Use health/nutrition themed images
-- Optimize for web (JPEG/WebP format)
-- Consider mobile responsiveness
-
-## Best Practices
-
-1. **Keep descriptions concise** - 1-2 lines maximum
-2. **Use clear call-to-actions** in titles
-3. **Test all links** before deployment
-4. **Ensure translations are accurate** for all languages
-5. **Monitor performance** of external image URLs 
+// Test with feature enabled
+jest.mock('../config/featureFlags', () => ({
+  isDailyPopupEnabled: () => true,
+}));
+``` 

@@ -297,6 +297,12 @@
     "unitKg": "kg",
     "unitCm": "cm"
   },
+  "dailyPopup": {
+    "title": "Wellnista에 오신 것을 환영합니다!",
+    "message": "오늘부터 건강한 여정을 시작하세요. 영양을 추적하고, 건강을 모니터링하며, 더 건강한 라이프스타일을 위한 더 나은 선택을 하세요.",
+    "later": "나중에",
+    "gotIt": "알겠습니다!"
+  },
   "knowledge": {
     "library": "지식 라이브러리",
     "carbs": "탄수화물 지식",

@@ -23,6 +23,8 @@ import AdvertisingCarousel from "../components/AdvertisingCarousel";
 import { getAdvertisingItems } from "../../config/advertising";
 import { getRandomProduct, getProductForLocale, Product } from "../../config/products";
 import Image from "next/image";
+import DailyPopup from "../components/DailyPopup";
+import { useDailyPopup } from "../hooks/useDailyPopup";
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -30,6 +32,7 @@ export default function HomeScreen() {
   const { t, locale } = useI18n();
   const [userName, setUserName] = useState<string | null>(null);
   const [recommendedProduct, setRecommendedProduct] = useState<Product | null>(null);
+  const { showPopup, closePopup } = useDailyPopup();
 
   useEffect(() => {
     const fetchUserName = async () => {
@@ -267,6 +270,13 @@ export default function HomeScreen() {
         <LogOut size={20} />
         <Typography className="font-semibold">{t("auth.logout")}</Typography>
       </button>
+
+      {/* Daily Popup */}
+      <DailyPopup
+        open={showPopup}
+        onClose={closePopup}
+        imageUrl="/promote.webp"
+      />
     </div>
   );
 }

@@ -286,6 +286,12 @@
     "unitKg": "kg",
     "unitCm": "cm"
   },
+  "dailyPopup": {
+    "title": "Selamat datang di Wellnista!",
+    "message": "Mulai perjalanan sehat Anda hari ini. Lacak nutrisi, pantau kesehatan, dan buat pilihan yang lebih baik untuk gaya hidup yang lebih sehat.",
+    "later": "Nanti",
+    "gotIt": "Mengerti!"
+  },
   "knowledge": {
     "library": "Perpustakaan Pengetahuan",
     "carbs": "Pengetahuan tentang Karbohidrat",

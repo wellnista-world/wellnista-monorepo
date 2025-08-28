@@ -286,6 +286,12 @@
     "unitKg": "kg",
     "unitCm": "cm"
   },
+  "dailyPopup": {
+    "title": "Wellnista へようこそ！",
+    "message": "今日から健康的な旅を始めましょう。栄養を追跡し、健康を監視し、より健康的なライフスタイルのためのより良い選択をしましょう。",
+    "later": "後で",
+    "gotIt": "了解しました！"
+  },
   "knowledge": {
     "library": "知識ライブラリ",
     "carbs": "炭水化物の知識",

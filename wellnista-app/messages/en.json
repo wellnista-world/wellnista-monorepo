@@ -301,6 +301,12 @@
     "unitKg": "kg",
     "unitCm": "cm"
   },
+  "dailyPopup": {
+    "title": "Welcome to Wellnista!",
+    "message": "Start your healthy journey today. Track your nutrition, monitor your health, and make better choices for a healthier lifestyle.",
+    "later": "Later",
+    "gotIt": "Got it!"
+  },
   "knowledge": {
     "library": "Knowledge Library",
     "carbs": "Knowledge about Carbs",
