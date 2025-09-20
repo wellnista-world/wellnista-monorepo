@@ -19,6 +19,7 @@ import {
   Settings,
   Activity,
   HeartPulse,
+  Brain,
 } from "lucide-react";
 import AdvertisingCarousel from "../components/AdvertisingCarousel";
 import { getAdvertisingItems } from "../../config/advertising";
@@ -125,6 +126,12 @@ export default function HomeScreen() {
       label: t("home.bloodPressureTracking"),
       href: "/blood-pressure",
       color: "bg-[#FF6B6B]",
+    },
+    {
+      icon: <Brain size={24} />,
+      label: t("home.mentalHealthTracking"),
+      href: "/mental-health",
+      color: "bg-[#8B5CF6]",
     },
   ];
 

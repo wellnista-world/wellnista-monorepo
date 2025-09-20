@@ -43,6 +43,15 @@ export interface FeatureFlags {
     showCategories: boolean;
   };
   
+  // Mental health tracking feature
+  mentalHealthTracking: {
+    enabled: boolean;
+    showCharts: boolean;
+    allowEdit: boolean;
+    allowVoiceRecording: boolean;
+    showRecommendations: boolean;
+  };
+  
   // Advertising features
   advertising: {
     enabled: boolean;
@@ -105,6 +114,14 @@ export const defaultFeatureFlags: FeatureFlags = {
     showCategories: true,
   },
   
+  mentalHealthTracking: {
+    enabled: true,
+    showCharts: true,
+    allowEdit: true,
+    allowVoiceRecording: true,
+    showRecommendations: true,
+  },
+  
   advertising: {
     enabled: true,
     showCarousel: true,
@@ -161,6 +178,10 @@ export const isBloodSugarTrackingEnabled = (): boolean => {
 
 export const isBloodPressureTrackingEnabled = (): boolean => {
   return isFeatureEnabled('bloodPressureTracking');
+};
+
+export const isMentalHealthTrackingEnabled = (): boolean => {
+  return isFeatureEnabled('mentalHealthTracking');
 };
 
 export const isAdvertisingEnabled = (): boolean => {
