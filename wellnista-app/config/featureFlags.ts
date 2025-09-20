@@ -35,6 +35,14 @@ export interface FeatureFlags {
     allowEdit: boolean;
   };
   
+  // Blood pressure tracking feature
+  bloodPressureTracking: {
+    enabled: boolean;
+    showCharts: boolean;
+    allowEdit: boolean;
+    showCategories: boolean;
+  };
+  
   // Advertising features
   advertising: {
     enabled: boolean;
@@ -90,6 +98,13 @@ export const defaultFeatureFlags: FeatureFlags = {
     allowEdit: true,
   },
   
+  bloodPressureTracking: {
+    enabled: true,
+    showCharts: true,
+    allowEdit: true,
+    showCategories: true,
+  },
+  
   advertising: {
     enabled: true,
     showCarousel: true,
@@ -142,6 +157,10 @@ export const isMenuRecommendationEnabled = (): boolean => {
 
 export const isBloodSugarTrackingEnabled = (): boolean => {
   return isFeatureEnabled('bloodSugarTracking');
+};
+
+export const isBloodPressureTrackingEnabled = (): boolean => {
+  return isFeatureEnabled('bloodPressureTracking');
 };
 
 export const isAdvertisingEnabled = (): boolean => {

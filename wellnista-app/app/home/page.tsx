@@ -18,6 +18,7 @@ import {
   ChevronRight,
   Settings,
   Activity,
+  HeartPulse,
 } from "lucide-react";
 import AdvertisingCarousel from "../components/AdvertisingCarousel";
 import { getAdvertisingItems } from "../../config/advertising";
@@ -118,6 +119,12 @@ export default function HomeScreen() {
       label: t("home.bmiTracking"),
       href: "/bmi",
       color: "bg-[#4ECDC4]",
+    },
+    {
+      icon: <HeartPulse size={24} />,
+      label: t("home.bloodPressureTracking"),
+      href: "/blood-pressure",
+      color: "bg-[#FF6B6B]",
     },
   ];
 
