@@ -1,0 +1,127 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "programs": "Programs",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Wellnista",
+    "subtitle": "Design Your Happier Wellness Life",
+    "description": "Promote well-being through natural and evidence-based approaches",
+    "cta": "Explore Our Programs"
+  },
+  "about": {
+    "title": "What is Wellnista?",
+    "mission": "Our Mission",
+    "missionText": "To promote well-being through natural and evidence-based approaches, creating harmony between people and nature through Thai wellness tourism.",
+    "vision": "Our Vision",
+    "visionText": "To be a leading wellness destination in Thailand, offering transformative experiences that nurture body, mind, and spirit through the healing power of nature."
+  },
+  "activities": {
+    "title": "Thailand Forest Bathing Experience",
+    "subtitle": "Discover our holistic wellness activities",
+    "forestBathing": {
+      "title": "Forest Bathing",
+      "description": "Immerse yourself in nature's healing embrace through guided forest therapy sessions"
+    },
+    "soundHealing": {
+      "title": "Sound Healing",
+      "description": "Experience deep relaxation through therapeutic sound vibrations and meditation"
+    },
+    "sleepPillows": {
+      "title": "Sleep Pillows Workshop",
+      "description": "Create your own herbal sleep pillows with natural Thai herbs for better rest"
+    },
+    "thaiMassage": {
+      "title": "Thai Massage",
+      "description": "Traditional Thai massage therapy to restore balance and energy flow"
+    },
+    "wellnessFood": {
+      "title": "Wellness Food Workshop",
+      "description": "Learn to prepare nutritious Thai wellness cuisine with local ingredients"
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "forestBathing": "Forest Bathing",
+    "forestBathingDescription": "Connect with nature through guided forest therapy sessions that reduce stress and enhance well-being",
+    "soundHealing": "Sound Healing",
+    "soundHealingDescription": "Experience deep relaxation and healing through therapeutic sound vibrations and meditation practices",
+    "wellnessCooking": "Wellness Cooking",
+    "wellnessCookingDescription": "Learn to prepare nutritious Thai wellness cuisine using fresh, local, and organic ingredients",
+    "pilates": "Pilates",
+    "pilatesDescription": "Strengthen your core and improve flexibility through mindful movement and breath work",
+    "herbalWorkshops": "Herbal Workshops",
+    "herbalWorkshopsDescription": "Discover the healing properties of Thai herbs and create your own natural wellness products",
+    "learnMore": "Learn More"
+  },
+  "programs": {
+    "title": "Featured Program",
+    "khaoyai": "Thailand Forest Bathing - Khao Yai Camp",
+    "location": "Khao Yai National Park",
+    "description": "Experience the ultimate wellness retreat in the lush forests of Khao Yai National Park",
+    "forestBathing": "Guided forest bathing sessions with certified instructors",
+    "soundHealing": "Therapeutic sound healing experiences",
+    "wellnessCooking": "Organic wellness cooking workshops",
+    "herbalMedicineAndPilates": "Herbal medicine and Pilates sessions",
+    "viewPackages": "View Packages"
+  },
+  "packages": {
+    "title": "Choose Your Package",
+    "corporate": {
+      "title": "Corporate Wellness",
+      "description": "Team building and wellness programs designed for organizations",
+      "features": [
+        "Customized group activities",
+        "Team building exercises",
+        "Stress management workshops",
+        "Healthy catering options"
+      ]
+    },
+    "elderly": {
+      "title": "Elderly Care",
+      "description": "Gentle wellness programs tailored for senior participants",
+      "features": ["Low-impact activities", "Health monitoring", "Specialized care staff", "Accessible facilities"]
+    },
+    "family": {
+      "title": "Family Package",
+      "description": "Wellness experiences for the whole family to enjoy together",
+      "features": [
+        "Family-friendly activities",
+        "Children's programs",
+        "Multi-generational bonding",
+        "Flexible scheduling"
+      ]
+    },
+    "foreigners": {
+      "title": "International Guests",
+      "description": "Curated experiences for visitors from around the world",
+      "features": ["English-speaking guides", "Cultural immersion", "Airport transfers", "Accommodation assistance"]
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "getInTouch": "Ready to begin your wellness journey? We'd love to hear from you.",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send Message",
+    "info": "Contact Information",
+    "phone": "Phone",
+    "location": "Location"
+  },
+  "footer": {
+    "tagline": "Design your happier wellness life through natural and evidence-based approaches.",
+    "services": "Services",
+    "values": "Brand Values",
+    "wellness": "Wellness",
+    "nature": "Nature",
+    "science": "Science",
+    "calmness": "Calmness",
+    "longevity": "Longevity",
+    "rights": "All rights reserved.",
+    "description": "Promoting harmony between people and nature through Thai wellness tourism."
+  }
+}

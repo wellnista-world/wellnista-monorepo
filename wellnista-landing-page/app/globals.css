@@ -1,0 +1,164 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated to more luxurious color palette with richer tones */
+  --background: #fdfcf9; /* Warmer ivory */
+  --foreground: #2a2a2a; /* Deeper charcoal */
+  --card: #f8f6f0; /* Softer sand */
+  --card-foreground: #2a2a2a;
+  --popover: #fdfcf9;
+  --popover-foreground: #2a2a2a;
+  --primary: #3d4a2c; /* Richer forest green */
+  --primary-foreground: #fdfcf9;
+  --secondary: #e8e4d8; /* Refined beige */
+  --secondary-foreground: #2a2a2a;
+  --muted: #e8e4d8;
+  --muted-foreground: #6b7055;
+  --accent: #b8a574; /* Luxurious gold */
+  --accent-foreground: #2a2a2a;
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: #e0ddd0;
+  --input: #e8e4d8;
+  --ring: #b8a574;
+  --chart-1: #3d4a2c;
+  --chart-2: #b8a574;
+  --chart-3: #e8e4d8;
+  --chart-4: #fdfcf9;
+  --chart-5: #2a2a2a;
+  --radius: 1rem;
+  --sidebar: #e8e4d8;
+  --sidebar-foreground: #2a2a2a;
+  --sidebar-primary: #3d4a2c;
+  --sidebar-primary-foreground: #fdfcf9;
+  --sidebar-accent: #b8a574;
+  --sidebar-accent-foreground: #2a2a2a;
+  --sidebar-border: #e0ddd0;
+  --sidebar-ring: #b8a574;
+}
+
+.dark {
+  --background: #2a2a2a;
+  --foreground: #fdfcf9;
+  --card: #3d4a2c;
+  --card-foreground: #fdfcf9;
+  --popover: #2a2a2a;
+  --popover-foreground: #fdfcf9;
+  --primary: #b8a574;
+  --primary-foreground: #2a2a2a;
+  --secondary: #3d4a2c;
+  --secondary-foreground: #fdfcf9;
+  --muted: #3d4a2c;
+  --muted-foreground: #e8e4d8;
+  --accent: #3d4a2c;
+  --accent-foreground: #2a2a2a;
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: #3d4a2c;
+  --input: #3d4a2c;
+  --ring: #b8a574;
+  --chart-1: #b8a574;
+  --chart-2: #e8e4d8;
+  --chart-3: #fdfcf9;
+  --chart-4: #3d4a2c;
+  --chart-5: #2a2a2a;
+  --sidebar: #2a2a2a;
+  --sidebar-foreground: #fdfcf9;
+  --sidebar-primary: #b8a574;
+  --sidebar-primary-foreground: #2a2a2a;
+  --sidebar-accent: #3d4a2c;
+  --sidebar-accent-foreground: #fdfcf9;
+  --sidebar-border: #3d4a2c;
+  --sidebar-ring: #b8a574;
+}
+
+@theme inline {
+  --font-sans: var(--font-garet);
+  --font-serif: var(--font-playfair);
+  /* Added Kanit font variable for Thai language */
+  --font-kanit: var(--font-kanit);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Added luxury animations and effects */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.luxury-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(184, 165, 116, 0.1) 50%, transparent 100%);
+  background-size: 1000px 100%;
+  animation: shimmer 3s infinite;
+}
+
+/* Brand name class keeps Cormorant font */
+.brand-name {
+  font-family: var(--font-playfair), serif !important;
+}
+
+/* Thai language uses Kanit font for all text except brand name */
+body.lang-th,
+body.lang-th * {
+  font-family: var(--font-kanit), sans-serif;
+}
+
+body.lang-th .brand-name {
+  font-family: var(--font-playfair), serif !important;
+}
+
+/* Ensure font-serif is overridden in Thai mode */
+body.lang-th .font-serif:not(.brand-name) {
+  font-family: var(--font-kanit), sans-serif !important;
+}
