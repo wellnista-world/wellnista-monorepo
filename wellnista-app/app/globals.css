@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap');
 @import "@fontsource/kanit"; /* Default Kanit font */
 @import "@fontsource/kanit/300.css"; /* Light weight */
 @import "@fontsource/kanit/400.css"; /* Regular weight */
@@ -9,6 +10,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
 
 :root {
   --primary: #9F9260;
@@ -66,5 +80,17 @@ button.neutral {
 
 .loading.muted {
   @apply bg-muted text-neutral;
+}
+
+/* Text shadow utility for carousel text */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Leckerli One font class */
+.leckerli-one-regular {
+  font-family: "Leckerli One", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 

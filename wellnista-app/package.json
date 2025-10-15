@@ -11,19 +11,24 @@
   "dependencies": {
     "@ericblade/quagga2": "^1.8.4",
     "@fontsource/kanit": "^5.1.1",
+    "@heroicons/react": "^2.2.0",
     "@line/liff": "^2.25.1",
     "@mui/icons-material": "^7.0.2",
+    "@stripe/stripe-js": "^7.3.1",
     "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.49.1",
     "@undecaf/barcode-detector-polyfill": "^0.9.21",
     "@zxing/browser": "^0.1.5",
-    "next": "15.2.3",
+    "lucide-react": "^0.513.0",
+    "next": "15.2.4",
+    "next-pwa": "^5.6.0",
     "openai": "^4.77.0",
     "react": "^19.0.0",
     "react-datepicker": "^8.1.0",
     "react-dom": "^19.0.0",
-    "recharts": "^2.15.2"
+    "recharts": "^2.15.2",
+    "stripe": "^18.2.1"
   },
   "devDependencies": {
     "@emotion/react": "^11.14.0",
@@ -37,6 +42,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.2",
     "postcss": "^8.5.3",
+    "sharp": "^0.34.2",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
   }

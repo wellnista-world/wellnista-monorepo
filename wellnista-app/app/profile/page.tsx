@@ -1,14 +1,47 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import PieChart from "../components/PieChart";
 import { useAuth } from "../lib/context/AuthContext";
 import { supabase } from "../lib/api/supabaseClient";
 import { UserData } from "../lib/types/user";
+import Typography from "@mui/material/Typography";
+import { UserCircle, Activity, Scale, Ruler, Heart, Clock, Pill, Edit } from "lucide-react";
+import { Calendar } from "../components/Calendar";
+import { useI18n } from "../../i18n";
+
+const activitiveLevel: string[] = [
+  "ไม่ออกกำลังกาย/นั่งทำงานอยู่กับที่",
+  "ออกกำลังกายเล็กน้อย 1-3วัน/สัปดาห์",
+  "ออกกำลังกายปานกลาง 4-5วัน/สัปดาห์",
+  "ออกกำลังกายหนัก 6-7วัน/สัปดาห์",
+  "ออกกำลังกายหนักมาก 2 ครั้ง/วัน เป็นนักกีฬา",
+];
+
+// const diseaseNames = [
+//   "เบาหวาน",
+//   "ไต",
+//   "หัวใจ",
+//   "ความดัน",
+//   "เก๊าต์",
+//   "ไขมัน",
+//   "อื่นๆ",
+//   "ไม่มี",
+// ];
+
+const activitiveLevelValue: number[] = [1.2, 1.375, 1.55, 1.725, 1.9];
+const activitiveLevelProtein: number[] = [1.0, 1.0, 1.2, 1.7, 2.2];
 
 export default function ProfilePage() {
-  const [view, setView] = useState<"info" | "carb">("info");
   const { user } = useAuth();
+  const { t } = useI18n();
+  const router = useRouter();
   const [userData, setUserData] = useState<UserData | null>(null);
+  const [totalNutrition, setTotalNutrition] = useState({
+    calories: 0,
+    carbs: 0,
+    protein: 0,
+  });
 
   useEffect(() => {
     if (!user?.id || userData) return;
@@ -23,80 +56,254 @@ export default function ProfilePage() {
     fetchUserData();
   }, [user, userData]);
 
-  // Example data (replace with real data as needed)
-  const carbValue = 45;
-  const carbGoal = 60;
-  const calValue = 1200;
-  const calGoal = 2000;
-  const bmi = 22.5;
+  useEffect(() => {
+    const fetchHistoryData = async () => {
+      if (!user?.id) return;
+      const { data } = await supabase
+        .from("food_scan_history")
+        .select(
+          `
+          *,
+          nutrition:nutrition_id (
+            total_calories_kcal,
+            protein_per_serving_g,
+            total_carbohydrates_per_serving_g
+          )
+        `
+        )
+        .eq("user_id", user.id);
+
+      if (data) {
+        // Calculate total nutrition only datetime today
+        const today = new Date();
+        const todayData = data.filter((item) => {
+          const itemDate = new Date(item.scanned_at);
+          return itemDate.toDateString() === today.toDateString();
+        });
+        console.log(todayData);
+        const totals = todayData.reduce(
+          (acc, item) => ({
+            calories:
+              acc.calories + (Number(item.nutrition?.total_calories_kcal) || 0),
+            protein:
+              acc.protein +
+              (Number(item.nutrition?.protein_per_serving_g) || 0),
+            carbs:
+              acc.carbs +
+              (Number(item.nutrition?.total_carbohydrates_per_serving_g) || 0),
+          }),
+          { calories: 0, protein: 0, carbs: 0 }
+        );
+        setTotalNutrition(totals);
+      }
+    };
+    fetchHistoryData();
+  }, [user]);
+
+  const teddMan =
+    (66 + 13.7 * (userData?.weight ?? 0) + 5 * (userData?.height ?? 0) - 6.8) *
+    activitiveLevelValue[
+      activitiveLevel.indexOf(userData?.activitylevel ?? "")
+    ];
+
+  const teddWoman =
+    (655 +
+      9.6 * (userData?.weight ?? 0) +
+      1.8 * (userData?.height ?? 0) -
+      4.7) *
+    activitiveLevelValue[
+      activitiveLevel.indexOf(userData?.activitylevel ?? "")
+    ];
+
+  // value only today
+  const carbValue = totalNutrition.carbs / 15;
+
+  const bmi = (userData?.weight ?? 0) / ((userData?.height ?? 0) / 100) ** 2;
+
+  const bmiText =
+    bmi > 30
+      ? t('profile.bmiCategories.obese2')
+      : bmi > 25
+      ? t('profile.bmiCategories.obese1')
+      : bmi > 23
+      ? t('profile.bmiCategories.overweight')
+      : bmi > 18.5
+      ? t('profile.bmiCategories.normal')
+      : t('profile.bmiCategories.underweight');
+
+  // carbGoal is เบาหวาน use 8 อื่นๆ use 12 or bmi more than 30 use 8
+  // const isDiabetes = userData?.diseases?.includes("เบาหวาน");
+  const carbGoalWithTedd = userData?.gender === "ชาย" ? teddMan : teddWoman;
+  const carbGoal = ((carbGoalWithTedd * 0.2) / 4) / 15;
+
+  const calValue = totalNutrition.calories;
+  const calGoal = userData?.gender === "ชาย" ? teddMan : teddWoman;
+
+  const proteinValue = totalNutrition.protein;
+  const proteinGoal =
+    (userData?.weight ?? 0) *
+    activitiveLevelProtein[
+      activitiveLevel.indexOf(userData?.activitylevel ?? "")
+    ];
+
+  const infoItems = [
+    {
+      icon: <UserCircle size={24} />,
+      label: t('profile.name'),
+      value: userData?.name || "-",
+    },
+    {
+      icon: <Heart size={24} />,
+      label: t('profile.diseases'),
+      value: userData?.diseases?.join(", ") || "-",
+    },
+    {
+      icon: <Activity size={24} />,
+      label: t('profile.gender'),
+      value: userData?.gender || "-",
+    },
+    {
+      icon: <Clock size={24} />,
+      label: t('profile.age'),
+      value: `${userData?.age || "-"} ${t('profile.years')}`,
+    },
+    {
+      icon: <Scale size={24} />,
+      label: t('profile.weight'),
+      value: `${userData?.weight || "-"} ${t('profile.kg')}`,
+    },
+    {
+      icon: <Ruler size={24} />,
+      label: t('profile.height'),
+      value: `${userData?.height || "-"} ${t('profile.cm')}`,
+    },
+    {
+      icon: <Pill size={24} />,
+      label: t('profile.medicines'),
+      value: userData?.medicines || "-",
+    },
+  ];
 
   return (
-    <div className="p-4">
-      <div className="flex flex-col items-center mb-6">
-        {/* Avatar */}
-        <div className="w-24 h-24 rounded-full bg-primary flex items-center justify-center mb-4 text-3xl font-bold text-secondary">
-          {userData?.name ? userData.name.charAt(0).toUpperCase() : "U"}
+    <div className="min-h-screen bg-secondary text-neutral font-garet px-4 py-6">
+      {/* Nutrition Progress */}
+      <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm">
+        <Typography className="text-lg font-semibold text-primary mb-6">
+          {t('profile.todayProgress')}
+        </Typography>
+        <div className="grid grid-cols-3 gap-4">
+          <div className="flex flex-col items-center bg-secondary/5 rounded-xl p-4">
+            <PieChart
+              value={carbValue}
+              goal={carbGoal}
+              color="#9F9260"
+              label=""
+              size={100}
+            />
+            <Typography className="text-sm font-semibold text-primary mt-3">
+              {carbValue.toFixed(0)}/{carbGoal.toFixed(0)} {t('profile.carb')}
+            </Typography>
+            <Typography className="text-xs text-neutral/70">{t('profile.carb')}</Typography>
+          </div>
+          <div className="flex flex-col items-center bg-secondary/5 rounded-xl p-4">
+            <PieChart
+              value={calValue}
+              goal={calGoal}
+              color="#5EC269"
+              label=""
+              size={100}
+            />
+            <Typography className="text-sm font-semibold text-primary mt-3">
+              {calValue}/{calGoal.toFixed(0)} {t('profile.kilocalories')}
+            </Typography>
+            <Typography className="text-xs text-neutral/70">{t('profile.calories')}</Typography>
+          </div>
+          <div className="flex flex-col items-center bg-secondary/5 rounded-xl p-4">
+            <PieChart
+              value={proteinValue}
+              goal={proteinGoal}
+              color="#3776A1"
+              label=""
+              size={100}
+            />
+            <Typography className="text-sm font-semibold text-primary mt-3">
+              {proteinValue.toFixed(0)}/{proteinGoal.toFixed(0)} {t('profile.grams')}
+            </Typography>
+            <Typography className="text-xs text-neutral/70">{t('profile.protein')}</Typography>
+          </div>
         </div>
       </div>
-      <div className="flex gap-2 mb-4">
-        <button
-          onClick={() => setView("info")}
-          className={`flex-1 px-6 py-3 rounded-full font-bold text-xl shadow-md transition
-            ${
-              view === "info"
-                ? "bg-primary text-secondary"
-                : "bg-white text-primary border border-primary"
-            }
-          `}
-        >
-          ข้อมูลส่วนตัว
-        </button>
-        <button
-          onClick={() => setView("carb")}
-          className={`flex-1 px-6 py-3 rounded-full font-bold text-xl shadow-md transition
-            ${
-              view === "carb"
-                ? "bg-primary text-secondary"
-                : "bg-white text-primary border border-primary"
-            }
-          `}
-        >
-          นับคาร์บ
-        </button>
+
+      {/* Calendar */}
+      <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm">
+        <Typography className="text-lg font-semibold text-primary mb-6">
+          {t('profile.eatingCalendar')}
+        </Typography>
+        <Calendar
+          calGoal={calGoal}
+          carbGoal={carbGoal}
+          proteinGoal={proteinGoal}
+          todayNutrition={{
+            calories: totalNutrition.calories,
+            carbs: totalNutrition.carbs,
+            protein: totalNutrition.protein,
+          }}
+        />
       </div>
-      {view === "info" ? (
-        <div className="text-xl font-semibold space-y-2">
-          {/* Personal info content */}
-          <p>ชื่อ - นามสกุล : {userData?.name}</p>
-          <p>โรคประจำตัว : {userData?.diseases.join(", ")}</p>
-          <p>เพศ {userData?.gender}</p>
-          <p>อายุ {userData?.age} ปี</p>
-          <p>น้ำหนัก : {userData?.weight} กิโลกรัม </p>
-          <p>ส่วนสูง : {userData?.height} เซนติเมตร</p>
-          <p>รอบเอว : {userData?.waist}</p>
-          <p>ระดับกิจกรรม : {userData?.activityLevel}</p>
-          <div className="text-xl font-bold">BMI: {bmi}</div>
+
+      {/* Personal Information */}
+      <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm">
+        <div className="flex items-center justify-between mb-4">
+          <Typography className="text-lg font-semibold text-primary">
+            {t('profile.personalInfo')}
+          </Typography>
+          <button
+            onClick={() => router.push('/profile/edit')}
+            className="flex items-center gap-2 px-4 py-2 bg-primary text-secondary rounded-full hover:bg-accent transition"
+          >
+            <Edit size={16} />
+            <span className="text-sm font-medium">{t('profile.editProfile')}</span>
+          </button>
         </div>
-      ) : (
-        <div className="flex flex-col items-center justify-center gap-6 py-4">
-          {/* Centered and bigger charts */}
-          <PieChart
-            value={carbValue}
-            goal={carbGoal}
-            color="#9F9260"
-            label="Carb"
-            size={180}
-          />
-          <PieChart
-            value={calValue}
-            goal={calGoal}
-            color="#5EC269"
-            label="Cal"
-            size={180}
-          />
-          {/* BMI */}
+        <div className="space-y-4">
+          {infoItems.map((item, index) => (
+            <div key={index} className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="text-primary">{item.icon}</div>
+                <Typography className="text-neutral/70">
+                  {item.label}
+                </Typography>
+              </div>
+              <Typography className="font-semibold">{item.value}</Typography>
+            </div>
+          ))}
         </div>
-      )}
+      </div>
+
+      {/* Health Stats Cards */}
+      <div className="grid grid-cols-2 gap-4">
+        <div className="bg-white rounded-2xl p-6 shadow-sm">
+          <Typography className="text-sm text-neutral/70 mb-2">{t('profile.bmi')}</Typography>
+          <Typography className="text-2xl font-bold text-primary">
+            {bmi.toFixed(1)}
+          </Typography>
+          <Typography className="text-xs text-neutral/70 mt-1">
+            {t('profile.bmi')}
+          </Typography>
+          <Typography className="text-xs mt-1 text-primary">{bmiText}</Typography>
+        </div>
+        <div className="bg-white rounded-2xl p-6 shadow-sm">
+          <Typography className="text-sm text-neutral/70 mb-2">
+            {t('profile.activityLevel')}
+          </Typography>
+          <Typography className="text-2xl font-bold text-primary">
+            {userData?.activitylevel || "-"}
+          </Typography>
+          <Typography className="text-xs text-neutral/70 mt-1">
+            {t('profile.dailyActivity')}
+          </Typography>
+        </div>
+      </div>
     </div>
   );
 }

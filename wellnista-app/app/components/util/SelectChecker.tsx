@@ -1,22 +1,14 @@
-import * as React from 'react';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import ListItemText from '@mui/material/ListItemText';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Checkbox from '@mui/material/Checkbox';
-import { useState, } from 'react';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
+'use client';
 
+import React, { useState } from 'react';
+import { Select, MenuItem, FormControl, InputLabel, Checkbox, ListItemText, SelectChangeEvent, ThemeProvider, createTheme, OutlinedInput } from '@mui/material';
+import { useI18n } from '../../../i18n';
 
 interface StdSelectProds {
-  labelInput: string;
   names: string[];
-  onChangeValue?: (value: string[]) => void;
+  labelInput: string;
+  onChangeValue: (value: string[]) => void;
 }
-
-
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -42,7 +34,7 @@ const theme = createTheme({
 });
 
 const MultipleSelectCheckmarks: React.FC<StdSelectProds> = ({ names, labelInput, onChangeValue }) => {
-
+  const { t } = useI18n();
   const [diseaseName, setDiseaseName] = useState<string[]>([]);
   
 
@@ -61,7 +53,7 @@ const MultipleSelectCheckmarks: React.FC<StdSelectProds> = ({ names, labelInput,
     <div>
       <ThemeProvider theme={theme}>
         <FormControl fullWidth className="font-garet ">
-          <InputLabel id="demo-multiple-checkbox-label" sx={{color: "#707070"}}>โรคประจำตัว</InputLabel>
+          <InputLabel id="demo-multiple-checkbox-label" sx={{color: "#707070"}}>{t('profile.diseases')}</InputLabel>
           <Select<string[]>
             className="hover:outline-neutral-950"
             variant='outlined'
@@ -90,6 +82,5 @@ const MultipleSelectCheckmarks: React.FC<StdSelectProds> = ({ names, labelInput,
     </div>
   );
 }
-
 
 export default MultipleSelectCheckmarks;

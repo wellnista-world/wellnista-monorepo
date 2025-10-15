@@ -78,18 +78,47 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signOut = async () => {
     try {
       setLoading(true);
+      
+      // Clear cart data specifically
+      if (user) {
+        localStorage.removeItem(`cart_${user.id}`);
+      }
+      localStorage.removeItem('cart_anonymous');
+      
+      // Clear other local storage and session storage
+      localStorage.clear();
+      sessionStorage.clear();
+      
+      // Attempt to sign out from Supabase
       const { error } = await supabase.auth.signOut();
-      if (error) throw error;
+      
+      // Even if there's an error with Supabase logout, we should still clear the local state
+      if (error) {
+        console.warn('Supabase logout error:', error);
+        // Don't throw the error, just log it and continue with local cleanup
+      }
+      
+      // Clear user state
+      setUser(null);
+      
+      // Force redirect to login page
+      window.location.href = '/';
+      
+    } catch (error: unknown) {
+      console.error('Logout error:', error);
+      
+      // Even if there's an error, we should still clear local state and redirect
+      if (user) {
+        localStorage.removeItem(`cart_${user.id}`);
+      }
+      localStorage.removeItem('cart_anonymous');
       localStorage.clear();
       sessionStorage.clear();
       setUser(null);
-      router.push('/');
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError(String(error));
-      }
+      setError(null);
+      
+      // Force redirect to login page
+      window.location.href = '/';
     } finally {
       setLoading(false);
     }

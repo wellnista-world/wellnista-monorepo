@@ -14,9 +14,15 @@ import {
 } from '@mui/material';
 import { supabase } from '../lib/api/supabaseClient';
 import DtxGraph from '../components/util/DtxChart';
+import { useI18n } from '../../i18n';
 
-const mealNames: string[] = ['เช้า', 'กลางวัน', 'เย็น', 'ก่อนนอน'];
-const mealTime: string[] = ['ก่อนอาหาร', 'หลังอาหาร 2 ชม.'];
+// Thai values for database storage
+const mealNamesThai: string[] = ['เช้า', 'กลางวัน', 'เย็น', 'ก่อนนอน'];
+const mealTimeThai: string[] = ['ก่อนอาหาร', 'หลังอาหาร 2 ชม.'];
+
+// Translation keys for display
+const mealNamesKeys: string[] = ['morning', 'lunch', 'evening', 'beforeBed'];
+const mealTimeKeys: string[] = ['beforeMeal', 'afterMeal'];
 
 interface DtxRecord {
   id: number;
@@ -28,6 +34,7 @@ interface DtxRecord {
 }
 
 export default function InforDtx() {
+  const { t } = useI18n();
   const [currentDate, setCurrentDate] = useState<string>('');
   const [currentTime, setCurrentTime] = useState<string>('');
   const [selectedMeal, setSelectedMeal] = useState<string>('');
@@ -36,6 +43,17 @@ export default function InforDtx() {
   const [loading, setLoading] = useState(false);
   const [beforeData, setBeforeData] = useState<DtxRecord[]>([]);
   const [afterData, setAfterData] = useState<DtxRecord[]>([]);
+
+  // Helper function to get Thai value from translation key
+  const getThaiValue = (key: string, type: 'meal' | 'time'): string => {
+    if (type === 'meal') {
+      const index = mealNamesKeys.indexOf(key);
+      return index !== -1 ? mealNamesThai[index] : key;
+    } else {
+      const index = mealTimeKeys.indexOf(key);
+      return index !== -1 ? mealTimeThai[index] : key;
+    }
+  };
 
   useEffect(() => {
     const date = new Date();
@@ -75,7 +93,7 @@ export default function InforDtx() {
 
   const handleSubmit = async () => {
     if (!selectedMeal || !selectedTime || !dtxValue) {
-      alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+      alert(t('bloodSugar.pleaseCompleteData'));
       return;
     }
 
@@ -87,27 +105,31 @@ export default function InforDtx() {
     } = await supabase.auth.getUser();
 
     if (userError || !user) {
-      alert('กรุณาเข้าสู่ระบบก่อนบันทึกข้อมูล');
+      alert(t('bloodSugar.pleaseLoginFirst'));
       setLoading(false);
       return;
     }
+
+    // Convert translation keys to Thai values for database storage
+    const thaiMeal = getThaiValue(selectedMeal, 'meal');
+    const thaiTime = getThaiValue(selectedTime, 'time');
 
     const { error } = await supabase.from('dtx_records').insert([
       {
         user_id: user.id,
         date: currentDate,
         time: currentTime,
-        meal: selectedMeal,
-        meal_phase: selectedTime,
+        meal: thaiMeal,
+        meal_phase: thaiTime,
         dtx_value: dtxValue,
       },
     ]);
 
     if (error) {
       console.error('Error inserting DTX:', error);
-      alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล');
+      alert(t('bloodSugar.errorSavingData'));
     } else {
-      alert('บันทึกข้อมูลสำเร็จ!');
+      alert(t('bloodSugar.dataSavedSuccessfully'));
       setSelectedMeal('');
       setSelectedTime('');
       setDtxValue(null);
@@ -128,7 +150,7 @@ export default function InforDtx() {
 
     if (error) {
       console.error('Error updating DTX:', error);
-      alert('เกิดข้อผิดพลาดในการแก้ไขข้อมูล');
+      alert(t('bloodSugar.errorUpdatingData'));
     } else {
       setLoading(true); 
       setLoading(false); 
@@ -138,11 +160,11 @@ export default function InforDtx() {
   return (
     <div className="min-h-screen bg-secondary text-neutral font-garet flex flex-col items-center px-4 py-6 space-y-4">
       <Typography variant="h5" className="text-primary font-magnolia text-3xl mb-2">
-        สมุดบันทึกน้ำตาล
+        {t('bloodSugar.title')}
       </Typography>
 
       <div className="w-full max-w-sm space-y-4">
-        <Typography className="text-xl font-bold">วัน-เวลา</Typography>
+        <Typography className="text-xl font-bold">{t('bloodSugar.dateTime')}</Typography>
         <div className="flex gap-4">
           <Box className="bg-white border-2 border-primary rounded px-4 py-2 w-full text-center font-semibold text-lg">
             {currentDate}
@@ -150,19 +172,19 @@ export default function InforDtx() {
         </div>
 
         <FormControl fullWidth>
-          <InputLabel>เลือกมื้อ</InputLabel>
-          <Select label="เลือกมื้อ" variant='outlined' value={selectedMeal} onChange={(e) => setSelectedMeal(e.target.value)} className="bg-white">
-            {mealNames.map((meal) => (
-              <MenuItem key={meal} value={meal}>{meal}</MenuItem>
+          <InputLabel>{t('bloodSugar.selectMeal')}</InputLabel>
+          <Select label={t('bloodSugar.selectMeal')} variant='outlined' value={selectedMeal} onChange={(e) => setSelectedMeal(e.target.value)} className="bg-white">
+            {mealNamesKeys.map((meal) => (
+              <MenuItem key={meal} value={meal}>{t(`bloodSugar.${meal}`)}</MenuItem>
             ))}
           </Select>
         </FormControl>
 
         <FormControl fullWidth>
-          <InputLabel>ก่อน/หลัง</InputLabel>
-          <Select label="ก่อน/หลัง" variant='outlined' value={selectedTime} onChange={(e) => setSelectedTime(e.target.value)} className="bg-white">
-            {mealTime.map((item) => (
-              <MenuItem key={item} value={item}>{item}</MenuItem>
+          <InputLabel>{t('bloodSugar.beforeAfter')}</InputLabel>
+          <Select label={t('bloodSugar.beforeAfter')} variant='outlined' value={selectedTime} onChange={(e) => setSelectedTime(e.target.value)} className="bg-white">
+            {mealTimeKeys.map((item) => (
+              <MenuItem key={item} value={item}>{t(`bloodSugar.${item}`)}</MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -170,7 +192,7 @@ export default function InforDtx() {
         <TextField
           fullWidth
           type="number"
-          label="ค่า DTX"
+          label={t('bloodSugar.bloodGlucoseValue')}
           value={dtxValue ?? ''}
           onChange={(e) => setDtxValue(e.target.value === '' ? null : Number(e.target.value))}
           className="bg-white"
@@ -183,12 +205,12 @@ export default function InforDtx() {
           disabled={loading}
           className="!bg-primary hover:!bg-accent !text-white font-garet text-xl rounded-full mt-6"
         >
-          {loading ? <CircularProgress size={24} color="inherit" /> : 'บันทึก'}
+          {loading ? <CircularProgress size={24} color="inherit" /> : t('bloodSugar.save')}
         </Button>
 
         <DtxGraph
           data={beforeData}
-          title="ก่อนอาหาร"
+          title={t('bloodSugar.beforeMealGraph')}
           normalMin={80}
           normalMax={182}
           maxY={450}
@@ -197,7 +219,7 @@ export default function InforDtx() {
 
         <DtxGraph
           data={afterData}
-          title="หลังอาหาร"
+          title={t('bloodSugar.afterMealGraph')}
           normalMin={80}
           normalMax={160}
           maxY={450}

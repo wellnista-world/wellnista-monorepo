@@ -6,7 +6,6 @@ import {
   TextField,
   Button,
   Typography,
-  Box,
   CircularProgress,
   ThemeProvider,
   FormControl,
@@ -16,43 +15,45 @@ import MultipleSelectCheckmarks from '../components/util/SelectChecker';
 import StdSelect from '../components/std/StdSelect';
 import theme from '..//components/theme/theme';
 import { useRouter } from 'next/navigation';
+import { useI18n } from '../../i18n';
 
 export interface UserData {
   name: string;
   nickname: string;
   diseases: string[];
-  madicines: string;
+  medicines: string;
   gender: string;
   age: number | null;
   weight: number | null;
   height: number | null;
-  activityLevel: string;
+  activitylevel: string;
   waist?: number | null;
 }
 
-const genderName: string[] = ['ชาย', 'หญิง'];
-const activitiveLevel: string[] = [
+// Thai values that will be saved to database
+const genderThaiValues = ['ชาย', 'หญิง'];
+const activityLevelThaiValues = [
   'ไม่ออกกำลังกาย/นั่งทำงานอยู่กับที่',
   'ออกกำลังกายเล็กน้อย 1-3วัน/สัปดาห์',
   'ออกกำลังกายปานกลาง 4-5วัน/สัปดาห์',
   'ออกกำลังกายหนัก 6-7วัน/สัปดาห์',
   'ออกกำลังกายหนักมาก 2 ครั้ง/วัน เป็นนักกีฬา',
 ];
-const diseaseNames = ['เบาหวาน', 'ไต', 'หัวใจ', 'ความดัน', 'เก๊าต์', 'ไขมัน', 'อื่นๆ', 'ไม่มี'];
-
+const diseaseThaiValues = ['เบาหวาน', 'ไต', 'หัวใจ', 'ความดัน', 'เก๊าต์', 'ไขมัน', 'อื่นๆ', 'ไม่มี'];
 
 export default function Register() {
   const router = useRouter();
+  const { t } = useI18n();
   const [userData, setUserData] = useState<UserData>({
     name: '',
     nickname: '',
     diseases: [],
-    madicines: '',
+    medicines: '',
     gender: '',
     age: null,
     weight: null,
     height: null,
-    activityLevel: '',
+    activitylevel: '',
     waist: null,
   });
 
@@ -60,34 +61,65 @@ export default function Register() {
   const [newDisease, setNewDisease] = useState("");
   const [popUp, setPopUp] = useState(false);
 
+  // Create translated display labels
+  const genderDisplayLabels = [
+    t('gender.male'),
+    t('gender.female')
+  ];
+
+  const activityLevelDisplayLabels = [
+    t('activityLevels.sedentary'),
+    t('activityLevels.lightlyActive'),
+    t('activityLevels.moderatelyActive'),
+    t('activityLevels.veryActive'),
+    t('activityLevels.extremelyActive')
+  ];
+
+  const diseaseDisplayLabels = [
+    t('diseases.diabetes'),
+    t('diseases.kidney'),
+    t('diseases.heart'),
+    t('diseases.hypertension'),
+    t('diseases.gout'),
+    t('diseases.dyslipidemia'),
+    t('diseases.other'),
+    t('diseases.none')
+  ];
+
   const handleInputChange = (field: keyof UserData, value: string | number | null) => {
     setUserData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleDiseaseChangeValue = (values: string[]) => {
-    setUserData((prev) => ({ ...prev, diseases: values }));
+    // Convert display labels back to Thai values for database
+    const thaiValues = values.map(displayLabel => {
+      const index = diseaseDisplayLabels.indexOf(displayLabel);
+      return index !== -1 ? diseaseThaiValues[index] : displayLabel;
+    });
+    
+    setUserData((prev) => ({ ...prev, diseases: thaiValues }));
 
-    if(values.includes('อื่นๆ')){
+    if(thaiValues.includes('อื่นๆ')){
       setPopUp(true);
     }else {
       setPopUp(false);
     }
-    
   };
 
+  const handleGenderChange = (displayLabel: string) => {
+    const index = genderDisplayLabels.indexOf(displayLabel);
+    const thaiValue = index !== -1 ? genderThaiValues[index] : displayLabel;
+    handleInputChange('gender', thaiValue);
+  };
+
+  const handleActivityLevelChange = (displayLabel: string) => {
+    const index = activityLevelDisplayLabels.indexOf(displayLabel);
+    const thaiValue = index !== -1 ? activityLevelThaiValues[index] : displayLabel;
+    handleInputChange('activitylevel', thaiValue);
+  };
 
   const handleAddDisease = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewDisease(event.target.value);
-    /*const findIndex = userData.diseases.indexOf("อื่นๆ")
-    console.log (findIndex);
-    if (newDisease.trim() !== '') {
-      setUserData(prevUserData => ({
-        ...prevUserData,
-        diseases: [...prevUserData.diseases[findIndex], newDisease],
-      }));
-      //setNewDisease(''); // เคลียร์ input หลังจากเพิ่ม
-      console.log (userData.diseases);
-    }*/
   };
 
   const handleBlur = () => {
@@ -102,11 +134,9 @@ export default function Register() {
         }
         return { ...prevUserData, diseases: updatedDiseases };
       });
-      // ไม่เคลียร์ newDisease ที่นี่
     }
     console.log(userData.diseases);
   }
-
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -117,7 +147,7 @@ export default function Register() {
     } = await supabase.auth.getUser();
 
     if (userError || !user) {
-      alert('คุณยังไม่ได้เข้าสู่ระบบ');
+      alert(t('auth.notLoggedIn'));
       setLoading(false);
       return;
     }
@@ -128,9 +158,9 @@ export default function Register() {
 
     if (error) {
       console.error('Error inserting data:', error);
-      alert('เกิดข้อผิดพลาดในการลงทะเบียน');
+      alert(t('auth.registrationError'));
     } else {
-      alert('ลงทะเบียนสำเร็จ!');
+      alert(t('auth.registrationSuccess'));
       router.push('/home');
     }
 
@@ -139,15 +169,22 @@ export default function Register() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box className="min-h-screen bg-secondary flex justify-center items-start px-4 pt-6 pb-12">
-        <Box className="w-full max-w-sm p-6 space-y-4">
-          <Typography variant="h5" className="text-primary text-neutral font-garet text-center">
-            ลงทะเบียน
+      <div className="min-h-screen bg-secondary text-neutral font-garet px-4 py-6">
+        {/* Header */}
+        <div className="mb-8 text-center">
+          <Typography className="text-2xl font-bold text-primary mb-1">
+            {t('register.title')}
           </Typography>
+          <Typography className="text-sm text-neutral/70">
+            {t('register.subtitle')}
+          </Typography>
+        </div>
 
+        {/* Registration Form */}
+        <div className="max-w-md mx-auto space-y-4">
           <TextField
             id="outlined-basic"
-            label="ชื่อ - นามสกุล"
+            label={t('register.fullName')}
             fullWidth
             variant="outlined"
             value={userData.name}
@@ -155,7 +192,7 @@ export default function Register() {
           />
 
           <TextField
-            label="ชื่อเล่น"
+            label={t('register.nickname')}
             fullWidth
             variant="outlined"
             value={userData.nickname}
@@ -163,13 +200,16 @@ export default function Register() {
           />
 
           <FormControl fullWidth>
-            <MultipleSelectCheckmarks labelInput='โรคประจำตัว' names={diseaseNames} onChangeValue={handleDiseaseChangeValue} >
-            </MultipleSelectCheckmarks> 
+            <MultipleSelectCheckmarks 
+              labelInput={t('register.diseases')} 
+              names={diseaseDisplayLabels} 
+              onChangeValue={handleDiseaseChangeValue} 
+            />
           </FormControl>
 
           { popUp &&(
               <TextField
-              label="โรคประจำตัวอื่นๆ"
+              label={t('register.otherDiseases')}
               fullWidth
               variant='outlined'
               value={newDisease}
@@ -180,17 +220,21 @@ export default function Register() {
           
 
           <TextField
-            label="ยาประจำตัว"
+            label={t('register.medicines')}
             fullWidth
             variant="outlined"
-            value={userData.madicines}
-            onChange={(e) => handleInputChange('madicines', e.target.value)}
+            value={userData.medicines}
+            onChange={(e) => handleInputChange('medicines', e.target.value)}
           />
      
-          <StdSelect label='เพศ' names={genderName} onChangeValue={(val) => handleInputChange('gender', val)} />
+          <StdSelect 
+            label={t('register.gender')} 
+            names={genderDisplayLabels} 
+            onChangeValue={handleGenderChange} 
+          />
 
           <TextField
-            label="อายุ"
+            label={t('register.age')}
             fullWidth
             type="number"
             value={userData.age ?? ''}
@@ -199,13 +243,13 @@ export default function Register() {
 
           <div className="grid grid-cols-2 gap-4">
             <TextField
-              label="น้ำหนัก"
+              label={t('register.weight')}
               type="number"
               value={userData.weight ?? ''}
               onChange={(e) => handleInputChange('weight', e.target.value === '' ? null : Number(e.target.value))}
             />
             <TextField
-              label="ส่วนสูง"
+              label={t('register.height')}
               type="number"
               value={userData.height ?? ''}
               onChange={(e) => handleInputChange('height', e.target.value === '' ? null : Number(e.target.value))}
@@ -213,26 +257,30 @@ export default function Register() {
           </div>
 
           <TextField
-            label="รอบเอว"
+            label={t('register.waist')}
             fullWidth
             type="number"
             value={userData.waist ?? ''}
             onChange={(e) => handleInputChange('waist', e.target.value === '' ? null : Number(e.target.value))}
           />
 
-          <StdSelect label='ระดับกิจกรรม' names={activitiveLevel} onChangeValue={(val) => handleInputChange('activityLevel', val)} />
+          <StdSelect 
+            label={t('register.activityLevel')} 
+            names={activityLevelDisplayLabels} 
+            onChangeValue={handleActivityLevelChange} 
+          />
           
           <Button
             variant="contained"
             fullWidth
             onClick={handleSubmit}
             disabled={loading}
-            className="!bg-primary hover:!bg-accent !text-white mt-4 rounded-full"
+            className="!bg-primary hover:!bg-accent !text-white mt-4 rounded-full font-semibold"
           >
-            {loading ? <CircularProgress size={24} color="inherit" /> : 'ลงทะเบียน'}
+            {loading ? <CircularProgress size={24} color="inherit" /> : t('register.submit')}
           </Button>
-        </Box>
-      </Box>
+        </div>
+      </div>
     </ThemeProvider>
   );
 }

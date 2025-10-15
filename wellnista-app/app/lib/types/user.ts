@@ -2,11 +2,11 @@ export interface UserData {
   name: string;
   nickname: string;
   diseases: string[];
-  madicines: string;
+  medicines: string;
   gender: string;
   age: number | null;
   weight: number | null;
   height: number | null;
-  activityLevel: string;
+  activitylevel: string;
   waist?: number | null;
 } 

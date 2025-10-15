@@ -8,6 +8,8 @@ import Box from '@mui/material/Box';
 import Image from "next/image";
 import { supabase } from "@/app/lib/api/supabaseClient";
 import { useAuth } from "@/app/lib/context/AuthContext";
+import { useI18n } from "../../../i18n";
+import { UserData } from "@/app/lib/types/user";
 
 export interface NutritionData {
   timestamp?: string; // or Date if you convert
@@ -47,15 +49,59 @@ export interface NutritionData {
   carbohydrates_per_serving_g?: number;
 }
 
+const activitiveLevel: string[] = [
+  "ไม่ออกกำลังกาย/นั่งทำงานอยู่กับที่",
+  "ออกกำลังกายเล็กน้อย 1-3วัน/สัปดาห์",
+  "ออกกำลังกายปานกลาง 4-5วัน/สัปดาห์",
+  "ออกกำลังกายหนัก 6-7วัน/สัปดาห์",
+  "ออกกำลังกายหนักมาก 2 ครั้ง/วัน เป็นนักกีฬา",
+];
+
+const activitiveLevelValue: number[] = [1.2, 1.375, 1.55, 1.725, 1.9];
+
 export default function ResultPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { t } = useI18n();
   const barcode = searchParams.get("barcode");
   const [product, setProduct] = useState<NutritionalInfo | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { user } = useAuth();
-  const maxCarbs = 8;
+
+  const [userData, setUserData] = useState<UserData | null>(null);
+  useEffect(() => {
+    if (!user?.id || userData) return;
+    const fetchUserData = async () => {
+      const { data } = await supabase
+        .from("users")
+        .select("*")
+        .eq("user_id", user.id)
+        .single();
+      setUserData(data);
+    };
+    fetchUserData();
+  }, [user, userData]);
+
+  // TEDD calculation for carb goal (same as profile page)
+  const teddMan =
+    (66 + 13.7 * (userData?.weight ?? 0) + 5 * (userData?.height ?? 0) - 6.8) *
+    activitiveLevelValue[
+      activitiveLevel.indexOf(userData?.activitylevel ?? "")
+    ];
+
+  const teddWoman =
+    (655 +
+      9.6 * (userData?.weight ?? 0) +
+      1.8 * (userData?.height ?? 0) -
+      4.7) *
+    activitiveLevelValue[
+      activitiveLevel.indexOf(userData?.activitylevel ?? "")
+    ];
+
+  // carbGoal calculation (same as profile page)
+  const carbGoalWithTedd = userData?.gender === "ชาย" ? teddMan : teddWoman;
+  const carbGoal = ((carbGoalWithTedd * 0.2) / 4) / 15;
 
   // create handle function when click กิน it will save data to supabase
   // try to search barcode from supabase in nutritional_data table
@@ -112,47 +158,82 @@ export default function ResultPage() {
         nutrition_id: nutritionId, // if you have a relation
       });
 
-      router.push("/scan");
+      router.push("/profile");
 
     if (historyError) {
       console.error("Failed to save scan history:", historyError);
     } else {
       console.log("Scan history saved!");
-      router.push("/scan");
+      router.push("/profile");
     }
   };
 
   useEffect(() => {
     if (!barcode) {
-      setError("ไม่พบบาร์โค้ดใน URL");
+      setError(t('scan.noBarcodeInUrl'));
       setLoading(false);
       return;
     }
 
     const fetchProduct = async () => {
       try {
+        // First, try to get data from Supabase nutrition_data table
+        const { data: nutritionData } = await supabase
+          .from("nutrition_data")
+          .select("*")
+          .eq("barcode", barcode)
+          .single();
+
+        if (nutritionData) {
+          // If found in Supabase, convert to NutritionalInfo format
+          const convertedData: NutritionalInfo = {
+            product_name: nutritionData.food_name_eng || nutritionData.food_name_thai,
+            product_name_th: nutritionData.food_name_thai,
+            product_name_en: nutritionData.food_name_eng,
+            image_url: nutritionData.food_image,
+            brands: nutritionData.brand_trademark_eng || nutritionData.brand_trademark_thai,
+            nutriments: {
+              "energy-kcal_serving": nutritionData.total_calories_kcal,
+              sugars_value: nutritionData.total_sugar,
+              fat: nutritionData.total_fat_g,
+              "sodium_value": nutritionData.total_sodium_mg,
+              carbohydrates: nutritionData.carbohydrates_per_serving_g,
+              proteins_serving: nutritionData.protein_per_serving_g,
+              "vitamin-a": nutritionData.vitamin_a_percentage,
+              "vitamin-b1": nutritionData.vitamin_b1_percentage,
+              "vitamin-b2": nutritionData.vitamin_b2_percentage,
+              calcium: nutritionData.calcium_percentage,
+              iron: nutritionData.iron_percentage
+            }
+          };
+          setProduct(convertedData);
+          setLoading(false);
+          return;
+        }
+
+        // If not found in Supabase, fetch from barcode API
         const data = await fetchProductByBarcode(barcode);
 
         if (!data) {
-          throw new Error("ไม่พบข้อมูลผลิตภัณฑ์ หรือข้อมูลไม่สมบูรณ์");
+          throw new Error(t('scan.productNotFound'));
         }
 
         setProduct(data);
       } catch (err) {
-        setError((err as Error).message || "เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ");
+        setError((err as Error).message || t('scan.unknownError'));
       } finally {
         setLoading(false);
       }
     };
 
     fetchProduct();
-  }, [barcode]);
+  }, [barcode, t]);
 
   if (loading) {
     return (
       <Box className="mt-10 flex items-center justify-center">
         <Box className="mt-8 w-48 h-48 flex items-center text-2xl text-secondary bg-primary justify-center rounded-full border-[#8A7F5F] border-t-transparent animate-spin">
-          <p className="text-[#FFFFFF]">Loading...</p>
+          <p className="text-[#FFFFFF]">{t('common.loading')}</p>
         </Box>
       </Box>
     );
@@ -173,7 +254,7 @@ export default function ResultPage() {
   const protein = product?.nutriments.proteins_serving ?? 0;
   const kcal = product?.nutriments["energy-kcal_serving"] ?? 0;
 
-  const carbPercentage = Math.min(((carbValue / 15) / maxCarbs) * 100, 100);
+  const carbPercentage = Math.round(carbValue / 15);
 
   // Calculate green stars based on nutritional values
   let greenStarCount = 0;
@@ -184,68 +265,69 @@ export default function ResultPage() {
   return (
     <Box className="flex flex-col min-h-screen bg-secondary text-neutral font-garet p-4">
       <p className="text-3xl font-bold mb-4">
-        {product?.product_name_th || product?.product_name_en || product?.product_name || "ไม่มีชื่อผลิตภัณฑ์"}
+        {product?.product_name || product?.product_name_en || product?.product_name_th || t('scan.noProductName')}
       </p>
       <Box className="grid grid-cols-2 gap-4 mb-6">
         <Box className="rounded-full w-full h-full items-center">
           {product?.image_url ? (
-            <Image
-              src={(product?.image_url as string) || "/placeholder-image.jpg"}
-              alt={product?.product_name_en || "รูปภาพของผลิตภัณฑ์"}
-              className="w-full h-full object-cover rounded-lg"
-              width={500}
-              height={500}
-            />
+            (product.image_url as string).includes('drive.google.com') ? (
+              <Box className="flex items-center justify-center bg-gray-200 rounded-lg h-full">
+                <p>{t('scan.noImage')}</p>
+              </Box>
+            ) : (
+              <Image
+                src={product.image_url as string}
+                alt={product?.product_name || product?.product_name_en || t('scan.noImage')}
+                className="w-full h-full object-cover rounded-lg"
+                width={500}
+                height={500}
+              />
+            )
           ) : (
-            <Box className="flex items-center justify-center bg-gray-200 rounded-lg">
-              <p>ไม่มีรูปภาพ</p>
+            <Box className="flex items-center justify-center bg-gray-200 rounded-lg h-full">
+              <p>{t('scan.noImage')}</p>
             </Box>
           )}
         </Box>
         <Box className="flex items-center mb-4 justify-center">
-          {/* <Box className="flex space-x-1 text-primary">
-          {[...Array(greenStarCount)].map((_, index) => (
-            <span key={index} className="text-2xl">★</span>
-          ))}
-        </Box> */}
-          <p className="text-3xl font-bold ml-4">{greenStarCount * 10} point</p>
+          <p className="text-3xl font-bold ml-4">{greenStarCount * 10} {t('scan.points')}</p>
         </Box>
       </Box>
       {/* Labels for Color Explanation */}
       <IntroductionStatus />
       <Box className="flex flex-col space-y-6 mb-6 w-full max-w-md">
-        <IndicatorRow label="น้ำตาล" value={sugarValue} thresholds={[2, 7]} />
-        <IndicatorRow label="โซเดียม" value={sodiumValue} thresholds={[700, 1050]} />
-        <IndicatorRow label="ไขมัน" value={fatValue} thresholds={[10, 13]} />
+        <IndicatorRow label={t('scan.sugar')} value={sugarValue} thresholds={[2, 7]} />
+        <IndicatorRow label={t('scan.sodium')} value={sodiumValue} thresholds={[700, 1050]} />
+        <IndicatorRow label={t('scan.fat')} value={fatValue} thresholds={[10, 13]} />
       </Box>
 
       <Box className="grid grid-cols-2 gap-4 mb-6">
         <Box className="bg-white p-4 rounded-lg shadow w-full text-lg font-bold">
-          <p>แคลอรี่: {kcal ?? "ไม่มีข้อมูล"} kcal</p>
+          <p>{t('scan.calories')}: {kcal ?? t('scan.noData')} kcal</p>
         </Box>
         <Box className="bg-white p-4 rounded-lg shadow w-full text-lg font-bold">
-          <p>โปรตีน: {protein ?? "ไม่มีข้อมูล"} กรัม</p>
+          <p>{t('scan.protein')}: {protein ?? t('scan.noData')} {t('scan.grams')}</p>
         </Box>
       </Box>
 
       <Box className="flex flex-col md:flex-row w-full gap-6">
         <Box className="flex flex-col items-start bg-white p-4 rounded-lg shadow w-full">
-          <h2 className="text-lg font-bold mb-2">ข้อมูลทางโภชนาการ</h2>
+          <h2 className="text-lg font-bold mb-2">{t('scan.nutritionalInfo')}</h2>
           <ul className="text-sm space-y-1">
-            <li>ไขมัน: {fatValue} กรัม</li>
-            <li>โซเดียม: {sodiumValue} มิลลิกรัม</li>
-            <li>น้ำตาล: {sugarValue} กรัม</li>
-            <li>คาร์โบไฮเดรต: {carbValue} กรัม</li>
-            <li>วิตามินเอ: {product?.nutriments["vitamin-a"] ?? "ไม่มีข้อมูล"} มก.</li>
-            <li>วิตามินบี1: {product?.nutriments["vitamin-b1"] ?? "ไม่มีข้อมูล"} มก.</li>
-            <li>วิตามินบี2: {product?.nutriments["vitamin-b2"] ?? "ไม่มีข้อมูล"} มก.</li>
-            <li>แคลเซียม: {product?.nutriments.calcium ?? "ไม่มีข้อมูล"} มก.</li>
-            <li>ธาตุเหล็ก: {product?.nutriments.iron ?? "ไม่มีข้อมูล"} มก.</li>
+            <li>{t('scan.fat')}: {fatValue} {t('scan.grams')}</li>
+            <li>{t('scan.sodium')}: {sodiumValue} {t('scan.milligrams')}</li>
+            <li>{t('scan.sugar')}: {sugarValue} {t('scan.grams')}</li>
+            <li>{t('scan.carbohydrates')}: {carbValue} {t('scan.grams')}</li>
+            <li>{t('scan.vitaminA')}: {product?.nutriments["vitamin-a"] ?? t('scan.noData')} {t('scan.mg')}</li>
+            <li>{t('scan.vitaminB1')}: {product?.nutriments["vitamin-b1"] ?? t('scan.noData')} {t('scan.mg')}</li>
+            <li>{t('scan.vitaminB2')}: {product?.nutriments["vitamin-b2"] ?? t('scan.noData')} {t('scan.mg')}</li>
+            <li>{t('scan.calcium')}: {product?.nutriments.calcium ?? t('scan.noData')} {t('scan.mg')}</li>
+            <li>{t('scan.iron')}: {product?.nutriments.iron ?? t('scan.noData')} {t('scan.mg')}</li>
           </ul>
         </Box>
 
         <Box className="flex flex-col items-center justify-center bg-white p-4 rounded-lg shadow w-full mb-8">
-          <h2 className="text-lg font-bold mb-2">ปริมาณคาร์บ</h2>
+          <h2 className="text-lg font-bold mb-2">{t('scan.carbAmount')}</h2>
           <Box className="w-24 h-24 mb-4">
             <svg viewBox="0 0 36 36" className="circular-chart">
               <path
@@ -266,7 +348,7 @@ export default function ResultPage() {
             </svg>
           </Box>
           <p className="text-sm text-neutral">
-            {Math.round(carbValue / 15)} คาร์บ ({Math.round(carbPercentage)}% ของ {maxCarbs} คาร์บสูงสุด)
+            {Math.round(carbValue / 15)} of {Math.round(carbGoal)} {t('profile.carb')}
           </p>
         </Box>
       </Box>
@@ -276,27 +358,19 @@ export default function ResultPage() {
           <button
             onClick={handleEat}
             className="px-6 py-3 w-full bg-[#5EC269] text-neutral text-xl font-semibold rounded-lg hover:bg-accent transition">
-            กินแล้ว
+            {t('scan.ate')}
           </button>
         </Box>
         <Box>
           <button
+          onClick={() => router.push("/scan")}
             className="px-6 py-3 w-full bg-[#DD524C] text-neutral text-xl font-semibold rounded-lg hover:bg-accent transition">
-            ไม่ได้กิน
+            {t('scan.didNotEat')}
           </button>
         </Box>
         <Box>
 
         </Box>
-      </Box>
-
-      <Box className="flex justify-center">
-        <button
-          className="px-6 py-3 bg-primary text-secondary font-semibold rounded-full hover:bg-accent transition"
-          onClick={() => router.push("/scan")}
-        >
-          ย้อนกลับ
-        </button>
       </Box>
     </Box>
   );
