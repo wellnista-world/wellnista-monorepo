@@ -6,17 +6,6 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
-export const metadata = {
-  title: "Sound Healing Therapy Thailand - Therapeutic Sound Bath & Wellness | Wellnista Longevity",
-  description: "Experience transformative sound healing therapy in Thailand. Singing bowl meditation, therapeutic sound baths, and vibrational healing for stress relief, emotional healing, longevity, and deep wellness. Expert sound healing practitioners in Khao Yai.",
-  keywords: "sound healing Thailand, sound therapy retreat, singing bowl meditation, therapeutic sound bath, vibrational healing, sound healing longevity, wellness sound therapy, chakra balancing Thailand, sound meditation retreat, healing frequencies",
-  openGraph: {
-    title: "Sound Healing Therapy & Sound Bath Thailand - Wellness & Longevity",
-    description: "Transform your well-being with therapeutic sound healing. Deep relaxation, stress relief, and longevity through ancient sound therapy practices.",
-    images: [{ url: "/serene-wellness-meditation-in-thai-forest.jpg", width: 1200, height: 630, alt: "Sound Healing Therapy Thailand Wellness Longevity" }],
-  },
-}
-
 export default function SoundHealingPage() {
   const { t } = useLanguage()
 

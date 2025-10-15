@@ -6,17 +6,6 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
-export const metadata = {
-  title: "Forest Bathing Thailand - Shinrin-yoku Therapy Khao Yai | Wellnista Longevity Wellness",
-  description: "Experience authentic forest bathing (Shinrin-yoku) in Thailand's Khao Yai National Park. Evidence-based forest therapy reduces stress, boosts immunity, lowers blood pressure, and promotes longevity. Certified guides lead therapeutic nature immersion sessions.",
-  keywords: "forest bathing Thailand, Shinrin-yoku Thailand, forest therapy Khao Yai, wellness forest bathing, longevity forest therapy, immune boost forest, stress relief nature therapy, forest bathing benefits, therapeutic forest walks",
-  openGraph: {
-    title: "Forest Bathing Therapy Thailand - Natural Wellness & Longevity",
-    description: "Scientifically-proven forest bathing experiences in Khao Yai. Reduce stress, boost immunity, and enhance longevity through guided Shinrin-yoku therapy.",
-    images: [{ url: "/peaceful-forest-bathing-scene-in-thailand.jpg", width: 1200, height: 630, alt: "Forest Bathing Shinrin-yoku Therapy Thailand Khao Yai" }],
-  },
-}
-
 export default function ForestBathingPage() {
   const { t } = useLanguage()
 

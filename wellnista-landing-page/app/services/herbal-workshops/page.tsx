@@ -6,17 +6,6 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
-export const metadata = {
-  title: "Thai Herbal Medicine Workshop - Natural Healing & Wellness Longevity | Wellnista",
-  description: "Learn traditional Thai herbal medicine for natural healing and longevity. Hands-on workshops teaching herbal remedies, aromatherapy, healing balms, and wellness products. Ancient Thai herbal wisdom for modern health and longevity.",
-  keywords: "Thai herbal medicine workshop, herbal wellness Thailand, natural healing herbs, Thai aromatherapy, herbal longevity, traditional Thai medicine, herbal remedies workshop, wellness herbs Thailand, Thai herbal compress",
-  openGraph: {
-    title: "Thai Herbal Medicine Workshop - Natural Healing & Longevity",
-    description: "Discover ancient Thai herbal wisdom. Create natural wellness products and learn traditional healing practices for longevity.",
-    images: [{ url: "/thai-herbal-medicine-workshop-natural-herbs.jpg", width: 1200, height: 630, alt: "Thai Herbal Medicine Workshop Natural Healing" }],
-  },
-}
-
 export default function HerbalWorkshopsPage() {
   const { t } = useLanguage()
 
