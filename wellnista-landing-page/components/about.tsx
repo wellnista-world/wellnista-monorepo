@@ -35,7 +35,7 @@ export function About() {
             <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl ring-1 ring-border/50">
               <img
                 src="/serene-wellness-meditation-in-thai-forest.jpg"
-                alt="Wellness in Nature"
+                alt="Wellness and Meditation in Thai Forest - Sound Healing and Longevity Retreat"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />

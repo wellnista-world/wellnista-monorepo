@@ -6,6 +6,17 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
+export const metadata = {
+  title: "Pilates Wellness Retreat Thailand - Mindful Movement & Longevity Fitness | Wellnista",
+  description: "Experience Pilates in nature at our Thailand wellness retreat. Build core strength, improve flexibility, and enhance longevity through mindful movement. Expert-led Pilates classes in serene natural settings for optimal wellness and fitness.",
+  keywords: "Pilates Thailand, wellness Pilates retreat, mindful movement Thailand, Pilates longevity, core strength wellness, flexibility training Thailand, Pilates nature retreat, holistic fitness Thailand",
+  openGraph: {
+    title: "Pilates Wellness Retreat Thailand - Movement & Longevity",
+    description: "Transform your body and mind with Pilates in Thailand's natural setting. Core strength, flexibility, and wellness for longevity.",
+    images: [{ url: "/pilates-class-in-nature-wellness-retreat.jpg", width: 1200, height: 630, alt: "Pilates Wellness Retreat in Nature Thailand" }],
+  },
+}
+
 export default function PilatesPage() {
   const { t } = useLanguage()
 

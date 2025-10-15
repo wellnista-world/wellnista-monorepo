@@ -8,27 +8,27 @@
   },
   "hero": {
     "title": "Wellnista",
-    "subtitle": "Design Your Happier Wellness Life",
-    "description": "Promote well-being through natural and evidence-based approaches",
-    "cta": "Explore Our Programs"
+    "subtitle": "Design Your Happier Wellness Life Through Forest Bathing & Sound Healing",
+    "description": "Promote longevity and well-being through natural, evidence-based wellness approaches including forest bathing (Shinrin-yoku) and therapeutic sound healing in Thailand",
+    "cta": "Explore Our Wellness Programs"
   },
   "about": {
     "title": "What is Wellnista?",
-    "mission": "Our Mission",
-    "missionText": "To promote well-being through natural and evidence-based approaches, creating harmony between people and nature through Thai wellness tourism.",
-    "vision": "Our Vision",
-    "visionText": "To be a leading wellness destination in Thailand, offering transformative experiences that nurture body, mind, and spirit through the healing power of nature."
+    "mission": "Our Wellness & Longevity Mission",
+    "missionText": "To promote longevity and well-being through natural, evidence-based approaches including forest bathing and sound healing. Creating harmony between people and nature through transformative Thai wellness tourism experiences.",
+    "vision": "Our Wellness Vision",
+    "visionText": "To be Thailand's leading wellness and longevity destination, offering transformative forest bathing, sound healing, and holistic experiences that nurture body, mind, and spirit through the healing power of nature."
   },
   "activities": {
-    "title": "Thailand Forest Bathing Experience",
-    "subtitle": "Discover our holistic wellness activities",
+    "title": "Thailand Forest Bathing & Sound Healing Experience",
+    "subtitle": "Discover our holistic wellness and longevity activities",
     "forestBathing": {
-      "title": "Forest Bathing",
-      "description": "Immerse yourself in nature's healing embrace through guided forest therapy sessions"
+      "title": "Forest Bathing (Shinrin-yoku)",
+      "description": "Immerse yourself in nature's healing embrace through guided forest bathing therapy sessions for wellness and longevity"
     },
     "soundHealing": {
-      "title": "Sound Healing",
-      "description": "Experience deep relaxation through therapeutic sound vibrations and meditation"
+      "title": "Sound Healing Therapy",
+      "description": "Experience deep relaxation and longevity through therapeutic sound healing vibrations and meditation"
     },
     "sleepPillows": {
       "title": "Sleep Pillows Workshop",
@@ -44,29 +44,29 @@
     }
   },
   "services": {
-    "title": "Our Services",
-    "forestBathing": "Forest Bathing",
-    "forestBathingDescription": "Connect with nature through guided forest therapy sessions that reduce stress and enhance well-being",
-    "soundHealing": "Sound Healing",
-    "soundHealingDescription": "Experience deep relaxation and healing through therapeutic sound vibrations and meditation practices",
-    "wellnessCooking": "Wellness Cooking",
-    "wellnessCookingDescription": "Learn to prepare nutritious Thai wellness cuisine using fresh, local, and organic ingredients",
-    "pilates": "Pilates",
-    "pilatesDescription": "Strengthen your core and improve flexibility through mindful movement and breath work",
-    "herbalWorkshops": "Herbal Workshops",
-    "herbalWorkshopsDescription": "Discover the healing properties of Thai herbs and create your own natural wellness products",
+    "title": "Our Wellness & Longevity Services",
+    "forestBathing": "Forest Bathing (Shinrin-yoku)",
+    "forestBathingDescription": "Connect with nature through guided forest bathing therapy sessions that reduce stress, boost immunity, and enhance longevity wellness",
+    "soundHealing": "Sound Healing Therapy",
+    "soundHealingDescription": "Experience deep relaxation, longevity, and healing through therapeutic sound healing vibrations and meditation practices",
+    "wellnessCooking": "Wellness Cooking for Longevity",
+    "wellnessCookingDescription": "Learn to prepare nutritious Thai wellness cuisine for longevity using fresh, local, and organic ingredients",
+    "pilates": "Pilates & Mindful Movement",
+    "pilatesDescription": "Strengthen your core, improve flexibility, and enhance longevity through mindful Pilates movement and breath work",
+    "herbalWorkshops": "Thai Herbal Medicine Workshops",
+    "herbalWorkshopsDescription": "Discover the healing properties of traditional Thai herbs and create your own natural wellness and longevity products",
     "learnMore": "Learn More"
   },
   "programs": {
-    "title": "Featured Program",
-    "khaoyai": "Thailand Forest Bathing - Khao Yai Camp",
-    "location": "Khao Yai National Park",
-    "description": "Experience the ultimate wellness retreat in the lush forests of Khao Yai National Park",
-    "forestBathing": "Guided forest bathing sessions with certified instructors",
-    "soundHealing": "Therapeutic sound healing experiences",
-    "wellnessCooking": "Organic wellness cooking workshops",
-    "herbalMedicineAndPilates": "Herbal medicine and Pilates sessions",
-    "viewPackages": "View Packages"
+    "title": "Featured Wellness & Longevity Program",
+    "khaoyai": "Thailand Forest Bathing & Sound Healing - Khao Yai Wellness Retreat",
+    "location": "Khao Yai National Park, Thailand",
+    "description": "Experience the ultimate forest bathing and sound healing wellness retreat for longevity in the lush forests of Khao Yai National Park",
+    "forestBathing": "Guided forest bathing (Shinrin-yoku) sessions with certified wellness instructors",
+    "soundHealing": "Therapeutic sound healing experiences for longevity and relaxation",
+    "wellnessCooking": "Organic wellness cooking workshops for longevity nutrition",
+    "herbalMedicineAndPilates": "Thai herbal medicine workshops and Pilates longevity sessions",
+    "viewPackages": "View Wellness Packages"
   },
   "packages": {
     "title": "Choose Your Package",
@@ -113,15 +113,15 @@
     "location": "Location"
   },
   "footer": {
-    "tagline": "Design your happier wellness life through natural and evidence-based approaches.",
-    "services": "Services",
-    "values": "Brand Values",
-    "wellness": "Wellness",
-    "nature": "Nature",
-    "science": "Science",
-    "calmness": "Calmness",
-    "longevity": "Longevity",
+    "tagline": "Design your happier wellness life through forest bathing, sound healing, and natural evidence-based longevity approaches.",
+    "services": "Wellness Services",
+    "values": "Wellness Values",
+    "wellness": "Wellness & Longevity",
+    "nature": "Nature Healing",
+    "science": "Evidence-Based Science",
+    "calmness": "Mindful Calmness",
+    "longevity": "Longevity & Health",
     "rights": "All rights reserved.",
-    "description": "Promoting harmony between people and nature through Thai wellness tourism."
+    "description": "Promoting harmony, longevity, and wellness between people and nature through Thai forest bathing, sound healing, and wellness tourism."
   }
 }

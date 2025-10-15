@@ -6,6 +6,17 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
+export const metadata = {
+  title: "Thai Wellness Cooking Workshop - Longevity Nutrition & Healthy Thai Cuisine | Wellnista",
+  description: "Learn authentic Thai wellness cooking for longevity and optimal health. Hands-on workshops teaching nutritious Thai recipes, healing herbs, and wellness nutrition. Expert chefs guide you through traditional Thai cooking for natural health and longevity.",
+  keywords: "Thai wellness cooking, longevity nutrition workshop, healthy Thai cuisine, Thai herbal cooking, wellness food Thailand, nutritious Thai recipes, cooking for longevity, Thai wellness food, healthy cooking workshop Thailand",
+  openGraph: {
+    title: "Thai Wellness Cooking Workshop - Longevity & Healthy Nutrition",
+    description: "Master Thai wellness cuisine for longevity. Learn nutritious recipes, healing herbs, and cooking techniques for optimal health.",
+    images: [{ url: "/thai-wellness-cooking-workshop-healthy-food.jpg", width: 1200, height: 630, alt: "Thai Wellness Cooking Workshop for Longevity and Health" }],
+  },
+}
+
 export default function WellnessCookingPage() {
   const { t } = useLanguage()
 

@@ -6,6 +6,17 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
+export const metadata = {
+  title: "Sound Healing Therapy Thailand - Therapeutic Sound Bath & Wellness | Wellnista Longevity",
+  description: "Experience transformative sound healing therapy in Thailand. Singing bowl meditation, therapeutic sound baths, and vibrational healing for stress relief, emotional healing, longevity, and deep wellness. Expert sound healing practitioners in Khao Yai.",
+  keywords: "sound healing Thailand, sound therapy retreat, singing bowl meditation, therapeutic sound bath, vibrational healing, sound healing longevity, wellness sound therapy, chakra balancing Thailand, sound meditation retreat, healing frequencies",
+  openGraph: {
+    title: "Sound Healing Therapy & Sound Bath Thailand - Wellness & Longevity",
+    description: "Transform your well-being with therapeutic sound healing. Deep relaxation, stress relief, and longevity through ancient sound therapy practices.",
+    images: [{ url: "/serene-wellness-meditation-in-thai-forest.jpg", width: 1200, height: 630, alt: "Sound Healing Therapy Thailand Wellness Longevity" }],
+  },
+}
+
 export default function SoundHealingPage() {
   const { t } = useLanguage()
 
@@ -20,7 +31,7 @@ export default function SoundHealingPage() {
           <div className="mb-12 rounded-2xl overflow-hidden">
             <img
               src="/serene-wellness-meditation-in-thai-forest.jpg"
-              alt="Sound Healing"
+              alt="Sound Healing Therapy and Sound Bath Meditation in Thailand - Wellness and Longevity Experience"
               className="w-full h-[400px] object-cover"
             />
           </div>
@@ -28,28 +39,30 @@ export default function SoundHealingPage() {
           <div className="prose prose-lg max-w-none">
             <p className="text-xl text-foreground/80 leading-relaxed mb-6">{t.activities.soundHealing.description}</p>
 
-            <h2 className="font-serif text-3xl text-primary mt-12 mb-4">About Sound Healing</h2>
+            <h2 className="font-serif text-3xl text-primary mt-12 mb-4">About Sound Healing Therapy & Wellness</h2>
             <p className="text-foreground/80 leading-relaxed">
-              Sound healing is an ancient practice that uses vibrational sound to help reduce stress, alter
-              consciousness, and create a deep sense of peace and well-being. We use singing bowls, gongs, chimes, and
-              other therapeutic instruments to create a meditative soundscape.
+              Sound healing therapy is an ancient wellness practice that uses therapeutic vibrational sound to reduce stress, promote longevity,
+              alter consciousness, and create a deep sense of peace and well-being. We use traditional singing bowls, therapeutic gongs, healing chimes, and
+              other sacred instruments to create transformative meditative soundscapes for optimal wellness and longevity.
             </p>
 
-            <h2 className="font-serif text-3xl text-primary mt-12 mb-4">Benefits</h2>
+            <h2 className="font-serif text-3xl text-primary mt-12 mb-4">Sound Healing Benefits for Longevity & Wellness</h2>
             <ul className="space-y-3 text-foreground/80">
-              <li>Deep relaxation and stress relief</li>
-              <li>Improved sleep quality</li>
-              <li>Enhanced mental clarity and focus</li>
-              <li>Emotional release and healing</li>
-              <li>Reduced anxiety and depression</li>
-              <li>Balanced energy and chakras</li>
+              <li>Deep relaxation and therapeutic stress relief</li>
+              <li>Improved sleep quality and restoration for longevity</li>
+              <li>Enhanced mental clarity, focus, and cognitive wellness</li>
+              <li>Emotional release and deep healing</li>
+              <li>Reduced anxiety, depression, and mental stress</li>
+              <li>Balanced energy, chakras, and vibrational wellness</li>
+              <li>Supports cardiovascular health and longevity</li>
+              <li>Promotes cellular regeneration through healing frequencies</li>
             </ul>
 
-            <h2 className="font-serif text-3xl text-primary mt-12 mb-4">The Experience</h2>
+            <h2 className="font-serif text-3xl text-primary mt-12 mb-4">The Sound Healing Experience</h2>
             <p className="text-foreground/80 leading-relaxed">
-              During a sound healing session, you'll lie comfortably while our practitioners create therapeutic
-              soundscapes using traditional instruments. The vibrations wash over you, promoting deep relaxation and
-              healing. Sessions last 60-90 minutes and are suitable for everyone.
+              During a transformative sound healing therapy session, you'll lie comfortably in Thailand's serene natural setting while our expert practitioners create therapeutic
+              soundscapes using traditional healing instruments. The therapeutic vibrations wash over you, promoting deep relaxation, wellness, and
+              longevity healing. Sessions last 60-90 minutes and are suitable for everyone seeking natural wellness and stress relief.
             </p>
           </div>
 

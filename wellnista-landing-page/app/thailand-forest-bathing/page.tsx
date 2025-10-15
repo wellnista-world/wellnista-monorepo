@@ -8,6 +8,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Check } from "lucide-react"
 import Link from "next/link"
 
+export const metadata = {
+  title: "Thailand Forest Bathing Khao Yai Retreat - Wellness & Longevity Program | Wellnista",
+  description: "Experience the ultimate forest bathing wellness retreat in Khao Yai National Park, Thailand. Complete longevity programs featuring Shinrin-yoku, sound healing, wellness cooking, Pilates, and herbal medicine. Corporate, family, and individual wellness packages available.",
+  keywords: "Thailand forest bathing retreat, Khao Yai wellness program, forest bathing Khao Yai, wellness longevity retreat Thailand, Shinrin-yoku retreat, sound healing Khao Yai, corporate wellness Thailand, family wellness retreat, longevity program Thailand",
+  openGraph: {
+    title: "Thailand Forest Bathing Khao Yai - Ultimate Wellness & Longevity Retreat",
+    description: "Transform your health at Khao Yai's premier forest bathing wellness retreat. Complete longevity programs with forest therapy, sound healing, and more.",
+    images: [{ url: "/khao-yai-national-park-forest-wellness-retreat.jpg", width: 1200, height: 630, alt: "Thailand Forest Bathing Wellness Retreat Khao Yai National Park" }],
+  },
+}
+
 export default function ThailandForestBathingPage() {
   const { t } = useLanguage()
 
@@ -47,7 +58,7 @@ export default function ThailandForestBathingPage() {
           <div className="mb-16 rounded-2xl overflow-hidden">
             <img
               src="/khao-yai-national-park-forest-wellness-retreat.jpg"
-              alt="Khao Yai Forest Bathing"
+              alt="Thailand Forest Bathing Wellness Retreat Khao Yai National Park - Longevity and Natural Healing Program"
               className="w-full h-[400px] object-cover"
             />
           </div>

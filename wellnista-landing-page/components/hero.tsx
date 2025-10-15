@@ -34,7 +34,7 @@ export function Hero() {
           <div className="relative w-full max-w-4xl mx-auto aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-border/50">
             <img
               src="/peaceful-forest-bathing-scene-in-thailand.jpg"
-              alt="Forest Bathing in Thailand"
+              alt="Forest Bathing Shinrin-yoku Wellness Retreat in Thailand - Natural Healing and Longevity Experience"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />

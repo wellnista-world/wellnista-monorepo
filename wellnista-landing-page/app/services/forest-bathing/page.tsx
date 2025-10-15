@@ -6,6 +6,17 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
+export const metadata = {
+  title: "Forest Bathing Thailand - Shinrin-yoku Therapy Khao Yai | Wellnista Longevity Wellness",
+  description: "Experience authentic forest bathing (Shinrin-yoku) in Thailand's Khao Yai National Park. Evidence-based forest therapy reduces stress, boosts immunity, lowers blood pressure, and promotes longevity. Certified guides lead therapeutic nature immersion sessions.",
+  keywords: "forest bathing Thailand, Shinrin-yoku Thailand, forest therapy Khao Yai, wellness forest bathing, longevity forest therapy, immune boost forest, stress relief nature therapy, forest bathing benefits, therapeutic forest walks",
+  openGraph: {
+    title: "Forest Bathing Therapy Thailand - Natural Wellness & Longevity",
+    description: "Scientifically-proven forest bathing experiences in Khao Yai. Reduce stress, boost immunity, and enhance longevity through guided Shinrin-yoku therapy.",
+    images: [{ url: "/peaceful-forest-bathing-scene-in-thailand.jpg", width: 1200, height: 630, alt: "Forest Bathing Shinrin-yoku Therapy Thailand Khao Yai" }],
+  },
+}
+
 export default function ForestBathingPage() {
   const { t } = useLanguage()
 
@@ -20,7 +31,7 @@ export default function ForestBathingPage() {
           <div className="mb-12 rounded-2xl overflow-hidden">
             <img
               src="/peaceful-forest-bathing-scene-in-thailand.jpg"
-              alt="Forest Bathing"
+              alt="Forest Bathing Shinrin-yoku Therapy in Thailand - Natural Wellness and Longevity Experience"
               className="w-full h-[400px] object-cover"
             />
           </div>
@@ -28,21 +39,23 @@ export default function ForestBathingPage() {
           <div className="prose prose-lg max-w-none">
             <p className="text-xl text-foreground/80 leading-relaxed mb-6">{t.activities.forestBathing.description}</p>
 
-            <h2 className="font-serif text-3xl text-primary mt-12 mb-4">What is Forest Bathing?</h2>
+            <h2 className="font-serif text-3xl text-primary mt-12 mb-4">What is Forest Bathing & Shinrin-yoku?</h2>
             <p className="text-foreground/80 leading-relaxed">
-              Forest bathing, or Shinrin-yoku, is a therapeutic practice that originated in Japan. It involves immersing
-              yourself in the forest atmosphere through all your senses. This mindful practice has been scientifically
-              proven to reduce stress, lower blood pressure, and boost immune function.
+              Forest bathing, or Shinrin-yoku, is a therapeutic wellness practice that originated in Japan. It involves mindfully immersing
+              yourself in the forest atmosphere through all your senses. This evidence-based longevity practice has been scientifically
+              proven to reduce stress, lower blood pressure, boost immune function, and promote overall wellness and longevity. Experience authentic forest therapy in Thailand's pristine Khao Yai forests.
             </p>
 
-            <h2 className="font-serif text-3xl text-primary mt-12 mb-4">Benefits</h2>
+            <h2 className="font-serif text-3xl text-primary mt-12 mb-4">Forest Bathing Benefits for Longevity & Wellness</h2>
             <ul className="space-y-3 text-foreground/80">
-              <li>Reduces stress and anxiety levels</li>
+              <li>Reduces stress and anxiety levels naturally</li>
               <li>Improves mood and emotional well-being</li>
-              <li>Boosts immune system function</li>
+              <li>Boosts immune system function for longevity</li>
               <li>Lowers blood pressure and heart rate</li>
-              <li>Enhances creativity and focus</li>
-              <li>Promotes better sleep quality</li>
+              <li>Enhances creativity, focus, and mental clarity</li>
+              <li>Promotes better sleep quality and restoration</li>
+              <li>Increases NK cell activity for disease prevention</li>
+              <li>Supports cardiovascular health and longevity</li>
             </ul>
 
             <h2 className="font-serif text-3xl text-primary mt-12 mb-4">What to Expect</h2>
