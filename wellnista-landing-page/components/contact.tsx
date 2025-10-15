@@ -1,25 +1,10 @@
 "use client"
 
-import type React from "react"
-import { useState } from "react"
 import { useLanguage } from "@/lib/language-context"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Phone, Mail, Globe } from "lucide-react"
 
 export function Contact() {
   const { t } = useLanguage()
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  })
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
-  }
 
   return (
     <section id="contact" className="py-32 md:py-40 bg-secondary/20">
@@ -86,69 +71,27 @@ export function Contact() {
               </div>
             </div>
 
-            <div className="bg-card rounded-3xl p-10 shadow-lg ring-1 ring-border/50">
-              <form onSubmit={handleSubmit} className="space-y-7">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-foreground mb-3 uppercase tracking-wider"
-                  >
-                    {t.contact.name}
-                  </label>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder={t.contact.name}
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="bg-background border-border rounded-xl h-12 font-light"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-foreground mb-3 uppercase tracking-wider"
-                  >
-                    {t.contact.email}
-                  </label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder={t.contact.email}
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="bg-background border-border rounded-xl h-12 font-light"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium text-foreground mb-3 uppercase tracking-wider"
-                  >
-                    {t.contact.message}
-                  </label>
-                  <Textarea
-                    id="message"
-                    placeholder={t.contact.message}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="bg-background border-border min-h-[180px] rounded-xl font-light"
-                    required
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-full py-6 uppercase tracking-widest shadow-lg hover:shadow-xl transition-all"
+            <div className="bg-card rounded-3xl p-10 shadow-lg ring-1 ring-border/50 flex flex-col items-center justify-center text-center space-y-8">
+              <div className="space-y-4">
+                <h3 className="font-serif text-3xl font-light text-primary tracking-wide">Get in Touch</h3>
+                <p className="text-muted-foreground font-light max-w-md">
+                  Ready to begin your wellness journey? Send us an email and we'll get back to you within 24 hours.
+                </p>
+              </div>
+              
+              <div className="space-y-4">
+                <a
+                  href="mailto:apicha.pinsakul@wellnista.world?subject=Wellness Program Inquiry&body=Hello Wellnista Team,%0D%0A%0D%0AI am interested in your wellness programs and would like to learn more about:%0D%0A%0D%0A- Forest Bathing Sessions%0D%0A- Sound Healing Therapy%0D%0A- Wellness Cooking Workshops%0D%0A- Pilates Classes%0D%0A- Herbal Medicine Workshops%0D%0A%0D%0APlease provide more information about:%0D%0A%0D%0A%0D%0AThank you!"
+                  className="inline-flex items-center gap-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-12 py-6 uppercase tracking-widest shadow-lg hover:shadow-xl transition-all font-medium"
                 >
+                  <Mail className="w-5 h-5" />
                   {t.contact.send}
-                </Button>
-              </form>
+                </a>
+                
+                <p className="text-sm text-muted-foreground font-light">
+                  Or call us directly at <a href="tel:+66918566163" className="text-primary hover:underline">+66 (0)91-856-6163</a>
+                </p>
+              </div>
             </div>
           </div>
         </div>
