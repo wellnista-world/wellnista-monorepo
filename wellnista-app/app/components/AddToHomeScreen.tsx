@@ -67,7 +67,7 @@ export default function AddToHomeScreen() {
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-lg z-50 animate-slide-up">
       <div className="flex items-center justify-between mb-2">
-        <h3 className="text-lg font-semibold text-primary">{t('addToHomeScreen.title')}</h3>
+        <h3 className="text-lg font-semibold text-primary">{t('common.addToHomeScreen.title')}</h3>
         <button
           onClick={handleDismiss}
           className="p-1 hover:bg-gray-100 rounded-full"
@@ -77,20 +77,20 @@ export default function AddToHomeScreen() {
         </button>
       </div>
       <p className="text-sm text-gray-600 mb-4">
-        {t('addToHomeScreen.description')}
+        {t('common.addToHomeScreen.description')}
       </p>
       <div className="flex gap-2">
         <button
           onClick={handleInstall}
           className="flex-1 bg-primary text-white py-2 px-4 rounded-lg font-semibold hover:opacity-90 transition"
         >
-          {t('addToHomeScreen.install')}
+          {t('common.addToHomeScreen.install')}
         </button>
         <button
           onClick={handleDismiss}
           className="flex-1 border border-gray-300 text-gray-600 py-2 px-4 rounded-lg font-semibold hover:bg-gray-50 transition"
         >
-          {t('addToHomeScreen.notNow')}
+          {t('common.addToHomeScreen.notNow')}
         </button>
       </div>
     </div>

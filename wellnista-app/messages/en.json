@@ -26,8 +26,8 @@
     "warning": "Warning",
     "info": "Information",
     "addToHomeScreen": {
-      "title": "Install Wellnista",
-      "description": "Add Wellnista to your home screen for faster access and easier use",
+      "title": "Install NubSook",
+      "description": "Add NubSook to your home screen for faster access and easier use",
       "install": "Install",
       "notNow": "Not now"
     },
@@ -100,9 +100,9 @@
     "needMore": "Need more points"
   },
   "auth": {
-    "welcome": "Welcome to wellnista",
-    "wellnista": "Wellnista",
-    "wellnistaBrand": "Wellnista",
+    "welcome": "Welcome to NubSook",
+    "wellnista": "NubSook",
+    "wellnistaBrand": "NubSook",
     "tagline": "Sustain Your Healthy Lifestyle-Easily, Every day",
     "login": "Login",
     "logout": "Log out",
@@ -111,7 +111,7 @@
     "phoneNumber": "Telephone number",
     "password": "Password",
     "welcomeUser": "Hello, {phone}",
-    "welcomeBack": "Welcome back to Wellnista",
+    "welcomeBack": "Welcome back to NubSook",
     "signup": "Sign Up",
     "signupTitle": "Create Account",
     "signupSubtitle": "Register with your phone number and password",
@@ -384,7 +384,7 @@
     "recordSaved": "Record saved successfully!"
   },
   "dailyPopup": {
-    "title": "Welcome to Wellnista!",
+    "title": "Welcome to NubSook!",
     "message": "Start your healthy journey today. Track your nutrition, monitor your health, and make better choices for a healthier lifestyle.",
     "later": "Later",
     "gotIt": "Got it!"
@@ -417,8 +417,8 @@
     }
   },
   "menu": {
-    "title": "Wellnista",
-    "welcome": "Welcome to Wellnista",
+    "title": "NubSook",
+    "welcome": "Welcome to NubSook",
     "chooseAction": "Choose your action below to get started",
     "checkNutrition": "Check food nutrition",
     "scanBarcode": "Scan Barcode",
@@ -450,7 +450,7 @@
     "healthBenefits": "Health Benefits",
     "dietaryConsiderations": "Dietary Considerations",
     "diseaseSpecificFood": "Disease-specific food for your loved ones",
-    "wellnistaMarket": "Wellnista Market",
+    "wellnistaMarket": "NubSook Market",
     "browseMarket": "Browse Market",
     "pork": "Pork",
     "chicken": "Chicken",
@@ -466,8 +466,8 @@
     "specializedFood": "Specialized food for diabetes",
     "contactLine": "Contact LINE",
     "carbLogging": "Carb logging is easier than you think. It helps prevent non-communicable chronic diseases.",
-    "wellnistaMarket": "Wellnista Market",
-    "wellnistaLibrary": "Wellnista Library",
+    "wellnistaMarket": "NubSook Market",
+    "wellnistaLibrary": "NubSook Library",
     "recommendedProducts": "Recommended Products",
     "recommendedProduct": "Recommended Product",
     "viewProduct": "View Product",
@@ -507,7 +507,7 @@
     "version": "Version",
     "developer": "Developer",
     "installApp": "Install App",
-    "installAppDescription": "Add Wellnista to your home screen for faster access and offline use",
+    "installAppDescription": "Add NubSook to your home screen for faster access and offline use",
     "installAppButton": "Install to Home Screen",
     "appInstalled": "App is already installed",
     "installAppSuccess": "App installed successfully!",

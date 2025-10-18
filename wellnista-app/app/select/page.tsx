@@ -4,6 +4,7 @@ import Link from "next/link";
 import Typography from '@mui/material/Typography';
 import { Barcode, Camera } from 'lucide-react';
 import { useI18n } from '../../i18n';
+import { getAppName } from '../../config/app';
 
 export default function SelectScreen() {
   const { t } = useI18n();
@@ -31,7 +32,7 @@ export default function SelectScreen() {
           {t('menu.welcomeTo')}
         </Typography>
         <Typography className="!text-3xl font-bold text-primary mb-4">
-          Wellnista
+          {getAppName()}
         </Typography>
         <Typography className="!text-sm text-neutral/70">
           {t('menu.chooseAction')}

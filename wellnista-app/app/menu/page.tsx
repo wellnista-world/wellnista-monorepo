@@ -8,6 +8,7 @@ import { UserData } from '../lib/types/user';
 import { MenuRecommendation } from '../lib/api/menu-recommendation';
 import { useI18n } from '../../i18n';
 import Typography from '@mui/material/Typography';
+import { getAppName } from '../../config/app';
 import CircularProgress from '@mui/material/CircularProgress';
 import Chip from '@mui/material/Chip';
 import { 
@@ -325,7 +326,7 @@ export default function MenuScreen() {
           {t('menu.whatToEat')}
         </Typography>
         <Typography variant="h6" className="text-accent">
-          Wellnista
+          {getAppName()}
         </Typography>
       </div>
 

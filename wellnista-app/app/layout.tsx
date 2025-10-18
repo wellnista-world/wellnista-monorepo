@@ -13,6 +13,7 @@ import { CartProvider } from './lib/context/CartContext';
 import { CoinProvider } from './lib/context/CoinContext';
 import TabBar from './components/TabBar';
 import CoinDisplay from './components/CoinDisplay';
+import { getAppName } from '../config/app';
 
 //import { Kanit } from "next/font/google";
 //import { Leckerli_One } from "next/font/google";
@@ -47,6 +48,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <link rel="manifest" href="/manifest.json" />
           <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
           <link rel="icon" href="/icons/icon-192x192.png" />
+          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="icon" type="image/x-icon" href="/favicon.ico" />
           {/* Google Analytics */}
           <Script
             src="https://www.googletagmanager.com/gtag/js?id=G-QTTCWH3PP4"
@@ -88,6 +91,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <link rel="manifest" href="/manifest.json" />
           <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
           <link rel="icon" href="/icons/icon-192x192.png" />
+          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="icon" type="image/x-icon" href="/favicon.ico" />
           {/* Google Analytics */}
           <Script
             src="https://www.googletagmanager.com/gtag/js?id=G-QTTCWH3PP4"
@@ -176,7 +181,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
                         {/* Center - Logo */}
                         <div className="flex-1 flex justify-center">
-                          <h1 className="text-2xl leckerli-one-regular text-secondary">Wellnista</h1>
+                          <h1 className="text-2xl leckerli-one-regular text-secondary">{getAppName()}</h1>
                         </div>
 
                         {/* Right side - Coin display */}

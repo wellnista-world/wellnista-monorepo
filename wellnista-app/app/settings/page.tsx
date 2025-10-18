@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useI18n } from '../../i18n';
 import { Typography, Box, Divider, Button, Alert } from '@mui/material';
+import { getAppName } from '../../config/app';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 import { Download, CheckCircle } from 'lucide-react';
 
@@ -184,7 +185,7 @@ export default function SettingsPage() {
             {t('settings.version')}: 1.2.0
           </Typography>
           <Typography variant="body2" className="text-gray-600">
-            {t('settings.developer')}: Wellnista Team
+            {t('settings.developer')}: {getAppName()} Team
           </Typography>
         </Box>
       </Box>

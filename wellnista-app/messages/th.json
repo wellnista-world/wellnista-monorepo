@@ -26,8 +26,8 @@
     "warning": "คำเตือน",
     "info": "ข้อมูล",
     "addToHomeScreen": {
-      "title": "ติดตั้ง Wellnista",
-      "description": "เพิ่ม Wellnista ลงในหน้าจอหลักเพื่อการเข้าถึงที่เร็วขึ้นและใช้งานง่ายขึ้น",
+      "title": "ติดตั้ง NubSook",
+      "description": "เพิ่ม NubSook ลงในหน้าจอหลักเพื่อการเข้าถึงที่เร็วขึ้นและใช้งานง่ายขึ้น",
       "install": "ติดตั้ง",
       "notNow": "ไม่ใช่ตอนนี้"
     },
@@ -90,9 +90,9 @@
     "needMore": "ต้องการแต้มเพิ่มเติม"
   },
   "auth": {
-    "welcome": "ยินดีต้อนรับสู่ wellnista",
-    "wellnista": "Wellnista",
-    "wellnistaBrand": "Wellnista",
+    "welcome": "ยินดีต้อนรับสู่ NubSook",
+    "wellnista": "NubSook",
+    "wellnistaBrand": "NubSook",
     "tagline": "รักษาสุขภาพให้ยั่งยืน - ง่ายๆ ทุกวัน",
     "login": "เข้าสู่ระบบ",
     "logout": "ออกจากระบบ",
@@ -101,7 +101,7 @@
     "phoneNumber": "หมายเลขโทรศัพท์",
     "password": "รหัสผ่าน",
     "welcomeUser": "สวัสดี, {phone}",
-    "welcomeBack": "ยินดีต้อนรับกลับสู่ Wellnista",
+    "welcomeBack": "ยินดีต้อนรับกลับสู่ NubSook",
     "signup": "สมัครสมาชิก",
     "signupTitle": "สร้างบัญชี",
     "signupSubtitle": "ลงทะเบียนด้วยหมายเลขโทรศัพท์และรหัสผ่าน",
@@ -374,7 +374,7 @@
     "recordSaved": "บันทึกข้อมูลสำเร็จ!"
   },
   "dailyPopup": {
-    "title": "ยินดีต้อนรับสู่ Wellnista!",
+    "title": "ยินดีต้อนรับสู่ NubSook!",
     "message": "เริ่มต้นการเดินทางเพื่อสุขภาพของคุณวันนี้ ติดตามโภชนาการ ตรวจสอบสุขภาพ และเลือกสิ่งที่ดีกว่าเพื่อวิถีชีวิตที่แข็งแรง",
     "later": "ภายหลัง",
     "gotIt": "เข้าใจแล้ว!"
@@ -408,8 +408,8 @@
     "medicines": "ยา"
   },
   "menu": {
-    "title": "Wellnista",
-    "welcome": "ยินดีต้อนรับเข้าสู่ Wellnista",
+    "title": "NubSook",
+    "welcome": "ยินดีต้อนรับเข้าสู่ NubSook",
     "chooseAction": "เลือกการดำเนินการด้านล่างเพื่อเริ่มต้น",
     "checkNutrition": "ตรวจสอบโภชนาการอาหาร",
     "scanBarcode": "สแกน บาร์โค้ด",
@@ -441,7 +441,7 @@
     "healthBenefits": "ประโยชน์ต่อสุขภาพ",
     "dietaryConsiderations": "ข้อควรระวัง",
     "diseaseSpecificFood": "อาหารเฉพาะโรคเพื่อคนที่คุณรัก",
-    "wellnistaMarket": "Wellnista Market",
+    "wellnistaMarket": "NubSook Market",
     "browseMarket": "ดูตลาด",
     "pork": "หมู",
     "chicken": "ไก่",
@@ -456,8 +456,8 @@
     "mentalHealthTracking": "บันทึกสุขภาพจิต",
     "specializedFood": "อาหารเฉพาะสำหรับผู้ป่วยเบาหวาน",
     "carbLogging": "การบันทึกคาร์บง่ายกว่าที่คิด ช่วยป้องกันโรคไม่ติดต่อเรื้อรัง",
-    "wellnistaMarket": "Wellnista Market",
-    "wellnistaLibrary": "Wellnista Library",
+    "wellnistaMarket": "NubSook Market",
+    "wellnistaLibrary": "NubSook Library",
     "recommendedProducts": "สินค้าแนะนำ",
     "recommendedProduct": "สินค้าแนะนำ",
     "viewProduct": "ดูสินค้า",
@@ -496,7 +496,7 @@
     "version": "เวอร์ชัน",
     "developer": "ผู้พัฒนา",
     "installApp": "ติดตั้งแอป",
-    "installAppDescription": "เพิ่ม Wellnista ลงในหน้าจอหลักของคุณเพื่อเข้าถึงได้เร็วขึ้นและใช้งานแบบออฟไลน์",
+    "installAppDescription": "เพิ่ม NubSook ลงในหน้าจอหลักของคุณเพื่อเข้าถึงได้เร็วขึ้นและใช้งานแบบออฟไลน์",
     "installAppButton": "ติดตั้งลงหน้าจอหลัก",
     "appInstalled": "แอปได้รับการติดตั้งแล้ว",
     "installAppSuccess": "ติดตั้งแอปสำเร็จ!",

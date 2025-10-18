@@ -1,6 +1,6 @@
 # Configuration Files
 
-This directory contains configuration files for the Wellnista app.
+This directory contains configuration files for the NubSook app.
 
 ## Feature Flags (`featureFlags.ts`)
 
@@ -51,7 +51,7 @@ if (isBmiTrackingEnabled()) {
 #### Market
 - **Flag**: `market.enabled`
 - **Helper**: `isMarketEnabled()`
-- **Description**: Controls the Wellnista Market features
+- **Description**: Controls the NubSook Market features
 
 #### Profile
 - **Flag**: `profile.enabled`

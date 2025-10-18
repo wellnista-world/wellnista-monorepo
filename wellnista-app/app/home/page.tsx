@@ -193,7 +193,7 @@ export default function HomeScreen() {
         />
       </div>
 
-      {/* Wellnista Market - Top Section */}
+      {/* NubSook Market - Top Section */}
       <div className="mb-8">
         <div
           onClick={() => router.push("/product")}

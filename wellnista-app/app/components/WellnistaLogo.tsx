@@ -1,19 +1,18 @@
 import { Typography } from '@mui/material';
+import { getAppName } from '../../config/app';
 
-
-
-interface WellnistaLogoProps {
+interface AppLogoProps {
   variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   className?: string;
 }
 
-export default function WellnistaLogo({ variant = 'h4', className = '' }: WellnistaLogoProps) {
+export default function AppLogo({ variant = 'h4', className = '' }: AppLogoProps) {
   return (
     <Typography
       variant={variant}
       className={`leckerli-one-regular text-center ${className}`}
     >
-      Wellnista
+      {getAppName()}
     </Typography>
   );
 } 

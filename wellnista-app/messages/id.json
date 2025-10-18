@@ -26,8 +26,8 @@
     "warning": "Peringatan",
     "info": "Informasi",
     "addToHomeScreen": {
-      "title": "Instal Wellnista",
-      "description": "Tambahkan Wellnista ke layar beranda untuk akses yang lebih cepat dan penggunaan yang lebih mudah",
+      "title": "Instal NubSook",
+      "description": "Tambahkan NubSook ke layar beranda untuk akses yang lebih cepat dan penggunaan yang lebih mudah",
       "install": "Instal",
       "notNow": "Tidak sekarang"
     },
@@ -86,8 +86,8 @@
   },
   "auth": {
     "welcome": "Selamat datang di wellnista",
-    "wellnista": "Wellnista",
-    "wellnistaBrand": "Wellnista",
+    "wellnista": "NubSook",
+    "wellnistaBrand": "NubSook",
     "tagline": "Pertahankan Gaya Hidup Sehat - Mudah, Setiap Hari",
     "login": "Masuk",
     "logout": "Keluar",
@@ -96,7 +96,7 @@
     "phoneNumber": "Nomor telepon",
     "password": "Kata sandi",
     "welcomeUser": "Halo, {phone}",
-    "welcomeBack": "Selamat datang kembali ke Wellnista",
+    "welcomeBack": "Selamat datang kembali ke NubSook",
     "signup": "Daftar",
     "signupTitle": "Buat Akun",
     "signupSubtitle": "Daftar dengan nomor telepon dan kata sandi",
@@ -322,7 +322,7 @@
     "unitBpm": "bpm"
   },
   "dailyPopup": {
-    "title": "Selamat datang di Wellnista!",
+    "title": "Selamat datang di NubSook!",
     "message": "Mulai perjalanan sehat Anda hari ini. Lacak nutrisi, pantau kesehatan, dan buat pilihan yang lebih baik untuk gaya hidup yang lebih sehat.",
     "later": "Nanti",
     "gotIt": "Mengerti!"
@@ -355,8 +355,8 @@
     }
   },
   "menu": {
-    "title": "Wellnista",
-    "welcome": "Selamat datang di Wellnista",
+    "title": "NubSook",
+    "welcome": "Selamat datang di NubSook",
     "chooseAction": "Pilih tindakan di bawah untuk memulai",
     "checkNutrition": "Periksa nutrisi makanan",
     "scanBarcode": "Pindai Barcode",
@@ -388,7 +388,7 @@
     "healthBenefits": "Manfaat Kesehatan",
     "dietaryConsiderations": "Pertimbangan Diet",
     "diseaseSpecificFood": "Makanan khusus penyakit untuk orang yang Anda cintai",
-    "wellnistaMarket": "Wellnista Market",
+    "wellnistaMarket": "NubSook Market",
     "browseMarket": "Jelajahi Pasar",
     "pork": "Babi",
     "chicken": "Ayam",
@@ -402,8 +402,8 @@
     "bloodPressureTracking": "Catatan Tekanan Darah",
     "specializedFood": "Makanan khusus untuk diabetes",
     "carbLogging": "Pencatatan karbohidrat lebih mudah dari yang Anda pikirkan. Ini membantu mencegah penyakit kronis non-menular.",
-    "wellnistaMarket": "Wellnista Market",
-    "wellnistaLibrary": "Wellnista Library",
+    "wellnistaMarket": "NubSook Market",
+    "wellnistaLibrary": "NubSook Library",
     "recommendedProducts": "Produk Rekomendasi",
     "recommendedProduct": "Produk Rekomendasi",
     "viewProduct": "Lihat Produk",
@@ -442,7 +442,7 @@
     "version": "Versi",
     "developer": "Pengembang",
     "installApp": "Instal Aplikasi",
-    "installAppDescription": "Tambahkan Wellnista ke layar utama Anda untuk akses yang lebih cepat dan penggunaan offline",
+    "installAppDescription": "Tambahkan NubSook ke layar utama Anda untuk akses yang lebih cepat dan penggunaan offline",
     "installAppButton": "Instal ke Layar Utama",
     "appInstalled": "Aplikasi sudah terinstal",
     "installAppSuccess": "Aplikasi berhasil diinstal!",

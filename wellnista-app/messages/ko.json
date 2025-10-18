@@ -26,8 +26,8 @@
     "warning": "경고",
     "info": "정보",
     "addToHomeScreen": {
-      "title": "Wellnista 설치",
-      "description": "Wellnista를 홈 화면에 추가하여 더 빠른 접근과 쉬운 사용을 제공합니다",
+      "title": "NubSook 설치",
+      "description": "NubSook를 홈 화면에 추가하여 더 빠른 접근과 쉬운 사용을 제공합니다",
       "install": "설치",
       "notNow": "나중에"
     },
@@ -97,8 +97,8 @@
   },
   "auth": {
     "welcome": "wellnista에 오신 것을 환영합니다",
-    "wellnista": "Wellnista",
-    "wellnistaBrand": "Wellnista",
+    "wellnista": "NubSook",
+    "wellnistaBrand": "NubSook",
     "tagline": "건강한 라이프스타일을 쉽게, 매일 유지하세요",
     "login": "로그인",
     "logout": "로그아웃",
@@ -107,7 +107,7 @@
     "phoneNumber": "전화번호",
     "password": "비밀번호",
     "welcomeUser": "안녕하세요, {phone}",
-    "welcomeBack": "Wellnista에 다시 오신 것을 환영합니다",
+    "welcomeBack": "NubSook에 다시 오신 것을 환영합니다",
     "signup": "가입하기",
     "signupTitle": "계정 만들기",
     "signupSubtitle": "전화번호와 비밀번호로 가입하세요",
@@ -333,7 +333,7 @@
     "unitBpm": "bpm"
   },
   "dailyPopup": {
-    "title": "Wellnista에 오신 것을 환영합니다!",
+    "title": "NubSook에 오신 것을 환영합니다!",
     "message": "오늘부터 건강한 여정을 시작하세요. 영양을 추적하고, 건강을 모니터링하며, 더 건강한 라이프스타일을 위한 더 나은 선택을 하세요.",
     "later": "나중에",
     "gotIt": "알겠습니다!"
@@ -366,8 +366,8 @@
     }
   },
   "menu": {
-    "title": "Wellnista",
-    "welcome": "Wellnista에 오신 것을 환영합니다",
+    "title": "NubSook",
+    "welcome": "NubSook에 오신 것을 환영합니다",
     "chooseAction": "아래 작업을 선택하여 시작하세요",
     "checkNutrition": "식품 영양 확인",
     "scanBarcode": "바코드 스캔",
@@ -399,7 +399,7 @@
     "healthBenefits": "건강 효과",
     "dietaryConsiderations": "식이 주의사항",
     "diseaseSpecificFood": "사랑하는 사람을 위한 질환 특화 식품",
-    "wellnistaMarket": "Wellnista 마켓",
+    "wellnistaMarket": "NubSook 마켓",
     "browseMarket": "마켓 둘러보기",
     "pork": "돼지고기",
     "chicken": "닭고기",
@@ -411,8 +411,8 @@
     "bloodSugarLog": "혈당 기록",
     "bmiTracking": "BMI 추적",
     "bloodPressureTracking": "혈압 기록",
-    "wellnistaMarket": "Wellnista Market",
-    "wellnistaLibrary": "Wellnista 라이브러리",
+    "wellnistaMarket": "NubSook Market",
+    "wellnistaLibrary": "NubSook 라이브러리",
     "specializedFood": "당뇨병 전용 식품",
     "contactLine": "LINE 문의",
     "carbLogging": "탄수화물 기록은 생각보다 쉽습니다. 만성 비감염성 질환 예방에 도움이 됩니다",
@@ -453,7 +453,7 @@
     "version": "버전",
     "developer": "개발자",
     "installApp": "앱 설치",
-    "installAppDescription": "Wellnista를 홈 화면에 추가하여 더 빠른 접근과 오프라인 사용을 경험하세요",
+    "installAppDescription": "NubSook를 홈 화면에 추가하여 더 빠른 접근과 오프라인 사용을 경험하세요",
     "installAppButton": "홈 화면에 설치",
     "appInstalled": "앱이 이미 설치되어 있습니다",
     "installAppSuccess": "앱 설치가 완료되었습니다!",

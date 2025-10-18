@@ -26,8 +26,8 @@
     "warning": "警告",
     "info": "情報",
     "addToHomeScreen": {
-      "title": "Wellnistaをインストール",
-      "description": "Wellnistaをホーム画面に追加して、より速くアクセスしやすくします",
+      "title": "NubSookをインストール",
+      "description": "NubSookをホーム画面に追加して、より速くアクセスしやすくします",
       "install": "インストール",
       "notNow": "今はしない"
     },
@@ -85,9 +85,9 @@
     "spent": "コインを使用しました！"
   },
   "auth": {
-    "welcome": "Wellnistaへようこそ",
-    "wellnista": "Wellnista",
-    "wellnistaBrand": "Wellnista",
+    "welcome": "NubSookへようこそ",
+    "wellnista": "NubSook",
+    "wellnistaBrand": "NubSook",
     "tagline": "健康的なライフスタイルを簡単に、毎日維持",
     "login": "ログイン",
     "logout": "ログアウト",
@@ -96,7 +96,7 @@
     "phoneNumber": "電話番号",
     "password": "パスワード",
     "welcomeUser": "こんにちは、{phone}",
-    "welcomeBack": "Wellnistaへようこそ",
+    "welcomeBack": "NubSookへようこそ",
     "signup": "サインアップ",
     "signupTitle": "アカウント作成",
     "signupSubtitle": "電話番号とパスワードで登録",
@@ -369,7 +369,7 @@
     "recordSaved": "記録が正常に保存されました！"
   },
   "dailyPopup": {
-    "title": "Wellnista へようこそ！",
+    "title": "NubSook へようこそ！",
     "message": "今日から健康的な旅を始めましょう。栄養を追跡し、健康を監視し、より健康的なライフスタイルのためのより良い選択をしましょう。",
     "later": "後で",
     "gotIt": "了解しました！"
@@ -402,8 +402,8 @@
     }
   },
   "menu": {
-    "title": "Wellnista",
-    "welcome": "Wellnistaへようこそ",
+    "title": "NubSook",
+    "welcome": "NubSookへようこそ",
     "chooseAction": "以下の操作を選択して開始",
     "checkNutrition": "食品栄養をチェック",
     "scanBarcode": "バーコードスキャン",
@@ -435,7 +435,7 @@
     "healthBenefits": "健康効果",
     "dietaryConsiderations": "食事の注意事項",
     "diseaseSpecificFood": "愛する人のための疾患特化食品",
-    "wellnistaMarket": "Wellnista マーケット",
+    "wellnistaMarket": "NubSook マーケット",
     "browseMarket": "マーケットを閲覧",
     "pork": "豚肉",
     "chicken": "鶏肉",
@@ -450,8 +450,8 @@
     "mentalHealthTracking": "メンタルヘルス記録",
     "specializedFood": "糖尿病専用食品",
     "carbLogging": "炭水化物の記録は思ったより簡単です。非感染性慢性疾患の予防に役立ちます。",
-    "wellnistaMarket": "Wellnista Market",
-    "wellnistaLibrary": "Wellnista ライブラリ",
+    "wellnistaMarket": "NubSook Market",
+    "wellnistaLibrary": "NubSook ライブラリ",
     "recommendedProducts": "おすすめ商品",
     "recommendedProduct": "おすすめ商品",
     "viewProduct": "商品を見る",
@@ -490,7 +490,7 @@
     "version": "バージョン",
     "developer": "開発者",
     "installApp": "アプリをインストール",
-    "installAppDescription": "Wellnista をホーム画面に追加して、より速いアクセスとオフライン使用を実現",
+    "installAppDescription": "NubSook をホーム画面に追加して、より速いアクセスとオフライン使用を実現",
     "installAppButton": "ホーム画面にインストール",
     "appInstalled": "アプリは既にインストールされています",
     "installAppSuccess": "アプリのインストールが完了しました！",

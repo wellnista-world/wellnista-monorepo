@@ -26,8 +26,8 @@
     "warning": "警告",
     "info": "信息",
     "addToHomeScreen": {
-      "title": "安装 Wellnista",
-      "description": "将 Wellnista 添加到主屏幕以便更快访问和更轻松使用",
+      "title": "安装 NubSook",
+      "description": "将 NubSook 添加到主屏幕以便更快访问和更轻松使用",
       "install": "安装",
       "notNow": "现在不安装"
     },
@@ -86,8 +86,8 @@
   },
   "auth": {
     "welcome": "欢迎来到 wellnista",
-    "wellnista": "Wellnista",
-    "wellnistaBrand": "Wellnista",
+    "wellnista": "NubSook",
+    "wellnistaBrand": "NubSook",
     "tagline": "轻松维持健康生活方式 - 每一天",
     "login": "登录",
     "logout": "登出",
@@ -96,7 +96,7 @@
     "phoneNumber": "电话号码",
     "password": "密码",
     "welcomeUser": "你好，{phone}",
-    "welcomeBack": "欢迎回到 Wellnista",
+    "welcomeBack": "欢迎回到 NubSook",
     "signup": "注册",
     "signupTitle": "创建账户",
     "signupSubtitle": "使用电话号码和密码注册",
@@ -322,7 +322,7 @@
     "unitBpm": "bpm"
   },
   "dailyPopup": {
-    "title": "欢迎使用 Wellnista！",
+    "title": "欢迎使用 NubSook！",
     "message": "今天开始您的健康之旅。跟踪营养，监测健康，为更健康的生活方式做出更好的选择。",
     "later": "稍后",
     "gotIt": "知道了！"
@@ -355,8 +355,8 @@
     }
   },
   "menu": {
-    "title": "Wellnista",
-    "welcome": "欢迎来到 Wellnista",
+    "title": "NubSook",
+    "welcome": "欢迎来到 NubSook",
     "chooseAction": "选择下面的操作开始",
     "checkNutrition": "检查食品营养",
     "scanBarcode": "扫描条形码",
@@ -388,7 +388,7 @@
     "healthBenefits": "健康益处",
     "dietaryConsiderations": "饮食注意事项",
     "diseaseSpecificFood": "为您所爱的人提供的疾病专用食品",
-    "wellnistaMarket": "Wellnista 市场",
+    "wellnistaMarket": "NubSook 市场",
     "browseMarket": "浏览市场",
     "pork": "猪肉",
     "chicken": "鸡肉",
@@ -400,8 +400,8 @@
     "bloodSugarLog": "血糖记录",
     "bmiTracking": "BMI 追踪",
     "bloodPressureTracking": "血压记录",
-    "wellnistaMarket": "Wellnista Market",
-    "wellnistaLibrary": "Wellnista 图书馆",
+    "wellnistaMarket": "NubSook Market",
+    "wellnistaLibrary": "NubSook 图书馆",
     "specializedFood": "糖尿病专用食品",
     "carbLogging": "碳水化合物记录比您想象的更容易。帮助预防慢性非传染性疾病",
     "recommendedProducts": "推荐产品",
@@ -442,7 +442,7 @@
     "version": "版本",
     "developer": "开发者",
     "installApp": "安装应用",
-    "installAppDescription": "将 Wellnista 添加到主屏幕以获得更快的访问和离线使用",
+    "installAppDescription": "将 NubSook 添加到主屏幕以获得更快的访问和离线使用",
     "installAppButton": "安装到主屏幕",
     "appInstalled": "应用已安装",
     "installAppSuccess": "应用安装成功！",

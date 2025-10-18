@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useRouter } from "next/navigation";
-import WellnistaLogo from "./components/WellnistaLogo";
+import AppLogo from "./components/WellnistaLogo";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import CountryCodeSelector from "./components/CountryCodeSelector";
 import { CountryCode, getDefaultCountry } from "../config/countryCodes";
@@ -96,7 +96,7 @@ export default function Home() {
           {t("auth.welcome")}
         </Typography>
         <Box className="flex justify-center mt-4">
-          <WellnistaLogo />
+          <AppLogo />
         </Box>
         <Typography className="text-xl font-bold text-primary mt-6">
           {t("auth.wellnistaBrand")}
