@@ -1,8 +1,13 @@
 import OpenAI from 'openai';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const getOpenAI = () => {
+  if (!process.env.OPENAI_API_KEY) {
+    throw new Error('OPENAI_API_KEY is not configured');
+  }
+  return new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+};
 
 export interface MentalHealthAnalysis {
   mental_score: number;
@@ -197,6 +202,7 @@ Catatan: Semua angka harus berupa angka, bukan string.`
     // Get the appropriate prompt for the selected language
     const systemPrompt = languagePrompts[language as keyof typeof languagePrompts] || languagePrompts['th'];
 
+    const openai = getOpenAI();
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
       messages: [

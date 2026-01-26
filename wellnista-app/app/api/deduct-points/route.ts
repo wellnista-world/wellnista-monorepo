@@ -2,9 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '../../lib/api/supabaseClient';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-05-28.basil',
-});
+const getStripe = () => {
+  if (!process.env.STRIPE_SECRET_KEY) {
+    throw new Error('STRIPE_SECRET_KEY is not configured');
+  }
+  return new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: '2025-08-27.basil',
+  });
+};
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,6 +23,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Retrieve the checkout session from Stripe
+    const stripe = getStripe();
     const session = await stripe.checkout.sessions.retrieve(sessionId);
 
     if (!session || session.payment_status !== 'paid') {

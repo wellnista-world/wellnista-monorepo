@@ -1,9 +1,14 @@
 import OpenAI from 'openai';
 import { NutritionalInfo } from './image-analyze';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const getOpenAI = () => {
+  if (!process.env.OPENAI_API_KEY) {
+    throw new Error('OPENAI_API_KEY is not configured');
+  }
+  return new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+};
 
 export async function analyzeFoodImage(image: string, language: string = 'th'): Promise<NutritionalInfo | null> {
   try {
@@ -27,6 +32,7 @@ export async function analyzeFoodImage(image: string, language: string = 'th'): 
     // Get the appropriate prompt for the selected language
     const systemPrompt = languagePrompts[language as keyof typeof languagePrompts] || languagePrompts['th'];
 
+    const openai = getOpenAI();
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
       messages: [

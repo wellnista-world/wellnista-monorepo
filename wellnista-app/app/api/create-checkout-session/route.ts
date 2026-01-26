@@ -3,9 +3,14 @@ import Stripe from 'stripe';
 import { CartItem } from '../../lib/context/CartContext';
 import { promotions } from '../../../config/promotion';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-05-28.basil',
-});
+const getStripe = () => {
+  if (!process.env.STRIPE_SECRET_KEY) {
+    throw new Error('STRIPE_SECRET_KEY is not configured');
+  }
+  return new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: '2025-08-27.basil',
+  });
+};
 
 export async function POST(request: NextRequest) {
   try {
@@ -58,6 +63,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create checkout session
+    const stripe = getStripe();
     const session = await stripe.checkout.sessions.create(sessionConfig);
 
     return NextResponse.json({ sessionId: session.id });
