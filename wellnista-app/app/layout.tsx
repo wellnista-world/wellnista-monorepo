@@ -181,7 +181,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
                         {/* Center - Logo */}
                         <div className="flex-1 flex justify-center">
-                          <h1 className="text-2xl leckerli-one-regular text-secondary">{getAppName()}</h1>
+                          <button
+                            onClick={() => router.push('/home')}
+                            className="text-2xl leckerli-one-regular text-secondary hover:opacity-80 transition-opacity"
+                          >
+                            {getAppName()}
+                          </button>
                         </div>
 
                         {/* Right side - Coin display */}

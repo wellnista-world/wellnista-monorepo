@@ -11,7 +11,6 @@ import {
   UserCircle,
   Camera,
   BookOpen,
-  Store,
   Library,
   LogOut,
   Heart,
@@ -23,8 +22,6 @@ import {
 } from "lucide-react";
 import AdvertisingCarousel from "../components/AdvertisingCarousel";
 import { getAdvertisingItems } from "../../config/advertising";
-import { getRandomProduct, getProductForLocale, Product } from "../../config/products";
-import Image from "next/image";
 import DailyPopup from "../components/DailyPopup";
 import { useDailyPopup } from "../hooks/useDailyPopup";
 
@@ -33,7 +30,6 @@ export default function HomeScreen() {
   const { user } = useAuth();
   const { t, locale } = useI18n();
   const [userName, setUserName] = useState<string | null>(null);
-  const [recommendedProduct, setRecommendedProduct] = useState<Product | null>(null);
   const { showPopup, closePopup } = useDailyPopup();
 
   useEffect(() => {
@@ -56,13 +52,6 @@ export default function HomeScreen() {
 
     fetchUserName();
   }, [user]);
-
-  useEffect(() => {
-    // Get a random recommended product for the current locale
-    const randomProduct = getRandomProduct();
-    const localizedProduct = getProductForLocale(randomProduct, locale);
-    setRecommendedProduct(localizedProduct);
-  }, [locale]);
 
   const handleLogout = async () => {
     try {
@@ -152,36 +141,6 @@ export default function HomeScreen() {
         </a>
       </div>
 
-      {/* Recommended Products Section */}
-      <div className="mb-8">
-        <Typography variant="h6" className="font-bold text-primary mb-4 pb-4">
-          {t("home.recommendedProducts")}
-        </Typography>
-        {recommendedProduct && (
-          <div 
-            onClick={() => router.push(`/product/${recommendedProduct.id}`)}
-            className="bg-white rounded-2xl p-4 shadow-lg hover:opacity-90 transition-all cursor-pointer"
-          >
-            <div className="flex items-center gap-4">
-              <div className="w-24 h-24 bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl flex items-center justify-center">
-                <Image src={recommendedProduct.image} alt={recommendedProduct.name} width={96} height={96} />
-              </div>
-              <div className="flex-1">
-                <Typography className="text-lg font-bold text-primary mb-1">
-                  {recommendedProduct.name}
-                </Typography>
-                <Typography className="text-sm text-neutral/60 mb-2">
-                  {recommendedProduct.description.length > 80 ? recommendedProduct.description.slice(0, 80) + "..." : recommendedProduct.description}
-                </Typography>
-                <Typography className="text-lg font-bold text-primary">
-                  {recommendedProduct.currency}{recommendedProduct.price}
-                </Typography>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-
       {/* Advertising Carousel */}
       <div className="mb-8">
         <Typography variant="h6" className="font-bold text-primary mb-4 pb-4">
@@ -191,27 +150,6 @@ export default function HomeScreen() {
           items={advertisingItems}
           autoSlideInterval={4000}
         />
-      </div>
-
-      {/* NubSook Market - Top Section */}
-      <div className="mb-8">
-        <div
-          onClick={() => router.push("/product")}
-          className="bg-white rounded-2xl p-6 flex items-center justify-between shadow-lg hover:bg-primary/5 transition-all cursor-pointer"
-        >
-          <div className="flex items-center gap-4">
-            <Store size={28} className="text-primary" />
-            <div>
-              <Typography className="text-xl font-bold text-primary">
-                {t("home.wellnistaMarket")}
-              </Typography>
-              <Typography className="text-sm text-neutral/70">
-                {t("home.specializedFood")}
-              </Typography>
-            </div>
-          </div>
-          <ChevronRight size={24} className="text-primary" />
-        </div>
       </div>
 
       {/* Header with Welcome Message */}

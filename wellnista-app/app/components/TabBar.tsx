@@ -3,12 +3,11 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useI18n } from "../../i18n";
 import { useAuth } from "../lib/context/AuthContext";
-import { 
-  Store, 
-  Heart, 
-  Camera, 
-  BookOpen, 
-  UserCircle 
+import {
+  Heart,
+  Camera,
+  BookOpen,
+  UserCircle
 } from "lucide-react";
 
 interface TabItem {
@@ -38,12 +37,6 @@ export default function TabBar() {
 
   const tabItems: TabItem[] = [
     {
-      icon: <Store size={28} />,
-      label: t("navigation.market"),
-      href: "/product",
-      color: "bg-primary",
-    },
-    {
       icon: <Heart size={28} />,
       label: t("navigation.menu"),
       href: "/menu",
@@ -70,9 +63,6 @@ export default function TabBar() {
   ];
 
   const isActive = (href: string) => {
-    if (href === "/market") {
-      return pathname === "/market" || pathname === "/product" || pathname.startsWith("/product/");
-    }
     return pathname === href || pathname.startsWith(href + "/");
   };
 
