@@ -63,7 +63,6 @@ export default function Register() {
     national_id: '',
     address: '',
     family_medical_history: [],
-    personal_carb_value: null,
   });
 
   const [loading, setLoading] = useState(false);
@@ -322,14 +321,6 @@ export default function Register() {
               onChangeValue={handleFamilyMedicalHistoryChangeValue}
             />
           </FormControl>
-
-          <TextField
-            label={t('register.personalCarbValue')}
-            fullWidth
-            type="number"
-            value={userData.personal_carb_value ?? ''}
-            onChange={(e) => handleInputChange('personal_carb_value', e.target.value === '' ? null : Number(e.target.value))}
-          />
 
           <Button
             variant="contained"
