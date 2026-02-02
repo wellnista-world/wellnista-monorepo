@@ -31,7 +31,7 @@ import { getAppName } from '../config/app';
 //});
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const { isLiffReady, error, isInLineApp } = useLiff();
+  const { isLiffReady, error } = useLiff();
   const pathname = usePathname();
   const router = useRouter();
   const showBackButton = pathname !== "/" && pathname !== "/home";
@@ -195,9 +195,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         </div>
                       </div>
                       
-                      {isInLineApp && (
-                        <p className="text-sm text-accent text-center mt-2">Running inside LINE</p>
-                      )}
                     </header>
                   )}
                   <main className={`${!hideHeader ? "p-4" : ""}`}>{children}</main>

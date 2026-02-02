@@ -10,7 +10,6 @@ export default function ScanPage() {
   const {
     isLiffReady,
     error: liffError,
-    isInLineApp,
     cameraPermission,
     requestCameraPermission,
   } = useLiff();
@@ -100,12 +99,6 @@ export default function ScanPage() {
   return (
     <div className="flex flex-col items-center min-h-screen bg-secondary text-neutral font-garet">
       <h1 className="mt-6 text-3xl font-magnolia text-primary mb-6">{t('scan.scanBarcode')}</h1>
-      {isInLineApp && (
-        <p className="text-sm text-accent mb-4">{t('scan.runningInLine')}</p>
-      )}
-      {/* {!isInLineApp && (
-        <p className="text-sm text-accent mb-4">Running in Browser</p>
-      )} */}
       {cameraPermission === false  &&(
         <button
           onClick={async () => {
