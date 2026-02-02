@@ -12,16 +12,15 @@ import { useAuth } from "@/app/lib/context/AuthContext";
 import { useI18n } from "../../../i18n";
 import Image from 'next/image';
 import { UserData } from "@/app/lib/types/user";
+import { calculateNutrition, getActivityLevelFromDescription } from "../../lib/utils/nutritionCalculator";
 
 const activitiveLevel: string[] = [
   "ไม่ออกกำลังกาย/นั่งทำงานอยู่กับที่",
   "ออกกำลังกายเล็กน้อย 1-3วัน/สัปดาห์",
-  "ออกกำลังกายปานกลาง 4-5วัน/สัปดาห์",
+  "ออกกำลังกายปานกลาง 3-5วัน/สัปดาห์",
   "ออกกำลังกายหนัก 6-7วัน/สัปดาห์",
   "ออกกำลังกายหนักมาก 2 ครั้ง/วัน เป็นนักกีฬา",
 ];
-
-const activitiveLevelValue: number[] = [1.2, 1.375, 1.55, 1.725, 1.9];
 
 export default function ScanImagePage() {
   const router = useRouter();
@@ -57,25 +56,18 @@ export default function ScanImagePage() {
     fetchUserData();
   }, [user, userData]);
 
-  // TEDD calculation for carb goal (same as profile page)
-  const teddMan =
-    (66 + 13.7 * (userData?.weight ?? 0) + 5 * (userData?.height ?? 0) - 6.8) *
-    activitiveLevelValue[
-      activitiveLevel.indexOf(userData?.activitylevel ?? "")
-    ];
+  // Calculate nutrition using the centralized utility
+  const nutritionResult = userData
+    ? calculateNutrition({
+        gender: (userData.gender || 'ชาย') as 'male' | 'female' | 'ชาย' | 'หญิง',
+        age: userData.age || 30,
+        weight: userData.weight || 70,
+        height: userData.height || 170,
+        activityLevel: getActivityLevelFromDescription(userData.activitylevel || activitiveLevel[0]),
+      })
+    : null;
 
-  const teddWoman =
-    (655 +
-      9.6 * (userData?.weight ?? 0) +
-      1.8 * (userData?.height ?? 0) -
-      4.7) *
-    activitiveLevelValue[
-      activitiveLevel.indexOf(userData?.activitylevel ?? "")
-    ];
-
-  // carbGoal calculation (same as profile page)
-  const carbGoalWithTedd = userData?.gender === "ชาย" ? teddMan : teddWoman;
-  const carbGoal = ((carbGoalWithTedd * 0.2) / 4) / 15;
+  const carbGoal = nutritionResult?.carbServings ?? 0;
 
   useEffect(() => {
     if (!isLiffReady || !cameraPermission) return;

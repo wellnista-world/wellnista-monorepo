@@ -9,4 +9,8 @@ export interface UserData {
   height: number | null;
   activitylevel: string;
   waist?: number | null;
+  national_id?: string;
+  address?: string;
+  family_medical_history?: string[];
+  personal_carb_value?: number | null;
 } 

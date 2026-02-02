@@ -28,6 +28,10 @@ export interface UserData {
   height: number | null;
   activitylevel: string;
   waist?: number | null;
+  national_id?: string;
+  address?: string;
+  family_medical_history?: string[];
+  personal_carb_value?: number | null;
 }
 
 // Thai values that will be saved to database
@@ -40,6 +44,7 @@ const activityLevelThaiValues = [
   'ออกกำลังกายหนักมาก 2 ครั้ง/วัน เป็นนักกีฬา',
 ];
 const diseaseThaiValues = ['เบาหวาน', 'ไต', 'หัวใจ', 'ความดัน', 'เก๊าต์', 'ไขมัน', 'อื่นๆ', 'ไม่มี'];
+const familyMedicalHistoryThaiValues = ['โรคไขมันในเลือดสูง', 'โรคหัวใจและหลอดเลือด', 'โรคเบาหวาน', 'มารดาเป็นเบาหวานขณะตั้งครรภ์', 'ไม่มี'];
 
 export default function Register() {
   const router = useRouter();
@@ -55,6 +60,10 @@ export default function Register() {
     height: null,
     activitylevel: '',
     waist: null,
+    national_id: '',
+    address: '',
+    family_medical_history: [],
+    personal_carb_value: null,
   });
 
   const [loading, setLoading] = useState(false);
@@ -84,6 +93,14 @@ export default function Register() {
     t('diseases.dyslipidemia'),
     t('diseases.other'),
     t('diseases.none')
+  ];
+
+  const familyMedicalHistoryDisplayLabels = [
+    t('familyMedicalHistory.dyslipidemia'),
+    t('familyMedicalHistory.cardiovascular'),
+    t('familyMedicalHistory.diabetes'),
+    t('familyMedicalHistory.gestationalDiabetes'),
+    t('familyMedicalHistory.none')
   ];
 
   const handleInputChange = (field: keyof UserData, value: string | number | null) => {
@@ -116,6 +133,16 @@ export default function Register() {
     const index = activityLevelDisplayLabels.indexOf(displayLabel);
     const thaiValue = index !== -1 ? activityLevelThaiValues[index] : displayLabel;
     handleInputChange('activitylevel', thaiValue);
+  };
+
+  const handleFamilyMedicalHistoryChangeValue = (values: string[]) => {
+    // Convert display labels back to Thai values for database
+    const thaiValues = values.map(displayLabel => {
+      const index = familyMedicalHistoryDisplayLabels.indexOf(displayLabel);
+      return index !== -1 ? familyMedicalHistoryThaiValues[index] : displayLabel;
+    });
+
+    setUserData((prev) => ({ ...prev, family_medical_history: thaiValues }));
   };
 
   const handleAddDisease = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -199,6 +226,24 @@ export default function Register() {
             onChange={(e) => handleInputChange('nickname', e.target.value)}
           />
 
+          <TextField
+            label={t('register.nationalId')}
+            fullWidth
+            variant="outlined"
+            value={userData.national_id}
+            onChange={(e) => handleInputChange('national_id', e.target.value)}
+          />
+
+          <TextField
+            label={t('register.address')}
+            fullWidth
+            variant="outlined"
+            multiline
+            rows={3}
+            value={userData.address}
+            onChange={(e) => handleInputChange('address', e.target.value)}
+          />
+
           <FormControl fullWidth>
             <MultipleSelectCheckmarks 
               labelInput={t('register.diseases')} 
@@ -264,12 +309,28 @@ export default function Register() {
             onChange={(e) => handleInputChange('waist', e.target.value === '' ? null : Number(e.target.value))}
           />
 
-          <StdSelect 
-            label={t('register.activityLevel')} 
-            names={activityLevelDisplayLabels} 
-            onChangeValue={handleActivityLevelChange} 
+          <StdSelect
+            label={t('register.activityLevel')}
+            names={activityLevelDisplayLabels}
+            onChangeValue={handleActivityLevelChange}
           />
-          
+
+          <FormControl fullWidth>
+            <MultipleSelectCheckmarks
+              labelInput={t('register.familyMedicalHistory')}
+              names={familyMedicalHistoryDisplayLabels}
+              onChangeValue={handleFamilyMedicalHistoryChangeValue}
+            />
+          </FormControl>
+
+          <TextField
+            label={t('register.personalCarbValue')}
+            fullWidth
+            type="number"
+            value={userData.personal_carb_value ?? ''}
+            onChange={(e) => handleInputChange('personal_carb_value', e.target.value === '' ? null : Number(e.target.value))}
+          />
+
           <Button
             variant="contained"
             fullWidth

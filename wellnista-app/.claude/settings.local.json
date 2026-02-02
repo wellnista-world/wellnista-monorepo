@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(findstr:*)",
+      "Bash(npx tsc:*)",
+      "Bash(node_modules/.bin/tsc:*)",
+      "Bash(npm run lint)",
+      "Bash(npm install)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nhide marketplace feature and update navigation\n\n- Remove Store tab from bottom navigation\n- Remove recommended products and market sections from home page\n- Replace BuySheet add-to-cart with navigate to home\n- Make app bar logo clickable to navigate to home\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git rebase:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm install:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfix build errors with lazy initialization for Stripe and OpenAI\n\n- Update Stripe API version to 2025-08-27.basil\n- Use lazy initialization for Stripe and OpenAI clients to avoid\n  build-time errors when env vars are not available\n- Fixes build failures on Vercel deployment\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit:*)",
+      "Bash(git -C \"C:\\\\Users\\\\PC\\\\wellnista\\\\wellnista-monorepo\\\\wellnista-app\" log --oneline -20)",
+      "Bash(git -C \"C:\\\\Users\\\\PC\\\\wellnista\\\\wellnista-monorepo\\\\wellnista-app\" remote -v)"
+    ]
+  }
+}

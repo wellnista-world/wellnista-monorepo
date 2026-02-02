@@ -195,6 +195,10 @@
     "cm": "เซนติเมตร",
     "inch": "นิ้ว",
     "bmi": "ดัชนีมวลกาย",
+    "nationalId": "เลขบัตรประชาชน",
+    "address": "ที่อยู่",
+    "familyMedicalHistory": "ประวัติเจ็บป่วยครอบครัว",
+    "personalCarbValue": "คาร์บประจำตัว",
     "bmiCategories": {
       "obese2": "อ้วนระดับ 2",
       "obese1": "อ้วนระดับ 1",
@@ -214,10 +218,27 @@
     "nickname": "ชื่อเล่น",
     "medicinesPlaceholder": "ระบุยาที่คุณกำลังรับประทานอยู่..."
   },
+  "nutrition": {
+    "bmr": "อัตราการเผาผลาญพื้นฐาน (BMR)",
+    "tdee": "พลังงานที่ใช้ต่อวัน (TDEE)",
+    "carbKcal": "พลังงานจากคาร์บต่อวัน",
+    "carbGrams": "คาร์บต่อวัน (กรัม)",
+    "carbServings": "คาร์บต่อวัน (หน่วย)",
+    "perDay": "ต่อวัน",
+    "kcalPerDay": "กิโลแคลอรี่/วัน",
+    "gramsPerDay": "กรัม/วัน",
+    "servingsPerDay": "หน่วย/วัน",
+    "calculationBreakdown": "รายละเอียดการคำนวณ",
+    "showCalculation": "แสดงการคำนวณ",
+    "hideCalculation": "ซ่อนการคำนวณ",
+    "disclaimer": "* ค่าประเมินเบื้องต้น ควรปรึกษาแพทย์หรือนักโภชนาการสำหรับคำแนะนำเฉพาะบุคคล",
+    "assumptions": "สมมติฐาน: 1g คาร์โบไฮเดรต = 4 kcal, 1 หน่วย = 15g คาร์โบไฮเดรต",
+    "carbRatio": "สัดส่วนคาร์บ (20% ของ TDEE)"
+  },
   "activityLevels": {
     "sedentary": "ไม่ออกกำลังกาย/นั่งทำงานอยู่กับที่",
     "lightlyActive": "ออกกำลังกายเล็กน้อย 1-3วัน/สัปดาห์",
-    "moderatelyActive": "ออกกำลังกายปานกลาง 4-5วัน/สัปดาห์",
+    "moderatelyActive": "ออกกำลังกายปานกลาง 3-5วัน/สัปดาห์",
     "veryActive": "ออกกำลังกายหนัก 6-7วัน/สัปดาห์",
     "extremelyActive": "ออกกำลังกายหนักมาก 2 ครั้ง/วัน เป็นนักกีฬา"
   },
@@ -230,6 +251,13 @@
     "dyslipidemia": "ไขมันในเลือดผิดปกติ",
     "other": "อื่นๆ",
     "none": "ไม่มีโรคประจำตัว"
+  },
+  "familyMedicalHistory": {
+    "dyslipidemia": "โรคไขมันในเลือดสูง",
+    "cardiovascular": "โรคหัวใจและหลอดเลือด",
+    "diabetes": "โรคเบาหวาน",
+    "gestationalDiabetes": "มารดาเป็นเบาหวานขณะตั้งครรภ์",
+    "none": "ไม่มี"
   },
   "gender": {
     "female": "หญิง",
@@ -522,6 +550,10 @@
     "height": "ส่วนสูง (ซม.)",
     "waist": "รอบเอว (ซม.)",
     "activityLevel": "ระดับการออกกำลังกาย",
+    "nationalId": "เลขบัตรประชาชน",
+    "address": "ที่อยู่",
+    "familyMedicalHistory": "ประวัติเจ็บป่วยครอบครัว",
+    "personalCarbValue": "คาร์บประจำตัว",
     "submit": "บันทึก"
   },
   "introductionStatus": {

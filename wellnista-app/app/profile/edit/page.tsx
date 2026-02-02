@@ -37,6 +37,14 @@ const diseaseOptions = [
   "ไม่มี",
 ];
 
+const familyMedicalHistoryOptions = [
+  "โรคไขมันในเลือดสูง",
+  "โรคหัวใจและหลอดเลือด",
+  "โรคเบาหวาน",
+  "มารดาเป็นเบาหวานขณะตั้งครรภ์",
+  "ไม่มี",
+];
+
 const genderOptions = ["ชาย", "หญิง"];
 
 export default function EditProfilePage() {
@@ -58,6 +66,10 @@ export default function EditProfilePage() {
     height: null,
     activitylevel: "",
     waist: null,
+    national_id: "",
+    address: "",
+    family_medical_history: [],
+    personal_carb_value: null,
   });
 
   // Fetch user data on component mount
@@ -90,6 +102,10 @@ export default function EditProfilePage() {
           height: data.height || null,
           activitylevel: data.activitylevel || "",
           waist: data.waist || null,
+          national_id: data.national_id || "",
+          address: data.address || "",
+          family_medical_history: data.family_medical_history || [],
+          personal_carb_value: data.personal_carb_value || null,
         });
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -114,10 +130,24 @@ export default function EditProfilePage() {
       const updatedDiseases = currentDiseases.includes(disease)
         ? currentDiseases.filter(d => d !== disease)
         : [...currentDiseases, disease];
-      
+
       return {
         ...prev,
         diseases: updatedDiseases
+      };
+    });
+  };
+
+  const handleFamilyMedicalHistoryToggle = (history: string) => {
+    setFormData(prev => {
+      const currentHistory = prev.family_medical_history || [];
+      const updatedHistory = currentHistory.includes(history)
+        ? currentHistory.filter(h => h !== history)
+        : [...currentHistory, history];
+
+      return {
+        ...prev,
+        family_medical_history: updatedHistory
       };
     });
   };
@@ -140,6 +170,10 @@ export default function EditProfilePage() {
           height: formData.height,
           activitylevel: formData.activitylevel,
           waist: formData.waist,
+          national_id: formData.national_id,
+          address: formData.address,
+          family_medical_history: formData.family_medical_history,
+          personal_carb_value: formData.personal_carb_value,
         })
         .eq("user_id", user.id);
 
@@ -214,6 +248,36 @@ export default function EditProfilePage() {
               variant="outlined"
             />
           </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <TextField
+              fullWidth
+              label={t('profile.nationalId')}
+              value={formData.national_id}
+              onChange={(e) => handleInputChange('national_id', e.target.value)}
+              variant="outlined"
+            />
+            <TextField
+              fullWidth
+              label={t('profile.personalCarbValue')}
+              type="number"
+              value={formData.personal_carb_value || ""}
+              onChange={(e) => handleInputChange('personal_carb_value', e.target.value ? parseFloat(e.target.value) : null)}
+              variant="outlined"
+              inputProps={{ min: 0, step: 0.1 }}
+            />
+          </div>
+
+          <TextField
+            fullWidth
+            label={t('profile.address')}
+            value={formData.address}
+            onChange={(e) => handleInputChange('address', e.target.value)}
+            variant="outlined"
+            multiline
+            rows={3}
+            className="mt-4"
+          />
         </div>
 
         {/* Health Information */}
@@ -259,6 +323,29 @@ export default function EditProfilePage() {
             rows={3}
             placeholder={t('profile.medicinesPlaceholder')}
           />
+
+          {/* Family Medical History */}
+          <div className="mt-4">
+            <Typography variant="subtitle1" className="mb-2 font-medium">
+              {t('profile.familyMedicalHistory')}
+            </Typography>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              {familyMedicalHistoryOptions.map((history) => (
+                <FormControlLabel
+                  key={history}
+                  control={
+                    <Checkbox
+                      checked={formData.family_medical_history?.includes(history) || false}
+                      onChange={() => handleFamilyMedicalHistoryToggle(history)}
+                      color="primary"
+                    />
+                  }
+                  label={history}
+                  className="text-sm"
+                />
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Physical Information */}

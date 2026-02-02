@@ -6,30 +6,19 @@ import { useAuth } from "../lib/context/AuthContext";
 import { supabase } from "../lib/api/supabaseClient";
 import { UserData } from "../lib/types/user";
 import Typography from "@mui/material/Typography";
-import { UserCircle, Activity, Scale, Ruler, Heart, Clock, Pill, Edit } from "lucide-react";
+import { UserCircle, Activity, Scale, Ruler, Heart, Clock, Pill, Edit, ChevronDown, ChevronUp } from "lucide-react";
 import { Calendar } from "../components/Calendar";
 import { useI18n } from "../../i18n";
+import { calculateNutrition, getActivityLevelFromDescription } from "../lib/utils/nutritionCalculator";
 
 const activitiveLevel: string[] = [
   "ไม่ออกกำลังกาย/นั่งทำงานอยู่กับที่",
   "ออกกำลังกายเล็กน้อย 1-3วัน/สัปดาห์",
-  "ออกกำลังกายปานกลาง 4-5วัน/สัปดาห์",
+  "ออกกำลังกายปานกลาง 3-5วัน/สัปดาห์",
   "ออกกำลังกายหนัก 6-7วัน/สัปดาห์",
   "ออกกำลังกายหนักมาก 2 ครั้ง/วัน เป็นนักกีฬา",
 ];
 
-// const diseaseNames = [
-//   "เบาหวาน",
-//   "ไต",
-//   "หัวใจ",
-//   "ความดัน",
-//   "เก๊าต์",
-//   "ไขมัน",
-//   "อื่นๆ",
-//   "ไม่มี",
-// ];
-
-const activitiveLevelValue: number[] = [1.2, 1.375, 1.55, 1.725, 1.9];
 const activitiveLevelProtein: number[] = [1.0, 1.0, 1.2, 1.7, 2.2];
 
 export default function ProfilePage() {
@@ -42,6 +31,7 @@ export default function ProfilePage() {
     carbs: 0,
     protein: 0,
   });
+  const [showCalculation, setShowCalculation] = useState(false);
 
   useEffect(() => {
     if (!user?.id || userData) return;
@@ -100,20 +90,16 @@ export default function ProfilePage() {
     fetchHistoryData();
   }, [user]);
 
-  const teddMan =
-    (66 + 13.7 * (userData?.weight ?? 0) + 5 * (userData?.height ?? 0) - 6.8) *
-    activitiveLevelValue[
-      activitiveLevel.indexOf(userData?.activitylevel ?? "")
-    ];
-
-  const teddWoman =
-    (655 +
-      9.6 * (userData?.weight ?? 0) +
-      1.8 * (userData?.height ?? 0) -
-      4.7) *
-    activitiveLevelValue[
-      activitiveLevel.indexOf(userData?.activitylevel ?? "")
-    ];
+  // Calculate nutrition using the centralized utility
+  const nutritionResult = userData
+    ? calculateNutrition({
+        gender: (userData.gender || 'ชาย') as 'male' | 'female' | 'ชาย' | 'หญิง',
+        age: userData.age || 30,
+        weight: userData.weight || 70,
+        height: userData.height || 170,
+        activityLevel: getActivityLevelFromDescription(userData.activitylevel || activitiveLevel[0]),
+      })
+    : null;
 
   // value only today
   const carbValue = totalNutrition.carbs / 15;
@@ -131,13 +117,9 @@ export default function ProfilePage() {
       ? t('profile.bmiCategories.normal')
       : t('profile.bmiCategories.underweight');
 
-  // carbGoal is เบาหวาน use 8 อื่นๆ use 12 or bmi more than 30 use 8
-  // const isDiabetes = userData?.diseases?.includes("เบาหวาน");
-  const carbGoalWithTedd = userData?.gender === "ชาย" ? teddMan : teddWoman;
-  const carbGoal = ((carbGoalWithTedd * 0.2) / 4) / 15;
-
+  const carbGoal = nutritionResult?.carbServings ?? 0;
+  const calGoal = nutritionResult?.tdee ?? 0;
   const calValue = totalNutrition.calories;
-  const calGoal = userData?.gender === "ชาย" ? teddMan : teddWoman;
 
   const proteinValue = totalNutrition.protein;
   const proteinGoal =
@@ -181,6 +163,26 @@ export default function ProfilePage() {
       icon: <Pill size={24} />,
       label: t('profile.medicines'),
       value: userData?.medicines || "-",
+    },
+    {
+      icon: <UserCircle size={24} />,
+      label: t('profile.nationalId'),
+      value: userData?.national_id || "-",
+    },
+    {
+      icon: <UserCircle size={24} />,
+      label: t('profile.address'),
+      value: userData?.address || "-",
+    },
+    {
+      icon: <Heart size={24} />,
+      label: t('profile.familyMedicalHistory'),
+      value: userData?.family_medical_history?.join(", ") || "-",
+    },
+    {
+      icon: <Activity size={24} />,
+      label: t('profile.personalCarbValue'),
+      value: userData?.personal_carb_value ? `${userData.personal_carb_value}` : "-",
     },
   ];
 
@@ -250,6 +252,95 @@ export default function ProfilePage() {
           }}
         />
       </div>
+
+      {/* Nutrition Calculation Breakdown */}
+      {nutritionResult && nutritionResult.isValid && (
+        <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm">
+          <button
+            onClick={() => setShowCalculation(!showCalculation)}
+            className="w-full flex items-center justify-between mb-4"
+          >
+            <Typography className="text-lg font-semibold text-primary">
+              {t('nutrition.calculationBreakdown')}
+            </Typography>
+            {showCalculation ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+          </button>
+
+          {showCalculation && (
+            <div className="space-y-4 pt-4 border-t border-neutral/10">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-secondary/5 rounded-xl p-4">
+                  <Typography className="text-xs text-neutral/70 mb-1">
+                    {t('nutrition.bmr')}
+                  </Typography>
+                  <Typography className="text-xl font-bold text-primary">
+                    {nutritionResult.bmr.toLocaleString()}
+                  </Typography>
+                  <Typography className="text-xs text-neutral/70">
+                    {t('nutrition.kcalPerDay')}
+                  </Typography>
+                </div>
+
+                <div className="bg-secondary/5 rounded-xl p-4">
+                  <Typography className="text-xs text-neutral/70 mb-1">
+                    {t('nutrition.tdee')}
+                  </Typography>
+                  <Typography className="text-xl font-bold text-primary">
+                    {nutritionResult.tdee.toLocaleString()}
+                  </Typography>
+                  <Typography className="text-xs text-neutral/70">
+                    {t('nutrition.kcalPerDay')}
+                  </Typography>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl p-4">
+                <Typography className="text-xs text-neutral/70 mb-2">
+                  {t('nutrition.carbRatio')}
+                </Typography>
+
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <Typography className="text-sm text-neutral/70">
+                      {t('nutrition.carbKcal')}
+                    </Typography>
+                    <Typography className="font-semibold">
+                      {nutritionResult.carbKcal.toLocaleString()} {t('profile.kilocalories')}
+                    </Typography>
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    <Typography className="text-sm text-neutral/70">
+                      {t('nutrition.carbGrams')}
+                    </Typography>
+                    <Typography className="font-semibold">
+                      {nutritionResult.carbGrams.toLocaleString()} {t('profile.grams')}
+                    </Typography>
+                  </div>
+
+                  <div className="flex justify-between items-center pt-2 border-t border-neutral/10">
+                    <Typography className="text-sm font-semibold text-primary">
+                      {t('nutrition.carbServings')}
+                    </Typography>
+                    <Typography className="text-lg font-bold text-primary">
+                      {nutritionResult.carbServings.toFixed(1)} {t('profile.carb')}
+                    </Typography>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-2 text-xs text-neutral/60">
+                <Typography className="italic">
+                  {t('nutrition.disclaimer')}
+                </Typography>
+                <Typography className="italic">
+                  {t('nutrition.assumptions')}
+                </Typography>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Personal Information */}
       <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm">
