@@ -17,38 +17,46 @@ export function useLiff() {
         setIsInLineApp(isLineApp);
 
         if (isLineApp) {
-          // Initialize LIFF only if not already initialized
-          if (!isLiffReady) {
+          // Try to initialize LIFF, but don't block the app if it fails
+          try {
             await liff.init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID || "" });
-            setIsLiffReady(true);
+          } catch (liffErr) {
+            console.warn("LIFF init failed, continuing without LIFF:", liffErr);
           }
-        } else {
-          // For non-LIFF usage (browser)
-          setIsLiffReady(true);
         }
+
+        // Always set ready to true so app doesn't get stuck
+        setIsLiffReady(true);
 
         // Check for camera permission
         if (navigator.permissions) {
-          const permissionStatus = await navigator.permissions.query({ name: "camera" as PermissionName });
-          setCameraPermission(permissionStatus.state === "granted");
-
-          // Listen for permission changes
-          permissionStatus.onchange = () => {
+          try {
+            const permissionStatus = await navigator.permissions.query({ name: "camera" as PermissionName });
             setCameraPermission(permissionStatus.state === "granted");
-          };
+
+            // Listen for permission changes
+            permissionStatus.onchange = () => {
+              setCameraPermission(permissionStatus.state === "granted");
+            };
+          } catch {
+            // Some browsers don't support camera permission query
+            setCameraPermission(false);
+          }
         } else {
           // Permissions API not supported
           console.warn("Permissions API not supported. Defaulting to false.");
           setCameraPermission(false);
         }
       } catch (err) {
-        console.error("Error during LIFF initialization or permission check:", err);
-        setError("Failed to initialize LIFF or check permissions.");
+        console.error("Error during initialization:", err);
+        setError("Failed to initialize.");
+        // Still set ready to true so app doesn't get stuck on loading
+        setIsLiffReady(true);
       }
     };
 
     initLiff();
-  }, [isLiffReady]);
+  }, []);
 
   const requestCameraPermission = async () => {
     try {
