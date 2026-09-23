@@ -40,7 +40,7 @@ Vitest + jsdom + React Testing Library (`vitest.config.mts`, `vitest.setup.ts`).
 - **Payments:** Stripe (checkout redirects to the hosted Checkout Session `url`; Stripe.js `redirectToCheckout` no longer exists)
 - **AI:** OpenAI for food analysis and menu recommendations
 - **Platform Integration:** LINE LIFF for LINE app features
-- **Barcode Scanning:** ZXing, Quagga2
+- **Barcode Scanning:** ZXing (`@zxing/library`, used by `app/scan`). Quagga2, `@zxing/browser` and the barcode-detector polyfill were unused and removed 2026-09-23.
 
 ## Architecture
 
@@ -143,3 +143,9 @@ NEXT_PUBLIC_LIFF_ID
 ## PWA
 
 Service worker configured via `next-pwa`. PWA is disabled in development (`next.config.ts`).
+
+`next-pwa` 5.6 is unmaintained and its `workbox-build` chain depends on a vulnerable
+`serialize-javascript` (build-time only, GHSA-5c6j-r48x-rmvq). `package.json` `overrides` pins
+`serialize-javascript` to `^7.1.1`, which brings `npm audit` to 0 and still generates `public/sw.js`.
+The maintained fork `@ducanh2912/next-pwa` (last release 2024) has the same chain, so switching
+would not help; Serwist (`@serwist/next`) is the long-term replacement if the plugin ever breaks.
