@@ -82,7 +82,12 @@
     "spend": "コインを使用",
     "insufficient": "コインが不足しています",
     "earned": "コインを獲得しました！",
-    "spent": "コインを使用しました！"
+    "spent": "コインを使用しました！",
+    "discount": "ポイント割引",
+    "usePoints": "ポイントを使って割引",
+    "pointsRequired": "必要ポイント",
+    "pointsUsed": "ポイントを割引に使用しました！",
+    "needMore": "ポイントが不足しています"
   },
   "auth": {
     "welcome": "NubSookへようこそ",
@@ -207,7 +212,11 @@
     "healthInfo": "健康情報",
     "physicalInfo": "身体情報",
     "nickname": "ニックネーム",
-    "medicinesPlaceholder": "現在服用中の薬を記載してください..."
+    "medicinesPlaceholder": "現在服用中の薬を記載してください...",
+    "nationalId": "国民ID番号",
+    "address": "住所",
+    "familyMedicalHistory": "家族の病歴",
+    "personalCarbValue": "個人の炭水化物目標値"
   },
   "activityLevels": {
     "sedentary": "座りがち（運動なしまたは少ない）",
@@ -399,7 +408,8 @@
         "title": "ナトリウム",
         "description": "ナトリウムの重要性と制御"
       }
-    }
+    },
+    "medicines": "薬"
   },
   "menu": {
     "title": "NubSook",
@@ -479,7 +489,9 @@
         "description": "食品をスキャンして正確な栄養情報を確認"
       }
     },
-    "contactLine": "LINEでお問い合わせ"
+    "contactLine": "LINEでお問い合わせ",
+    "install": "インストール",
+    "notNow": "あとで"
   },
   "settings": {
     "title": "設定",
@@ -516,7 +528,11 @@
     "height": "身長 (cm)",
     "waist": "ウエスト (cm)",
     "activityLevel": "活動レベル",
-    "submit": "送信"
+    "submit": "送信",
+    "nationalId": "国民ID番号",
+    "address": "住所",
+    "familyMedicalHistory": "家族の病歴",
+    "personalCarbValue": "個人の炭水化物目標値"
   },
   "introductionStatus": {
     "safe": "安全 - 推奨範囲内",
@@ -547,5 +563,30 @@
       "fri": "金",
       "sat": "土"
     }
-  }
-} 
+  },
+  "nutrition": {
+    "bmr": "基礎代謝量（BMR）",
+    "tdee": "1日の総消費エネルギー（TDEE）",
+    "carbKcal": "1日の炭水化物エネルギー",
+    "carbGrams": "1日の炭水化物（グラム）",
+    "carbServings": "1日の炭水化物（サービング）",
+    "perDay": "1日あたり",
+    "kcalPerDay": "kcal/日",
+    "gramsPerDay": "g/日",
+    "servingsPerDay": "サービング/日",
+    "calculationBreakdown": "計算の内訳",
+    "showCalculation": "計算を表示",
+    "hideCalculation": "計算を非表示",
+    "disclaimer": "* 推定値です。個別のアドバイスは医師または栄養士にご相談ください。",
+    "assumptions": "前提：炭水化物1g = 4 kcal、1サービング = 炭水化物15g",
+    "carbRatio": "炭水化物の割合（TDEEの20%）"
+  },
+  "familyMedicalHistory": {
+    "dyslipidemia": "高コレステロール血症",
+    "cardiovascular": "心血管疾患",
+    "diabetes": "糖尿病",
+    "gestationalDiabetes": "妊娠糖尿病（母親）",
+    "none": "なし"
+  },
+  "securePaymentViaPromptPay": "PromptPayによる安全な支払い"
+}

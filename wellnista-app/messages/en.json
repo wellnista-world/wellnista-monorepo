@@ -39,7 +39,7 @@
     "stock": "Stock",
     "available": "Available",
     "unavailable": "Unavailable",
-    "total": "Total",
+    "total": "Total:",
     "price": "Price",
     "currency": "฿",
     "proceedToCheckout": "Proceed to Checkout",
@@ -74,16 +74,6 @@
     "stripeFailedToLoad": "Stripe failed to load",
     "yourCartIsEmpty": "Your cart is empty",
     "qty": "Qty",
-    "total": "Total:",
-    "shippingAddress": "Shipping Address",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "email": "Email",
-    "phone": "Phone",
-    "address": "Address",
-    "city": "City",
-    "postalCode": "Postal Code",
-    "paymentMethod": "Payment Method",
     "securePaymentViaPromptPay": "Secure payment via PromptPay"
   },
   "coins": {
@@ -442,7 +432,8 @@
         "title": "Sodium",
         "description": "Importance of sodium and control"
       }
-    }
+    },
+    "medicines": "Medicines"
   },
   "menu": {
     "title": "NubSook",
@@ -596,5 +587,6 @@
       "fri": "Fri",
       "sat": "Sat"
     }
-  }
-} 
+  },
+  "securePaymentViaPromptPay": "Secure payment via PromptPay"
+}

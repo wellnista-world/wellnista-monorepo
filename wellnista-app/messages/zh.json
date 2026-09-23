@@ -82,7 +82,12 @@
     "spend": "花费硬币",
     "insufficient": "硬币不足",
     "earned": "获得硬币！",
-    "spent": "花费硬币！"
+    "spent": "花费硬币！",
+    "discount": "积分折扣",
+    "usePoints": "使用积分抵扣",
+    "pointsRequired": "所需积分",
+    "pointsUsed": "积分已用于折扣！",
+    "needMore": "积分不足"
   },
   "auth": {
     "welcome": "欢迎来到 wellnista",
@@ -207,7 +212,11 @@
     "healthInfo": "健康信息",
     "physicalInfo": "身体信息",
     "nickname": "昵称",
-    "medicinesPlaceholder": "列出您目前正在服用的药物..."
+    "medicinesPlaceholder": "列出您目前正在服用的药物...",
+    "nationalId": "身份证号码",
+    "address": "地址",
+    "familyMedicalHistory": "家族病史",
+    "personalCarbValue": "个人碳水化合物目标值"
   },
   "activityLevels": {
     "sedentary": "久坐不动（很少或没有运动）",
@@ -352,7 +361,8 @@
         "title": "钠",
         "description": "钠的重要性和控制方法"
       }
-    }
+    },
+    "medicines": "药物"
   },
   "menu": {
     "title": "NubSook",
@@ -431,7 +441,10 @@
         "description": "扫描食品查看准确的营养信息"
       }
     },
-    "contactLine": "联系 LINE"
+    "contactLine": "联系 LINE",
+    "mentalHealthTracking": "心理健康记录",
+    "install": "安装",
+    "notNow": "暂不"
   },
   "settings": {
     "title": "设置",
@@ -468,7 +481,11 @@
     "height": "身高 (厘米)",
     "waist": "腰围 (厘米)",
     "activityLevel": "活动水平",
-    "submit": "提交"
+    "submit": "提交",
+    "nationalId": "身份证号码",
+    "address": "地址",
+    "familyMedicalHistory": "家族病史",
+    "personalCarbValue": "个人碳水化合物目标值"
   },
   "introductionStatus": {
     "safe": "安全 - 在推荐范围内",
@@ -499,5 +516,77 @@
       "fri": "五",
       "sat": "六"
     }
-  }
-} 
+  },
+  "nutrition": {
+    "bmr": "基础代谢率（BMR）",
+    "tdee": "每日总能量消耗（TDEE）",
+    "carbKcal": "每日碳水化合物能量",
+    "carbGrams": "每日碳水化合物（克）",
+    "carbServings": "每日碳水化合物（份）",
+    "perDay": "每天",
+    "kcalPerDay": "千卡/天",
+    "gramsPerDay": "克/天",
+    "servingsPerDay": "份/天",
+    "calculationBreakdown": "计算明细",
+    "showCalculation": "显示计算",
+    "hideCalculation": "隐藏计算",
+    "disclaimer": "* 仅为估算值。如需个性化建议，请咨询医生或营养师。",
+    "assumptions": "假设：1克碳水化合物 = 4千卡，1份 = 15克碳水化合物",
+    "carbRatio": "碳水化合物比例（TDEE的20%）"
+  },
+  "familyMedicalHistory": {
+    "dyslipidemia": "高胆固醇血症",
+    "cardiovascular": "心血管疾病",
+    "diabetes": "糖尿病",
+    "gestationalDiabetes": "妊娠期糖尿病（母亲）",
+    "none": "无"
+  },
+  "mentalHealth": {
+    "title": "心理健康记录",
+    "description": "记录您的想法和感受，追踪心理健康状况",
+    "voiceRecording": "语音录制",
+    "startRecording": "开始录音",
+    "stopRecording": "停止录音",
+    "pause": "暂停",
+    "resume": "继续",
+    "recording": "录音中...",
+    "transcript": "语音文字",
+    "transcriptPlaceholder": "您说的内容将显示在这里...",
+    "analyzeTranscript": "AI 分析",
+    "analyzing": "分析中...",
+    "analysisResults": "分析结果",
+    "mentalScore": "心理健康评分",
+    "mood": "情绪",
+    "stressLevel": "压力水平",
+    "anxietyLevel": "焦虑水平",
+    "depressionLevel": "抑郁水平",
+    "summary": "总结",
+    "recommendations": "建议",
+    "additionalNotes": "补充备注",
+    "notesPlaceholder": "添加补充备注...",
+    "date": "日期",
+    "time": "时间",
+    "saveRecord": "保存记录",
+    "lastRecord": "最近记录",
+    "mentalHealthTrends": "心理健康趋势",
+    "moodCategories": {
+      "excellent": "非常好",
+      "good": "好",
+      "fair": "一般",
+      "poor": "较差",
+      "critical": "危急"
+    },
+    "loading": "加载中...",
+    "featureDisabled": "功能已停用",
+    "featureDisabledDescription": "心理健康记录功能目前已停用。如需使用，请联系客服。",
+    "recordingError": "录音时发生错误，请重试。",
+    "speechNotSupported": "您的浏览器不支持语音识别。",
+    "noTranscript": "没有语音文字，请先录下您的想法。",
+    "analysisError": "分析文字失败，请重试。",
+    "noAnalysisData": "没有分析数据。",
+    "fetchError": "获取记录失败，请重试。",
+    "saveError": "保存记录失败，请重试。",
+    "recordSaved": "记录保存成功！"
+  },
+  "securePaymentViaPromptPay": "通过 PromptPay 安全支付"
+}

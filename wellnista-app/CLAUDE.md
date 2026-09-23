@@ -28,8 +28,9 @@ Vitest + jsdom + React Testing Library (`vitest.config.mts`, `vitest.setup.ts`).
 - `app/lib/utils/__tests__/cartUtils.test.ts` - per-user localStorage carts, merge, totals
 - `config/__tests__/config.test.ts` - product catalogue integrity + localisation, country codes, feature flags
 - `i18n/__tests__/i18n.test.tsx` - I18nProvider (default/stored locale, fallback to Thai, `{param}`
-  interpolation) and a catalogue check that every English key has a Thai fallback, since `t()` falls
-  back to Thai before returning the raw key.
+  interpolation) and catalogue checks: every English key has a Thai fallback (since `t()` falls back
+  to Thai before returning the raw key) and every locale has every key Thai has, so a new string must
+  be added to all six files.
 
 ## Tech Stack
 

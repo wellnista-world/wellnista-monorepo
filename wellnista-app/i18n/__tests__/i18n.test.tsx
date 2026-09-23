@@ -5,6 +5,9 @@ import { I18nProvider, useI18n } from "../index";
 import en from "../../messages/en.json";
 import th from "../../messages/th.json";
 import id from "../../messages/id.json";
+import ja from "../../messages/ja.json";
+import ko from "../../messages/ko.json";
+import zh from "../../messages/zh.json";
 
 const wrapper = ({ children }: { children: ReactNode }) => <I18nProvider>{children}</I18nProvider>;
 
@@ -24,6 +27,18 @@ describe("message catalogues", () => {
   it("has a Thai fallback for every English key, because t() falls back to Thai", () => {
     const thKeys = new Set(leafKeys(th));
     const missing = leafKeys(en).filter((k) => !thKeys.has(k));
+    expect(missing).toEqual([]);
+  });
+
+  it.each([
+    ["en", en],
+    ["ja", ja],
+    ["ko", ko],
+    ["zh", zh],
+    ["id", id],
+  ])("%s has every key that Thai has", (_name, catalogue) => {
+    const keys = new Set(leafKeys(catalogue as Tree));
+    const missing = leafKeys(th).filter((k) => !keys.has(k));
     expect(missing).toEqual([]);
   });
 });
@@ -63,11 +78,15 @@ describe("I18nProvider", () => {
   it("falls back to Thai for a key missing in the active locale", () => {
     const { result } = renderHook(() => useI18n(), { wrapper });
     act(() => result.current.setLocale("id"));
-    // Indonesian has fewer keys than Thai; take one that only Thai has.
+    // English-only key (present in en/th, absent in id): the Thai text wins.
     const idKeys = new Set(leafKeys(id));
     const onlyTh = leafKeys(th).find((k) => !idKeys.has(k));
-    expect(onlyTh).toBeDefined();
-    expect(result.current.t(onlyTh!)).toBe(lookup(th, onlyTh!));
+    if (onlyTh) {
+      expect(result.current.t(onlyTh)).toBe(lookup(th, onlyTh));
+    } else {
+      // Every locale is complete now, so exercise the raw-key path instead.
+      expect(result.current.t("does.not.exist")).toBe("does.not.exist");
+    }
   });
 
   it("interpolates {params} and leaves unknown placeholders alone", () => {

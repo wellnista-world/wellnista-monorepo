@@ -82,7 +82,12 @@
     "spend": "Gunakan Koin",
     "insufficient": "Koin tidak cukup",
     "earned": "Koin diperoleh!",
-    "spent": "Koin digunakan!"
+    "spent": "Koin digunakan!",
+    "discount": "Diskon Poin",
+    "usePoints": "Gunakan poin untuk diskon",
+    "pointsRequired": "Poin yang dibutuhkan",
+    "pointsUsed": "poin digunakan untuk diskon!",
+    "needMore": "Poin belum cukup"
   },
   "auth": {
     "welcome": "Selamat datang di wellnista",
@@ -207,7 +212,11 @@
     "healthInfo": "Informasi Kesehatan",
     "physicalInfo": "Informasi Fisik",
     "nickname": "Nama Panggilan",
-    "medicinesPlaceholder": "Daftar obat yang sedang Anda konsumsi..."
+    "medicinesPlaceholder": "Daftar obat yang sedang Anda konsumsi...",
+    "nationalId": "Nomor KTP",
+    "address": "Alamat",
+    "familyMedicalHistory": "Riwayat Penyakit Keluarga",
+    "personalCarbValue": "Target Karbohidrat Pribadi"
   },
   "activityLevels": {
     "sedentary": "Sedentari / Sedikit atau tidak ada olahraga",
@@ -352,7 +361,8 @@
         "title": "Natrium",
         "description": "Pentingnya natrium dan pengendaliannya"
       }
-    }
+    },
+    "medicines": "Obat"
   },
   "menu": {
     "title": "NubSook",
@@ -431,7 +441,10 @@
         "description": "Pindai makanan untuk melihat informasi nutrisi yang akurat"
       }
     },
-    "contactLine": "Hubungi LINE"
+    "contactLine": "Hubungi LINE",
+    "mentalHealthTracking": "Catatan Kesehatan Mental",
+    "install": "Pasang",
+    "notNow": "Nanti saja"
   },
   "settings": {
     "title": "Pengaturan",
@@ -468,7 +481,11 @@
     "height": "Tinggi Badan (cm)",
     "waist": "Lingkar Pinggang (cm)",
     "activityLevel": "Tingkat Aktivitas",
-    "submit": "Kirim"
+    "submit": "Kirim",
+    "nationalId": "Nomor KTP",
+    "address": "Alamat",
+    "familyMedicalHistory": "Riwayat Penyakit Keluarga",
+    "personalCarbValue": "Target Karbohidrat Pribadi"
   },
   "introductionStatus": {
     "safe": "Aman - Dalam rentang yang direkomendasikan",
@@ -499,5 +516,77 @@
       "fri": "Jum",
       "sat": "Sab"
     }
-  }
-} 
+  },
+  "nutrition": {
+    "bmr": "Laju Metabolisme Basal (BMR)",
+    "tdee": "Total Pengeluaran Energi Harian (TDEE)",
+    "carbKcal": "Energi Karbohidrat Harian",
+    "carbGrams": "Karbohidrat Harian (gram)",
+    "carbServings": "Karbohidrat Harian (porsi)",
+    "perDay": "per hari",
+    "kcalPerDay": "kkal/hari",
+    "gramsPerDay": "g/hari",
+    "servingsPerDay": "porsi/hari",
+    "calculationBreakdown": "Rincian Perhitungan",
+    "showCalculation": "Tampilkan Perhitungan",
+    "hideCalculation": "Sembunyikan Perhitungan",
+    "disclaimer": "* Nilai perkiraan. Konsultasikan dengan dokter atau ahli gizi untuk rekomendasi pribadi.",
+    "assumptions": "Asumsi: 1 g karbohidrat = 4 kkal, 1 porsi = 15 g karbohidrat",
+    "carbRatio": "Rasio Karbohidrat (20% dari TDEE)"
+  },
+  "familyMedicalHistory": {
+    "dyslipidemia": "Kolesterol darah tinggi",
+    "cardiovascular": "Penyakit kardiovaskular",
+    "diabetes": "Diabetes",
+    "gestationalDiabetes": "Diabetes gestasional (ibu)",
+    "none": "Tidak ada"
+  },
+  "mentalHealth": {
+    "title": "Catatan Kesehatan Mental",
+    "description": "Catat pikiran dan perasaan Anda untuk memantau kesehatan mental",
+    "voiceRecording": "Rekaman Suara",
+    "startRecording": "Mulai Merekam",
+    "stopRecording": "Berhenti Merekam",
+    "pause": "Jeda",
+    "resume": "Lanjutkan",
+    "recording": "Merekam...",
+    "transcript": "Transkrip",
+    "transcriptPlaceholder": "Pikiran yang Anda ucapkan akan muncul di sini...",
+    "analyzeTranscript": "Analisis dengan AI",
+    "analyzing": "Menganalisis...",
+    "analysisResults": "Hasil Analisis",
+    "mentalScore": "Skor Kesehatan Mental",
+    "mood": "Suasana Hati",
+    "stressLevel": "Tingkat Stres",
+    "anxietyLevel": "Tingkat Kecemasan",
+    "depressionLevel": "Tingkat Depresi",
+    "summary": "Ringkasan",
+    "recommendations": "Rekomendasi",
+    "additionalNotes": "Catatan Tambahan",
+    "notesPlaceholder": "Tambahkan catatan tambahan...",
+    "date": "Tanggal",
+    "time": "Waktu",
+    "saveRecord": "Simpan Catatan",
+    "lastRecord": "Catatan Terakhir",
+    "mentalHealthTrends": "Tren Kesehatan Mental",
+    "moodCategories": {
+      "excellent": "Sangat Baik",
+      "good": "Baik",
+      "fair": "Cukup",
+      "poor": "Buruk",
+      "critical": "Kritis"
+    },
+    "loading": "Memuat...",
+    "featureDisabled": "Fitur Dinonaktifkan",
+    "featureDisabledDescription": "Pencatatan kesehatan mental saat ini dinonaktifkan. Hubungi dukungan jika Anda memerlukan fitur ini.",
+    "recordingError": "Terjadi kesalahan saat merekam. Silakan coba lagi.",
+    "speechNotSupported": "Browser Anda tidak mendukung pengenalan suara.",
+    "noTranscript": "Belum ada transkrip. Rekam pikiran Anda terlebih dahulu.",
+    "analysisError": "Gagal menganalisis transkrip. Silakan coba lagi.",
+    "noAnalysisData": "Tidak ada data analisis.",
+    "fetchError": "Gagal mengambil catatan. Silakan coba lagi.",
+    "saveError": "Gagal menyimpan catatan. Silakan coba lagi.",
+    "recordSaved": "Catatan berhasil disimpan!"
+  },
+  "securePaymentViaPromptPay": "Pembayaran aman melalui PromptPay"
+}
