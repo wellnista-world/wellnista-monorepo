@@ -171,7 +171,11 @@
     "iron": "철분",
     "grams": "그램",
     "milligrams": "밀리그램",
-    "mg": "mg"
+    "mg": "mg",
+    "errAnalyzer": "음식 분석 서비스를 이용할 수 없습니다. 나중에 다시 시도해 주세요",
+    "errNotConfigured": "서버에 OpenAI API 키가 설정되어 있지 않습니다",
+    "errQuota": "OpenAI API 크레딧이 소진되었습니다. OpenAI 계정에 크레딧을 충전해 주세요",
+    "errBadResponse": "AI 응답을 읽을 수 없습니다. 다시 촬영해 주세요"
   },
   "profile": {
     "title": "프로필",

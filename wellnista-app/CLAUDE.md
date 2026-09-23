@@ -122,7 +122,19 @@ Client initialized in `app/lib/api/supabase.ts`. Tables include:
 
 ### OpenAI
 
-Used for food analysis (`/api/analyze-food`) and menu recommendations (`/api/menu-recommendation`). Client in `app/lib/api/openai.ts`.
+Used for food analysis (`/api/analyze-food`) and menu recommendations (`/api/menu-recommendation`).
+
+- `openai` v7 requires **Node.js 22**; `package.json` `engines.node` is `>=22` so Vercel picks a
+  matching runtime.
+- `/api/analyze-food` returns `null` only when the model says the picture is not food. Configuration,
+  API and parsing failures come back as an error response with a `code` (`not_configured`,
+  `openai_error`, `bad_response`) and the scan page shows the reason (e.g. OpenAI credits
+  exhausted) instead of "no food data found". Before 2026-09-23 every failure was swallowed into
+  `null`, which is how an `insufficient_quota` 429 showed up as "ไม่พบข้อมูลอาหาร".
+- The vision model is `OPENAI_FOOD_MODEL` (default `gpt-4o`), overridable without a deploy.
+- `parseFoodAnalysis()` is pure and unit-tested (`app/lib/api/__tests__/analyze-food.test.ts`).
+- The scan page downscales the captured frame to 1280px JPEG (q=0.85) before upload so phone
+  photos stay under Vercel's 4.5 MB request limit.
 
 ### Stripe
 

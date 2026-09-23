@@ -171,7 +171,11 @@
     "iron": "Zat Besi",
     "grams": "gram",
     "milligrams": "miligram",
-    "mg": "mg"
+    "mg": "mg",
+    "errAnalyzer": "Layanan analisis makanan tidak tersedia. Silakan coba lagi nanti",
+    "errNotConfigured": "Kunci API OpenAI belum diatur di server",
+    "errQuota": "Kredit API OpenAI habis. Silakan isi ulang akun OpenAI",
+    "errBadResponse": "Balasan AI tidak dapat dibaca. Silakan ambil foto lagi"
   },
   "profile": {
     "title": "Profil",

@@ -171,7 +171,11 @@
     "iron": "Iron",
     "grams": "grams",
     "milligrams": "milligrams",
-    "mg": "mg"
+    "mg": "mg",
+    "errAnalyzer": "The food analyzer is unavailable. Please try again later",
+    "errNotConfigured": "OpenAI API key is not configured on the server",
+    "errQuota": "OpenAI API credits are exhausted. Please top up the OpenAI account",
+    "errBadResponse": "The AI reply could not be read. Please take the photo again"
   },
   "profile": {
     "title": "Profile",

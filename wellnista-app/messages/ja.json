@@ -171,7 +171,11 @@
     "iron": "鉄",
     "grams": "グラム",
     "milligrams": "ミリグラム",
-    "mg": "mg"
+    "mg": "mg",
+    "errAnalyzer": "食品解析サービスが利用できません。後でもう一度お試しください",
+    "errNotConfigured": "サーバーに OpenAI API キーが設定されていません",
+    "errQuota": "OpenAI API のクレジットが不足しています。OpenAI アカウントにチャージしてください",
+    "errBadResponse": "AI の応答を読み取れませんでした。もう一度撮影してください"
   },
   "profile": {
     "title": "プロフィール",

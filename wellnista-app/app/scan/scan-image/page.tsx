@@ -128,11 +128,16 @@ export default function ScanImagePage() {
 
     if (!context) return;
 
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
+    // Downscale before upload: a full-resolution phone frame as base64 can
+    // exceed the 4.5 MB request limit on Vercel, and the model does not need
+    // more than ~1280px to identify a dish.
+    const MAX_SIDE = 1280;
+    const scale = Math.min(1, MAX_SIDE / Math.max(video.videoWidth, video.videoHeight));
+    canvas.width = Math.round(video.videoWidth * scale);
+    canvas.height = Math.round(video.videoHeight * scale);
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    const imageData = canvas.toDataURL('image/jpeg');
+    const imageData = canvas.toDataURL('image/jpeg', 0.85);
     setCapturedImage(imageData);
   };
 
@@ -153,8 +158,22 @@ export default function ScanImagePage() {
         }),
       });
 
-      const data = await response.json();
-      console.log(data);
+      const data = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        // The API failed (no credits, no key, model error). Say so instead of
+        // pretending the picture had no food in it.
+        const code = data?.code as string | undefined;
+        const detail = String(data?.error || '');
+        let reason = t('scan.errAnalyzer');
+        if (code === 'not_configured') reason = t('scan.errNotConfigured');
+        else if (/insufficient_quota|credit_balance|billing/i.test(detail)) reason = t('scan.errQuota');
+        else if (code === 'bad_response') reason = t('scan.errBadResponse');
+        console.error('Food analysis failed:', response.status, code, detail);
+        setAnalysisError(`${t('scan.cannotAnalyzeImage')}: ${reason}`);
+        return;
+      }
+
       if (data === null) {
         setAnalysisError(t('scan.noFoodDataInImage'));
       } else {
