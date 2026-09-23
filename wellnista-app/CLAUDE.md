@@ -14,8 +14,22 @@ NubSook (Wellnista) is a Progressive Web App for personal nutrition and wellness
 npm run dev      # Start dev server with Turbopack
 npm run build    # Production build
 npm run lint     # ESLint (flat config; `next lint` was removed in Next 16)
+npm test         # Vitest in watch mode
+npm run test:run # Vitest once (CI)
 npm start        # Start production server
 ```
+
+## Testing
+
+Vitest + jsdom + React Testing Library (`vitest.config.mts`, `vitest.setup.ts`). Tests live in
+`__tests__` folders next to the code they cover and use explicit `vitest` imports (no globals):
+
+- `app/lib/utils/__tests__/nutritionCalculator.test.ts` - Harris-Benedict BMR/TDEE, carb math, validation
+- `app/lib/utils/__tests__/cartUtils.test.ts` - per-user localStorage carts, merge, totals
+- `config/__tests__/config.test.ts` - product catalogue integrity + localisation, country codes, feature flags
+- `i18n/__tests__/i18n.test.tsx` - I18nProvider (default/stored locale, fallback to Thai, `{param}`
+  interpolation) and a catalogue check that every English key has a Thai fallback, since `t()` falls
+  back to Thai before returning the raw key.
 
 ## Tech Stack
 

@@ -513,7 +513,9 @@
         "description": "สแกนอาหารเพื่อดูข้อมูลโภชนาการที่แม่นยำ"
       }
     },
-    "contactLine": "ติดต่อ LINE"
+    "contactLine": "ติดต่อ LINE",
+    "install": "ติดตั้ง",
+    "notNow": "ไว้ทีหลัง"
   },
   "settings": {
     "title": "ตั้งค่า",
@@ -587,4 +589,4 @@
     }
   },
   "securePaymentViaPromptPay": "การชำระเงินที่ปลอดภัยผ่าน PromptPay"
-} 
+}
