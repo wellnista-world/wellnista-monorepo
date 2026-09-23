@@ -189,7 +189,7 @@ export default function ProfilePage() {
   return (
     <div className="min-h-screen bg-secondary text-neutral font-garet px-4 py-6">
       {/* Nutrition Progress */}
-      <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm">
+      <div className="bg-white rounded-2xl p-6 mb-8 shadow-xs">
         <Typography className="text-lg font-semibold text-primary mb-6">
           {t('profile.todayProgress')}
         </Typography>
@@ -237,7 +237,7 @@ export default function ProfilePage() {
       </div>
 
       {/* Calendar */}
-      <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm">
+      <div className="bg-white rounded-2xl p-6 mb-8 shadow-xs">
         <Typography className="text-lg font-semibold text-primary mb-6">
           {t('profile.eatingCalendar')}
         </Typography>
@@ -255,7 +255,7 @@ export default function ProfilePage() {
 
       {/* Nutrition Calculation Breakdown */}
       {nutritionResult && nutritionResult.isValid && (
-        <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm">
+        <div className="bg-white rounded-2xl p-6 mb-8 shadow-xs">
           <button
             onClick={() => setShowCalculation(!showCalculation)}
             className="w-full flex items-center justify-between mb-4"
@@ -294,7 +294,7 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              <div className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl p-4">
+              <div className="bg-linear-to-r from-primary/5 to-accent/5 rounded-xl p-4">
                 <Typography className="text-xs text-neutral/70 mb-2">
                   {t('nutrition.carbRatio')}
                 </Typography>
@@ -343,7 +343,7 @@ export default function ProfilePage() {
       )}
 
       {/* Personal Information */}
-      <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm">
+      <div className="bg-white rounded-2xl p-6 mb-8 shadow-xs">
         <div className="flex items-center justify-between mb-4">
           <Typography className="text-lg font-semibold text-primary">
             {t('profile.personalInfo')}
@@ -373,7 +373,7 @@ export default function ProfilePage() {
 
       {/* Health Stats Cards */}
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
+        <div className="bg-white rounded-2xl p-6 shadow-xs">
           <Typography className="text-sm text-neutral/70 mb-2">{t('profile.bmi')}</Typography>
           <Typography className="text-2xl font-bold text-primary">
             {bmi.toFixed(1)}
@@ -383,7 +383,7 @@ export default function ProfilePage() {
           </Typography>
           <Typography className="text-xs mt-1 text-primary">{bmiText}</Typography>
         </div>
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
+        <div className="bg-white rounded-2xl p-6 shadow-xs">
           <Typography className="text-sm text-neutral/70 mb-2">
             {t('profile.activityLevel')}
           </Typography>

@@ -90,7 +90,7 @@ export default function ProductDetailPage() {
         </div>
         <button 
           onClick={handleBuyNow}
-          className="flex-grow-[2] bg-primary text-white flex items-center justify-center font-semibold"
+          className="grow-2 bg-primary text-white flex items-center justify-center font-semibold"
         >
           {t('common.buyNow')}
         </button>

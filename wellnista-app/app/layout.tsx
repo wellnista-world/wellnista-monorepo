@@ -169,7 +169,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                                   window.history.back();
                                 }
                               }}
-                              className="p-2 rounded-full bg-white/80 hover:bg-primary/80 text-accent hover:text-white shadow z-10"
+                              className="p-2 rounded-full bg-white/80 hover:bg-primary/80 text-accent hover:text-white shadow-sm z-10"
                               aria-label="Back"
                             >
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">

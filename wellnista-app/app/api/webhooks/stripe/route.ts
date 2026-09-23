@@ -5,9 +5,7 @@ const getStripe = () => {
   if (!process.env.STRIPE_SECRET_KEY) {
     throw new Error('STRIPE_SECRET_KEY is not configured');
   }
-  return new Stripe(process.env.STRIPE_SECRET_KEY, {
-    apiVersion: '2025-08-27.basil',
-  });
+  return new Stripe(process.env.STRIPE_SECRET_KEY);
 };
 
 export async function POST(request: NextRequest) {

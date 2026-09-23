@@ -294,16 +294,16 @@ export default function ResultPage() {
       </Box>
 
       <Box className="grid grid-cols-2 gap-4 mb-6">
-        <Box className="bg-white p-4 rounded-lg shadow w-full text-lg font-bold">
+        <Box className="bg-white p-4 rounded-lg shadow-sm w-full text-lg font-bold">
           <p>{t('scan.calories')}: {kcal ?? t('scan.noData')} kcal</p>
         </Box>
-        <Box className="bg-white p-4 rounded-lg shadow w-full text-lg font-bold">
+        <Box className="bg-white p-4 rounded-lg shadow-sm w-full text-lg font-bold">
           <p>{t('scan.protein')}: {protein ?? t('scan.noData')} {t('scan.grams')}</p>
         </Box>
       </Box>
 
       <Box className="flex flex-col md:flex-row w-full gap-6">
-        <Box className="flex flex-col items-start bg-white p-4 rounded-lg shadow w-full">
+        <Box className="flex flex-col items-start bg-white p-4 rounded-lg shadow-sm w-full">
           <h2 className="text-lg font-bold mb-2">{t('scan.nutritionalInfo')}</h2>
           <ul className="text-sm space-y-1">
             <li>{t('scan.fat')}: {fatValue} {t('scan.grams')}</li>
@@ -318,7 +318,7 @@ export default function ResultPage() {
           </ul>
         </Box>
 
-        <Box className="flex flex-col items-center justify-center bg-white p-4 rounded-lg shadow w-full mb-8">
+        <Box className="flex flex-col items-center justify-center bg-white p-4 rounded-lg shadow-sm w-full mb-8">
           <h2 className="text-lg font-bold mb-2">{t('scan.carbAmount')}</h2>
           <Box className="w-24 h-24 mb-4">
             <svg viewBox="0 0 36 36" className="circular-chart">

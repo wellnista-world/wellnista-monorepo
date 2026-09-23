@@ -366,16 +366,16 @@ export default function ScanImagePage() {
           </Box>
 
           <div className="grid grid-cols-2 gap-4 mb-6">
-            <div className="bg-white p-4 rounded-lg shadow w-full text-lg font-bold">
+            <div className="bg-white p-4 rounded-lg shadow-sm w-full text-lg font-bold">
               <p>{t('scan.calories')}: {analysisResult.nutriments["energy-kcal_serving"] || t('scan.noData')} kcal</p>
             </div>
-            <div className="bg-white p-4 rounded-lg shadow w-full text-lg font-bold">
+            <div className="bg-white p-4 rounded-lg shadow-sm w-full text-lg font-bold">
               <p>{t('scan.protein')}: {analysisResult.nutriments.proteins_serving || t('scan.noData')} {t('scan.grams')}</p>
             </div>
           </div>
 
           <div className="flex flex-col md:flex-row w-full gap-6">
-            <div className="flex flex-col items-start bg-white p-4 rounded-lg shadow w-full">
+            <div className="flex flex-col items-start bg-white p-4 rounded-lg shadow-sm w-full">
               <h2 className="text-lg font-bold mb-2">{t('scan.nutritionalInfo')}</h2>
               <ul className="text-sm space-y-1">
                 <li>{t('scan.fat')}: {analysisResult.nutriments.fat || 0} {t('scan.grams')}</li>
@@ -390,7 +390,7 @@ export default function ScanImagePage() {
               </ul>
             </div>
 
-            <div className="flex flex-col items-center justify-center bg-white p-4 rounded-lg shadow w-full mb-8">
+            <div className="flex flex-col items-center justify-center bg-white p-4 rounded-lg shadow-sm w-full mb-8">
               <h2 className="text-lg font-bold mb-2">{t('scan.carbAmount')}</h2>
               <div className="w-24 h-24 mb-4">
                 <svg viewBox="0 0 36 36" className="circular-chart">

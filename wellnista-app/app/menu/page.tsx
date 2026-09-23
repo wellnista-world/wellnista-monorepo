@@ -355,12 +355,12 @@ export default function MenuScreen() {
             open={loading} 
             maxWidth="sm" 
             fullWidth
-            PaperProps={{
+            slotProps={{ paper: {
               style: {
                 borderRadius: '16px',
                 backgroundColor: 'white',
               }
-            }}
+            } }}
           >
             <DialogContent className="p-8 text-center">
               <CircularProgress size={60} className="mb-4" />

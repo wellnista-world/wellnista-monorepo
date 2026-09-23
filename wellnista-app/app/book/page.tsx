@@ -166,7 +166,7 @@ export default function InforDtx() {
       <div className="w-full max-w-sm space-y-4">
         <Typography className="text-xl font-bold">{t('bloodSugar.dateTime')}</Typography>
         <div className="flex gap-4">
-          <Box className="bg-white border-2 border-primary rounded px-4 py-2 w-full text-center font-semibold text-lg">
+          <Box className="bg-white border-2 border-primary rounded-sm px-4 py-2 w-full text-center font-semibold text-lg">
             {currentDate}
           </Box>
         </div>
@@ -203,7 +203,7 @@ export default function InforDtx() {
           fullWidth
           onClick={handleSubmit}
           disabled={loading}
-          className="!bg-primary hover:!bg-accent !text-white font-garet text-xl rounded-full mt-6"
+          className="bg-primary! hover:bg-accent! text-white! font-garet text-xl rounded-full mt-6"
         >
           {loading ? <CircularProgress size={24} color="inherit" /> : t('bloodSugar.save')}
         </Button>

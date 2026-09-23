@@ -58,7 +58,7 @@ export default function LibraryPage() {
           <div
             key={topic.key}
             onClick={() => handleTopicClick(topic.url)}
-            className="bg-white rounded-2xl p-6 flex items-center justify-between shadow-sm hover:bg-primary/5 transition-all cursor-pointer"
+            className="bg-white rounded-2xl p-6 flex items-center justify-between shadow-xs hover:bg-primary/5 transition-all cursor-pointer"
           >
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
@@ -79,7 +79,7 @@ export default function LibraryPage() {
       </div>
 
       {/* Additional Information */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm">
+      <div className="bg-white rounded-2xl p-6 shadow-xs">
         <Typography variant="h6" className="font-semibold text-primary mb-3">
           {t('knowledge.library')}
         </Typography>

@@ -39,7 +39,7 @@ export default function CountryCodeSelector({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-full px-4 py-4 text-left bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary h-[56px]"
+        className="flex items-center justify-between w-full px-4 py-4 text-left bg-white border border-gray-300 rounded-md shadow-xs focus:outline-hidden focus:ring-2 focus:ring-primary focus:border-primary h-[56px]"
       >
         <div className="flex items-center space-x-2">
           <span className="text-xl">{selectedCountry.flag}</span>

@@ -181,7 +181,7 @@ export default function BloodPressureTracking() {
         {/* Date & Time Display */}
         <Typography className="text-xl font-bold">{t('bloodPressure.dateTime')}</Typography>
         <div className="flex gap-4">
-          <Box className="bg-white border-2 border-primary rounded px-4 py-2 w-full text-center font-semibold text-lg">
+          <Box className="bg-white border-2 border-primary rounded-sm px-4 py-2 w-full text-center font-semibold text-lg">
             {currentDate}
           </Box>
         </div>
@@ -195,9 +195,9 @@ export default function BloodPressureTracking() {
             value={systolic ?? ''}
             onChange={(e) => setSystolic(e.target.value === '' ? null : Number(e.target.value))}
             className="bg-white"
-            InputProps={{
+            slotProps={{ input: {
               startAdornment: <Heart size={20} className="text-primary mr-2" />,
-            }}
+            } }}
           />
           <TextField
             fullWidth
@@ -206,9 +206,9 @@ export default function BloodPressureTracking() {
             value={diastolic ?? ''}
             onChange={(e) => setDiastolic(e.target.value === '' ? null : Number(e.target.value))}
             className="bg-white"
-            InputProps={{
+            slotProps={{ input: {
               startAdornment: <Heart size={20} className="text-primary mr-2" />,
-            }}
+            } }}
           />
         </div>
 
@@ -219,9 +219,9 @@ export default function BloodPressureTracking() {
           value={pulse ?? ''}
           onChange={(e) => setPulse(e.target.value === '' ? null : Number(e.target.value))}
           className="bg-white"
-          InputProps={{
+          slotProps={{ input: {
             startAdornment: <Activity size={20} className="text-primary mr-2" />,
-          }}
+          } }}
         />
 
         <TextField
@@ -240,7 +240,7 @@ export default function BloodPressureTracking() {
           fullWidth
           onClick={handleSubmit}
           disabled={loading}
-          className="!bg-primary hover:!bg-accent !text-white font-garet text-xl rounded-full mt-6"
+          className="bg-primary! hover:bg-accent! text-white! font-garet text-xl rounded-full mt-6"
         >
           {loading ? <CircularProgress size={24} color="inherit" /> : t('bloodPressure.save')}
         </Button>
@@ -323,7 +323,7 @@ export default function BloodPressureTracking() {
               </Typography>
               <div className="space-y-2 max-h-60 overflow-y-auto">
                 {bpRecords.slice(0, 10).map((record) => (
-                  <div key={record.id} className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                  <div key={record.id} className="flex justify-between items-center p-2 bg-gray-50 rounded-sm">
                     <div>
                       <Typography variant="body2" className="font-semibold">
                         {record.date}

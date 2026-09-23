@@ -38,13 +38,13 @@ export default function DailyPopup({
       onClose={handleClose}
       maxWidth="sm"
       fullWidth
-      PaperProps={{
+      slotProps={{ paper: {
         style: {
           borderRadius: '20px',
           backgroundColor: 'white',
           overflow: 'hidden',
         }
-      }}
+      } }}
     >
       <DialogContent className="p-0">
         {/* Close button */}
@@ -82,7 +82,7 @@ export default function DailyPopup({
               variant="outlined"
               fullWidth
               onClick={handleClose}
-              className="!border-primary !text-primary hover:!bg-primary/10"
+              className="border-primary! text-primary! hover:bg-primary/10!"
             >
               {t('dailyPopup.later')}
             </Button>
@@ -91,7 +91,7 @@ export default function DailyPopup({
               variant="contained"
               fullWidth
               onClick={handleClose}
-              className="!bg-primary hover:!bg-accent !text-white"
+              className="bg-primary! hover:bg-accent! text-white!"
             >
               {t('dailyPopup.gotIt')}
             </Button>

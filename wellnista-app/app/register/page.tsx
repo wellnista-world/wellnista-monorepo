@@ -327,7 +327,7 @@ export default function Register() {
             fullWidth
             onClick={handleSubmit}
             disabled={loading}
-            className="!bg-primary hover:!bg-accent !text-white mt-4 rounded-full font-semibold"
+            className="bg-primary! hover:bg-accent! text-white! mt-4 rounded-full font-semibold"
           >
             {loading ? <CircularProgress size={24} color="inherit" /> : t('register.submit')}
           </Button>

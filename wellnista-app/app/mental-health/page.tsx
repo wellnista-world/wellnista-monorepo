@@ -521,7 +521,7 @@ export default function MentalHealthPage() {
                   value={selectedDate}
                   onChange={(e) => setSelectedDate(e.target.value)}
                   className="bg-white"
-                  InputLabelProps={{ shrink: true }}
+                  slotProps={{ inputLabel: { shrink: true } }}
                 />
                 <TextField
                   type="time"
@@ -529,7 +529,7 @@ export default function MentalHealthPage() {
                   value={selectedTime}
                   onChange={(e) => setSelectedTime(e.target.value)}
                   className="bg-white"
-                  InputLabelProps={{ shrink: true }}
+                  slotProps={{ inputLabel: { shrink: true } }}
                 />
               </div>
 

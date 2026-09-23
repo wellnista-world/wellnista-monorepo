@@ -91,7 +91,7 @@ export default function SettingsPage() {
 
       <Box className="mt-6 w-full max-w-sm flex flex-col gap-6">
         {/* Language Settings */}
-        <Box className="bg-white rounded-lg p-4 shadow-sm">
+        <Box className="bg-white rounded-lg p-4 shadow-xs">
           <Typography variant="h6" className="mb-3 font-semibold">
             {t('settings.language')}
           </Typography>
@@ -104,7 +104,7 @@ export default function SettingsPage() {
         <Divider />
 
         {/* Current Language Display */}
-        <Box className="bg-white rounded-lg p-4 shadow-sm">
+        <Box className="bg-white rounded-lg p-4 shadow-xs">
           <Typography variant="h6" className="mb-3 font-semibold">
             {t('settings.currentLanguage')}
           </Typography>
@@ -123,7 +123,7 @@ export default function SettingsPage() {
         {/* Install App Section */}
         {!isInstalled && (
           <>
-            <Box className="bg-white rounded-lg p-4 shadow-sm">
+            <Box className="bg-white rounded-lg p-4 shadow-xs">
               <Typography variant="h6" className="mb-3 font-semibold">
                 {t('settings.installApp')}
               </Typography>
@@ -163,7 +163,7 @@ export default function SettingsPage() {
         {/* App Already Installed Message */}
         {isInstalled && (
           <>
-            <Box className="bg-white rounded-lg p-4 shadow-sm">
+            <Box className="bg-white rounded-lg p-4 shadow-xs">
               <Typography variant="h6" className="mb-3 font-semibold flex items-center gap-2">
                 <CheckCircle size={20} className="text-green-600" />
                 {t('settings.installApp')}
@@ -177,7 +177,7 @@ export default function SettingsPage() {
         )}
 
         {/* App Information */}
-        <Box className="bg-white rounded-lg p-4 shadow-sm">
+        <Box className="bg-white rounded-lg p-4 shadow-xs">
           <Typography variant="h6" className="mb-3 font-semibold">
             {t('settings.appInfo')}
           </Typography>

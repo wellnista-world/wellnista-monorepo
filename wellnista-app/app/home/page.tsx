@@ -90,7 +90,7 @@ export default function HomeScreen() {
       icon: <Camera size={24} />,
       label: t("home.eatThisScan"),
       href: "/select",
-      color: "bg-[#9F9260]",
+      color: "bg-primary",
     },
     {
       icon: <Heart size={24} />,
@@ -184,7 +184,7 @@ export default function HomeScreen() {
       <div className="space-y-4 mb-8">
         <div
           onClick={() => router.push("/home/library")}
-          className="bg-white rounded-2xl p-6 flex items-center justify-between shadow-sm hover:bg-primary/5 transition-all cursor-pointer"
+          className="bg-white rounded-2xl p-6 flex items-center justify-between shadow-xs hover:bg-primary/5 transition-all cursor-pointer"
         >
           <div className="flex items-center gap-4">
             <Library size={24} className="text-primary" />
@@ -197,7 +197,7 @@ export default function HomeScreen() {
 
         <div
           onClick={() => router.push("/settings")}
-          className="bg-white rounded-2xl p-6 flex items-center justify-between shadow-sm hover:bg-primary/5 transition-all cursor-pointer"
+          className="bg-white rounded-2xl p-6 flex items-center justify-between shadow-xs hover:bg-primary/5 transition-all cursor-pointer"
         >
           <div className="flex items-center gap-4">
             <Settings size={24} className="text-primary" />

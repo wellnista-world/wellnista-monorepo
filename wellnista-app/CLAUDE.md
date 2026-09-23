@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-NubSook (Wellnista) is a Progressive Web App for personal nutrition and wellness tracking. Built with Next.js 15 App Router, it provides health tracking (BMI, blood pressure, mental health), food analysis via AI, barcode scanning, and e-commerce features.
+NubSook (Wellnista) is a Progressive Web App for personal nutrition and wellness tracking. Built with Next.js 16 App Router, it provides health tracking (BMI, blood pressure, mental health), food analysis via AI, barcode scanning, and e-commerce features.
 
 **Production URL:** https://app.wellnista.world
 
@@ -13,16 +13,16 @@ NubSook (Wellnista) is a Progressive Web App for personal nutrition and wellness
 ```bash
 npm run dev      # Start dev server with Turbopack
 npm run build    # Production build
-npm run lint     # ESLint
+npm run lint     # ESLint (flat config; `next lint` was removed in Next 16)
 npm start        # Start production server
 ```
 
 ## Tech Stack
 
-- **Framework:** Next.js 15.2 with App Router (React 19)
-- **Styling:** Material-UI 7 + Tailwind CSS
+- **Framework:** Next.js 16 with App Router (React 19). `next build --webpack` because next-pwa hooks into webpack; `next dev` runs on Turbopack with the PWA plugin skipped.
+- **Styling:** Material-UI 9 (slotProps API: `slotProps.input` / `htmlInput` / `inputLabel` / `paper` instead of the removed `InputProps` / `inputProps` / `InputLabelProps` / `PaperProps`) + Tailwind CSS 4 (theme lives in `app/globals.css` `@theme`; there is no tailwind.config.ts)
 - **Database/Auth:** Supabase (PostgreSQL)
-- **Payments:** Stripe
+- **Payments:** Stripe (checkout redirects to the hosted Checkout Session `url`; Stripe.js `redirectToCheckout` no longer exists)
 - **AI:** OpenAI for food analysis and menu recommendations
 - **Platform Integration:** LINE LIFF for LINE app features
 - **Barcode Scanning:** ZXing, Quagga2

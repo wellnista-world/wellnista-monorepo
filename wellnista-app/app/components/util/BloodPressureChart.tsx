@@ -122,7 +122,7 @@ export default function BloodPressureChart({
                     tick={{ fontSize: 12 }}
                   />
                   <Tooltip 
-                    formatter={(value: number) => [`${value} ${getUnit()}`, getDataKeyLabel()]}
+                    formatter={(value) => [`${value ?? ''} ${getUnit()}`, getDataKeyLabel()]}
                     labelFormatter={(label) => `Date: ${label}`}
                   />
                   <ReferenceLine 
@@ -160,7 +160,7 @@ export default function BloodPressureChart({
           {chartData.length > 0 && (
             <div className="mt-4 space-y-2 max-h-40 overflow-y-auto">
               {chartData.map((record) => (
-                <div key={record.id} className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                <div key={record.id} className="flex justify-between items-center p-2 bg-gray-50 rounded-sm">
                   <div>
                     <Typography variant="body2" className="font-semibold">
                       {record.date}
@@ -216,7 +216,7 @@ export default function BloodPressureChart({
               <div className="flex gap-2 pt-4">
                 <button
                   onClick={() => setEditDialogOpen(false)}
-                  className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+                  className="px-4 py-2 bg-gray-500 text-white rounded-sm hover:bg-gray-600"
                 >
                   {t('common.cancel')}
                 </button>
@@ -225,7 +225,7 @@ export default function BloodPressureChart({
                     // Handle save logic here
                     setEditDialogOpen(false);
                   }}
-                  className="px-4 py-2 bg-primary text-white rounded hover:bg-accent"
+                  className="px-4 py-2 bg-primary text-white rounded-sm hover:bg-accent"
                 >
                   {t('common.save')}
                 </button>

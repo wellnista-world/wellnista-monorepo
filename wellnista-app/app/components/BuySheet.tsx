@@ -40,7 +40,7 @@ export const BuySheet = ({ product, open, onClose }: BuySheetProps) => {
   };
 
   return (
-    <Drawer anchor="bottom" open={open} onClose={onClose} PaperProps={{ sx: { borderTopLeftRadius: 16, borderTopRightRadius: 16 } }}>
+    <Drawer anchor="bottom" open={open} onClose={onClose} slotProps={{ paper: { sx: { borderTopLeftRadius: 16, borderTopRightRadius: 16 } } }}>
       <Box sx={{ padding: '16px', maxWidth: '600px', margin: 'auto', width: '100%' }}>
         <IconButton onClick={onClose} sx={{ position: 'absolute', top: 8, right: 8, zIndex: 1300 }}>
           <CloseIcon />
@@ -55,7 +55,7 @@ export const BuySheet = ({ product, open, onClose }: BuySheetProps) => {
         </Box>
 
         <Box sx={{ mt: 2, pb: 2 }}>
-          <Typography variant="h6" fontWeight="bold" sx={{ mb: 1 }}>
+          <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
             {displayProduct.name}
           </Typography>
           <Typography variant="body2" color="text.secondary">

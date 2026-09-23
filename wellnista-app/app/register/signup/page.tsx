@@ -97,7 +97,7 @@ export default function SignupPage() {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             fullWidth
-            className="bg-white rounded"
+            className="bg-white rounded-sm"
             placeholder={t('auth.phonePlaceholder')}
           />
         </div>
@@ -108,7 +108,7 @@ export default function SignupPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           fullWidth
-          className="bg-white rounded"
+          className="bg-white rounded-sm"
         />
         <button
           onClick={handleSignup}

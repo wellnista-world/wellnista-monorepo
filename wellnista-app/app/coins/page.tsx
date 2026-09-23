@@ -73,7 +73,7 @@ export default function CoinsPage() {
             <div
               key={index}
               onClick={method.action}
-              className="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm hover:bg-primary/5 transition-all cursor-pointer"
+              className="bg-white rounded-2xl p-4 flex items-center justify-between shadow-xs hover:bg-primary/5 transition-all cursor-pointer"
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
@@ -100,7 +100,7 @@ export default function CoinsPage() {
       </div>
 
       {/* Information */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm">
+      <div className="bg-white rounded-2xl p-6 shadow-xs">
         <Typography className="font-bold text-primary mb-3">
           About Coins
         </Typography>

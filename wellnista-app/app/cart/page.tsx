@@ -35,7 +35,7 @@ export default function CartPage() {
             {cart.map(item => (
               <div key={item.product.id} className="bg-white p-4 rounded-lg shadow-md flex items-center">
                 <Image src={item.product.image} alt={item.product.name} width={80} height={80} className="rounded-md object-cover" />
-                <div className="flex-grow ml-4">
+                <div className="grow ml-4">
                   <Typography className="font-semibold">{item.product.name}</Typography>
                   <Typography className="text-gray-600">{item.product.currency}{item.product.price}</Typography>
                 </div>

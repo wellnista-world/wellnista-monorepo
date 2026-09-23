@@ -1,6 +1,6 @@
 'use client';
 
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceArea, ResponsiveContainer, TooltipProps } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceArea, ResponsiveContainer } from 'recharts';
 import { useState, useEffect } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
 import { useI18n } from '../../../i18n';
@@ -35,7 +35,10 @@ const formatDateToThai = (dateStr: string | undefined) => {
   return `${day}/${month}/${thaiYear}`;
 };
 
-interface CustomTooltipProps extends TooltipProps<number, string> {
+interface CustomTooltipProps {
+  active?: boolean;
+  payload?: Array<{ value?: number; payload: BmiRecord }>;
+  label?: string;
   onEdit: (data: BmiRecord) => void;
   dataKey: string;
 }
@@ -45,7 +48,7 @@ const CustomTooltip = ({ active, payload, label, dataKey }: CustomTooltipProps) 
   if (active && payload && payload.length) {
     const data = payload[0].payload as BmiRecord;
     return (
-      <div className="bg-white p-2 border border-gray-300 rounded shadow">
+      <div className="bg-white p-2 border border-gray-300 rounded-sm shadow-sm">
         <p className="font-bold">{t('bmi.date')} {formatDateToThai(label)}</p>
         <p className="text-primary">{t('bmi.time')}: {data.time}</p>
         <p className="text-primary">
@@ -191,12 +194,12 @@ export default function BmiChart({ data: initialData, title, dataKey, normalMin,
       <Dialog 
         open={open} 
         onClose={handleClose}
-        PaperProps={{
+        slotProps={{ paper: {
           style: {
             borderRadius: '1rem',
             padding: '1rem',
           }
-        }}
+        } }}
       >
         <DialogTitle className="text-center font-bold text-xl text-primary font-magnolia">
           {t('bmi.editData')}
@@ -209,11 +212,11 @@ export default function BmiChart({ data: initialData, title, dataKey, normalMin,
               value={editData?.time ?? ''}
               disabled
               className="bg-white"
-              InputProps={{
+              slotProps={{ input: {
                 style: {
                   borderRadius: '0.5rem',
                 }
-              }}
+              } }}
             />
             <TextField
               fullWidth
@@ -222,11 +225,11 @@ export default function BmiChart({ data: initialData, title, dataKey, normalMin,
               value={editData?.weight !== undefined && editData?.weight !== null ? editData.weight : ''}
               onChange={(e) => setEditData({ ...editData!, weight: Number(e.target.value) })}
               className="bg-white"
-              InputProps={{
+              slotProps={{ input: {
                 style: {
                   borderRadius: '0.5rem',
                 }
-              }}
+              } }}
             />
             <TextField
               fullWidth
@@ -235,11 +238,11 @@ export default function BmiChart({ data: initialData, title, dataKey, normalMin,
               value={editData?.height !== undefined && editData?.height !== null ? editData.height : ''}
               onChange={(e) => setEditData({ ...editData!, height: Number(e.target.value) })}
               className="bg-white"
-              InputProps={{
+              slotProps={{ input: {
                 style: {
                   borderRadius: '0.5rem',
                 }
-              }}
+              } }}
             />
             <TextField
               fullWidth
@@ -248,18 +251,18 @@ export default function BmiChart({ data: initialData, title, dataKey, normalMin,
               value={editData?.waist !== undefined && editData?.waist !== null ? editData.waist : ''}
               onChange={(e) => setEditData({ ...editData!, waist: Number(e.target.value) })}
               className="bg-white"
-              InputProps={{
+              slotProps={{ input: {
                 style: {
                   borderRadius: '0.5rem',
                 }
-              }}
+              } }}
             />
           </div>
         </DialogContent>
         <DialogActions className="gap-4 p-4">
           <Button 
             onClick={handleClose}
-            className="!text-primary !border-primary !border-2 hover:!bg-primary/10"
+            className="text-primary! border-primary! border-2! hover:bg-primary/10!"
             variant="outlined"
           >
             {t('bmi.cancel')}
@@ -267,7 +270,7 @@ export default function BmiChart({ data: initialData, title, dataKey, normalMin,
           <Button 
             onClick={handleSubmit} 
             variant="contained"
-            className="!bg-primary hover:!bg-accent !text-white font-garet text-xl rounded-full"
+            className="bg-primary! hover:bg-accent! text-white! font-garet text-xl rounded-full"
           >
             {t('bmi.save')}
           </Button>

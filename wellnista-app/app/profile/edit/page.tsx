@@ -224,7 +224,7 @@ export default function EditProfilePage() {
 
       <div className="max-w-2xl mx-auto space-y-6">
         {/* Basic Information */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
+        <div className="bg-white rounded-2xl p-6 shadow-xs">
           <div className="flex items-center gap-3 mb-4">
             <User className="text-primary" size={24} />
             <Typography variant="h6" className="font-semibold text-primary">
@@ -264,7 +264,7 @@ export default function EditProfilePage() {
               value={formData.personal_carb_value || ""}
               onChange={(e) => handleInputChange('personal_carb_value', e.target.value ? parseFloat(e.target.value) : null)}
               variant="outlined"
-              inputProps={{ min: 0, step: 0.1 }}
+              slotProps={{ htmlInput: { min: 0, step: 0.1 } }}
             />
           </div>
 
@@ -281,7 +281,7 @@ export default function EditProfilePage() {
         </div>
 
         {/* Health Information */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
+        <div className="bg-white rounded-2xl p-6 shadow-xs">
           <div className="flex items-center gap-3 mb-4">
             <Heart className="text-primary" size={24} />
             <Typography variant="h6" className="font-semibold text-primary">
@@ -349,7 +349,7 @@ export default function EditProfilePage() {
         </div>
 
         {/* Physical Information */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
+        <div className="bg-white rounded-2xl p-6 shadow-xs">
           <div className="flex items-center gap-3 mb-4">
             <Activity className="text-primary" size={24} />
             <Typography variant="h6" className="font-semibold text-primary">
@@ -380,7 +380,7 @@ export default function EditProfilePage() {
               value={formData.age || ""}
               onChange={(e) => handleInputChange('age', e.target.value ? parseInt(e.target.value) : null)}
               variant="outlined"
-              inputProps={{ min: 1, max: 120 }}
+              slotProps={{ htmlInput: { min: 1, max: 120 } }}
             />
           </div>
 
@@ -392,10 +392,9 @@ export default function EditProfilePage() {
               value={formData.weight || ""}
               onChange={(e) => handleInputChange('weight', e.target.value ? parseFloat(e.target.value) : null)}
               variant="outlined"
-              inputProps={{ min: 20, max: 300, step: 0.1 }}
-              InputProps={{
+              slotProps={{ htmlInput: { min: 20, max: 300, step: 0.1 }, input: {
                 endAdornment: <Typography variant="caption">kg</Typography>
-              }}
+              } }}
             />
 
             <TextField
@@ -405,10 +404,9 @@ export default function EditProfilePage() {
               value={formData.height || ""}
               onChange={(e) => handleInputChange('height', e.target.value ? parseFloat(e.target.value) : null)}
               variant="outlined"
-              inputProps={{ min: 100, max: 250, step: 0.1 }}
-              InputProps={{
+              slotProps={{ htmlInput: { min: 100, max: 250, step: 0.1 }, input: {
                 endAdornment: <Typography variant="caption">cm</Typography>
-              }}
+              } }}
             />
 
             <TextField
@@ -418,10 +416,9 @@ export default function EditProfilePage() {
               value={formData.waist || ""}
               onChange={(e) => handleInputChange('waist', e.target.value ? parseFloat(e.target.value) : null)}
               variant="outlined"
-              inputProps={{ min: 50, max: 200, step: 0.1 }}
-              InputProps={{
+              slotProps={{ htmlInput: { min: 50, max: 200, step: 0.1 }, input: {
                 endAdornment: <Typography variant="caption">cm</Typography>
-              }}
+              } }}
             />
           </div>
 

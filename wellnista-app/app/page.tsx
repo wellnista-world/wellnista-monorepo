@@ -136,7 +136,7 @@ export default function Home() {
                 variant="outlined"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="bg-white rounded"
+                className="bg-white rounded-sm"
                 placeholder={t("auth.phonePlaceholder")}
               />
             </div>
@@ -147,7 +147,7 @@ export default function Home() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="bg-white rounded"
+              className="bg-white rounded-sm"
             />
             <button
               onClick={handleLogin}

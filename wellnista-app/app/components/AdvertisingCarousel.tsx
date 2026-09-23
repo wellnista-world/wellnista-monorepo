@@ -112,7 +112,7 @@ export default function AdvertisingCarousel({
 
               {/* Click indicator */}
               {showClickIndicator && (
-                <Box className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">
+                <Box className="absolute top-4 right-4 bg-white/20 backdrop-blur-xs rounded-full px-3 py-1">
                   <Typography variant="caption" className="text-white font-medium">
                     {t('home.advertising.clickToSeeMore')}
                   </Typography>

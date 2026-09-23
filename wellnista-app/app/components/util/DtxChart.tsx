@@ -1,6 +1,6 @@
 'use client';
 
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceArea, ResponsiveContainer, TooltipProps } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceArea, ResponsiveContainer } from 'recharts';
 import { useState, useEffect } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
@@ -34,7 +34,10 @@ const formatDateToThai = (dateStr: string | undefined) => {
   return `${day}/${month}/${thaiYear}`;
 };
 
-interface CustomTooltipProps extends TooltipProps<number, string> {
+interface CustomTooltipProps {
+  active?: boolean;
+  payload?: Array<{ value?: number; payload: DtxRecord }>;
+  label?: string;
   onEdit: (data: DtxRecord) => void;
 }
 
@@ -42,7 +45,7 @@ const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload as DtxRecord;
     return (
-      <div className="bg-white p-2 border border-gray-300 rounded shadow">
+      <div className="bg-white p-2 border border-gray-300 rounded-sm shadow-sm">
         <p className="font-bold">วันที่ {formatDateToThai(label)}</p>
         <p className="text-primary">เวลา: {data.time}</p>
         <p className="text-primary">ระดับน้ำตาล: {payload[0].value}</p>
@@ -162,12 +165,12 @@ export default function DtxGraph({ data: initialData, title, normalMin, normalMa
       <Dialog 
         open={open} 
         onClose={handleClose}
-        PaperProps={{
+        slotProps={{ paper: {
           style: {
             borderRadius: '1rem',
             padding: '1rem',
           }
-        }}
+        } }}
       >
         <DialogTitle className="text-center font-bold text-xl text-primary font-magnolia">
           แก้ไขข้อมูล
@@ -180,11 +183,11 @@ export default function DtxGraph({ data: initialData, title, normalMin, normalMa
               value={editData?.time ?? ''}
               disabled
               className="bg-white"
-              InputProps={{
+              slotProps={{ input: {
                 style: {
                   borderRadius: '0.5rem',
                 }
-              }}
+              } }}
             />
             <TextField
               fullWidth
@@ -193,11 +196,11 @@ export default function DtxGraph({ data: initialData, title, normalMin, normalMa
               value={editData?.dtx_value !== undefined && editData?.dtx_value !== null ? editData.dtx_value : ''}
               onChange={(e) => setEditData({ ...editData!, dtx_value : Number(e.target.value) })}
               className="bg-white"
-              InputProps={{
+              slotProps={{ input: {
                 style: {
                   borderRadius: '0.5rem',
                 }
-              }}
+              } }}
             />
             <FormControl fullWidth>
               <InputLabel>เลือกมื้อ</InputLabel>
@@ -234,7 +237,7 @@ export default function DtxGraph({ data: initialData, title, normalMin, normalMa
         <DialogActions className="gap-4 p-4">
           <Button 
             onClick={handleClose}
-            className="!text-primary !border-primary !border-2 hover:!bg-primary/10"
+            className="text-primary! border-primary! border-2! hover:bg-primary/10!"
             variant="outlined"
           >
             ยกเลิก
@@ -242,7 +245,7 @@ export default function DtxGraph({ data: initialData, title, normalMin, normalMa
           <Button 
             onClick={handleSubmit} 
             variant="contained"
-            className="!bg-primary hover:!bg-accent !text-white font-garet text-xl rounded-full"
+            className="bg-primary! hover:bg-accent! text-white! font-garet text-xl rounded-full"
           >
             บันทึก
           </Button>

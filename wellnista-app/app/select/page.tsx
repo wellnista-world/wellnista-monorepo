@@ -14,13 +14,13 @@ export default function SelectScreen() {
       icon: <Barcode size={50} />,
       label: t('menu.scanBarcode'),
       href: "/scan",
-      color: "bg-[#9F9260]"
+      color: "bg-primary"
     },
     {
       icon: <Camera size={50} />,
       label: t('menu.takePhoto'),
       href: "/scan/scan-image",
-      color: "bg-[#9F9260]"
+      color: "bg-primary"
     }
   ];
 
@@ -28,20 +28,20 @@ export default function SelectScreen() {
     <div className="min-h-screen bg-secondary text-neutral font-garet px-4 py-6">
       {/* Header Section */}
       <div className="text-center mb-8">
-        <Typography className="!text-2xl font-bold text-primary mb-2">
+        <Typography className="text-2xl! font-bold text-primary mb-2">
           {t('menu.welcomeTo')}
         </Typography>
-        <Typography className="!text-3xl font-bold text-primary mb-4">
+        <Typography className="text-3xl! font-bold text-primary mb-4">
           {getAppName()}
         </Typography>
-        <Typography className="!text-sm text-neutral/70">
+        <Typography className="text-sm! text-neutral/70">
           {t('menu.chooseAction')}
         </Typography>
       </div>
 
       {/* Main Menu Grid */}
       <div className="mb-8">
-        <Typography className="!text-xl font-semibold text-primary mb-6 pb-3">
+        <Typography className="text-xl! font-semibold text-primary mb-6 pb-3">
           {t('menu.checkNutrition')}
         </Typography>
         <div className="grid grid-cols-2 gap-4">
@@ -55,7 +55,7 @@ export default function SelectScreen() {
                 <div className="flex justify-between items-start">
                   {item.icon}
                 </div>
-                <Typography className="!text-xl font-semibold">
+                <Typography className="text-xl! font-semibold">
                   {item.label}
                 </Typography>
               </div>

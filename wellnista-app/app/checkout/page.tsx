@@ -3,22 +3,12 @@
 import { useState } from 'react';
 import { useCart } from '../lib/context/CartContext';
 import { useCoins } from '../lib/context/CoinContext';
-import { loadStripe } from '@stripe/stripe-js';
 import Link from 'next/link';
 import Typography from '@mui/material/Typography';
 import { Button, Paper, Divider, Checkbox, FormControlLabel } from '@mui/material';
 import { useI18n } from '../../i18n';
 import { Coins } from 'lucide-react';
 import { promotions } from '../../config/promotion';
-
-const stripePromise = (() => {
-  const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
-  if (!publishableKey) {
-    console.error('Stripe publishable key is not set. Please add NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY to your .env.local file');
-    return null;
-  }
-  return loadStripe(publishableKey);
-})();
 
 export default function CheckoutPage() {
   const { cart } = useCart();
@@ -63,28 +53,19 @@ export default function CheckoutPage() {
         }),
       });
 
-      const { sessionId, error } = await response.json();
+      const { url, error } = await response.json();
 
       if (error) {
         throw new Error(error);
       }
 
-      if (!stripePromise) {
-        throw new Error(t('common.stripeNotConfigured'));
-      }
-
-      const stripe = await stripePromise;
-      if (!stripe) {
+      // Stripe.js no longer offers redirectToCheckout; Checkout Sessions are
+      // entered through the hosted URL the server returns.
+      if (!url) {
         throw new Error(t('common.stripeFailedToLoad'));
       }
 
-      const { error: stripeError } = await stripe.redirectToCheckout({
-        sessionId,
-      });
-
-      if (stripeError) {
-        throw new Error(stripeError.message);
-      }
+      window.location.assign(url);
     } catch (error) {
       console.error('Checkout error:', error);
       alert(t('common.failedToCheckout'));
