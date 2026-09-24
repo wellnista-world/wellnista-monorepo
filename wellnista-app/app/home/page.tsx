@@ -1,234 +1,269 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { supabase } from "../lib/api/supabaseClient";
 import { useAuth } from "../lib/context/AuthContext";
 import { useI18n } from "../../i18n";
-import Link from "next/link";
-import Typography from "@mui/material/Typography";
 import {
-  UserCircle,
   Camera,
-  BookOpen,
-  Library,
-  LogOut,
   Heart,
-  ChevronRight,
-  Settings,
+  BookOpen,
   Activity,
   HeartPulse,
   Brain,
+  Library,
+  Settings,
+  ShoppingBag,
+  LogOut,
+  ChevronRight,
+  Sparkles,
+  Flame,
 } from "lucide-react";
 import AdvertisingCarousel from "../components/AdvertisingCarousel";
 import { getAdvertisingItems } from "../../config/advertising";
 import DailyPopup from "../components/DailyPopup";
 import { useDailyPopup } from "../hooks/useDailyPopup";
+import RingGauge from "../components/ui/RingGauge";
+import type { UserData } from "../lib/types/user";
+import { calculateNutrition, getActivityLevelFromDescription } from "../lib/utils/nutritionCalculator";
+
+function bmiOf(weight: number, height: number): number {
+  const m = height / 100;
+  return Math.round((weight / (m * m)) * 10) / 10;
+}
 
 export default function HomeScreen() {
   const router = useRouter();
   const { user } = useAuth();
   const { t, locale } = useI18n();
-  const [userName, setUserName] = useState<string | null>(null);
+  const [profile, setProfile] = useState<Partial<UserData> | null>(null);
   const { showPopup, closePopup } = useDailyPopup();
 
   useEffect(() => {
-    const fetchUserName = async () => {
+    const fetchProfile = async () => {
       if (!user) return;
-
       const { data, error } = await supabase
         .from("users")
-        .select("name")
+        .select("name, nickname, gender, age, weight, height, activitylevel")
         .eq("user_id", user.id)
         .single();
-
       if (error) {
-        console.error("Error fetching user name:", error);
+        console.error("Error fetching user profile:", error);
         return;
       }
-
-      setUserName(data.name);
+      setProfile(data);
     };
-
-    fetchUserName();
+    fetchProfile();
   }, [user]);
 
   const handleLogout = async () => {
     try {
-      // Clear local storage and session storage first
       localStorage.clear();
       sessionStorage.clear();
-
-      // Attempt to sign out from Supabase
       const { error } = await supabase.auth.signOut();
-
-      if (error) {
-        console.warn("Supabase logout error:", error);
-      }
-
-      // Force redirect to login page regardless of Supabase error
+      if (error) console.warn("Supabase logout error:", error);
       window.location.href = "/";
     } catch (error) {
       console.error("Logout error:", error);
-      // Force redirect even if there's an error
       window.location.href = "/";
     }
   };
+
+  // Personal targets from the profile (same maths as the scan screen).
+  const stats = useMemo(() => {
+    if (!profile?.weight || !profile?.height || !profile?.age) return null;
+    const nutrition = calculateNutrition({
+      gender: (profile.gender || "ชาย") as "male" | "female" | "ชาย" | "หญิง",
+      age: profile.age,
+      weight: profile.weight,
+      height: profile.height,
+      activityLevel: getActivityLevelFromDescription(profile.activitylevel || ""),
+    });
+    if (!nutrition.isValid) return null;
+    const bmi = bmiOf(profile.weight, profile.height);
+    const category =
+      bmi < 18.5 ? "bmiUnder" : bmi < 25 ? "bmiNormal" : bmi < 30 ? "bmiOver" : "bmiObese";
+    return { nutrition, bmi, category };
+  }, [profile]);
+
+  const hour = new Date().getHours();
+  const greetingKey = hour < 12 ? "home.goodMorning" : hour < 18 ? "home.goodAfternoon" : "home.goodEvening";
+  const displayName = profile?.nickname || profile?.name || "";
+  const initial = (displayName || user?.email || "W").trim().charAt(0).toUpperCase();
+
+  const advertisingItems = getAdvertisingItems(locale);
 
   if (!user) {
     return null; // AuthProvider will handle the redirect
   }
 
-  const menuItems = [
+  const quickActions = [
     {
-      icon: <UserCircle size={24} />,
-      label: t("navigation.profile"),
-      href: "/profile",
-      color: "bg-[#5EC269]",
-    },
-    {
-      icon: <Camera size={24} />,
+      icon: <Camera size={22} />,
+      well: "wa-iconwell",
       label: t("home.eatThisScan"),
+      sub: t("menu.checkNutrition"),
       href: "/select",
-      color: "bg-primary",
     },
     {
-      icon: <Heart size={24} />,
+      icon: <Heart size={22} />,
+      well: "wa-iconwell wa-iconwell--mint",
       label: t("home.whatToEat"),
+      sub: t("menu.diseaseSpecificFood"),
       href: "/menu",
-      color: "bg-[#DD524C]",
-    },
-    {
-      icon: <BookOpen size={24} />,
-      label: t("home.bloodSugarLog"),
-      href: "/book",
-      color: "bg-[#8A7F5F]",
-    },
-    {
-      icon: <Activity size={24} />,
-      label: t("home.bmiTracking"),
-      href: "/bmi",
-      color: "bg-[#4ECDC4]",
-    },
-    {
-      icon: <HeartPulse size={24} />,
-      label: t("home.bloodPressureTracking"),
-      href: "/blood-pressure",
-      color: "bg-[#FF6B6B]",
-    },
-    {
-      icon: <Brain size={24} />,
-      label: t("home.mentalHealthTracking"),
-      href: "/mental-health",
-      color: "bg-[#8B5CF6]",
     },
   ];
 
-  // Get advertising items from configuration
-  const advertisingItems = getAdvertisingItems(locale);
+  const trackers = [
+    { icon: <BookOpen size={20} />, label: t("home.bloodSugarLog"), href: "/book", tint: "text-lime" },
+    { icon: <Activity size={20} />, label: t("home.bmiTracking"), href: "/bmi", tint: "text-mint" },
+    { icon: <HeartPulse size={20} />, label: t("home.bloodPressureTracking"), href: "/blood-pressure", tint: "text-danger" },
+    { icon: <Brain size={20} />, label: t("home.mentalHealthTracking"), href: "/mental-health", tint: "text-violet" },
+  ];
+
+  const more = [
+    { icon: <ShoppingBag size={20} />, label: t("home.wellnistaMarket"), href: "/product" },
+    { icon: <Library size={20} />, label: t("home.wellnistaLibrary"), href: "/home/library" },
+    { icon: <Settings size={20} />, label: t("navigation.settings"), href: "/settings" },
+  ];
 
   return (
-    <div className="min-h-screen bg-secondary text-neutral font-garet px-4 py-6">
-      {/* LINE Contact Link - Top Right */}
-      <div className="flex justify-end mb-4">
-        <a
-          href="https://lin.ee/q4tHGv0"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-xs text-primary hover:text-accent transition-colors underline"
+    <div className="mx-auto max-w-md pb-6">
+      {/* Greeting */}
+      <div className="mb-5 flex items-center justify-between">
+        <div>
+          <p className="wa-eyebrow">{t(greetingKey)}</p>
+          <h1 className="text-2xl font-semibold text-ink leading-tight">
+            {displayName || t("auth.welcomeBack")}
+          </h1>
+        </div>
+        <Link
+          href="/profile"
+          className="wa-gradient flex h-11 w-11 items-center justify-center rounded-full text-base font-bold ring-2 ring-line"
+          aria-label={t("navigation.profile")}
         >
-          {t("home.contactLine")}
-        </a>
+          {initial}
+        </Link>
       </div>
 
-      {/* Advertising Carousel */}
-      <div className="mb-8">
-        <Typography variant="h6" className="font-bold text-primary mb-4 pb-4">
-          {t("home.advertising.title")}
-        </Typography>
-        <AdvertisingCarousel
-          items={advertisingItems}
-          autoSlideInterval={4000}
-        />
-      </div>
-
-      {/* Header with Welcome Message */}
-      <div className="mb-8">
-        <Typography className="text-2xl font-bold text-primary mb-1">
-          {t("auth.welcomeUser").replace("{phone}", userName || "")}
-        </Typography>
-        <Typography className="text-sm text-neutral/70">
-          {t("auth.welcomeBack")}
-        </Typography>
-      </div>
-
-      {/* Main Menu Grid */}
-      <div className="grid grid-cols-2 gap-4 mb-8">
-        {menuItems.map((item, index) => (
-          <Link key={index} href={item.href} className="block">
-            <div
-              className={`bg-white rounded-2xl p-6 h-32 flex flex-col text-primary justify-between shadow-lg hover:opacity-90 transition-all`}
-            >
-              <div className="flex justify-between items-start">
-                {item.icon}
+      {/* Daily target card */}
+      {stats ? (
+        <div className="wa-card mb-4 p-5">
+          <div className="flex items-center gap-4">
+            <div className="min-w-0 flex-1">
+              <div className="mb-2 flex items-center gap-2 text-sm text-ink-muted">
+                <Flame size={16} className="text-lime" />
+                {t("home.dailyTarget")}
               </div>
-              <Typography className="text-lg font-semibold">
-                {item.label}
-              </Typography>
+              <div className="flex items-baseline gap-2">
+                <span className="text-4xl font-bold text-ink">{stats.nutrition.carbServings}</span>
+                <span className="text-sm text-ink-muted">{t("home.servingsUnit")}</span>
+              </div>
+              <p className="mt-1 text-xs text-ink-muted">
+                {stats.nutrition.carbGrams} {t("nutrition.gramsPerDay")} · {stats.nutrition.tdee}{" "}
+                {t("nutrition.kcalPerDay")}
+              </p>
+            </div>
+            <RingGauge value={stats.bmi / 40} size={104} stroke={9}>
+              <span className="text-2xl font-bold text-ink">{stats.bmi}</span>
+              <span className="text-[10px] uppercase tracking-wider text-ink-muted">{t("home.bmiLabel")}</span>
+            </RingGauge>
+          </div>
+          <div className="mt-4 flex items-center justify-between border-t border-line pt-3 text-xs">
+            <span className="text-ink-muted">{t("profile.bmi")}</span>
+            <span className={`wa-chip ${stats.category === "bmiNormal" ? "wa-chip--active" : ""}`}>
+              {t(`home.${stats.category}`)}
+            </span>
+          </div>
+        </div>
+      ) : (
+        <Link href="/profile/edit" className="wa-card mb-4 flex items-center gap-4 p-5">
+          <span className="wa-iconwell shrink-0">
+            <Flame size={20} />
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="font-semibold text-ink">{t("home.completeProfile")}</p>
+            <p className="text-xs text-ink-muted">{t("home.completeProfileDesc")}</p>
+          </div>
+          <ChevronRight size={18} className="text-ink-muted" />
+        </Link>
+      )}
+
+      {/* AI tip banner */}
+      <div className="wa-gradient mb-6 flex items-start gap-3 rounded-3xl p-4">
+        <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-black/10">
+          <Sparkles size={16} />
+        </span>
+        <div className="min-w-0">
+          <p className="text-sm font-semibold leading-snug">{t("home.tipText")}</p>
+          <p className="mt-1 text-[11px] font-medium opacity-70">{t("home.tipTitle")}</p>
+        </div>
+      </div>
+
+      {/* Quick actions */}
+      <h2 className="mb-3 text-base font-semibold text-ink">{t("home.quickActions")}</h2>
+      <div className="mb-6 grid grid-cols-2 gap-3">
+        {quickActions.map((a) => (
+          <Link key={a.href} href={a.href} className="wa-card flex h-36 flex-col justify-between p-4 transition-transform active:scale-[0.98]">
+            <span className={a.well}>{a.icon}</span>
+            <div>
+              <p className="font-semibold leading-tight text-ink">{a.label}</p>
+              <p className="mt-0.5 line-clamp-2 text-[11px] text-ink-muted">{a.sub}</p>
             </div>
           </Link>
         ))}
       </div>
 
-      {/* Additional Services */}
-      <div className="space-y-4 mb-8">
-        <div
-          onClick={() => router.push("/home/library")}
-          className="bg-white rounded-2xl p-6 flex items-center justify-between shadow-xs hover:bg-primary/5 transition-all cursor-pointer"
-        >
-          <div className="flex items-center gap-4">
-            <Library size={24} className="text-primary" />
-            <Typography className="font-semibold text-primary">
-              {t("home.wellnistaLibrary")}
-            </Typography>
-          </div>
-          <ChevronRight size={20} className="text-primary" />
-        </div>
-
-        <div
-          onClick={() => router.push("/settings")}
-          className="bg-white rounded-2xl p-6 flex items-center justify-between shadow-xs hover:bg-primary/5 transition-all cursor-pointer"
-        >
-          <div className="flex items-center gap-4">
-            <Settings size={24} className="text-primary" />
-            <Typography className="font-semibold text-primary">
-              {t("navigation.settings")}
-            </Typography>
-          </div>
-          <ChevronRight size={20} className="text-primary" />
-        </div>
+      {/* Health tracking */}
+      <h2 className="mb-3 text-base font-semibold text-ink">{t("home.healthTracking")}</h2>
+      <div className="mb-6 grid grid-cols-2 gap-3">
+        {trackers.map((item) => (
+          <Link key={item.href} href={item.href} className="wa-card flex items-center gap-3 p-4 transition-transform active:scale-[0.98]">
+            <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-surface-2 ${item.tint}`}>
+              {item.icon}
+            </span>
+            <span className="text-sm font-medium leading-tight text-ink">{item.label}</span>
+          </Link>
+        ))}
       </div>
 
-      {/* Footer Note */}
-      <div className="text-center text-sm text-neutral/70 mb-8">
-        <p>{t("home.carbLogging")}</p>
+      {/* Promotions */}
+      <h2 className="mb-3 text-base font-semibold text-ink">{t("home.promotions")}</h2>
+      <div className="mb-6 overflow-hidden rounded-3xl">
+        <AdvertisingCarousel items={advertisingItems} autoSlideInterval={4000} />
       </div>
 
-      {/* Logout Button */}
-      <button
-        onClick={handleLogout}
-        className="w-full bg-white rounded-2xl p-4 flex items-center justify-center gap-2 text-primary hover:bg-primary/5 transition-all"
-      >
-        <LogOut size={20} />
-        <Typography className="font-semibold">{t("auth.logout")}</Typography>
-      </button>
+      {/* More */}
+      <h2 className="mb-3 text-base font-semibold text-ink">{t("home.more")}</h2>
+      <div className="wa-card mb-6 divide-y divide-line">
+        {more.map((item) => (
+          <button
+            key={item.href}
+            onClick={() => router.push(item.href)}
+            className="flex w-full items-center gap-3 px-4 py-3.5 text-left"
+          >
+            <span className="text-lime">{item.icon}</span>
+            <span className="flex-1 text-sm font-medium text-ink">{item.label}</span>
+            <ChevronRight size={18} className="text-ink-muted" />
+          </button>
+        ))}
+      </div>
 
-      {/* Daily Popup */}
-      <DailyPopup
-        open={showPopup}
-        onClose={closePopup}
-        imageUrl="/promote.webp"
-      />
+      <p className="mb-4 px-2 text-center text-xs text-ink-muted">{t("home.carbLogging")}</p>
+
+      <div className="flex items-center justify-center gap-4 text-xs text-ink-muted">
+        <a href="https://lin.ee/q4tHGv0" target="_blank" rel="noopener noreferrer" className="underline">
+          {t("home.contactLine")}
+        </a>
+        <button onClick={handleLogout} className="inline-flex items-center gap-1 underline">
+          <LogOut size={14} />
+          {t("auth.logout")}
+        </button>
+      </div>
+
+      <DailyPopup open={showPopup} onClose={closePopup} imageUrl="/promote.webp" />
     </div>
   );
 }

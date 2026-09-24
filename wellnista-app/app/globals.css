@@ -3,28 +3,53 @@ layer(base);
 @import '@fontsource/kanit' layer(base); /* Default Kanit font */
 @import '@fontsource/kanit/300.css' layer(base); /* Light weight */
 @import '@fontsource/kanit/400.css' layer(base); /* Regular weight */
+@import '@fontsource/kanit/500.css' layer(base); /* Medium weight */
+@import '@fontsource/kanit/600.css' layer(base); /* Semi-bold weight */
 @import '@fontsource/kanit/700.css' layer(base); /* Bold weight */
 
 @import 'tailwindcss';
 
+/*
+  Wellnista AI design tokens (dark, green-black surfaces, lime → mint accent).
+
+  The legacy names (primary / secondary / accent / neutral / muted) are kept
+  and REMAPPED so every existing screen picks up the new palette:
+    bg-secondary  = page background      text-neutral = body text
+    text-primary  = lime accent          bg-muted     = raised surface
+  The compat layer at the bottom restyles the hard-coded light utilities
+  (bg-white, text-gray-*) that older pages still use.
+*/
 @theme {
-  --color-primary: #9f9260;
-  --color-secondary: #fbf8ef;
-  --color-accent: #505631;
-  --color-neutral: #393939;
-  --color-muted: #e5e2d9;
+  --color-bg: #0a0e0b;
+  --color-bg-deep: #163126;
+  --color-surface: #151b16;
+  --color-surface-2: #1e2721;
+  --color-line: rgba(255, 255, 255, 0.08);
+  --color-ink: #f1f5ee;
+  --color-ink-muted: #9aa69c;
+  --color-lime: #cdf565;
+  --color-mint: #7fe7b6;
+  --color-danger: #ff6b6b;
+  --color-warn: #ffc857;
+  --color-violet: #a78bfa;
+
+  /* legacy names, remapped */
+  --color-primary: #cdf565;
+  --color-secondary: #0a0e0b;
+  --color-accent: #7fe7b6;
+  --color-neutral: #f1f5ee;
+  --color-muted: #1e2721;
 
   --font-kanit: Kanit, sans-serif;
   --font-leckerli: 'Leckerli One', cursive;
+
+  --radius-card: 1.5rem;
 }
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
   looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
 */
 @layer base {
   *,
@@ -32,7 +57,7 @@ layer(base);
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
+    border-color: var(--color-line, currentcolor);
   }
 }
 
@@ -50,33 +75,33 @@ layer(base);
 }
 
 :root {
-  --primary: #9F9260;
-  --secondary: #FFF4D2;
-  --accent: #505631;
-  --neutral: #615f5f;
-  --muted: #E5E2D9;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary: #9F9260;
-    --secondary: #171717;
-    --accent: #505631;
-    --neutral: #ededed;
-    --muted: #303030;
-  }
+  --primary: #cdf565;
+  --secondary: #0a0e0b;
+  --accent: #7fe7b6;
+  --neutral: #f1f5ee;
+  --muted: #1e2721;
+  color-scheme: dark;
 }
 
 /* Base styles */
+html {
+  background-color: var(--color-bg);
+}
+
 body {
-  @apply bg-secondary text-neutral;
-  font-family: 'Kanit', sans-serif; /* Apply Kanit globally */
+  min-height: 100vh;
+  color: var(--color-ink);
+  background-color: var(--color-bg);
+  background-image: radial-gradient(120% 55% at 50% -12%, var(--color-bg-deep) 0%, var(--color-bg) 62%);
+  background-attachment: fixed;
+  font-family: 'Kanit', sans-serif;
   font-weight: 400;
+  -webkit-font-smoothing: antialiased;
 }
 
 button {
   @apply rounded-md text-center;
-  font-family: 'Kanit', sans-serif; /* Ensure buttons use Kanit */
+  font-family: 'Kanit', sans-serif;
 }
 
 button.primary {
@@ -119,3 +144,161 @@ button.neutral {
   font-style: normal;
 }
 
+/* ---------------------------------------------------------------------- */
+/* Wellnista AI components                                                 */
+/* ---------------------------------------------------------------------- */
+
+/* Raised card on the dark canvas */
+.wa-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Lime → mint accent gradient (buttons, banners, rings) */
+.wa-gradient {
+  background-image: linear-gradient(100deg, var(--color-lime) 0%, var(--color-mint) 100%);
+  color: #0a0e0b;
+}
+
+.wa-gradient-text {
+  background-image: linear-gradient(100deg, var(--color-lime) 0%, var(--color-mint) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Section eyebrow label */
+.wa-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-lime);
+}
+
+/* Pill chip */
+.wa-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--color-line);
+  background-color: var(--color-surface-2);
+  color: var(--color-ink);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.wa-chip--active {
+  background-color: var(--color-lime);
+  border-color: var(--color-lime);
+  color: #0a0e0b;
+}
+
+/* Circular icon well */
+.wa-iconwell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background-color: rgba(205, 245, 101, 0.12);
+  color: var(--color-lime);
+}
+
+.wa-iconwell--mint {
+  background-color: rgba(127, 231, 182, 0.12);
+  color: var(--color-mint);
+}
+
+/* Primary CTA */
+.wa-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.wa-btn:active {
+  transform: scale(0.98);
+}
+
+.wa-btn:disabled {
+  opacity: 0.5;
+}
+
+.wa-btn--ghost {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-line);
+  color: var(--color-ink);
+}
+
+.wa-btn--danger {
+  background-color: rgba(255, 107, 107, 0.12);
+  border: 1px solid rgba(255, 107, 107, 0.35);
+  color: var(--color-danger);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Compat layer: screens not yet rebuilt still use light-theme utilities.  */
+/* Unlayered rules beat Tailwind's layered utilities, so this repaints     */
+/* them onto the dark canvas without touching every file.                 */
+/* ---------------------------------------------------------------------- */
+main .bg-white {
+  background-color: var(--color-surface);
+}
+
+main .bg-gray-50,
+main .bg-gray-100,
+main .bg-gray-200,
+main .bg-slate-100 {
+  background-color: var(--color-surface-2);
+}
+
+main .text-gray-900,
+main .text-gray-800,
+main .text-gray-700,
+main .text-black {
+  color: var(--color-ink);
+}
+
+main .text-gray-600,
+main .text-gray-500,
+main .text-gray-400,
+main .text-gray-300 {
+  color: var(--color-ink-muted);
+}
+
+main .border-gray-100,
+main .border-gray-200,
+main .border-gray-300 {
+  border-color: var(--color-line);
+}
+
+main .shadow-xs,
+main .shadow-sm,
+main .shadow-md,
+main .shadow-lg {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+main .rounded-lg,
+main .rounded-xl {
+  border-radius: 1rem;
+}
+
+main input:not([type='checkbox']):not([type='radio']),
+main select,
+main textarea {
+  color-scheme: dark;
+}

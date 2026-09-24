@@ -3,9 +3,9 @@
 
 export const appConfig = {
   // App Identity
-  name: "NubSook",
-  shortName: "NubSook", 
-  displayName: "NubSook",
+  name: "Wellnista AI",
+  shortName: "Wellnista AI",
+  displayName: "Wellnista AI",
   
   // App Description
   description: "Your personal nutrition assistant",
@@ -16,8 +16,8 @@ export const appConfig = {
   supportEmail: "tao.isaman@gmail.com",
   
   // App Colors (matching your theme)
-  themeColor: "#9F9260",
-  backgroundColor: "#ffffff",
+  themeColor: "#0a0e0b",
+  backgroundColor: "#0a0e0b",
   
   // App Features
   features: {
@@ -41,8 +41,8 @@ export const appConfig = {
   
   // App Metadata
   version: "1.0.0",
-  author: "NubSook Team",
-  copyright: "© 2024 NubSook. All rights reserved.",
+  author: "Wellnista Team",
+  copyright: "© 2026 Wellnista. All rights reserved.",
   
   // Localization
   defaultLanguage: "th",

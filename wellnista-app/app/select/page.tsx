@@ -1,73 +1,63 @@
 "use client";
 
 import Link from "next/link";
-import Typography from '@mui/material/Typography';
-import { Barcode, Camera } from 'lucide-react';
-import { useI18n } from '../../i18n';
-import { getAppName } from '../../config/app';
+import { Barcode, Camera, ChevronRight, Sparkles } from "lucide-react";
+import { useI18n } from "../../i18n";
 
+// "Log food": pick how to identify what you are about to eat.
 export default function SelectScreen() {
   const { t } = useI18n();
-  
-  const menuItems = [
+
+  const options = [
     {
-      icon: <Barcode size={50} />,
-      label: t('menu.scanBarcode'),
-      href: "/scan",
-      color: "bg-primary"
+      icon: <Camera size={24} />,
+      well: "wa-iconwell",
+      label: t("menu.takePhoto"),
+      sub: t("scan.aiPhotoHint"),
+      href: "/scan/scan-image",
     },
     {
-      icon: <Camera size={50} />,
-      label: t('menu.takePhoto'),
-      href: "/scan/scan-image",
-      color: "bg-primary"
-    }
+      icon: <Barcode size={24} />,
+      well: "wa-iconwell wa-iconwell--mint",
+      label: t("menu.scanBarcode"),
+      sub: t("scan.barcodeHint"),
+      href: "/scan",
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-secondary text-neutral font-garet px-4 py-6">
-      {/* Header Section */}
-      <div className="text-center mb-8">
-        <Typography className="text-2xl! font-bold text-primary mb-2">
-          {t('menu.welcomeTo')}
-        </Typography>
-        <Typography className="text-3xl! font-bold text-primary mb-4">
-          {getAppName()}
-        </Typography>
-        <Typography className="text-sm! text-neutral/70">
-          {t('menu.chooseAction')}
-        </Typography>
+    <div className="mx-auto max-w-md pb-6">
+      <div className="mb-6">
+        <p className="wa-eyebrow">{t("navigation.scan")}</p>
+        <h1 className="text-2xl font-semibold text-ink">{t("menu.checkNutrition")}</h1>
+        <p className="mt-1 text-sm text-ink-muted">{t("menu.chooseAction")}</p>
       </div>
 
-      {/* Main Menu Grid */}
-      <div className="mb-8">
-        <Typography className="text-xl! font-semibold text-primary mb-6 pb-3">
-          {t('menu.checkNutrition')}
-        </Typography>
-        <div className="grid grid-cols-2 gap-4">
-          {menuItems.map((item, index) => (
-            <Link 
-              key={index} 
-              href={item.href}
-              className="block"
-            >
-              <div className="bg-white rounded-2xl p-6 h-32 flex flex-col text-primary justify-between shadow-lg hover:opacity-90 transition-all">
-                <div className="flex justify-between items-start">
-                  {item.icon}
-                </div>
-                <Typography className="text-xl! font-semibold">
-                  {item.label}
-                </Typography>
-              </div>
-            </Link>
-          ))}
+      <div className="space-y-3">
+        {options.map((o) => (
+          <Link
+            key={o.href}
+            href={o.href}
+            className="wa-card flex items-center gap-4 p-4 transition-transform active:scale-[0.98]"
+          >
+            <span className={`${o.well} h-12 w-12 shrink-0`}>{o.icon}</span>
+            <div className="min-w-0 flex-1">
+              <p className="font-semibold text-ink">{o.label}</p>
+              <p className="text-xs text-ink-muted">{o.sub}</p>
+            </div>
+            <ChevronRight size={18} className="text-ink-muted" />
+          </Link>
+        ))}
+      </div>
+
+      <div className="wa-gradient mt-6 flex items-start gap-3 rounded-3xl p-4">
+        <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-black/10">
+          <Sparkles size={16} />
+        </span>
+        <div>
+          <p className="text-sm font-semibold">{t("menu.selectMethod")}</p>
+          <p className="text-xs opacity-80">{t("menu.toViewNutrition")}</p>
         </div>
-      </div>
-
-      {/* Footer Note */}
-      <div className="text-center text-sm text-neutral/70">
-        <p>{t('menu.selectMethod')}</p>
-        <p>{t('menu.toViewNutrition')}</p>
       </div>
     </div>
   );

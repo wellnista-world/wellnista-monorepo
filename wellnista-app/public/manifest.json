@@ -1,11 +1,11 @@
 {
-  "name": "NubSook",
-  "short_name": "NubSook",
-  "description": "Your personal nutrition assistant",
+  "name": "Wellnista AI",
+  "short_name": "Wellnista AI",
+  "description": "Wellnista AI - your personal nutrition assistant",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#9F9260",
+  "background_color": "#0a0e0b",
+  "theme_color": "#0a0e0b",
   "orientation": "portrait",
   "scope": "/",
   "lang": "th",
@@ -59,4 +59,4 @@
       "purpose": "any"
     }
   ]
-} 
+}

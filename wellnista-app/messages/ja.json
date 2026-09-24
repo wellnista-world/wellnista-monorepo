@@ -26,8 +26,8 @@
     "warning": "警告",
     "info": "情報",
     "addToHomeScreen": {
-      "title": "NubSookをインストール",
-      "description": "NubSookをホーム画面に追加して、より速くアクセスしやすくします",
+      "title": "Wellnista AIをインストール",
+      "description": "Wellnista AIをホーム画面に追加して、より速くアクセスしやすくします",
       "install": "インストール",
       "notNow": "今はしない"
     },
@@ -90,9 +90,9 @@
     "needMore": "ポイントが不足しています"
   },
   "auth": {
-    "welcome": "NubSookへようこそ",
-    "wellnista": "NubSook",
-    "wellnistaBrand": "NubSook",
+    "welcome": "Wellnista AIへようこそ",
+    "wellnista": "Wellnista AI",
+    "wellnistaBrand": "Wellnista AI",
     "tagline": "健康的なライフスタイルを簡単に、毎日維持",
     "login": "ログイン",
     "logout": "ログアウト",
@@ -101,7 +101,7 @@
     "phoneNumber": "電話番号",
     "password": "パスワード",
     "welcomeUser": "こんにちは、{phone}",
-    "welcomeBack": "NubSookへようこそ",
+    "welcomeBack": "Wellnista AIへようこそ",
     "signup": "サインアップ",
     "signupTitle": "アカウント作成",
     "signupSubtitle": "電話番号とパスワードで登録",
@@ -175,7 +175,10 @@
     "errAnalyzer": "食品解析サービスが利用できません。後でもう一度お試しください",
     "errNotConfigured": "サーバーに OpenAI API キーが設定されていません",
     "errQuota": "OpenAI API のクレジットが不足しています。OpenAI アカウントにチャージしてください",
-    "errBadResponse": "AI の応答を読み取れませんでした。もう一度撮影してください"
+    "errBadResponse": "AI の応答を読み取れませんでした。もう一度撮影してください",
+    "aiPhotoHint": "写真から AI が栄養を推定します",
+    "barcodeHint": "商品のバーコードから栄養成分を読み取ります",
+    "aiAnalysis": "Wellnista AI の分析結果"
   },
   "profile": {
     "title": "プロフィール",
@@ -382,7 +385,7 @@
     "recordSaved": "記録が正常に保存されました！"
   },
   "dailyPopup": {
-    "title": "NubSook へようこそ！",
+    "title": "Wellnista AI へようこそ！",
     "message": "今日から健康的な旅を始めましょう。栄養を追跡し、健康を監視し、より健康的なライフスタイルのためのより良い選択をしましょう。",
     "later": "後で",
     "gotIt": "了解しました！"
@@ -416,8 +419,8 @@
     "medicines": "薬"
   },
   "menu": {
-    "title": "NubSook",
-    "welcome": "NubSookへようこそ",
+    "title": "Wellnista AI",
+    "welcome": "Wellnista AIへようこそ",
     "chooseAction": "以下の操作を選択して開始",
     "checkNutrition": "食品栄養をチェック",
     "scanBarcode": "バーコードスキャン",
@@ -449,7 +452,7 @@
     "healthBenefits": "健康効果",
     "dietaryConsiderations": "食事の注意事項",
     "diseaseSpecificFood": "愛する人のための疾患特化食品",
-    "wellnistaMarket": "NubSook マーケット",
+    "wellnistaMarket": "Wellnista AI マーケット",
     "browseMarket": "マーケットを閲覧",
     "pork": "豚肉",
     "chicken": "鶏肉",
@@ -464,8 +467,8 @@
     "mentalHealthTracking": "メンタルヘルス記録",
     "specializedFood": "糖尿病専用食品",
     "carbLogging": "炭水化物の記録は思ったより簡単です。非感染性慢性疾患の予防に役立ちます。",
-    "wellnistaMarket": "NubSook Market",
-    "wellnistaLibrary": "NubSook ライブラリ",
+    "wellnistaMarket": "Wellnista Market",
+    "wellnistaLibrary": "Wellnista AI ライブラリ",
     "recommendedProducts": "おすすめ商品",
     "recommendedProduct": "おすすめ商品",
     "viewProduct": "商品を見る",
@@ -495,7 +498,25 @@
     },
     "contactLine": "LINEでお問い合わせ",
     "install": "インストール",
-    "notNow": "あとで"
+    "notNow": "あとで",
+    "goodMorning": "おはようございます",
+    "goodAfternoon": "こんにちは",
+    "goodEvening": "こんばんは",
+    "dailyTarget": "1日の炭水化物目標",
+    "servingsUnit": "サービング",
+    "bmiLabel": "BMI",
+    "bmiUnder": "低体重",
+    "bmiNormal": "標準",
+    "bmiOver": "過体重",
+    "bmiObese": "肥満",
+    "completeProfile": "健康プロフィールを完成させましょう",
+    "completeProfileDesc": "体重・身長・年齢・活動量を登録すると、あなた専用の炭水化物目標が表示されます",
+    "tipTitle": "Wellnista AI のヒント",
+    "tipText": "食べる前に写真を撮って、AI に炭水化物の計算と糖分・塩分・脂質のチェックを任せましょう",
+    "quickActions": "クイックアクション",
+    "healthTracking": "健康トラッキング",
+    "more": "その他",
+    "promotions": "プロモーション"
   },
   "settings": {
     "title": "設定",
@@ -506,7 +527,7 @@
     "version": "バージョン",
     "developer": "開発者",
     "installApp": "アプリをインストール",
-    "installAppDescription": "NubSook をホーム画面に追加して、より速いアクセスとオフライン使用を実現",
+    "installAppDescription": "Wellnista AI をホーム画面に追加して、より速いアクセスとオフライン使用を実現",
     "installAppButton": "ホーム画面にインストール",
     "appInstalled": "アプリは既にインストールされています",
     "installAppSuccess": "アプリのインストールが完了しました！",

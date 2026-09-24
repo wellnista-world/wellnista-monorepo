@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-NubSook (Wellnista) is a Progressive Web App for personal nutrition and wellness tracking. Built with Next.js 16 App Router, it provides health tracking (BMI, blood pressure, mental health), food analysis via AI, barcode scanning, and e-commerce features.
+Wellnista AI (formerly NubSook / นับสุข, rebranded 2026-09-24) is a Progressive Web App for personal nutrition and wellness tracking. Built with Next.js 16 App Router, it provides health tracking (BMI, blood pressure, mental health), food analysis via AI, barcode scanning, and e-commerce features.
 
 **Production URL:** https://app.wellnista.world
 
@@ -103,13 +103,21 @@ t('common.save'); // Returns translated string
 
 Language preference stored in localStorage (`wellnista-language`).
 
-### Theme
+### Theme (Wellnista AI, dark)
 
-- Primary color: `#9F9260` (warm brown)
-- Secondary color: `#FFF4D2` (cream)
-- Font: Kanit (Thai-optimized)
+Design tokens live in `app/globals.css` `@theme` and are mirrored in `app/theme.ts` (MUI dark
+palette). Canvas `#0a0e0b` with a deep-green radial glow, cards `#151b16` (`.wa-card`), raised
+`#1e2721`, text `#f1f5ee` / muted `#9aa69c`, accent lime `#cdf565` → mint `#7fe7b6`
+(`.wa-gradient`, `.wa-gradient-text`). Font: Kanit.
 
-Configured in `app/theme.ts` (MUI) and `tailwind.config.ts`.
+The legacy Tailwind names (`primary` / `secondary` / `accent` / `neutral` / `muted`) are
+**remapped** to these tokens, and an unlayered "compat layer" at the bottom of `globals.css`
+repaints `bg-white`, `text-gray-*`, `border-gray-*` inside `main` onto the dark surfaces, so
+screens that have not been rebuilt yet still look coherent. Rebuilt so far: layout header,
+`TabBar` (floating bar with the AI scan action raised in the middle), `home`, `select`,
+`scan/scan-image` (macro rings via `components/ui/RingGauge`), `IndicatorRow`, `IntroductionStatus`.
+Helper classes: `.wa-card`, `.wa-chip`, `.wa-chip--active`, `.wa-iconwell`, `.wa-btn`
+(`--ghost`, `--danger`), `.wa-eyebrow`. New screens should use these instead of MUI layout.
 
 ## Key Integration Points
 

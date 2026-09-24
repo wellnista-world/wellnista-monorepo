@@ -91,8 +91,8 @@ describe("feature flags", () => {
 });
 
 describe("app config", () => {
-  it("brands the app as NubSook", () => {
-    expect(getAppName()).toBe("NubSook");
+  it("brands the app as Wellnista AI", () => {
+    expect(getAppName()).toBe("Wellnista AI");
     expect(getAppShortName()).toBe(appConfig.shortName);
   });
 });

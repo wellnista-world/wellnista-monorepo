@@ -43,8 +43,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-          <meta name="theme-color" content="#9F9260" />
-          <meta name="description" content="Your personal nutrition assistant" />
+          <meta name="theme-color" content="#0a0e0b" />
+          <meta name="description" content="Wellnista AI - your personal nutrition assistant" />
           <link rel="manifest" href="/manifest.json" />
           <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
           <link rel="icon" href="/icons/icon-192x192.png" />
@@ -86,8 +86,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-          <meta name="theme-color" content="#9F9260" />
-          <meta name="description" content="Your personal nutrition assistant" />
+          <meta name="theme-color" content="#0a0e0b" />
+          <meta name="description" content="Wellnista AI - your personal nutrition assistant" />
           <link rel="manifest" href="/manifest.json" />
           <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
           <link rel="icon" href="/icons/icon-192x192.png" />
@@ -125,8 +125,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-        <meta name="theme-color" content="#9F9260" />
-        <meta name="description" content="Your personal nutrition assistant" />
+        <meta name="theme-color" content="#0a0e0b" />
+        <meta name="description" content="Wellnista AI - your personal nutrition assistant" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
         <link rel="icon" href="/icons/icon-192x192.png" />
@@ -148,7 +148,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className="bg-secondary text-neutral">
+      <body className="bg-bg text-ink">
         <I18nProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -156,10 +156,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <CartProvider>
                 <CoinProvider>
                   {!hideHeader && (
-                    <header className="p-4 bg-accent text-secondary relative">
-                      <div className="flex items-center justify-between">
+                    <header className="sticky top-0 z-40 border-b border-line bg-bg/70 backdrop-blur-md">
+                      <div className="mx-auto flex max-w-md items-center justify-between px-4 py-3">
                         {/* Left side - Back button or spacer */}
-                        <div className="flex items-center w-20">
+                        <div className="flex w-20 items-center">
                           {showBackButton && (
                             <button
                               onClick={() => {
@@ -169,35 +169,33 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                                   window.history.back();
                                 }
                               }}
-                              className="p-2 rounded-full bg-white/80 hover:bg-primary/80 text-accent hover:text-white shadow-sm z-10"
+                              className="flex h-9 w-9 items-center justify-center rounded-full bg-surface-2 text-ink ring-1 ring-line"
                               aria-label="Back"
                             >
-                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-5 w-5">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                               </svg>
                             </button>
                           )}
                         </div>
 
-                        {/* Center - Logo */}
-                        <div className="flex-1 flex justify-center">
-                          <button
-                            onClick={() => router.push('/home')}
-                            className="text-2xl leckerli-one-regular text-secondary hover:opacity-80 transition-opacity"
-                          >
-                            {getAppName()}
-                          </button>
-                        </div>
+                        {/* Center - Brand wordmark */}
+                        <button
+                          onClick={() => router.push('/home')}
+                          className="text-lg font-semibold tracking-tight text-ink"
+                          aria-label={getAppName()}
+                        >
+                          Wellnista <span className="wa-gradient-text">AI</span>
+                        </button>
 
                         {/* Right side - Coin display */}
-                        <div className="flex items-center justify-end w-20">
-                          <CoinDisplay className="text-secondary" />
+                        <div className="flex w-20 items-center justify-end">
+                          <CoinDisplay className="wa-chip py-1" />
                         </div>
                       </div>
-                      
                     </header>
                   )}
-                  <main className={`${!hideHeader ? "p-4" : ""}`}>{children}</main>
+                  <main className={`${!hideHeader ? "px-4 py-5" : ""}`}>{children}</main>
                   <AddToHomeScreen />
                   <TabBar />
                 </CoinProvider>

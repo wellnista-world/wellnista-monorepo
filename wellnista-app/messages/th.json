@@ -26,8 +26,8 @@
     "warning": "คำเตือน",
     "info": "ข้อมูล",
     "addToHomeScreen": {
-      "title": "ติดตั้ง NubSook",
-      "description": "เพิ่ม NubSook ลงในหน้าจอหลักเพื่อการเข้าถึงที่เร็วขึ้นและใช้งานง่ายขึ้น",
+      "title": "ติดตั้ง Wellnista AI",
+      "description": "เพิ่ม Wellnista AI ลงในหน้าจอหลักเพื่อการเข้าถึงที่เร็วขึ้นและใช้งานง่ายขึ้น",
       "install": "ติดตั้ง",
       "notNow": "ไม่ใช่ตอนนี้"
     },
@@ -90,9 +90,9 @@
     "needMore": "ต้องการแต้มเพิ่มเติม"
   },
   "auth": {
-    "welcome": "ยินดีต้อนรับสู่ NubSook",
-    "wellnista": "NubSook",
-    "wellnistaBrand": "NubSook",
+    "welcome": "ยินดีต้อนรับสู่ Wellnista AI",
+    "wellnista": "Wellnista AI",
+    "wellnistaBrand": "Wellnista AI",
     "tagline": "รักษาสุขภาพให้ยั่งยืน - ง่ายๆ ทุกวัน",
     "login": "เข้าสู่ระบบ",
     "logout": "ออกจากระบบ",
@@ -101,7 +101,7 @@
     "phoneNumber": "หมายเลขโทรศัพท์",
     "password": "รหัสผ่าน",
     "welcomeUser": "สวัสดี, {phone}",
-    "welcomeBack": "ยินดีต้อนรับกลับสู่ NubSook",
+    "welcomeBack": "ยินดีต้อนรับกลับสู่ Wellnista AI",
     "signup": "สมัครสมาชิก",
     "signupTitle": "สร้างบัญชี",
     "signupSubtitle": "ลงทะเบียนด้วยหมายเลขโทรศัพท์และรหัสผ่าน",
@@ -175,7 +175,10 @@
     "errAnalyzer": "ระบบวิเคราะห์อาหารขัดข้อง กรุณาลองใหม่ภายหลัง",
     "errNotConfigured": "ยังไม่ได้ตั้งค่า OpenAI API key บนเซิร์ฟเวอร์",
     "errQuota": "เครดิต OpenAI API หมด กรุณาเติมเครดิตในบัญชี OpenAI",
-    "errBadResponse": "AI ตอบกลับในรูปแบบที่อ่านไม่ได้ กรุณาลองถ่ายใหม่"
+    "errBadResponse": "AI ตอบกลับในรูปแบบที่อ่านไม่ได้ กรุณาลองถ่ายใหม่",
+    "aiPhotoHint": "ให้ AI วิเคราะห์สารอาหารจากรูปถ่าย",
+    "barcodeHint": "อ่านข้อมูลโภชนาการจากบาร์โค้ดสินค้า",
+    "aiAnalysis": "ผลวิเคราะห์จาก Wellnista AI"
   },
   "profile": {
     "title": "โปรไฟล์",
@@ -406,7 +409,7 @@
     "recordSaved": "บันทึกข้อมูลสำเร็จ!"
   },
   "dailyPopup": {
-    "title": "ยินดีต้อนรับสู่ NubSook!",
+    "title": "ยินดีต้อนรับสู่ Wellnista AI!",
     "message": "เริ่มต้นการเดินทางเพื่อสุขภาพของคุณวันนี้ ติดตามโภชนาการ ตรวจสอบสุขภาพ และเลือกสิ่งที่ดีกว่าเพื่อวิถีชีวิตที่แข็งแรง",
     "later": "ภายหลัง",
     "gotIt": "เข้าใจแล้ว!"
@@ -440,8 +443,8 @@
     "medicines": "ยา"
   },
   "menu": {
-    "title": "NubSook",
-    "welcome": "ยินดีต้อนรับเข้าสู่ NubSook",
+    "title": "Wellnista AI",
+    "welcome": "ยินดีต้อนรับเข้าสู่ Wellnista AI",
     "chooseAction": "เลือกการดำเนินการด้านล่างเพื่อเริ่มต้น",
     "checkNutrition": "ตรวจสอบโภชนาการอาหาร",
     "scanBarcode": "สแกน บาร์โค้ด",
@@ -473,7 +476,7 @@
     "healthBenefits": "ประโยชน์ต่อสุขภาพ",
     "dietaryConsiderations": "ข้อควรระวัง",
     "diseaseSpecificFood": "อาหารเฉพาะโรคเพื่อคนที่คุณรัก",
-    "wellnistaMarket": "NubSook Market",
+    "wellnistaMarket": "Wellnista Market",
     "browseMarket": "ดูตลาด",
     "pork": "หมู",
     "chicken": "ไก่",
@@ -488,8 +491,8 @@
     "mentalHealthTracking": "บันทึกสุขภาพจิต",
     "specializedFood": "อาหารเฉพาะสำหรับผู้ป่วยเบาหวาน",
     "carbLogging": "การบันทึกคาร์บง่ายกว่าที่คิด ช่วยป้องกันโรคไม่ติดต่อเรื้อรัง",
-    "wellnistaMarket": "NubSook Market",
-    "wellnistaLibrary": "NubSook Library",
+    "wellnistaMarket": "Wellnista Market",
+    "wellnistaLibrary": "Wellnista Library",
     "recommendedProducts": "สินค้าแนะนำ",
     "recommendedProduct": "สินค้าแนะนำ",
     "viewProduct": "ดูสินค้า",
@@ -519,7 +522,25 @@
     },
     "contactLine": "ติดต่อ LINE",
     "install": "ติดตั้ง",
-    "notNow": "ไว้ทีหลัง"
+    "notNow": "ไว้ทีหลัง",
+    "goodMorning": "สวัสดีตอนเช้า",
+    "goodAfternoon": "สวัสดีตอนบ่าย",
+    "goodEvening": "สวัสดีตอนเย็น",
+    "dailyTarget": "เป้าหมายคาร์บต่อวัน",
+    "servingsUnit": "หน่วยคาร์บ",
+    "bmiLabel": "BMI",
+    "bmiUnder": "น้ำหนักน้อย",
+    "bmiNormal": "สมส่วน",
+    "bmiOver": "น้ำหนักเกิน",
+    "bmiObese": "อ้วน",
+    "completeProfile": "กรอกข้อมูลสุขภาพให้ครบ",
+    "completeProfileDesc": "เพิ่มน้ำหนัก ส่วนสูง อายุ และระดับกิจกรรม เพื่อรับเป้าหมายคาร์บส่วนตัว",
+    "tipTitle": "Wellnista AI แนะนำ",
+    "tipText": "ถ่ายรูปอาหารก่อนกิน ให้ AI ช่วยนับคาร์บและเช็กน้ำตาล โซเดียม ไขมันให้ทุกมื้อ",
+    "quickActions": "เริ่มต้นเร็ว",
+    "healthTracking": "ติดตามสุขภาพ",
+    "more": "เพิ่มเติม",
+    "promotions": "โปรโมชั่น"
   },
   "settings": {
     "title": "ตั้งค่า",
@@ -530,7 +551,7 @@
     "version": "เวอร์ชัน",
     "developer": "ผู้พัฒนา",
     "installApp": "ติดตั้งแอป",
-    "installAppDescription": "เพิ่ม NubSook ลงในหน้าจอหลักของคุณเพื่อเข้าถึงได้เร็วขึ้นและใช้งานแบบออฟไลน์",
+    "installAppDescription": "เพิ่ม Wellnista AI ลงในหน้าจอหลักของคุณเพื่อเข้าถึงได้เร็วขึ้นและใช้งานแบบออฟไลน์",
     "installAppButton": "ติดตั้งลงหน้าจอหลัก",
     "appInstalled": "แอปได้รับการติดตั้งแล้ว",
     "installAppSuccess": "ติดตั้งแอปสำเร็จ!",

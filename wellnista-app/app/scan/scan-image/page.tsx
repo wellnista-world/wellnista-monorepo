@@ -5,7 +5,8 @@ import { useLiff } from "../../lib/api/use-liff";
 import { NutritionalInfo } from "../../lib/api/image-analyze";
 import IntroductionStatus from "@/app/components/util/IntroductionStatus";
 import IndicatorRow from "@/app/components/util/IndicatorRow";
-import Box from '@mui/material/Box';
+import RingGauge from '@/app/components/ui/RingGauge';
+import { Camera, Sparkles, Loader2 } from 'lucide-react';
 import { useRouter } from "next/navigation";
 import { supabase } from "@/app/lib/api/supabaseClient";
 import { useAuth } from "@/app/lib/context/AuthContext";
@@ -244,7 +245,7 @@ export default function ScanImagePage() {
 
   if (!isLiffReady) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-secondary text-neutral font-garet">
+      <div className="flex min-h-[60vh] items-center justify-center text-ink-muted">
         <p>{t('scan.loadingLiff')}</p>
       </div>
     );
@@ -252,16 +253,52 @@ export default function ScanImagePage() {
 
   if (liffError) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-secondary text-red-500 font-garet">
+      <div className="flex min-h-[60vh] items-center justify-center text-danger">
         <p>{liffError}</p>
       </div>
     );
   }
 
+  const n = analysisResult?.nutriments;
+  const kcal = n?.["energy-kcal_serving"] ?? 0;
+  const protein = n?.proteins_serving ?? 0;
+  const carbs = n?.carbohydrates ?? 0;
+  const fat = n?.fat ?? 0;
+  const sugar = n?.sugars_value ?? 0;
+  const sodium = n?.["sodium_value"] ?? 0;
+  const score = ((sugar <= 2 ? 1 : 0) + (fat <= 10 ? 1 : 0) + (sodium <= 700 ? 1 : 0)) * 10;
+  const carbServings = Math.round(carbs / 15);
+  const productName =
+    analysisResult?.product_name || analysisResult?.product_name_en || analysisResult?.product_name_th || t('scan.noProductName');
+
+  const macros = [
+    { label: t('scan.calories'), value: kcal, max: 700, color: '#cdf565' },
+    { label: t('scan.protein'), value: protein, max: 50, color: '#7fe7b6' },
+    { label: t('scan.carbohydrates'), value: carbs, max: 75, color: '#a78bfa' },
+    { label: t('scan.fat'), value: fat, max: 30, color: '#ffc857' },
+  ];
+
+  const details: [string, number | undefined, string][] = [
+    [t('scan.fat'), n?.fat, t('scan.grams')],
+    [t('scan.sodium'), n?.["sodium_value"], t('scan.milligrams')],
+    [t('scan.sugar'), n?.sugars_value, t('scan.grams')],
+    [t('scan.carbohydrates'), n?.carbohydrates, t('scan.grams')],
+    [t('scan.vitaminA'), n?.["vitamin-a"], t('scan.mg')],
+    [t('scan.vitaminB1'), n?.["vitamin-b1"], t('scan.mg')],
+    [t('scan.vitaminB2'), n?.["vitamin-b2"], t('scan.mg')],
+    [t('scan.calcium'), n?.calcium, t('scan.mg')],
+    [t('scan.iron'), n?.iron, t('scan.mg')],
+  ];
+
   return (
-    <div className="flex flex-col items-center min-h-screen bg-secondary text-neutral font-garet">
-      <h1 className="mt-6 text-3xl font-magnolia text-primary mb-6">{t('scan.scanFood')}</h1>
-      
+    <div className="mx-auto max-w-md pb-6">
+      {!analysisResult && (
+        <div className="mb-5">
+          <p className="wa-eyebrow">{t('navigation.scan')}</p>
+          <h1 className="text-2xl font-semibold text-ink">{t('scan.scanFood')}</h1>
+        </div>
+      )}
+
       {cameraPermission === false && (
         <button
           onClick={async () => {
@@ -272,67 +309,63 @@ export default function ScanImagePage() {
               setCameraError(t('scan.cameraError'));
             }
           }}
-          className="px-6 py-3 bg-primary text-secondary font-semibold rounded-full hover:bg-accent transition mb-4"
+          className="wa-btn wa-gradient mb-4"
         >
+          <Camera size={18} />
           {t('scan.requestCameraPermission')}
         </button>
       )}
 
-      {cameraError && (
-        <p className="text-red-500 text-center mb-4">{cameraError}</p>
-      )}
+      {cameraError && <p className="mb-4 text-center text-sm text-danger">{cameraError}</p>}
 
       {cameraPermission && !capturedImage && (
-        <>
-          <select
-            className="mb-8 px-4 py-2 border-2 border-accent rounded-lg bg-muted text-neutral"
-            onChange={(e) => setSelectedCameraId(e.target.value)}
-            value={selectedCameraId || ""}
-          >
-            {cameras.map((camera) => (
-              <option key={camera.deviceId} value={camera.deviceId}>
-                {camera.label || `Camera ${camera.deviceId}`}
-              </option>
-            ))}
-          </select>
-          <video
-            ref={videoRef}
-            className="w-full max-w-md border-4 border-primary rounded-lg"
-            playsInline
-            muted
-            autoPlay
-          />
+        <div className="wa-card overflow-hidden">
+          <div className="relative aspect-[3/4] bg-black">
+            <video ref={videoRef} className="h-full w-full object-cover" playsInline muted autoPlay />
+            <div className="pointer-events-none absolute inset-6 rounded-3xl border-2 border-white/30" />
+          </div>
           <canvas ref={canvasRef} className="hidden" />
-          <button
-            onClick={captureImage}
-            className="mt-4 px-8 py-3 bg-primary text-secondary font-semibold rounded-full hover:bg-accent transition"
-          >
-            {t('scan.capturePhoto')}
-          </button>
-        </>
+          <div className="flex items-center gap-3 p-4">
+            {cameras.length > 1 && (
+              <select
+                className="wa-chip flex-1 appearance-none py-2"
+                onChange={(e) => setSelectedCameraId(e.target.value)}
+                value={selectedCameraId || ""}
+              >
+                {cameras.map((camera) => (
+                  <option key={camera.deviceId} value={camera.deviceId}>
+                    {camera.label || `Camera ${camera.deviceId}`}
+                  </option>
+                ))}
+              </select>
+            )}
+            <button
+              onClick={captureImage}
+              className="wa-gradient ml-auto flex h-16 w-16 items-center justify-center rounded-full shadow-[0_10px_24px_rgba(205,245,101,0.35)] ring-4 ring-bg"
+              aria-label={t('scan.capturePhoto')}
+            >
+              <Camera size={26} />
+            </button>
+          </div>
+        </div>
       )}
 
       {capturedImage && !analysisResult && (
-        <div className="flex flex-col items-center">
+        <div className="wa-card overflow-hidden">
           <Image
             src={capturedImage}
             alt="Captured food"
-            width={400}
-            height={300}
-            className="w-full max-w-md border-4 border-primary rounded-lg"
+            width={800}
+            height={1000}
+            unoptimized
+            className="aspect-[3/4] w-full object-cover"
           />
-          <div className="flex gap-4 mt-4">
-            <button
-              onClick={retakePhoto}
-              className="px-6 py-3 bg-muted text-neutral font-semibold rounded-full hover:bg-accent transition"
-            >
+          <div className="flex gap-3 p-4">
+            <button onClick={retakePhoto} className="wa-btn wa-btn--ghost">
               {t('scan.retakePhoto')}
             </button>
-            <button
-              onClick={analyzeImage}
-              disabled={isAnalyzing}
-              className="px-6 py-3 bg-primary text-secondary font-semibold rounded-full hover:bg-accent transition"
-            >
+            <button onClick={analyzeImage} disabled={isAnalyzing} className="wa-btn wa-gradient">
+              {isAnalyzing ? <Loader2 size={18} className="animate-spin" /> : <Sparkles size={18} />}
               {isAnalyzing ? t('scan.analyzing') : t('scan.analyzeFood')}
             </button>
           </div>
@@ -340,137 +373,101 @@ export default function ScanImagePage() {
       )}
 
       {analysisResult && (
-        <div className="flex flex-col min-h-screen bg-secondary text-neutral font-garet p-4">
-          <p className="text-3xl font-bold mb-4">
-            {analysisResult.product_name || analysisResult.product_name_en || analysisResult.product_name_th || t('scan.noProductName')}
+        <div>
+          {/* Hero photo with health score */}
+          <div className="wa-card relative mb-4 overflow-hidden">
+            {capturedImage ? (
+              <Image
+                src={capturedImage}
+                alt={productName}
+                width={800}
+                height={800}
+                unoptimized
+                className="aspect-square w-full object-cover"
+              />
+            ) : (
+              <div className="flex aspect-square items-center justify-center text-ink-muted">{t('scan.noImage')}</div>
+            )}
+            <span className="wa-chip wa-chip--active absolute left-4 top-4">
+              <Sparkles size={12} />
+              {score} {t('scan.points')}
+            </span>
+          </div>
+
+          {/* Macro rings */}
+          <div className="mb-4 grid grid-cols-4 gap-2">
+            {macros.map((m) => (
+              <div key={m.label} className="wa-card flex flex-col items-center gap-1 px-1 py-3">
+                <RingGauge value={m.value / m.max} size={56} stroke={6} color={m.color}>
+                  <span className="text-xs font-bold text-ink">{Math.round(m.value)}</span>
+                </RingGauge>
+                <span className="text-[10px] text-ink-muted">{m.label}</span>
+              </div>
+            ))}
+          </div>
+
+          <h1 className="text-2xl font-semibold text-ink">{productName}</h1>
+          <p className="mb-4 text-sm text-ink-muted">
+            {kcal} kcal · {carbServings}/{Math.round(carbGoal)} {t('profile.carb')}
           </p>
 
-          <div className="grid grid-cols-2 gap-4 mb-6">
-            <div className="rounded-full w-full h-full items-center">
-              {capturedImage ? (
-                <Image
-                  src={capturedImage}
-                  alt={analysisResult.product_name || analysisResult.product_name_en || t('scan.noImage')}
-                  width={200}
-                  height={200}
-                  className="w-full h-full object-cover rounded-lg"
-                />
-              ) : (
-                <div className="flex items-center justify-center bg-gray-200 rounded-lg h-full">
-                  <p>{t('scan.noImage')}</p>
+          {/* AI analysis: traffic lights */}
+          <div className="wa-card mb-4 p-4">
+            <p className="wa-eyebrow mb-3">{t('scan.aiAnalysis')}</p>
+            <IntroductionStatus />
+            <div className="space-y-3">
+              <IndicatorRow label={t('scan.sugar')} value={sugar} unit={t('scan.grams')} thresholds={[2, 7]} />
+              <IndicatorRow label={t('scan.sodium')} value={sodium} unit={t('scan.milligrams')} thresholds={[700, 1050]} />
+              <IndicatorRow label={t('scan.fat')} value={fat} unit={t('scan.grams')} thresholds={[10, 13]} />
+            </div>
+          </div>
+
+          {/* Carb servings against the personal goal */}
+          <div className="wa-card mb-4 flex items-center gap-4 p-4">
+            <RingGauge value={carbGoal ? carbServings / carbGoal : 0} size={72} stroke={7}>
+              <span className="text-sm font-bold text-ink">{carbServings}</span>
+            </RingGauge>
+            <div>
+              <p className="font-semibold text-ink">{t('scan.carbAmount')}</p>
+              <p className="text-xs text-ink-muted">
+                {carbServings}/{Math.round(carbGoal)} {t('profile.carb')}
+              </p>
+            </div>
+          </div>
+
+          {/* Details */}
+          <div className="wa-card mb-4 p-4">
+            <p className="mb-2 font-semibold text-ink">{t('scan.nutritionalInfo')}</p>
+            <dl className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-sm">
+              {details.map(([label, value, unit]) => (
+                <div key={label} className="flex justify-between gap-2">
+                  <dt className="text-ink-muted">{label}</dt>
+                  <dd className="text-ink">
+                    {value ?? t('scan.noData')} {value !== undefined ? unit : ''}
+                  </dd>
                 </div>
-              )}
-            </div>
-            <div className="flex items-center mb-4 justify-center">
-              <p className="text-3xl font-bold ml-4">
-                {(() => {
-                  const sugarValue = analysisResult.nutriments.sugars_value ?? 0;
-                  const fatValue = analysisResult.nutriments.fat ?? 0;
-                  const sodiumValue = analysisResult.nutriments["sodium_value"] ?? 0;
-                  let greenStarCount = 0;
-                  if (sugarValue >= 0 && sugarValue <= 2) greenStarCount++;
-                  if (fatValue >= 0 && fatValue <= 10) greenStarCount++;
-                  if (sodiumValue >= 0 && sodiumValue <= 700) greenStarCount++;
-                  return `${greenStarCount * 10} ${t('scan.points')}`;
-                })()}
-              </p>
-            </div>
+              ))}
+            </dl>
           </div>
 
-          <IntroductionStatus />
-          <Box className="flex flex-col space-y-6 mb-6 w-full max-w-md">
-            <IndicatorRow label={t('scan.sugar')} value={analysisResult.nutriments.sugars_value || 0} thresholds={[2, 7]} />
-            <IndicatorRow label={t('scan.sodium')} value={analysisResult.nutriments["sodium_value"] || 0} thresholds={[700, 1050]} />
-            <IndicatorRow label={t('scan.fat')} value={analysisResult.nutriments.fat || 0} thresholds={[10, 13]} />
-          </Box>
-
-          <div className="grid grid-cols-2 gap-4 mb-6">
-            <div className="bg-white p-4 rounded-lg shadow-sm w-full text-lg font-bold">
-              <p>{t('scan.calories')}: {analysisResult.nutriments["energy-kcal_serving"] || t('scan.noData')} kcal</p>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm w-full text-lg font-bold">
-              <p>{t('scan.protein')}: {analysisResult.nutriments.proteins_serving || t('scan.noData')} {t('scan.grams')}</p>
-            </div>
-          </div>
-
-          <div className="flex flex-col md:flex-row w-full gap-6">
-            <div className="flex flex-col items-start bg-white p-4 rounded-lg shadow-sm w-full">
-              <h2 className="text-lg font-bold mb-2">{t('scan.nutritionalInfo')}</h2>
-              <ul className="text-sm space-y-1">
-                <li>{t('scan.fat')}: {analysisResult.nutriments.fat || 0} {t('scan.grams')}</li>
-                <li>{t('scan.sodium')}: {analysisResult.nutriments["sodium_value"] || 0} {t('scan.milligrams')}</li>
-                <li>{t('scan.sugar')}: {analysisResult.nutriments.sugars_value || 0} {t('scan.grams')}</li>
-                <li>{t('scan.carbohydrates')}: {analysisResult.nutriments.carbohydrates || 0} {t('scan.grams')}</li>
-                <li>{t('scan.vitaminA')}: {analysisResult.nutriments["vitamin-a"] || t('scan.noData')} {t('scan.mg')}</li>
-                <li>{t('scan.vitaminB1')}: {analysisResult.nutriments["vitamin-b1"] || t('scan.noData')} {t('scan.mg')}</li>
-                <li>{t('scan.vitaminB2')}: {analysisResult.nutriments["vitamin-b2"] || t('scan.noData')} {t('scan.mg')}</li>
-                <li>{t('scan.calcium')}: {analysisResult.nutriments.calcium || t('scan.noData')} {t('scan.mg')}</li>
-                <li>{t('scan.iron')}: {analysisResult.nutriments.iron || t('scan.noData')} {t('scan.mg')}</li>
-              </ul>
-            </div>
-
-            <div className="flex flex-col items-center justify-center bg-white p-4 rounded-lg shadow-sm w-full mb-8">
-              <h2 className="text-lg font-bold mb-2">{t('scan.carbAmount')}</h2>
-              <div className="w-24 h-24 mb-4">
-                <svg viewBox="0 0 36 36" className="circular-chart">
-                  <path
-                    className="circle-bg"
-                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                    fill="none"
-                    stroke="#eee"
-                    strokeWidth="3"
-                  />
-                  <path
-                    className="circle"
-                    strokeDasharray={`${Math.min(((analysisResult.nutriments.carbohydrates ?? 0) / 15) / carbGoal * 100, 100)}, 100`}
-                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                    fill="none"
-                    stroke="#9F9260"
-                    strokeWidth="3"
-                  />
-                </svg>
-              </div>
-              <p className="text-sm text-neutral">
-                {Math.round((analysisResult.nutriments.carbohydrates ?? 0) / 15)}/{Math.round(carbGoal)} {t('profile.carb')}
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 grid-flow-col gap-4 mb-6">
-            <div>
-              <button
-                onClick={handleEat}
-                className="px-6 py-3 w-full bg-[#5EC269] text-neutral text-xl font-semibold rounded-lg hover:bg-accent transition">
-                {t('scan.ate')}
-              </button>
-            </div>
-            <div>
-              <button
-                onClick={() => router.push("/scan")}
-                className="px-6 py-3 w-full bg-[#DD524C] text-neutral text-xl font-semibold rounded-lg hover:bg-accent transition">
-                {t('scan.didNotEat')}
-              </button>
-            </div>
-          </div>
-
-          <div className="flex justify-center">
-            <button
-              onClick={retakePhoto}
-              className="px-6 py-3 bg-primary text-secondary font-semibold rounded-full hover:bg-accent transition"
-            >
-              {t('scan.takeNewPhoto')}
+          <div className="mb-3 grid grid-cols-2 gap-3">
+            <button onClick={handleEat} className="wa-btn wa-gradient">
+              {t('scan.ate')}
+            </button>
+            <button onClick={() => router.push("/scan")} className="wa-btn wa-btn--danger">
+              {t('scan.didNotEat')}
             </button>
           </div>
+          <button onClick={retakePhoto} className="wa-btn wa-btn--ghost">
+            {t('scan.takeNewPhoto')}
+          </button>
         </div>
       )}
 
       {analysisError && (
-        <div className="w-full max-w-md p-4 mt-4 bg-muted rounded-lg">
-          <p className="text-red-500 text-center">{analysisError}</p>
-          <button
-            onClick={retakePhoto}
-            className="mt-4 px-6 py-3 bg-primary text-secondary font-semibold rounded-full hover:bg-accent transition w-full"
-          >
+        <div className="wa-card mt-4 p-4">
+          <p className="text-center text-sm text-danger">{analysisError}</p>
+          <button onClick={retakePhoto} className="wa-btn wa-btn--ghost mt-4">
             {t('scan.retakePhoto')}
           </button>
         </div>
