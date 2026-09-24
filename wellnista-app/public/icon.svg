@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Wellnista AI app icon: dark green tile, deep-green glow, lime→mint sparkle mark -->
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="18%" r="75%">
+      <stop offset="0%" stop-color="#1f4a35"/>
+      <stop offset="55%" stop-color="#0f2418"/>
+      <stop offset="100%" stop-color="#0a0e0b"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#cdf565"/>
+      <stop offset="100%" stop-color="#7fe7b6"/>
+    </linearGradient>
+    <linearGradient id="accentSoft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#cdf565" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#7fe7b6" stop-opacity="0.55"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#cdf565" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- tile -->
+  <rect width="512" height="512" rx="112" fill="url(#glow)"/>
+  <rect x="1" y="1" width="510" height="510" rx="111" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="2"/>
+
+  <!-- ring (carb / progress) -->
+  <circle cx="256" cy="264" r="150" fill="none" stroke="#ffffff" stroke-opacity="0.07" stroke-width="22"/>
+  <path d="M256 114 a150 150 0 1 1 -129.9 75" fill="none" stroke="url(#accent)" stroke-width="22" stroke-linecap="round"/>
+
+  <!-- sparkle mark -->
+  <g filter="url(#shadow)">
+    <path d="M256 168 C262 226 286 250 344 256 C286 262 262 286 256 344 C250 286 226 262 168 256 C226 250 250 226 256 168 Z" fill="url(#accent)"/>
+  </g>
+  <!-- small companion sparkle -->
+  <path d="M402 80 C404 100 412 108 432 110 C412 112 404 120 402 140 C400 120 392 112 372 110 C392 108 400 100 402 80 Z" fill="url(#accentSoft)"/>
+</svg>

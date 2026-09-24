@@ -46,8 +46,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <meta name="theme-color" content="#0a0e0b" />
           <meta name="description" content="Wellnista AI - your personal nutrition assistant" />
           <link rel="manifest" href="/manifest.json" />
-          <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
-          <link rel="icon" href="/icons/icon-192x192.png" />
+          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png" />
           <link rel="shortcut icon" href="/favicon.ico" />
           <link rel="icon" type="image/x-icon" href="/favicon.ico" />
           {/* Google Analytics */}
@@ -89,8 +90,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <meta name="theme-color" content="#0a0e0b" />
           <meta name="description" content="Wellnista AI - your personal nutrition assistant" />
           <link rel="manifest" href="/manifest.json" />
-          <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
-          <link rel="icon" href="/icons/icon-192x192.png" />
+          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png" />
           <link rel="shortcut icon" href="/favicon.ico" />
           <link rel="icon" type="image/x-icon" href="/favicon.ico" />
           {/* Google Analytics */}
@@ -128,8 +130,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#0a0e0b" />
         <meta name="description" content="Wellnista AI - your personal nutrition assistant" />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
-        <link rel="icon" href="/icons/icon-192x192.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png" />
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-QTTCWH3PP4"
