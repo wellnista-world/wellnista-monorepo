@@ -484,7 +484,12 @@
     "installAppButton": "Instal ke Layar Utama",
     "appInstalled": "Aplikasi sudah terinstal",
     "installAppSuccess": "Aplikasi berhasil diinstal!",
-    "installAppError": "Gagal menginstal aplikasi. Silakan coba lagi"
+    "installAppError": "Gagal menginstal aplikasi. Silakan coba lagi",
+    "theme": "Tampilan",
+    "themeDescription": "Pilih gelap atau terang, atau ikuti pengaturan perangkat",
+    "themeDark": "Gelap",
+    "themeLight": "Terang",
+    "themeSystem": "Sistem"
   },
   "errors": {
     "general": "Terjadi kesalahan. Silakan coba lagi.",

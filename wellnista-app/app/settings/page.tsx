@@ -5,6 +5,7 @@ import { useI18n } from '../../i18n';
 import { Typography, Box, Divider, Button, Alert } from '@mui/material';
 import { getAppName } from '../../config/app';
 import LanguageSwitcher from '../components/LanguageSwitcher';
+import ThemeSwitcher from '../components/ThemeSwitcher';
 import { Download, CheckCircle } from 'lucide-react';
 
 interface BeforeInstallPromptEvent extends Event {
@@ -90,6 +91,19 @@ export default function SettingsPage() {
       </Typography>
 
       <Box className="mt-6 w-full max-w-sm flex flex-col gap-6">
+        {/* Appearance */}
+        <Box className="bg-white rounded-lg p-4 shadow-xs">
+          <Typography variant="h6" className="mb-3 font-semibold">
+            {t('settings.theme')}
+          </Typography>
+          <Typography variant="body2" className="mb-4 text-gray-600">
+            {t('settings.themeDescription')}
+          </Typography>
+          <ThemeSwitcher />
+        </Box>
+
+        <Divider />
+
         {/* Language Settings */}
         <Box className="bg-white rounded-lg p-4 shadow-xs">
           <Typography variant="h6" className="mb-3 font-semibold">

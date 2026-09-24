@@ -531,7 +531,12 @@
     "installAppButton": "ホーム画面にインストール",
     "appInstalled": "アプリは既にインストールされています",
     "installAppSuccess": "アプリのインストールが完了しました！",
-    "installAppError": "アプリのインストールに失敗しました。もう一度お試しください"
+    "installAppError": "アプリのインストールに失敗しました。もう一度お試しください",
+    "theme": "外観",
+    "themeDescription": "ダーク・ライト、または端末の設定に合わせるを選べます",
+    "themeDark": "ダーク",
+    "themeLight": "ライト",
+    "themeSystem": "システム"
   },
   "errors": {
     "general": "エラーが発生しました。もう一度お試しください。",

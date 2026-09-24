@@ -484,7 +484,12 @@
     "installAppButton": "安装到主屏幕",
     "appInstalled": "应用已安装",
     "installAppSuccess": "应用安装成功！",
-    "installAppError": "应用安装失败，请重试"
+    "installAppError": "应用安装失败，请重试",
+    "theme": "外观",
+    "themeDescription": "选择深色或浅色，或跟随设备设置",
+    "themeDark": "深色",
+    "themeLight": "浅色",
+    "themeSystem": "跟随系统"
   },
   "errors": {
     "general": "发生错误。请重试。",

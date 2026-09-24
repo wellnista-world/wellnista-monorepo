@@ -484,7 +484,12 @@
     "installAppButton": "홈 화면에 설치",
     "appInstalled": "앱이 이미 설치되어 있습니다",
     "installAppSuccess": "앱 설치가 완료되었습니다!",
-    "installAppError": "앱 설치에 실패했습니다. 다시 시도해 주세요"
+    "installAppError": "앱 설치에 실패했습니다. 다시 시도해 주세요",
+    "theme": "화면 테마",
+    "themeDescription": "다크 또는 라이트를 선택하거나 기기 설정을 따릅니다",
+    "themeDark": "다크",
+    "themeLight": "라이트",
+    "themeSystem": "시스템"
   },
   "errors": {
     "general": "오류가 발생했습니다. 다시 시도해주세요.",

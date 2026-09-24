@@ -555,7 +555,12 @@
     "installAppButton": "Install to Home Screen",
     "appInstalled": "App is already installed",
     "installAppSuccess": "App installed successfully!",
-    "installAppError": "Failed to install app. Please try again."
+    "installAppError": "Failed to install app. Please try again.",
+    "theme": "Appearance",
+    "themeDescription": "Choose dark or light, or follow your device setting",
+    "themeDark": "Dark",
+    "themeLight": "Light",
+    "themeSystem": "System"
   },
   "errors": {
     "general": "An error occurred. Please try again.",

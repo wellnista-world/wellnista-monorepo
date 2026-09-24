@@ -3,9 +3,9 @@ import "./globals.css";
 import { useLiff } from "./lib/api/use-liff";
 import Script from "next/script";
 import { usePathname, useRouter } from "next/navigation";
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import theme from './theme';
+import { ThemeModeProvider, useThemeMode } from './lib/context/ThemeModeContext';
+import { THEME_BOOTSTRAP_SCRIPT } from './lib/theme-mode';
+import { Moon, Sun } from 'lucide-react';
 import { AuthProvider } from './lib/context/AuthContext';
 import AddToHomeScreen from './components/AddToHomeScreen';
 import { I18nProvider } from '../i18n';
@@ -30,6 +30,20 @@ import { getAppName } from '../config/app';
   //display: "swap",
 //});
 
+// Header button: flips dark ↔ light. Lives inside ThemeModeProvider.
+function ThemeToggleButton() {
+  const { resolved, toggle } = useThemeMode();
+  return (
+    <button
+      onClick={toggle}
+      className="flex h-9 w-9 items-center justify-center rounded-full bg-surface-2 text-ink ring-1 ring-line"
+      aria-label={resolved === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+    >
+      {resolved === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+    </button>
+  );
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const { isLiffReady, error } = useLiff();
   const pathname = usePathname();
@@ -42,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <html lang="en">
         <head>
           <meta charSet="utf-8" />
+          <script dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP_SCRIPT }} />
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
           <meta name="theme-color" content="#0a0e0b" />
           <meta name="description" content="Wellnista AI - your personal nutrition assistant" />
@@ -86,6 +101,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <html lang="en">
         <head>
           <meta charSet="utf-8" />
+          <script dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP_SCRIPT }} />
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
           <meta name="theme-color" content="#0a0e0b" />
           <meta name="description" content="Wellnista AI - your personal nutrition assistant" />
@@ -126,6 +142,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP_SCRIPT }} />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         <meta name="theme-color" content="#0a0e0b" />
         <meta name="description" content="Wellnista AI - your personal nutrition assistant" />
@@ -153,8 +170,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="bg-bg text-ink">
         <I18nProvider>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
+          <ThemeModeProvider>
             <AuthProvider>
               <CartProvider>
                 <CoinProvider>
@@ -162,7 +178,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <header className="sticky top-0 z-40 border-b border-line bg-bg/70 backdrop-blur-md">
                       <div className="mx-auto flex max-w-md items-center justify-between px-4 py-3">
                         {/* Left side - Back button or spacer */}
-                        <div className="flex w-20 items-center">
+                        <div className="flex w-24 items-center">
                           {showBackButton && (
                             <button
                               onClick={() => {
@@ -191,8 +207,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                           Wellnista <span className="wa-gradient-text">AI</span>
                         </button>
 
-                        {/* Right side - Coin display */}
-                        <div className="flex w-20 items-center justify-end">
+                        {/* Right side - theme toggle + coins */}
+                        <div className="flex w-24 items-center justify-end gap-1.5">
+                          <ThemeToggleButton />
                           <CoinDisplay className="wa-chip py-1" />
                         </div>
                       </div>
@@ -204,7 +221,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </CoinProvider>
               </CartProvider>
             </AuthProvider>
-          </ThemeProvider>
+          </ThemeModeProvider>
         </I18nProvider>
       </body>
     </html>

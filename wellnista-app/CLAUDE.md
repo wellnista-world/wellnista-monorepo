@@ -119,6 +119,18 @@ screens that have not been rebuilt yet still look coherent. Rebuilt so far: layo
 Helper classes: `.wa-card`, `.wa-chip`, `.wa-chip--active`, `.wa-iconwell`, `.wa-btn`
 (`--ghost`, `--danger`), `.wa-eyebrow`. New screens should use these instead of MUI layout.
 
+**Light theme.** `ThemeModeProvider` (`app/lib/context/ThemeModeContext.tsx`) owns the
+preference (`dark` / `light` / `system`, localStorage key `wellnista-theme`, default dark), sets
+`data-theme` on `<html>`, keeps the `theme-color` meta in sync and hands MUI the matching palette
+from `createAppTheme(mode)`. The CSS tokens are overridden under `:root[data-theme="light"]` in
+`globals.css`; because Tailwind v4 utilities read the variables, every screen and the compat
+layer re-skin automatically. In light mode the accent used for text/icons darkens for contrast
+(`--color-lime` → `#3f7a0b`) while gradient fills keep the bright lime→mint via
+`--color-lime-fill` / `--color-mint-fill`. A bootstrap script (`THEME_BOOTSTRAP_SCRIPT` in
+`app/lib/theme-mode.ts`, inlined in `<head>`) applies the stored theme before first paint. UI:
+sun/moon button in the header (`toggle()`), and a Dark / Light / System control on Settings
+(`components/ThemeSwitcher.tsx`). Pure helpers are unit-tested in `app/lib/__tests__/theme-mode.test.ts`.
+
 ## Key Integration Points
 
 ### Supabase
