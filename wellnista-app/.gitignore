@@ -10,7 +10,7 @@
 !.yarn/releases
 !.yarn/versions
 
-package-lock.json
+# package-lock.json is committed: every install gets the same versions, and the security scan can audit them
 
 # testing
 /coverage
