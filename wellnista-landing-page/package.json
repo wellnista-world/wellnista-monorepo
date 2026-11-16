@@ -70,5 +70,14 @@
     "tailwindcss": "^4.3.5",
     "tw-animate-css": "1.3.3",
     "typescript": "^5"
+  },
+  "pnpm": {
+    "overrides": {
+      "browserslist": "^4.28.7",
+      "lodash": "^4.18.1",
+      "nanoid": "^3.3.18",
+      "postcss": "^8.5.18",
+      "source-map-js": "^1.2.2"
+    }
   }
 }
