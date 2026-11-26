@@ -53,6 +53,27 @@ export async function POST(request: NextRequest) {
     const supabaseAdmin = getSupabaseAdmin();
     const pointsToDeduct = 100;
 
+    // Idempotency claim: at most ONE deduction per Stripe session. A duplicate call (e.g. the
+    // success page re-mounting on a refresh) hits the UNIQUE stripe_session_id and is a no-op,
+    // so points can't be deducted twice for the same payment. Requires the point_deductions
+    // table (see point_deductions_table.sql) to exist.
+    const { error: claimError } = await supabaseAdmin
+      .from('point_deductions')
+      .insert({ stripe_session_id: sessionId, user_id: buyerId, points: pointsToDeduct });
+
+    if (claimError) {
+      // 23505 = unique_violation → this session's points were already deducted earlier.
+      if ((claimError as { code?: string }).code === '23505') {
+        return NextResponse.json({ success: true, pointsDeducted: 0, alreadyProcessed: true });
+      }
+      console.error('point_deductions claim failed', (claimError as { code?: string })?.code ?? '');
+      return NextResponse.json({ error: 'Failed to process point deduction' }, { status: 500 });
+    }
+
+    // The claim is ours now; release it on any failure below so a legitimate retry can proceed.
+    const releaseClaim = () =>
+      supabaseAdmin.from('point_deductions').delete().eq('stripe_session_id', sessionId);
+
     const { data: userData, error: fetchError } = await supabaseAdmin
       .from('users')
       .select('coins')
@@ -60,11 +81,13 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (fetchError || !userData) {
+      await releaseClaim();
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
     const currentCoins = userData.coins || 0;
     if (currentCoins < pointsToDeduct) {
+      await releaseClaim();
       return NextResponse.json({ error: 'Insufficient points' }, { status: 400 });
     }
 
@@ -76,6 +99,7 @@ export async function POST(request: NextRequest) {
       .eq('user_id', buyerId);
 
     if (updateError) {
+      await releaseClaim();
       return NextResponse.json({ error: 'Failed to deduct points' }, { status: 500 });
     }
 
