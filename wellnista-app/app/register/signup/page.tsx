@@ -62,12 +62,17 @@ export default function SignupPage() {
     ]);
 
     if (insertError) {
-      setError(t('auth.signupSuccess'));
+      // The auth account was created but the profile row was not. Do NOT show a success
+      // message here (the old copy started with "Sign up successful…"): surface a real error
+      // and stop the spinner so the user isn't left on an infinite loading state.
       console.error(insertError);
-    } else {
-      router.push('/register');
+      setError(t('auth.signupError'));
       setLoading(false);
+      return;
     }
+
+    router.push('/register');
+    setLoading(false);
   };
 
   return (

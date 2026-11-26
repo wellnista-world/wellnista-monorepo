@@ -113,7 +113,8 @@
     "notLoggedIn": "Anda belum masuk",
     "registrationError": "Terjadi kesalahan saat pendaftaran",
     "registrationSuccess": "Pendaftaran berhasil!",
-    "signupSuccess": "Pendaftaran berhasil tetapi terjadi kesalahan saat menyimpan data tambahan"
+    "signupSuccess": "Pendaftaran berhasil tetapi terjadi kesalahan saat menyimpan data tambahan",
+    "signupError": "Terjadi kesalahan saat mendaftar. Silakan coba lagi."
   },
   "navigation": {
     "home": "Beranda",

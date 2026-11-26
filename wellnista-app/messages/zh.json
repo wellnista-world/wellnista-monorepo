@@ -113,7 +113,8 @@
     "notLoggedIn": "您尚未登录",
     "registrationError": "注册时发生错误",
     "registrationSuccess": "注册成功！",
-    "signupSuccess": "注册成功但保存额外数据时发生错误"
+    "signupSuccess": "注册成功但保存额外数据时发生错误",
+    "signupError": "注册时发生错误，请重试。"
   },
   "navigation": {
     "home": "首页",
