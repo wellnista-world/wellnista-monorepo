@@ -5,8 +5,6 @@ import { supabase } from '../api/supabaseClient';
 interface CoinContextType {
   coins: number;
   loading: boolean;
-  addCoins: (amount: number) => Promise<void>;
-  subtractCoins: (amount: number) => Promise<boolean>;
   refreshCoins: () => Promise<void>;
 }
 
@@ -51,56 +49,11 @@ export const CoinProvider = ({ children }: { children: ReactNode }) => {
     fetchCoins();
   }, [user?.id]);
 
-  // Add coins to user account
-  const addCoins = async (amount: number) => {
-    if (!user?.id || amount <= 0) return;
-
-    try {
-      const newBalance = coins + amount;
-      
-      const { error } = await supabase
-        .from('users')
-        .update({ coins: newBalance })
-        .eq('user_id', user.id);
-
-      if (error) {
-        console.error('Error adding coins:', error);
-      } else {
-        setCoins(newBalance);
-      }
-    } catch (error) {
-      console.error('Error adding coins:', error);
-    }
-  };
-
-  // Subtract coins from user account
-  const subtractCoins = async (amount: number): Promise<boolean> => {
-    if (!user?.id || amount <= 0) return false;
-
-    if (coins < amount) {
-      return false; // Insufficient coins
-    }
-
-    try {
-      const newBalance = coins - amount;
-      
-      const { error } = await supabase
-        .from('users')
-        .update({ coins: newBalance })
-        .eq('user_id', user.id);
-
-      if (error) {
-        console.error('Error subtracting coins:', error);
-        return false;
-      } else {
-        setCoins(newBalance);
-        return true;
-      }
-    } catch (error) {
-      console.error('Error subtracting coins:', error);
-      return false;
-    }
-  };
+  // coins is a server-owned balance: it is read here but NEVER written from the client.
+  // A client write can't be trusted (a user could set any balance), and the DB now blocks
+  // UPDATE(coins) for the authenticated role (see coins_server_only.sql). Any future earn/
+  // spend must go through a server route using the service role (e.g. /api/deduct-points),
+  // then call refreshCoins() to re-read the authoritative balance.
 
   // Refresh coins from database
   const refreshCoins = async () => {
@@ -110,8 +63,6 @@ export const CoinProvider = ({ children }: { children: ReactNode }) => {
   const value = {
     coins,
     loading,
-    addCoins,
-    subtractCoins,
     refreshCoins,
   };
 
