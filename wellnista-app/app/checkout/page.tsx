@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useCart } from '../lib/context/CartContext';
 import { useCoins } from '../lib/context/CoinContext';
+import { supabase } from '../lib/api/supabaseClient';
 import Link from 'next/link';
 import Typography from '@mui/material/Typography';
 import { Button, Paper, Divider, Checkbox, FormControlLabel } from '@mui/material';
@@ -41,11 +42,23 @@ export default function CheckoutPage() {
     setIsLoading(true);
 
     try {
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+
+      // Using the point discount requires a logged-in buyer: attach the Supabase access token so
+      // the server can verify it and bind the order to this user (see create-checkout-session).
+      if (usePointDiscount && canUsePoints) {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session?.access_token) {
+          alert(t('common.pleaseLoginToUsePoints') || 'Please log in to use your points.');
+          setIsLoading(false);
+          return;
+        }
+        headers['Authorization'] = `Bearer ${session.access_token}`;
+      }
+
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: JSON.stringify({
           items: cart,
           usePointDiscount,

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { CartItem } from '../../lib/context/CartContext';
 import { promotions } from '../../../config/promotion';
+import { getSupabaseAdmin } from '../../lib/api/supabaseAdmin';
 
 const getStripe = () => {
   if (!process.env.STRIPE_SECRET_KEY) {
@@ -23,6 +24,30 @@ export async function POST(request: NextRequest) {
         { error: 'No items provided' },
         { status: 400 }
       );
+    }
+
+    // When the order uses the point discount, bind it to the AUTHENTICATED buyer: verify the
+    // caller's Supabase JWT server-side and stamp the resolved user id into the session metadata.
+    // The later /api/deduct-points reads that id back from Stripe (tamper-proof) and deducts ONLY
+    // from that user — so the deduction can never be aimed at someone else. Plain (non-point)
+    // checkouts need no auth and carry no user id.
+    let metadataUserId = '';
+    if (usePointDiscount) {
+      const authHeader = request.headers.get('authorization') ?? '';
+      const token = authHeader.toLowerCase().startsWith('bearer ')
+        ? authHeader.slice(7).trim()
+        : '';
+      if (!token) {
+        return NextResponse.json(
+          { error: 'Authentication required to use points' },
+          { status: 401 }
+        );
+      }
+      const { data: authData, error: authError } = await getSupabaseAdmin().auth.getUser(token);
+      if (authError || !authData.user) {
+        return NextResponse.json({ error: 'Invalid authentication' }, { status: 401 });
+      }
+      metadataUserId = authData.user.id;
     }
 
     // Create line items for Stripe
@@ -50,6 +75,7 @@ export async function POST(request: NextRequest) {
       metadata: {
         usePointDiscount: usePointDiscount?.toString() || 'false',
         promotionCode: promotionCode || '',
+        userId: metadataUserId,
       },
     };
 
