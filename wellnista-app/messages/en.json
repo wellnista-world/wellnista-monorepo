@@ -113,7 +113,8 @@
     "notLoggedIn": "You are not logged in",
     "registrationError": "Registration error occurred",
     "registrationSuccess": "Registration successful!",
-    "signupSuccess": "Sign up successful but error occurred while saving additional data"
+    "signupSuccess": "Sign up successful but error occurred while saving additional data",
+    "signupError": "An error occurred during sign-up. Please try again."
   },
   "navigation": {
     "home": "Home",
